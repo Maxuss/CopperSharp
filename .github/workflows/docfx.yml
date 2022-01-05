@@ -1,0 +1,34 @@
+name: DocFX docs Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+  generate-docs:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1.9.0
+        with:
+          dotnet-version: 6.0.100
+      - name: Set up DocFX
+        uses: crazy-max/ghaction-chocolatey@v1.6.0
+        with:
+          args: install docfx
+      - name: Install dependencies
+        run: dotnet restore
+      - name: DocFX build
+        run: docfx docfx.json
+      - name: Publish
+        if: github.event_name == "push"
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs
+          force_orphan: true
