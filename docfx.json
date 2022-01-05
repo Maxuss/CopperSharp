@@ -1,0 +1,33 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [ "CopperSharp/*.csproj", "*.sln", "src/DotnetNew/*.csproj" ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "CopperSharp"
+        }
+      ],
+      "dest": "docs"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "guides/**/*.md", "*.md" ],
+        "dest": "docs"
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "articles/images/**"]
+      }
+    ],
+    "globalMetadata": {
+      "_appTitle": "Minecraft Datapack library",
+      "_enableSearch": true
+    },
+    "markdownEngineName": "markdig",
+    "dest": "_site"
+  }
+}
