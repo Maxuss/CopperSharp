@@ -1,0 +1,270 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/maxus/RiderProjects/CopperSharp",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/example_guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/example_guide.html",
+          "hash": "fU2f/L6b534KAxJD1Jm61PdJDk2Dm7nUXiFmr2JLVlQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/index.html",
+          "hash": "fTxUZf7yKRMWvSctv9V1eqWH+V68T9WEOt3S/XNqkxM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guides/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/toc.html",
+          "hash": "puSqCvXjYD+oVSmOCyVLxYkSMNmoZYYt7AGzX3qkqpk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "3mdVGA782TqAwKUjKJUL8eMW1t2fxQeauHInfAtzzCg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.CopperSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.CopperSharp.html",
+          "hash": "BFXVfw7xjKFlwwVrsT2wKOJ7XTGHnMq7BNnwRqOppeQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Datapack.DatapackWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Datapack.DatapackWriter.html",
+          "hash": "qv4Xn1lmm8VgfmhA7wynr7249jAtkfEOpgI3SVFlTgg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Datapack.PackFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Datapack.PackFormat.html",
+          "hash": "W3igLk/W8AOgNyarZefi2iE86EYN9bPUwriZ/bYjBjA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Datapack.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Datapack.html",
+          "hash": "NDSSCJ1C8A+IcvgJO0ZNM79yzzNJnF5eaCfilyjJsfI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Functions.IAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Functions.IAction.html",
+          "hash": "EBHqem0pzVpE9R+0W/H/9UCQvSaaxBa4n4BkeEy1bvU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Functions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Functions.html",
+          "hash": "FcuwzCHshH0dozyFwHfzIBFmfGNcOcWkNgIrhylSpCI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Modules.IFunctionRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Modules.IFunctionRegistry.html",
+          "hash": "tc7HyRVVqTwAH3YgD+NF/2g9XdygeMceqFZ26ecTVfA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Modules.Module.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Modules.Module.html",
+          "hash": "mSCnkiSF1tGF3shzf9pnj/fQUrs/f9cQZjhSOJxjas4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Modules.ModuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Modules.ModuleRegistry.html",
+          "hash": "Pt3SI2w6gJvg/jTvMk2VhYJKU7temWW2tlEmnPsRJtM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.Modules.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.Modules.html",
+          "hash": "zcnqgf0Bf9uCMlz+URo+CiRej3hb9/fBMDipJmrSCk4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/docs/CopperSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CopperSharp.html",
+          "hash": "xPHxeLPfe5vzCNj3Om42uG3ndxkR0MzcvfhT6QRwqDM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "SA0LRw9anrjzDtR9uWwVsaNBgPVk68LVZMix8UVeqiE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "/1mjlmIlGHiLJrSyA4ItxJG0tOp0yF0SWspjrhZpFvw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 11,
+          "skipped_file_count": 11
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
