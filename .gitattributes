@@ -1,3 +1,2 @@
-docs/* linguist-vendored
-docs/styles/* linguist-vendored
-templates/darkfx/styles/* linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
