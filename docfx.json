@@ -3,19 +3,21 @@
     {
       "src": [
         {
-          "files": [ "CopperSharp/*.csproj", "*.sln", "src/DotnetNew/*.csproj" ],
-          "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "CopperSharp"
+          "files": [ "CopperSharp/bin/Release/net6.0/CopperSharp.dll" ]
         }
       ],
-      "dest": "docs"
+      "dest": "obj/docs"
     }
   ],
   "build": {
     "content": [
       {
-        "files": [ "guides/**/*.md", "*.md" ],
-        "dest": "docs"
+        "files": [ "**/*.yml" ],
+        "src": "obj/docs",
+        "dest": "api"
+      },
+      {
+        "files": ["guides/**/*.md", "*.md", "toc.yml"]
       }
     ],
     "resource": [
@@ -24,10 +26,10 @@
       }
     ],
     "globalMetadata": {
-      "_appTitle": "Minecraft Datapack library",
+      "_appTitle": "CopperSharp",
       "_enableSearch": true
     },
     "markdownEngineName": "markdig",
-    "dest": "_site"
+    "dest": "docs"
   }
 }

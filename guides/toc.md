@@ -1,3 +1,1 @@
-# CopperSharp Articles
-
-These are CopperSharp articles
+# [Example Guide](example_guide.md)
