@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/example_guide.html",
-          "hash": "QI9bQYKc7XwSsbN1yAFAxE10Z2n2cdfpEoBmufYqcJI="
+          "hash": "ihb0g/MHvyFJ59ljew+vyJN/6r+41lrLZ0NBBGF0wsA="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "guides/index.html",
-          "hash": "O17RYMqmRiepPUCoZ2sOkJnrTUiZBwh9hg5NTLgtacA="
+          "hash": "zvpykjDZuWvapTWSV3nVTfYknWcC+jr9uVqdsYPCU4Y="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "3mdVGA782TqAwKUjKJUL8eMW1t2fxQeauHInfAtzzCg="
+          "hash": "1KxTVhcp6+JR1OLxNqlvrCht3sFHEEKuG3gKUIrX6lk="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.CopperSharp.html",
-          "hash": "vUwW53BAcT6sJKGGoa7Qe4rm1PQ3fG4TYQz4CzLdkOA="
+          "hash": "SQhPE/d4KWDa7U8yZcR+jac6YGux2e04N3saGkhq7/Q="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Datapack.DatapackWriter.html",
-          "hash": "iHmr9DWu8RMwtMzmonYTcQjBgl+lnGZZSrmgUYCGTnc="
+          "hash": "pm8qk0L2qX/MPnRbRYFwTwSRqqPsg1RL1Fjk0X5Wd9E="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Datapack.PackFormat.html",
-          "hash": "rAg1mHLn43hChy2/zbeYp/MXTAjTgDBNGDYvlGGqydI="
+          "hash": "rpCg0rh7Dbw/6SzKOew99nmx0XWDG5JoQnV7nHyae9A="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Datapack.html",
-          "hash": "7JVLM2/TrY0eeAJwm9XJHU2MQQCQ0W6hMwy3L4EccCs="
+          "hash": "NxPq0GY9wz6pPMUrnzXGj3fE9rVWFTrDe+/vvni0vQM="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Functions.IAction.html",
-          "hash": "qLOl2/lZVoJE6iuagT5HUcGETJorlwJLFhQJ+VVE1/c="
+          "hash": "Z46ZM1jne+fGjRpt6GnkF66boaGysTWyk7gDIivD3Io="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Functions.html",
-          "hash": "02mhSFG2k6wPcRIay2/SeBRp9xnOQ6BivU8WDH/Iiwg="
+          "hash": "O6TEjVrfomQRPgjIhznlzM++U5RQPuDZ4iah9DXE3TQ="
         }
       },
       "is_incremental": false,
@@ -138,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Modules.IFunctionRegistry.html",
-          "hash": "D3ZGcCurv3jcPTsAPkr5WEIaKAz11z29SJ1EOCHZwEQ="
+          "hash": "wUVfW8rd6YtTztbWStz12gX7r0nj2qmri4Rt8NLpjHk="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Modules.Module.html",
-          "hash": "BeoZI/LcO/mncCOBUzrmj2svziGKkST7rSOpNrDuJY8="
+          "hash": "m0VlTidhXYQDAdJRCuPSLuhCiD4etEir+BaYx1QsZIE="
         }
       },
       "is_incremental": false,
@@ -162,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Modules.ModuleRegistry.html",
-          "hash": "p6AHheh3rim07gYW2iVUhDUA9fWvnAygTP+iA2UyXHo="
+          "hash": "SmsGPCMrNYPzoV4A111H8/a0n3Prf6l1wE5skXTbQBg="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.Modules.html",
-          "hash": "jQJyVKvotBX+Q2OGk2wfq2OkJTpSIeUhsM/bmv+GPUA="
+          "hash": "JHHqA6FaLeQ+iK0hTo8pjyp7mLcjX4sGDY60XXqsvVk="
         }
       },
       "is_incremental": false,
@@ -186,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/CopperSharp.html",
-          "hash": "HETBQE0ESTLms/kTszdpFEz2YdUBv6FQKENg6M/jTAg="
+          "hash": "GFw8eesxC0nWEx+4egn3jxhepm6a1CN/Cy6R/AsPTXU="
         }
       },
       "is_incremental": false,

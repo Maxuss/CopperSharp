@@ -30,6 +30,10 @@
       "_enableSearch": true
     },
     "markdownEngineName": "markdig",
-    "dest": "docs"
+    "dest": "docs",
+    "template": [
+      "default",
+      "templates/darkfx"
+    ]
   }
 }
