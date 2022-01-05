@@ -23,6 +23,8 @@ jobs:
           args: install docfx
       - name: Install dependencies
         run: dotnet restore
+      - name: .NET build
+        run: dotnet build --configuration Release
       - name: DocFX build
         run: docfx docfx.json
       - name: Publish
