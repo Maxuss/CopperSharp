@@ -1,3 +1,5 @@
+using CopperSharp.Registry;
+
 namespace CopperSharp.Modules;
 
 /// <summary>
