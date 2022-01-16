@@ -67,4 +67,14 @@ public interface IComponent : ICloneable
     {
         return new TextComponent(text) as IComponent;
     }
+
+    /// <summary>
+    /// Creates a new <see cref="TranslatableComponent"/>
+    /// </summary>
+    /// <param name="key">Key to be stored as localizable string inside component</param>
+    /// <returns>A new instance of translatable component</returns>
+    public static IComponent Translatable(string key)
+    {
+        return new TranslatableComponent(key) as IComponent;
+    }
 }
