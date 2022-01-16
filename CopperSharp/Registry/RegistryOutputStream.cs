@@ -1,72 +1,50 @@
-using System.Text;
-
 namespace CopperSharp.Registry;
 
-public abstract class RegistryOutputStream : StreamWriter
+/// <summary>
+/// An output stream for registries to write into, usually piped into file
+/// </summary>
+/// <typeparam name="TWrite">Type of element stored in registry that will be written into stream</typeparam>
+public abstract class RegistryOutputStream<TWrite> : IDisposable, IAsyncDisposable
 {
-    private StreamWriter _base;
+    /// <summary>
+    /// Base stream writer of this stream
+    /// </summary>
+    protected StreamWriter? Base { get; }
+
+    /// <summary>
+    /// Creates a new registry output stream piped to provided path
+    /// </summary>
+    /// <param name="path">Path to which the registry data should be written</param>
+    protected RegistryOutputStream(string path)
+    {
+        Base = new StreamWriter(File.Open(path, FileMode.Create));
+    }
+
+    /// <summary>
+    /// A no-args constructor for inheritors
+    /// </summary>
+    protected RegistryOutputStream()
+    {
+    }
+
+    /// <summary>
+    /// Writes an element to the stream
+    /// </summary>
+    /// <param name="write">Element to be written</param>
+    public abstract void Write(TWrite write);
+
 
     /// <inheritdoc />
-    protected RegistryOutputStream(Stream stream) : base(stream)
+    public void Dispose()
     {
-        _base = new StreamWriter(stream);
+        GC.SuppressFinalize(this);
+        Base?.Dispose();
     }
 
     /// <inheritdoc />
-    protected RegistryOutputStream(Stream stream, Encoding encoding) : base(stream, encoding)
+    public ValueTask DisposeAsync()
     {
-        _base = new StreamWriter(stream, encoding);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(Stream stream, Encoding encoding, int bufferSize) : base(stream, encoding,
-        bufferSize)
-    {
-        _base = new StreamWriter(stream, encoding, bufferSize);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(Stream stream, Encoding? encoding = null, int bufferSize = -1,
-        bool leaveOpen = false) : base(stream, encoding, bufferSize, leaveOpen)
-    {
-        _base = new StreamWriter(stream, encoding, bufferSize, leaveOpen);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path) : base(path)
-    {
-        _base = new StreamWriter(path);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path, FileStreamOptions options) : base(path, options)
-    {
-        _base = new StreamWriter(path, options);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path, bool append) : base(path, append)
-    {
-        _base = new StreamWriter(path, append);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path, bool append, Encoding encoding) : base(path, append, encoding)
-    {
-        _base = new StreamWriter(path, append, encoding);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path, bool append, Encoding encoding, int bufferSize) : base(path, append,
-        encoding, bufferSize)
-    {
-        _base = new StreamWriter(path, append, encoding, bufferSize);
-    }
-
-    /// <inheritdoc />
-    protected RegistryOutputStream(string path, Encoding encoding, FileStreamOptions options) : base(path, encoding,
-        options)
-    {
-        _base = new StreamWriter(path, encoding, options);
+        GC.SuppressFinalize(this);
+        return Base?.DisposeAsync() ?? ValueTask.CompletedTask;
     }
 }

@@ -36,6 +36,15 @@ public interface IFunction : IRegistrable
 /// </summary>
 public sealed class DefaultFunction : IFunction
 {
+    /// <summary>
+    /// Creates a new empty function
+    /// </summary>
+    /// <param name="pathTo">Relative path to the function from data/&lt;namespace&gt;/functions datapack directory</param>
+    public DefaultFunction(string pathTo)
+    {
+        PathTo = pathTo;
+    }
+
     /// <inheritdoc />
     public Stack<IAction> Actions { get; } = new();
 
@@ -44,4 +53,7 @@ public sealed class DefaultFunction : IFunction
 
     /// <inheritdoc />
     public IAction? Pop() => Actions.Count <= 0 ? null : Actions.Pop();
+
+    /// <inheritdoc />
+    public string PathTo { get; set; }
 }
