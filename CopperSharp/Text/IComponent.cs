@@ -1,6 +1,8 @@
 //https://minecraft.fandom.com/wiki/Raw_JSON_text_format#Java_Edition
 // ReSharper disable RedundantCast
 
+using CopperSharp.Text.Impl;
+
 namespace CopperSharp.Text;
 
 /// <summary>
@@ -22,6 +24,16 @@ public interface IComponent : ICloneable
     /// Formatting of this component
     /// </summary>
     public TextFormatting Formatting { get; }
+
+    /// <summary>
+    /// Event handler for component hover
+    /// </summary>
+    public IHoverEvent? HoverEvent { get; }
+
+    /// <summary>
+    /// Event handler for component click
+    /// </summary>
+    public ClickEvent? ClickEvent { get; }
 
     /// <summary>
     /// Color of this component
@@ -57,6 +69,25 @@ public interface IComponent : ICloneable
     /// <param name="components">Components to be added to this component as children</param>
     /// <returns>Copy of this component</returns>
     public IComponent Child(params IComponent[] components);
+
+    /// <summary>
+    /// Adds provided click event handler to this component
+    /// </summary>
+    /// <param name="click">Click event handler to be added to this component</param>
+    /// <returns>Copy of this component</returns>
+    public IComponent OnClick(ClickEvent click);
+
+    /// <summary>
+    /// Adds provided hover event handler to this component
+    /// </summary>
+    /// <param name="hover">Hover event handler to be added to this component</param>
+    /// <returns>Copy of this component</returns>
+    public IComponent OnHover(IHoverEvent hover);
+
+    /// <summary>
+    /// Converts this component to parseable container
+    /// </summary>
+    public AbstractComponentContainer Contain();
 
     /// <summary>
     /// Creates a new <see cref="TextComponent"/>

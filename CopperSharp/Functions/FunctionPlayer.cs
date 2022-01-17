@@ -18,6 +18,4 @@ public class FunctionPlayer
     /// Reference to function, in scope of which the player is located
     /// </summary>
     public IFunction Function { get; }
-
-    // TODO: finish this
 }
