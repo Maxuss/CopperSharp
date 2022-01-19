@@ -5,8 +5,24 @@ namespace CopperSharp.Text.Impl;
 /// <summary>
 /// A container for component click event
 /// </summary>
-/// <param name="Action">Action to be performed when the component is clicked/hovered over</param>
-/// <param name="Value">Value for the action</param>
-public record ComponentClickEvent(
-    [JsonProperty("action")] string Action,
-    [JsonProperty("value")] string Value);
+public readonly struct ComponentClickEvent
+{
+    /// <summary>
+    /// A container for component click event
+    /// </summary>
+    /// <param name="action">Action to be performed when the component is clicked/hovered over</param>
+    /// <param name="value">Value for the action</param>
+    public ComponentClickEvent(string action, string value)
+    {
+        this.Action = action;
+        this.Value = value;
+    }
+
+    /// <summary>Action to be performed when the component is clicked/hovered over</summary>
+    [JsonProperty("action")]
+    public string Action { get; init; }
+
+    /// <summary>Value for the action</summary>
+    [JsonProperty("value")]
+    public string Value { get; init; }
+}

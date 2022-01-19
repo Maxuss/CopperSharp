@@ -9,7 +9,15 @@ namespace CopperSharp.Text;
 /// </summary>
 public readonly struct TranslatableComponent : IComponent
 {
-    private string Key { get; }
+    /// <summary>
+    /// Translation key for this component
+    /// </summary>
+    public string Key { get; }
+
+    /// <summary>
+    /// Extra slots to fit into formatting
+    /// </summary>
+    public List<IComponent> ExtraSlots { get; } = new();
 
     /// <inheritdoc />
     public ComponentType ComponentType => ComponentType.Translatable;
@@ -18,13 +26,16 @@ public readonly struct TranslatableComponent : IComponent
     public List<IComponent> Children { get; } = new();
 
     /// <inheritdoc />
-    public TextFormatting Formatting { get; } = new(FormattingType.Italic, false);
+    public Dictionary<FormattingType, bool> Formatting { get; } = new();
 
     /// <inheritdoc />
     public IHoverEvent? HoverEvent { get; }
 
     /// <inheritdoc />
     public ClickEvent? ClickEvent { get; }
+
+    /// <inheritdoc />
+    public string? InsertionText { get; }
 
     /// <inheritdoc />
     public ITextColor Color { get; } = NamedTextColor.White;
@@ -38,10 +49,12 @@ public readonly struct TranslatableComponent : IComponent
         Key = key;
         HoverEvent = null;
         ClickEvent = null;
+        InsertionText = null;
     }
 
-    private TranslatableComponent(string text, List<IComponent> children, TextFormatting formatting, ITextColor color,
-        IHoverEvent? hover, ClickEvent? click)
+    private TranslatableComponent(string text, List<IComponent> children, Dictionary<FormattingType, bool> formatting,
+        ITextColor color,
+        IHoverEvent? hover, ClickEvent? click, string? insertion, List<IComponent> slots)
     {
         Key = text;
         Children = children;
@@ -49,48 +62,76 @@ public readonly struct TranslatableComponent : IComponent
         Color = color;
         HoverEvent = hover;
         ClickEvent = click;
+        InsertionText = insertion;
+        ExtraSlots = slots;
     }
 
     /// <inheritdoc />
     public IComponent Colored(ITextColor color)
     {
-        return new TranslatableComponent(Key, Children, Formatting, color, HoverEvent, ClickEvent) as IComponent;
+        return new TranslatableComponent(Key, Children, Formatting, color, HoverEvent, ClickEvent, InsertionText,
+            ExtraSlots) as IComponent;
     }
 
     /// <inheritdoc />
-    public IComponent Formatted(TextFormatting format)
+    public IComponent Formatted(FormattingType type, bool toggle = true)
     {
-        return new TranslatableComponent(Key, Children, format, Color, HoverEvent, ClickEvent) as IComponent;
+        Formatting[type] = toggle;
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent, InsertionText,
+            ExtraSlots) as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent Child(params IComponent[] components)
     {
         Children.AddRange(components);
-        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent) as IComponent;
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent, InsertionText,
+            ExtraSlots) as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent OnClick(ClickEvent click)
     {
-        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, click) as IComponent;
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, click, InsertionText, ExtraSlots)
+            as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent OnHover(IHoverEvent hover)
     {
-        return new TranslatableComponent(Key, Children, Formatting, Color, hover, ClickEvent) as IComponent;
+        return new TranslatableComponent(Key, Children, Formatting, Color, hover, ClickEvent, InsertionText, ExtraSlots)
+            as IComponent;
+    }
+
+    /// <inheritdoc />
+    public IComponent Insertion(string insertion)
+    {
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent, insertion,
+            ExtraSlots) as IComponent;
+    }
+
+    /// <summary>
+    /// Adds an extra slot, to fit into the component formatting
+    /// </summary>
+    /// <param name="slot">Slot to be put</param>
+    /// <returns>Copy of this component</returns>
+    public IComponent Slot(IComponent slot)
+    {
+        ExtraSlots.Add(slot);
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent, InsertionText,
+            ExtraSlots) as IComponent;
     }
 
     /// <inheritdoc />
     public AbstractComponentContainer Contain()
     {
-        throw new NotImplementedException();
+        return new TranslatableComponentContainer(this);
     }
 
     /// <inheritdoc />
     public object Clone()
     {
-        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent) as object;
+        return new TranslatableComponent(Key, Children, Formatting, Color, HoverEvent, ClickEvent, InsertionText,
+            ExtraSlots) as object;
     }
 }

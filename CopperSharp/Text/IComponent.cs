@@ -23,7 +23,7 @@ public interface IComponent : ICloneable
     /// <summary>
     /// Formatting of this component
     /// </summary>
-    public TextFormatting Formatting { get; }
+    public Dictionary<FormattingType, bool> Formatting { get; }
 
     /// <summary>
     /// Event handler for component hover
@@ -34,6 +34,11 @@ public interface IComponent : ICloneable
     /// Event handler for component click
     /// </summary>
     public ClickEvent? ClickEvent { get; }
+
+    /// <summary>
+    /// Text to be inserted when this component is shift-clicked
+    /// </summary>
+    public string? InsertionText { get; }
 
     /// <summary>
     /// Color of this component
@@ -50,18 +55,10 @@ public interface IComponent : ICloneable
     /// <summary>
     /// Applies a formatting to this component and returns its copy
     /// </summary>
-    /// <param name="format">Formatting to be applied</param>
-    /// <returns>Copy of this component</returns>
-    public IComponent Formatted(TextFormatting format);
-
-    /// <summary>
-    /// Applies a formatting to this component and returns its copy
-    /// </summary>
     /// <param name="format">Type of formatting to be applied</param>
     /// <param name="flag">Toggles formatting on if true, and off if false</param>
     /// <returns>Copy of this component</returns>
-    public IComponent Formatted(FormattingType format, bool flag = true)
-        => Formatted(new TextFormatting(format, flag));
+    public IComponent Formatted(FormattingType format, bool flag = true);
 
     /// <summary>
     /// Adds provided components to this component as children and returns copy of this component
@@ -83,6 +80,13 @@ public interface IComponent : ICloneable
     /// <param name="hover">Hover event handler to be added to this component</param>
     /// <returns>Copy of this component</returns>
     public IComponent OnHover(IHoverEvent hover);
+
+    /// <summary>
+    /// Adds an insertion text to be inserted into chat when the component is shift clicked
+    /// </summary>
+    /// <param name="insertion">Insertion to be provided</param>
+    /// <returns>Copy of this component</returns>
+    public IComponent Insertion(string insertion);
 
     /// <summary>
     /// Converts this component to parseable container

@@ -12,33 +12,89 @@ public interface IHoverEventContainer
 /// <summary>
 /// Represents a hover event for component
 /// </summary>
-/// <param name="Action">Type of action</param>
-/// <param name="Contents">Contents of this component hover event</param>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public record ComponentHoverEvent(
-    [JsonProperty("action")] string Action,
-    [JsonProperty("contents")] IHoverEventContainer Contents);
+public readonly struct ComponentHoverEvent
+{
+    /// <summary>
+    /// Represents a hover event for component
+    /// </summary>
+    /// <param name="action">Type of action</param>
+    /// <param name="contents">Contents of this component hover event</param>
+    public ComponentHoverEvent(string action, IHoverEventContainer contents)
+    {
+        Action = action;
+        Contents = contents;
+    }
+
+    /// <summary>Type of action</summary>
+    [JsonProperty("action")]
+    public string Action { get; init; }
+
+    /// <summary>Contents of this component hover event</summary>
+    [JsonProperty("contents")]
+    public IHoverEventContainer Contents { get; init; }
+}
 
 /// <summary>
 /// A container for <see cref="ComponentHoverEvent" />
 /// </summary>
-/// <param name="Id">ID of item. E.g. minecraft:diamond</param>
-/// <param name="Count">Count of item. Optional.</param>
-/// <param name="Tag">NBT Tag of item. Optional.</param>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public record ShowItemHoverEvent(
-    [JsonProperty("id")] string Id,
-    [JsonProperty("count")] int? Count = null,
-    [JsonProperty("tag")] string? Tag = null) : IHoverEventContainer;
+public readonly struct ShowItemHoverEvent : IHoverEventContainer
+{
+    /// <summary>
+    /// A container for <see cref="ComponentHoverEvent" />
+    /// </summary>
+    /// <param name="id">ID of item. E.g. minecraft:diamond</param>
+    /// <param name="count">Count of item. Optional.</param>
+    /// <param name="tag">NBT Tag of item. Optional.</param>
+    public ShowItemHoverEvent(string id, int? count = null, string? tag = null)
+    {
+        Id = id;
+        Count = count;
+        Tag = tag;
+    }
+
+    /// <summary>ID of item. E.g. minecraft:diamond</summary>
+    [JsonProperty("id")]
+    public string Id { get; init; }
+
+    /// <summary>Count of item. Optional.</summary>
+    [JsonProperty("count")]
+    public int? Count { get; init; }
+
+    /// <summary>NBT Tag of item. Optional.</summary>
+    [JsonProperty("tag")]
+    public string? Tag { get; init; }
+}
 
 /// <summary>
 /// A container for <see cref="ComponentHoverEvent" />
 /// </summary>
-/// <param name="Name">Name of the entity. Optional.</param>
-/// <param name="EntityType">Type of the entity. E.g. minecraft:pig</param>
-/// <param name="EntityId">UUID of entity</param>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public record ShowEntityHoverEvent(
-    [JsonProperty("type")] string EntityType,
-    [JsonProperty("id")] string EntityId,
-    [JsonProperty("name")] AbstractComponentContainer? Name = null) : IHoverEventContainer;
+public readonly struct ShowEntityHoverEvent : IHoverEventContainer
+{
+    /// <summary>
+    /// A container for <see cref="ComponentHoverEvent" />
+    /// </summary>
+    /// <param name="name">Name of the entity. Optional.</param>
+    /// <param name="entityType">Type of the entity. E.g. minecraft:pig</param>
+    /// <param name="entityId">UUID of entity</param>
+    public ShowEntityHoverEvent(string entityType, string entityId, AbstractComponentContainer? name = null)
+    {
+        this.EntityType = entityType;
+        this.EntityId = entityId;
+        this.Name = name;
+    }
+
+    /// <summary>Type of the entity. E.g. minecraft:pig</summary>
+    [JsonProperty("type")]
+    public string EntityType { get; init; }
+
+    /// <summary>UUID of entity</summary>
+    [JsonProperty("id")]
+    public string EntityId { get; init; }
+
+    /// <summary>Name of the entity. Optional.</summary>
+    [JsonProperty("name")]
+    public AbstractComponentContainer? Name { get; init; }
+}

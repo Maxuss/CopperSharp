@@ -39,4 +39,33 @@ public interface ITextColor
     {
         return new HexadecimalTextColor(hex);
     }
+
+    /// <summary>
+    /// Creates a new <see cref="HexadecimalTextColor"/> from provided red green and blue values
+    /// </summary>
+    /// <param name="r">Red amount</param>
+    /// <param name="g">Green amount</param>
+    /// <param name="b">Blue amount</param>
+    public static ITextColor Hex(int r, int g, int b)
+    {
+        return new HexadecimalTextColor(r, g, b);
+    }
+
+    /// <summary>
+    /// Creates a new <see cref="HexadecimalTextColor"/> from provided hex integer
+    /// </summary>
+    /// <param name="hex">Hex integer, containing red, green and blue values</param>
+    public static ITextColor Hex(int hex)
+    {
+        return new HexadecimalTextColor((hex >> 16) & 0xFF, (hex >> 8) & 0xFF, (hex >> 0) & 0xFF);
+    }
+
+    /// <summary>
+    /// Converts this color to string.
+    /// </summary>
+    /// <returns>String representation of this text color</returns>
+    public string ToString()
+    {
+        return ToHexString();
+    }
 }

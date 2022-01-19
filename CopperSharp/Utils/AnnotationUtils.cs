@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace CopperSharp.Utils;
 
 /// <summary>
@@ -36,7 +34,9 @@ public static class AnnotationUtils
     public static string? GetData(this Enum en)
     {
         var type = en.GetType();
-        var att = type.GetCustomAttribute<EnumDataAttribute>();
-        return att?.Data;
+        var fieldInfo = type.GetField(en.ToString());
+        var attribs =
+            fieldInfo?.GetCustomAttributes(typeof(EnumDataAttribute), false) as EnumDataAttribute[];
+        return attribs?.Length > 0 ? attribs[0].Data : null;
     }
 }

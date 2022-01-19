@@ -9,7 +9,10 @@ namespace CopperSharp.Text;
 /// </summary>
 public readonly struct TextComponent : IComponent
 {
-    private string Text { get; }
+    /// <summary>
+    /// Text stored inside this component
+    /// </summary>
+    public string Text { get; }
 
     /// <inheritdoc />
     public ComponentType ComponentType => ComponentType.Text;
@@ -18,14 +21,16 @@ public readonly struct TextComponent : IComponent
     public List<IComponent> Children { get; } = new();
 
     /// <inheritdoc />
-    public TextFormatting Formatting { get; } = new(FormattingType.Italic, false);
-
+    public Dictionary<FormattingType, bool> Formatting { get; } = new();
 
     /// <inheritdoc />
     public IHoverEvent? HoverEvent { get; }
 
     /// <inheritdoc />
     public ClickEvent? ClickEvent { get; }
+
+    /// <inheritdoc />
+    public string? InsertionText { get; }
 
     /// <inheritdoc />
     public ITextColor Color { get; } = NamedTextColor.White;
@@ -39,10 +44,12 @@ public readonly struct TextComponent : IComponent
         Text = text;
         HoverEvent = null;
         ClickEvent = null;
+        InsertionText = null;
     }
 
-    private TextComponent(string text, List<IComponent> children, TextFormatting formatting, ITextColor color,
-        IHoverEvent? hover, ClickEvent? click)
+    private TextComponent(string text, List<IComponent> children, Dictionary<FormattingType, bool> formatting,
+        ITextColor color,
+        IHoverEvent? hover, ClickEvent? click, string? insertion)
     {
         Text = text;
         Children = children;
@@ -50,48 +57,59 @@ public readonly struct TextComponent : IComponent
         Color = color;
         HoverEvent = hover;
         ClickEvent = click;
+        InsertionText = insertion;
     }
 
     /// <inheritdoc />
     public IComponent Colored(ITextColor color)
     {
-        return new TextComponent(Text, Children, Formatting, color, HoverEvent, ClickEvent) as IComponent;
+        return new TextComponent(Text, Children, Formatting, color, HoverEvent, ClickEvent,
+            InsertionText) as IComponent;
     }
 
     /// <inheritdoc />
-    public IComponent Formatted(TextFormatting format)
+    public IComponent Formatted(FormattingType type, bool toggle = true)
     {
-        return new TextComponent(Text, Children, format, Color, HoverEvent, ClickEvent) as IComponent;
+        Formatting[type] = toggle;
+        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent,
+            InsertionText) as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent Child(params IComponent[] components)
     {
         Children.AddRange(components);
-        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent) as IComponent;
+        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent,
+            InsertionText) as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent OnClick(ClickEvent click)
     {
-        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, click) as IComponent;
+        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, click, InsertionText) as IComponent;
     }
 
     /// <inheritdoc />
     public IComponent OnHover(IHoverEvent hover)
     {
-        return new TextComponent(Text, Children, Formatting, Color, hover, ClickEvent) as IComponent;
+        return new TextComponent(Text, Children, Formatting, Color, hover, ClickEvent, InsertionText) as IComponent;
+    }
+
+    /// <inheritdoc />
+    public IComponent Insertion(string insertion)
+    {
+        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent, insertion) as IComponent;
     }
 
     /// <inheritdoc />
     public AbstractComponentContainer Contain()
     {
-        throw new NotImplementedException();
+        return new TextComponentContainer(this);
     }
 
     /// <inheritdoc />
     public object Clone()
     {
-        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent) as object;
+        return new TextComponent(Text, Children, Formatting, Color, HoverEvent, ClickEvent, InsertionText) as object;
     }
 }

@@ -1,5 +1,8 @@
 namespace CopperSharp.Registry;
 
+/// <summary>
+/// A namespace:path pair, used to represent a lot of things, such as item ids, functions and more
+/// </summary>
 public readonly struct Identifier
 {
     private readonly string _ns;
