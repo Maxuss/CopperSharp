@@ -23,14 +23,14 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
         IsItalic = parent.Formatting.ContainsKey(FormattingType.Italic)
             ? parent.Formatting[FormattingType.Italic]
             : null;
-        IsObfuscated = parent.Formatting.ContainsKey(FormattingType.Obfuscated)
-            ? parent.Formatting[FormattingType.Obfuscated]
-            : null;
         IsUnderlined = parent.Formatting.ContainsKey(FormattingType.Underlined)
             ? parent.Formatting[FormattingType.Underlined]
             : null;
         IsStrikethrough = parent.Formatting.ContainsKey(FormattingType.Strikethrough)
             ? parent.Formatting[FormattingType.Strikethrough]
+            : null;
+        IsObfuscated = parent.Formatting.ContainsKey(FormattingType.Obfuscated)
+            ? parent.Formatting[FormattingType.Obfuscated]
             : null;
     }
 
@@ -53,16 +53,10 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     public bool? IsBold { get; protected set; }
 
     /// <summary>
-    /// Whether this component is bold
+    /// Whether this component is italic
     /// </summary>
     [JsonProperty("italic")]
     public bool? IsItalic { get; protected set; }
-
-    /// <summary>
-    /// Whether this component is obfuscated
-    /// </summary>
-    [JsonProperty("obfuscated")]
-    public bool? IsObfuscated { get; protected set; }
 
     /// <summary>
     /// Whether this component is underlined
@@ -71,10 +65,16 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     public bool? IsUnderlined { get; protected set; }
 
     /// <summary>
-    /// Whether this component is striked through
+    /// Whether this component is strikethrough
     /// </summary>
     [JsonProperty("strikethrough")]
     public bool? IsStrikethrough { get; protected set; }
+
+    /// <summary>
+    /// Whether this component is obfuscated
+    /// </summary>
+    [JsonProperty("obfuscated")]
+    public bool? IsObfuscated { get; protected set; }
 
     /// <summary>
     /// Insertion text to be inserted when this component is shift clicked

@@ -28,6 +28,7 @@ public class Tests
     [Fact]
     public void RawComponentSerialization()
     {
+        var beginTime = DateTime.Now;
         var component = new TextComponent("Hello, World!")
             .Colored(ITextColor.Hex(153, 0, 201))
             .Formatted(FormattingType.Bold)
@@ -43,5 +44,7 @@ public class Tests
                     .Colored(ITextColor.Hex(0xbf4f4a))
                     .OnHover(IHoverEvent.Item(Identifier.Minecraft("diamond_ore"), 12)));
         _testOutputHelper.WriteLine(JsonConvert.SerializeObject(component.Contain()));
+        var endTime = DateTime.Now - beginTime;
+        _testOutputHelper.WriteLine($"Finished in {endTime.TotalMilliseconds}ms");
     }
 }

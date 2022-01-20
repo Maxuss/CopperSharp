@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperSharp", "CopperSharp\CopperSharp.csproj", "{051B3137-B5F6-49A1-AF81-3A5A6616E8F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{EFAC6D21-ECBE-44BC-8B57-FAC0D528C0FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{051B3137-B5F6-49A1-AF81-3A5A6616E8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{051B3137-B5F6-49A1-AF81-3A5A6616E8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{051B3137-B5F6-49A1-AF81-3A5A6616E8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFAC6D21-ECBE-44BC-8B57-FAC0D528C0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFAC6D21-ECBE-44BC-8B57-FAC0D528C0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFAC6D21-ECBE-44BC-8B57-FAC0D528C0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFAC6D21-ECBE-44BC-8B57-FAC0D528C0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
