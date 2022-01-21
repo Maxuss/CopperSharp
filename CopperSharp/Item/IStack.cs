@@ -18,5 +18,5 @@ public interface IStack
     /// <summary>
     /// Item metadata, stored in tag
     /// </summary>
-    public ItemTag? Meta { get; set; }
+    public ItemMeta? Meta { get; set; }
 }

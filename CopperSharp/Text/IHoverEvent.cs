@@ -29,7 +29,7 @@ public interface IHoverEvent
     /// <param name="tag">Extra NBT tag of item. Optional.</param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IHoverEvent Item(Identifier id, int? count = null, ItemTag? tag = null)
+    public static IHoverEvent Item(Identifier id, int? count = null, ItemMeta? tag = null)
         => new DisplayItemHover(id, count, tag) as IHoverEvent;
 
     /// <summary>
@@ -78,7 +78,7 @@ public readonly struct DisplayItemHover : IHoverEvent
 {
     private readonly Identifier _id;
     private readonly int? _count;
-    private readonly ItemTag? _tag;
+    private readonly ItemMeta? _tag;
 
     /// <summary>
     /// Displays provided item data on hover
@@ -86,7 +86,7 @@ public readonly struct DisplayItemHover : IHoverEvent
     /// <param name="id">Type of item. E.g. minecraft:diamond</param>
     /// <param name="count">Count of items. Optional.</param>
     /// <param name="nbt">NBT Item tag. Optional.</param>
-    public DisplayItemHover(Identifier id, int? count = null, ItemTag? nbt = null)
+    public DisplayItemHover(Identifier id, int? count = null, ItemMeta? nbt = null)
     {
         _id = id;
         _count = count;

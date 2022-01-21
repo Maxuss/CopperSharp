@@ -12,7 +12,7 @@ public struct ItemStack : IStack
     public Material Material { get; }
 
     /// <inheritdoc />
-    public ItemTag? Meta { get; set; } = null;
+    public ItemMeta? Meta { get; set; } = null;
 
     /// <summary>
     /// Constructs a new item stack from provided parameters
@@ -20,7 +20,7 @@ public struct ItemStack : IStack
     /// <param name="material">Material to use</param>
     /// <param name="amount">Amount of item in this stack</param>
     /// <param name="meta">Meta information on item</param>
-    public ItemStack(Material material, int amount = 1, ItemTag? meta = null)
+    public ItemStack(Material material, int amount = 1, ItemMeta? meta = null)
     {
         Material = material;
         Amount = amount;
