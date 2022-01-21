@@ -1,6 +1,7 @@
 //https://minecraft.fandom.com/wiki/Raw_JSON_text_format#Java_Edition
 // ReSharper disable RedundantCast
 
+using CopperSharp.Item;
 using CopperSharp.Text.Impl;
 
 namespace CopperSharp.Text;
@@ -101,6 +102,16 @@ public interface IComponent : ICloneable
     public static IComponent Text(string text)
     {
         return new TextComponent(text) as IComponent;
+    }
+
+    /// <summary>
+    /// Constructs a new component representing provided material
+    /// </summary>
+    /// <param name="material">Material to convert into component</param>
+    /// <returns>Translatable component of this material</returns>
+    public static IComponent Material(Material material)
+    {
+        return new TranslatableComponent($"item.minecraft.{material.Id}") as IComponent;
     }
 
     /// <summary>
