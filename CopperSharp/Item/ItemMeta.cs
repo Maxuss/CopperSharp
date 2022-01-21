@@ -7,9 +7,13 @@ namespace CopperSharp.Item;
 /// <summary>
 /// NBT Tag for items
 /// </summary>
-public class ItemMeta
+public abstract class ItemMeta
 {
-    internal ItemMeta(Material type)
+    /// <summary>
+    /// Instantiates a new item meta class
+    /// </summary>
+    /// <param name="type"></param>
+    protected ItemMeta(Material type)
     {
         Name = IComponent.Material(type);
         Type = type;
@@ -56,9 +60,14 @@ public class ItemMeta
     public List<string> Destroyable { get; } = new();
 
     /// <summary>
-    /// Delay in ticks, until this item can be picked up
+    /// Time required to pick this item up in ticks (when dropped)
     /// </summary>
-    public long PickupDelay { get; } = 1L;
+    public long? PickupDelay { get; set; } = null;
+
+    /// <summary>
+    /// Time it takes this item to disappear in ticks (when dropped)
+    /// </summary>
+    public long? Age { get; set; } = null;
 
     /// <summary>
     /// Adds specific enchantments to this item

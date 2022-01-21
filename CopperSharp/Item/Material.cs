@@ -1,5 +1,7 @@
 // THIS FILE IS AUTO GENERATED!
 
+using CopperSharp.Registry;
+
 namespace CopperSharp.Item;
 
 /// <summary>
