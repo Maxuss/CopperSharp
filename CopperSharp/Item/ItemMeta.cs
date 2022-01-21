@@ -1,6 +1,9 @@
 using CopperSharp.Data.Attributes;
+using CopperSharp.Data.SNbt;
 using CopperSharp.Registry;
 using CopperSharp.Text;
+using CopperSharp.Utils;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Item;
 
@@ -22,52 +25,52 @@ public abstract class ItemMeta
     /// <summary>
     /// Material of this item
     /// </summary>
-    public Material Type { get; }
+    private Material Type { get; }
 
     /// <summary>
     /// Attribute modifiers on this item
     /// </summary>
-    public List<AttributeModifier> AttributeModifiers { get; } = new();
+    private List<AttributeModifier> AttributeModifiers { get; } = new();
 
     /// <summary>
     /// All enchantments applied to this item
     /// </summary>
-    public List<Enchantment> Enchantments { get; } = new();
+    private List<Enchantment> Enchantments { get; } = new();
 
     /// <summary>
     /// Item flags to be hidden
     /// </summary>
-    public List<ItemFlag> HiddenFlags { get; } = new();
+    private List<ItemFlag> HiddenFlags { get; } = new();
 
     /// <summary>
     /// Whether this item is unbreakable
     /// </summary>
-    public bool Unbreakable { get; } = false;
+    public bool? Unbreakable { get; set; } = null;
 
     /// <summary>
     /// Name of this item's display
     /// </summary>
-    public IComponent Name { get; set; }
+    private IComponent Name { get; set; }
 
     /// <summary>
     /// Lore of this item's display
     /// </summary>
-    public List<IComponent> Lore { get; set; } = new();
+    private List<IComponent> Lore { get; } = new();
 
     /// <summary>
     /// Represents blocks this item can/can not destroy
     /// </summary>
-    public List<string> Destroyable { get; } = new();
+    private List<string> Destroyable { get; } = new();
 
     /// <summary>
     /// Time required to pick this item up in ticks (when dropped)
     /// </summary>
-    public long? PickupDelay { get; set; } = null;
+    public int? PickupDelay { get; set; } = null;
 
     /// <summary>
     /// Time it takes this item to disappear in ticks (when dropped)
     /// </summary>
-    public long? Age { get; set; } = null;
+    public int? Age { get; set; } = null;
 
     /// <summary>
     /// Adds specific enchantments to this item
@@ -88,6 +91,17 @@ public abstract class ItemMeta
     public ItemMeta AppendLore(params IComponent[] lore)
     {
         Lore.AddRange(lore);
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a custom name to this item's lore display
+    /// </summary>
+    /// <param name="name">New custom name of the item</param>
+    /// <returns>This item meta</returns>
+    public ItemMeta CustomName(IComponent name)
+    {
+        Name = name;
         return this;
     }
 
@@ -123,4 +137,152 @@ public abstract class ItemMeta
         Destroyable.AddRange(ids.Select(it => it.ToString()));
         return this;
     }
+
+    /// <summary>
+    /// Converts this item meta to Stringified NBT
+    /// </summary>
+    /// <returns></returns>
+    public string ToSNbt()
+    {
+        using var sw = new StringWriter();
+        using var w = new StringNbtWriter(sw);
+        w.WriteBeginCompound();
+        // begin display tag
+        w.WritePropertyName("display");
+        w.WriteBeginCompound();
+        w.WritePropertyName("Name");
+        w.WriteRawValue(JsonConvert.SerializeObject(Name.Serialize()));
+        if (Lore.Any())
+        {
+            w.WritePropertyName("Lore");
+            w.WriteBeginArray();
+            foreach (var component in Lore)
+            {
+                w.WriteString(component.Serialize());
+            }
+
+            w.WriteEndArray();
+        }
+
+        w.WriteEndCompound();
+        w.WriteComma();
+        // end display tag
+
+        // begin enchantments tag
+        if (Enchantments.Any())
+        {
+            w.WritePropertyName("Enchantments");
+            w.WriteBeginArray();
+            foreach (var enchant in Enchantments)
+            {
+                var edata = enchant.Enchant.GetEnchantData() ??
+                            throw new Exception("Invalid enchantment data provided!");
+                var lvl = enchant.Level;
+                if (Enchantments.IndexOf(enchant) != 0)
+                    w.WriteComma();
+                w.WriteBeginCompound();
+                w.WritePropertyName("id");
+                w.WriteString($"minecraft:{edata.Id}");
+                w.WritePropertyName("lvl");
+                w.WriteInteger(lvl);
+                w.WriteEndCompound();
+            }
+
+            w.WriteEndArray();
+            w.WriteComma();
+        }
+        // end enchantments tag
+
+        // begin CanDestroy tag
+        if (Destroyable.Any())
+        {
+            w.WritePropertyName("CanDestroy");
+            w.WriteBeginArray();
+            foreach (var dest in Destroyable)
+            {
+                w.WriteString(dest);
+            }
+
+            w.WriteEndArray();
+            w.WriteComma();
+        }
+        // end CanDestroy tag
+
+        // begin HideFlags tag
+        if (HiddenFlags.Any())
+        {
+            w.WritePropertyName("HideFlags");
+            w.WriteInteger(HiddenFlags.Sum(it => (int) it));
+        }
+        // end HideFlags tag
+
+        // begin AttributeModifiers tag
+        if (AttributeModifiers.Any())
+        {
+            w.WritePropertyName("AttributeModifiers");
+            w.WriteBeginArray();
+            foreach (var attr in AttributeModifiers)
+            {
+                if (AttributeModifiers.IndexOf(attr) != 0)
+                    w.WriteComma();
+                w.WriteBeginCompound();
+                w.WritePropertyName("AttributeName");
+                w.WriteString(attr.Type);
+                w.WritePropertyName("Name");
+                w.WriteString(attr.Name);
+                w.WritePropertyName("Amount");
+                w.WriteFloat(attr.Amount);
+                w.WritePropertyName("Operation");
+                w.WriteInteger((int) attr.Action);
+                if (attr.Slot != null)
+                {
+                    w.WritePropertyName("Slot");
+                    w.WriteString(attr.Slot ?? "mainhand");
+                }
+
+                w.WritePropertyName("UUID");
+                w.WriteUuidArray(Guid.NewGuid());
+                w.WriteEndCompound();
+            }
+
+            w.WriteEndArray();
+        }
+        // end AttributeModifiers tag
+
+        // begin unbreakable tag
+        if (Unbreakable != null)
+        {
+            w.WritePropertyName("Unbreakable");
+            w.WriteBool(Unbreakable.Value);
+        }
+        // end unbreakable tag
+
+        // begin PickupDelay tag
+        if (PickupDelay != null)
+        {
+            w.WritePropertyName("PickupDelay");
+            w.WriteInteger(PickupDelay ?? 0);
+        }
+        // end PickupDelay tag
+
+        // begin Age tag
+        if (Age != null)
+        {
+            w.WritePropertyName("Age");
+            w.WriteInteger(Age ?? 0);
+        }
+        // end Age tag
+
+        // external meta
+        WriteExternalMetaData(w);
+
+        w.WriteEndCompound();
+        return sw.ToString();
+    }
+
+    /// <summary>
+    /// Writes external meta data to the writer as nbt
+    /// </summary>
+    /// <param name="w">Writer to which external meta data should be written</param>
+    protected abstract void WriteExternalMetaData(StringNbtWriter w);
 }

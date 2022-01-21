@@ -7,6 +7,7 @@ namespace CopperSharp.Data.SNbt;
 /// </summary>
 public class StringNbtWriter : IDisposable
 {
+    private int _arrayPosition = 0;
     private int _depthLevel;
     private State _previous = State.Error;
     private State _state = State.Open;
@@ -51,6 +52,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public void WriteBeginArray()
     {
+        ValidateArray();
         sw.Write('[');
         PushDepth(State.Array);
     }
@@ -62,6 +64,7 @@ public class StringNbtWriter : IDisposable
     {
         sw.Write(']');
         PullDepth();
+        _arrayPosition = 0;
     }
 
     /// <summary>
@@ -166,12 +169,28 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a uuid
+    /// Writes a provided UUID
     /// </summary>
     /// <param name="id"></param>
     public void WriteUuid(Guid id)
     {
         WriteString(id.ToString());
+    }
+
+    /// <summary>
+    /// Writes a provided UUID as an array of integers
+    /// </summary>
+    /// <param name="id">Id to be written</param>
+    public void WriteUuidArray(Guid id)
+    {
+        var bytes = id.ToByteArray();
+        var ints = new int[4];
+        for (var i = 0; i < 4; i++)
+        {
+            ints[i] = BitConverter.ToInt32(bytes, i * 4);
+        }
+
+        WriteRawValue($"[I; {ints[0]}, {ints[1]}, {ints[2]}, {ints[3]}]");
     }
 
     /// <summary>
@@ -185,11 +204,21 @@ public class StringNbtWriter : IDisposable
         FinalizeProperty();
     }
 
+    /// <summary>
+    /// Manually writes a comma to the writer
+    /// </summary>
+    public void WriteComma()
+    {
+        sw.Write(',');
+    }
+
     private void ValidateArray()
     {
         if (_state == State.Array)
         {
-            sw.Write(",");
+            if (_arrayPosition > 0)
+                sw.Write(",");
+            _arrayPosition++;
         }
     }
 

@@ -1,8 +1,15 @@
 namespace CopperSharp.Data.Attributes;
 
 /// <summary>
-/// A global interface for attribute types
+/// A global interface for attribute types.<br/>
+/// To get static attribute values, check<br/>
+/// implementations below:
 /// </summary>
+/// <seealso cref="GenericAttribute"/>
+/// <seealso cref="PlayerAttribute"/>
+/// <seealso cref="ZombieAttribute"/>
+/// <seealso cref="HorseAttribute"/>
+/// <seealso cref="FlyingEntityAttribute"/>
 public interface IAttributeType
 {
     /// <summary>

@@ -15,9 +15,11 @@ public readonly struct Enchantment
     /// <param name="allowBigLevels">Whether levels over default values should be allowed. False by default.</param>
     public Enchantment(Enchant enchant, int level, bool allowBigLevels = false)
     {
-        Level = allowBigLevels ? level :
-            (enchant.GetEnchantData()?.MaxLevel ?? throw new Exception("Invalid enchant provided!")) < level ? level :
-            throw new Exception("The level of enchantment exceeds its default maximum!");
+        Level = !allowBigLevels &&
+                level > (enchant.GetEnchantData()?.MaxLevel ?? throw new Exception("Invalid enchant provided!"))
+            ? throw new Exception("The level of enchantment exceeds its default maximum!")
+            : level;
+
         Enchant = enchant;
     }
 

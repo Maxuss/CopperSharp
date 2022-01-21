@@ -1,3 +1,5 @@
+using CopperSharp.Item.Impl;
+
 namespace CopperSharp.Item;
 
 /// <summary>
@@ -12,7 +14,7 @@ public struct ItemStack : IStack
     public Material Material { get; }
 
     /// <inheritdoc />
-    public ItemMeta? Meta { get; set; } = null;
+    public ItemMeta Meta { get; set; }
 
     /// <summary>
     /// Constructs a new item stack from provided parameters
@@ -24,6 +26,15 @@ public struct ItemStack : IStack
     {
         Material = material;
         Amount = amount;
-        Meta = meta;
+        Meta = meta ?? new DefaultItemMeta(material);
+    }
+
+    /// <summary>
+    /// Serializes this item into minecraft-readable format
+    /// </summary>
+    /// <returns>Serialized item</returns>
+    public string Serialize()
+    {
+        return $"{Material.Id}{Meta.ToSNbt()} {Amount}";
     }
 }

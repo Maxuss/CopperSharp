@@ -93,4 +93,11 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     /// </summary>
     [JsonProperty("hoverEvent")]
     public ComponentHoverEvent? HoverEvent { get; protected set; }
+
+    /// <summary>
+    /// Serializes this component to JSON string
+    /// </summary>
+    /// <returns>String, that can be parsed by minecraft as component</returns>
+    public string Serialize()
+        => JsonConvert.SerializeObject(this);
 }

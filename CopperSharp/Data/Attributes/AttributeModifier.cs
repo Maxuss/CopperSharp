@@ -1,3 +1,6 @@
+using CopperSharp.Item;
+using CopperSharp.Utils;
+
 namespace CopperSharp.Data.Attributes;
 
 /// <summary>
@@ -11,14 +14,22 @@ public readonly struct AttributeModifier
     /// <param name="provider">Type of attribute</param>
     /// <param name="action">Action to be performed with provided amount</param>
     /// <param name="amount">Amount by which the attribute will be modified</param>
+    /// <param name="slot">Slot for this attribute modifier to work. If applied to entities, ignore</param>
     /// <param name="name">Name of this attribute modifier. If null, default name will be used</param>
-    public AttributeModifier(IAttributeType provider, AttributeAction action, double amount, string? name = null)
+    public AttributeModifier(IAttributeType provider, AttributeAction action, double amount, ItemSlot? slot = null,
+        string? name = null)
     {
         Name = name ?? provider.Name;
         Action = action;
         Type = provider.Name;
         Amount = amount > provider.Maximum ? provider.Maximum : amount;
+        Slot = slot?.GetData() ?? null;
     }
+
+    /// <summary>
+    /// Slot for this attribute modifier to work
+    /// </summary>
+    public string? Slot { get; }
 
     /// <summary>
     /// Name of this attribute modifier

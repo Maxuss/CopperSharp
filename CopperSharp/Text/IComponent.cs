@@ -95,6 +95,20 @@ public interface IComponent : ICloneable
     public AbstractComponentContainer Contain();
 
     /// <summary>
+    /// Removes italic formatting from this component
+    /// </summary>
+    /// <returns>Copy of this component</returns>
+    public IComponent NoItalic()
+        => Formatted(FormattingType.Italic, false);
+
+    /// <summary>
+    /// Serializes this component to JSON string
+    /// </summary>
+    /// <returns>String, that can be parsed by minecraft as component</returns>
+    public string Serialize()
+        => Contain().Serialize();
+
+    /// <summary>
     /// Creates a new <see cref="TextComponent"/>
     /// </summary>
     /// <param name="text">Text to be stored inside the component</param>
@@ -111,7 +125,7 @@ public interface IComponent : ICloneable
     /// <returns>Translatable component of this material</returns>
     public static IComponent Material(Material material)
     {
-        return new TranslatableComponent($"item.minecraft.{material.Id}") as IComponent;
+        return new TranslatableComponent($"item.minecraft.{material.Id}").Formatted(FormattingType.Italic, false);
     }
 
     /// <summary>
