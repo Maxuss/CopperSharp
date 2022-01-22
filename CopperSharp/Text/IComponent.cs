@@ -46,7 +46,7 @@ public interface IComponent : ICloneable
     /// <summary>
     /// Color of this component
     /// </summary>
-    public ITextColor Color { get; }
+    public ITextColor? Color { get; }
 
     /// <summary>
     /// Applies a coloring to this component and returns its copy

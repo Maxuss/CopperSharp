@@ -15,7 +15,7 @@ public struct ItemStack : IStack
     public Material Material { get; }
 
     /// <inheritdoc />
-    public ItemMeta Meta { get; set; }
+    public ItemMeta? Meta { get; set; }
 
     /// <summary>
     /// Constructs a new item stack from provided parameters
@@ -45,6 +45,6 @@ public struct ItemStack : IStack
     /// <returns>Serialized item</returns>
     public string Serialize()
     {
-        return $"{Material.Id}{Meta.ToSNbt()} {Amount}";
+        return $"{Material.Id}{Meta?.ToSNbt()} {Amount}";
     }
 }

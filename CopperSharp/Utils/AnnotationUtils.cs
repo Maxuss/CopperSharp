@@ -30,9 +30,10 @@ public sealed class EnumDataAttribute : Attribute
 public sealed class EnchantDataAttribute : Attribute
 {
     /// <summary>
-    /// Creates a new enum data attribute
+    /// Creates a new enchantment data attribute
     /// </summary>
-    /// <param name="data">Data stored inside the enum</param>
+    /// <param name="id">Path part of the Identifier of this enchantment</param>
+    /// <param name="maxLevel">Max level of this enchantment</param>
     public EnchantDataAttribute(string id, int maxLevel)
     {
         Id = id;

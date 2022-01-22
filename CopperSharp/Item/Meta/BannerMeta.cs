@@ -3,6 +3,9 @@ using CopperSharp.Text;
 
 namespace CopperSharp.Item.Meta;
 
+/// <summary>
+/// Metadata container for banners
+/// </summary>
 public sealed class BannerMeta : ItemMeta
 {
     /// <inheritdoc />
@@ -328,7 +331,7 @@ public readonly struct PatternType
     /// <summary>
     /// Globe
     /// </summary>
-    public static PatternType Glone { get; } = new("glb");
+    public static PatternType Globe { get; } = new("glb");
 
     /// <summary>
     /// Snout
@@ -336,6 +339,9 @@ public readonly struct PatternType
     public static PatternType Piglin { get; } = new("pig");
 }
 
+/// <summary>
+/// Represents a color of banner pattern
+/// </summary>
 public enum BannerColor
 {
     /// <summary>

@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace CopperSharp.Item.Meta;
 
+/// <summary>
+/// Metadata container for player skulls
+/// </summary>
 public class SkullMeta : ItemMeta
 {
     private bool _complexOwner;

@@ -33,7 +33,7 @@ public readonly struct TextComponent : IComponent
     public string? InsertionText { get; }
 
     /// <inheritdoc />
-    public ITextColor Color { get; } = NamedTextColor.White;
+    public ITextColor? Color { get; }
 
     /// <summary>
     /// Creates a new text component from provided text
@@ -45,10 +45,11 @@ public readonly struct TextComponent : IComponent
         HoverEvent = null;
         ClickEvent = null;
         InsertionText = null;
+        Color = null;
     }
 
     private TextComponent(string text, List<IComponent> children, Dictionary<FormattingType, bool> formatting,
-        ITextColor color,
+        ITextColor? color,
         IHoverEvent? hover, ClickEvent? click, string? insertion)
     {
         Text = text;

@@ -15,7 +15,7 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     protected AbstractComponentContainer(IComponent parent)
     {
         Children = !parent.Children.Any() ? null : parent.Children.Select(it => it.Contain()).ToList();
-        Color = parent.Color.ToString();
+        Color = parent.Color?.ToString();
         InsertionText = parent.InsertionText;
         ClickEvent = parent.ClickEvent?.Contain();
         HoverEvent = parent.HoverEvent?.Contain();
