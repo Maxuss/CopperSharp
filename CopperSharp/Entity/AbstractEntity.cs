@@ -1,3 +1,4 @@
+using CopperSharp.Data.SNbt;
 using CopperSharp.Text;
 using CopperSharp.Utils;
 
@@ -8,16 +9,37 @@ namespace CopperSharp.Entity;
 /// </summary>
 public abstract class AbstractEntity
 {
-    private short? Air { get; set; }
-    private bool? Glowing { get; set; }
-    private bool? HasVisualFire { get; set; }
-    private bool? Invulnerable { get; set; }
-    private bool? Silent { get; set; }
-    private IComponent? CustomName { get; set; }
-    private bool? CustomNameVisible { get; set; }
-    private Vec3? Motion { get; set; }
-    private Vec2? Rotation { get; set; }
-    private List<AbstractEntity> Passengers { get; set; } = new();
+    private Dictionary<string, bool> _bools = new();
+
+    /// <summary>
+    /// Constructs a new abstract entity with provided type
+    /// </summary>
+    /// <param name="type">Type of this entity</param>
+    protected AbstractEntity(EntityType type)
+    {
+        Type = type;
+    }
+
+    /// <summary>
+    /// Type of this entity
+    /// </summary>
+    public EntityType Type { get; }
+
+    private short Air { get; set; } = -1;
+    private IComponent? CustomName { get; set; } = null;
+    private Vec3 Motion { get; set; } = new(0, 0, 0);
+    private Vec2 Rotation { get; set; } = new(0, 0);
+    private List<AbstractEntity> Passengers { get; } = new();
+
+    /// <summary>
+    /// Disables gravity for this entity
+    /// </summary>
+    /// <returns></returns>
+    public AbstractEntity DisableGravity()
+    {
+        _bools["NoGravity"] = true;
+        return this;
+    }
 
     /// <summary>
     /// Makes this entity silent, not making any noise at all
@@ -26,7 +48,7 @@ public abstract class AbstractEntity
     /// <returns>This entity</returns>
     public AbstractEntity SetSilent(bool silent)
     {
-        Silent = silent;
+        _bools["Silent"] = silent;
         return this;
     }
 
@@ -35,9 +57,9 @@ public abstract class AbstractEntity
     /// </summary>
     /// <param name="immune">Whether to make entity immune to all attacks</param>
     /// <returns>This entity</returns>
-    public AbstractEntity Invulnerability(bool immune)
+    public AbstractEntity Invulnerability(bool immune = true)
     {
-        Invulnerable = immune;
+        _bools["Invulnerable"] = immune;
         return this;
     }
 
@@ -57,7 +79,7 @@ public abstract class AbstractEntity
     /// <returns>This entity</returns>
     public AbstractEntity VisualFire()
     {
-        HasVisualFire = true;
+        _bools["HasVisualFire"] = true;
         return this;
     }
 
@@ -68,7 +90,7 @@ public abstract class AbstractEntity
     /// <returns>This entity</returns>
     public AbstractEntity Glow(bool glow = true)
     {
-        Glowing = glow;
+        _bools["Glowing"] = glow;
         return this;
     }
 
@@ -81,7 +103,7 @@ public abstract class AbstractEntity
     public AbstractEntity Name(IComponent name, bool alwaysVisible = false)
     {
         CustomName = name;
-        CustomNameVisible = alwaysVisible;
+        _bools["CustomNameVisible"] = alwaysVisible;
         return this;
     }
 
@@ -139,5 +161,73 @@ public abstract class AbstractEntity
     {
         Passengers.AddRange(passengers);
         return this;
+    }
+
+    /// <summary>
+    /// Serializes extra data from this inheritor
+    /// </summary>
+    /// <param name="sw">Writer to which the data should be written</param>
+    protected virtual void SerializeExtra(StringNbtWriter sw)
+    {
+    }
+
+    /// <summary>
+    /// Serializes this entity into SNBT
+    /// </summary>
+    /// <returns>Serialized entity</returns>
+    public string Serialize(bool includeType = true)
+    {
+        using var sw = new StringWriter();
+        using var w = new StringNbtWriter(sw);
+
+        w.WriteBeginCompound();
+
+        foreach (var (key, value) in _bools)
+        {
+            w.WritePropertyName(key);
+            w.WriteBool(value);
+        }
+
+        if (Air != -1)
+        {
+            w.WriteShort("Air", Air);
+        }
+
+        if (CustomName != null)
+        {
+            w.WriteString("CustomName", CustomName.Serialize());
+        }
+
+        w.WritePropertyName("Motion");
+        w.WriteBeginArray();
+        w.WriteFloat(Motion.DX);
+        w.WriteFloat(Motion.DY);
+        w.WriteFloat(Motion.DZ);
+        w.WriteEndArray();
+        w.WriteComma();
+
+        w.WritePropertyName("Rotation");
+        w.WriteBeginArray();
+        w.WriteFloat(Rotation.Yaw);
+        w.WriteFloat(Rotation.Pitch);
+        w.WriteEndArray();
+
+        if (Passengers.Any())
+        {
+            w.WriteComma();
+            w.WritePropertyName("Passengers");
+            w.WriteBeginArray();
+            foreach (var passenger in Passengers)
+            {
+                w.WriteRawValue(passenger.Serialize(false));
+            }
+
+            w.WriteEndArray();
+        }
+
+        SerializeExtra(w);
+
+        w.WriteEndCompound();
+        return $"{(includeType ? Type.Id.ToString() : "")}{sw}";
     }
 }

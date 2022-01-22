@@ -48,6 +48,24 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
+    /// Writes the component begin tag
+    /// </summary>
+    public async Task WriteBeginCompoundAsync()
+    {
+        await sw.WriteAsync('{');
+        PushDepth(State.Compound);
+    }
+
+    /// <summary>
+    /// Writes the component end tag
+    /// </summary>
+    public async Task WriteEndCompoundAsync()
+    {
+        await sw.WriteAsync('}');
+        PullDepth();
+    }
+
+    /// <summary>
     /// Writes the array begin tag
     /// </summary>
     public void WriteBeginArray()
@@ -58,11 +76,31 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
+    /// Writes the array begin tag
+    /// </summary>
+    public async Task WriteBeginArrayAsync()
+    {
+        await ValidateArrayAsync();
+        await sw.WriteAsync('[');
+        PushDepth(State.Array);
+    }
+
+    /// <summary>
     /// Writes the array end tag
     /// </summary>
     public void WriteEndArray()
     {
         sw.Write(']');
+        PullDepth();
+        _arrayPosition = 0;
+    }
+
+    /// <summary>
+    /// Writes the array end tag
+    /// </summary>
+    public async Task WriteEndArrayAsync()
+    {
+        await sw.WriteAsync(']');
         PullDepth();
         _arrayPosition = 0;
     }
@@ -83,6 +121,21 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
+    /// Writes the property name and allows writing value
+    /// </summary>
+    /// <param name="name">Name of the property to be written</param>
+    public async Task WritePropertyNameAsync(string name)
+    {
+        if (_state == State.PostProperty)
+        {
+            await sw.WriteAsync(',');
+        }
+
+        await sw.WriteAsync($"{name}:");
+        _state = State.InProperty;
+    }
+
+    /// <summary>
     /// Writes and escapes a string
     /// </summary>
     /// <param name="str">String to be written</param>
@@ -90,6 +143,17 @@ public class StringNbtWriter : IDisposable
     {
         ValidateCanWriteValue();
         WriteEscapedString(str);
+        FinalizeProperty();
+    }
+
+    /// <summary>
+    /// Writes and escapes a string
+    /// </summary>
+    /// <param name="str">String to be written</param>
+    public async Task WriteStringAsync(string str)
+    {
+        await ValidateCanWriteValueAsync();
+        await WriteEscapedStringAsync(str);
         FinalizeProperty();
     }
 
@@ -105,12 +169,32 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
+    /// Writes a byte tag
+    /// </summary>
+    /// <param name="b">Byte to be written</param>
+    public async Task WriteByteAsync(byte b)
+    {
+        await ValidateCanWriteValueAsync();
+        await sw.WriteAsync($"{b}b");
+        FinalizeProperty();
+    }
+
+    /// <summary>
     /// Writes a boolean
     /// </summary>
     /// <param name="b">Boolean to be written</param>
     public void WriteBool(bool b)
     {
         WriteByte((byte) (b ? 1 : 0));
+    }
+
+    /// <summary>
+    /// Writes a boolean
+    /// </summary>
+    /// <param name="b">Boolean to be written</param>
+    public async Task WriteBoolAsync(bool b)
+    {
+        await WriteByteAsync((byte) (b ? 1 : 0));
     }
 
     /// <summary>
@@ -138,11 +222,33 @@ public class StringNbtWriter : IDisposable
     /// <summary>
     /// Writes a double as float
     /// </summary>
+    /// <param name="f">Float to be written</param>
+    public async Task WriteFloatAsync(float f)
+    {
+        await ValidateCanWriteValueAsync();
+        await sw.WriteAsync($"{f.ToString(CultureInfo.InvariantCulture)}f");
+        FinalizeProperty();
+    }
+
+    /// <summary>
+    /// Writes a double as float
+    /// </summary>
     /// <param name="d">Double to be written</param>
     public void WriteFloat(double d)
     {
         ValidateCanWriteValue();
         sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}f");
+        FinalizeProperty();
+    }
+
+    /// <summary>
+    /// Writes a double as float
+    /// </summary>
+    /// <param name="d">Double to be written</param>
+    public async Task WriteFloatAsync(double d)
+    {
+        await ValidateCanWriteValueAsync();
+        await sw.WriteAsync($"{d.ToString(CultureInfo.InvariantCulture)}f");
         FinalizeProperty();
     }
 
@@ -154,6 +260,17 @@ public class StringNbtWriter : IDisposable
     {
         ValidateCanWriteValue();
         sw.Write($"{s}s");
+        FinalizeProperty();
+    }
+
+    /// <summary>
+    /// Writes a short
+    /// </summary>
+    /// <param name="s">Short to be written</param>
+    public async Task WriteShortAsync(short s)
+    {
+        await ValidateCanWriteValueAsync();
+        await sw.WriteAsync($"{s}s");
         FinalizeProperty();
     }
 
@@ -205,21 +322,169 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Manually writes a comma to the writer
+    /// Writes a raw value, represented by string
+    /// </summary>
+    /// <param name="raw">Value to be written</param>
+    public async Task WriteRawValueAsync(string raw)
+    {
+        await ValidateCanWriteValueAsync();
+        await sw.WriteAsync(raw);
+        FinalizeProperty();
+    }
+
+
+    /// <summary>
+    /// Writes and escapes a string
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="str">String to be written</param>
+    public void WriteString(string property, string str)
+    {
+        WritePropertyName(property);
+        WriteString(str);
+    }
+
+    /// <summary>
+    /// Writes a byte tag
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="b">Byte to be written</param>
+    public void WriteByte(string property, byte b)
+    {
+        WritePropertyName(property);
+        WriteByte(b);
+    }
+
+    /// <summary>
+    /// Writes a boolean
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="b">Boolean to be written</param>
+    public void WriteBool(string property, bool b)
+    {
+        WritePropertyName(property);
+        WriteBool(b);
+    }
+
+    /// <summary>
+    /// Writes an int
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="i">Integer to be written</param>
+    public void WriteInteger(string property, int i)
+    {
+        WritePropertyName(property);
+        WriteInteger(i);
+    }
+
+    /// <summary>
+    /// Writes a float
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="f">Float to be written</param>
+    public void WriteFloat(string property, float f)
+    {
+        WritePropertyName(property);
+        WriteFloat(f);
+    }
+
+    /// <summary>
+    /// Writes a double as float
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="d">Double to be written</param>
+    public void WriteFloat(string property, double d)
+    {
+        WritePropertyName(property);
+        WriteFloat(d);
+    }
+
+    /// <summary>
+    /// Writes a short
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="s">Short to be written</param>
+    public void WriteShort(string property, short s)
+    {
+        WritePropertyName(property);
+        WriteShort(s);
+    }
+
+    /// <summary>
+    /// Writes a long
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="l">Long to be written</param>
+    public void WriteLong(string property, long l)
+    {
+        WritePropertyName(property);
+        WriteLong(l);
+    }
+
+    /// <summary>
+    /// Writes a provided UUID
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="id"></param>
+    public void WriteUuid(string property, Guid id)
+    {
+        WritePropertyName(property);
+        WriteUuid(id);
+    }
+
+    /// <summary>
+    /// Writes a provided UUID as an array of integers
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="id">Id to be written</param>
+    public void WriteUuidArray(string property, Guid id)
+    {
+        WritePropertyName(property);
+        WriteUuidArray(id);
+    }
+
+    /// <summary>
+    /// Writes a raw value, represented by string
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="raw">Value to be written</param>
+    public void WriteRawValue(string property, string raw)
+    {
+        WritePropertyName(property);
+        WriteRawValue(raw);
+    }
+
+    /// <summary>
+    /// Explicitly writes a comma to the writer
     /// </summary>
     public void WriteComma()
     {
         sw.Write(',');
     }
 
+    /// <summary>
+    /// Explicitly writes a comma to the writer
+    /// </summary>
+    public async Task WriteCommaAsync()
+    {
+        await sw.WriteAsync(',');
+    }
+
+
     private void ValidateArray()
     {
-        if (_state == State.Array)
-        {
-            if (_arrayPosition > 0)
-                sw.Write(",");
-            _arrayPosition++;
-        }
+        if (_state != State.Array) return;
+        if (_arrayPosition > 0)
+            sw.Write(",");
+        _arrayPosition++;
+    }
+
+    private async Task ValidateArrayAsync()
+    {
+        if (_state != State.Array) return;
+        if (_arrayPosition > 0)
+            await sw.WriteAsync(",");
+        _arrayPosition++;
     }
 
     private void FinalizeProperty()
@@ -236,6 +501,12 @@ public class StringNbtWriter : IDisposable
         sw.Write($"\"{escaped}\"");
     }
 
+    private async Task WriteEscapedStringAsync(string val)
+    {
+        var escaped = val.Replace("\"", "\\\"");
+        await sw.WriteAsync($"\"{escaped}\"");
+    }
+
     private void ValidateCanWriteValue()
     {
         if (_state != State.Array && _state != State.InProperty)
@@ -244,6 +515,16 @@ public class StringNbtWriter : IDisposable
         }
 
         ValidateArray();
+    }
+
+    private async Task ValidateCanWriteValueAsync()
+    {
+        if (_state != State.Array && _state != State.InProperty)
+        {
+            throw new Exception("Writing a value in current state would result in malformed SNBT!");
+        }
+
+        await ValidateArrayAsync();
     }
 
     private void PullDepth()

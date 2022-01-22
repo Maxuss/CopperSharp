@@ -1,3 +1,5 @@
+using CopperSharp.Data.SNbt;
+
 namespace CopperSharp.Entity;
 
 /// <summary>
@@ -5,4 +7,11 @@ namespace CopperSharp.Entity;
 /// </summary>
 public abstract class AbstractLivingEntity : AbstractEntity
 {
+    protected AbstractLivingEntity(EntityType type) : base(type)
+    {
+    }
+
+    protected override void SerializeExtra(StringNbtWriter sw)
+    {
+    }
 }

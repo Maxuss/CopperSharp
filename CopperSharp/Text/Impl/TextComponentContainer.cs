@@ -13,4 +13,10 @@ internal class TextComponentContainer : AbstractComponentContainer
     }
 
     [JsonProperty("text")] public string TextContents { get; } = "undefined";
+
+    protected override void WriteExtraData(JsonTextWriter w)
+    {
+        w.WritePropertyName("text");
+        w.WriteValue(TextContents);
+    }
 }

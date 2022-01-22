@@ -15,5 +15,19 @@ internal class TranslatableComponentContainer : AbstractComponentContainer
 
     [JsonProperty("translate")] public string Key { get; } = "undefined";
 
-    [JsonProperty("with")] public List<AbstractComponentContainer>? WithSlots { get; }
+    [JsonProperty("with")] public List<AbstractComponentContainer> WithSlots { get; } = new();
+
+    protected override void WriteExtraData(JsonTextWriter w)
+    {
+        w.WritePropertyName("key");
+        w.WriteValue(Key);
+        w.WritePropertyName("with");
+        w.WriteStartArray();
+        foreach (var slot in WithSlots)
+        {
+            w.WriteRawValue(slot.Serialize());
+        }
+
+        w.WriteEndArray();
+    }
 }
