@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-using CopperSharp.Item;
+using CopperSharp.Item.Meta;
 using CopperSharp.Registry;
 using CopperSharp.Text.Impl;
 

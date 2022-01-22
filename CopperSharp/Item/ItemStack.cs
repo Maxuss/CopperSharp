@@ -1,4 +1,5 @@
 using CopperSharp.Item.Impl;
+using CopperSharp.Item.Meta;
 
 namespace CopperSharp.Item;
 
@@ -21,12 +22,21 @@ public struct ItemStack : IStack
     /// </summary>
     /// <param name="material">Material to use</param>
     /// <param name="amount">Amount of item in this stack</param>
-    /// <param name="meta">Meta information on item</param>
-    public ItemStack(Material material, int amount = 1, ItemMeta? meta = null)
+    public ItemStack(Material material, int amount = 1)
     {
         Material = material;
         Amount = amount;
-        Meta = meta ?? new DefaultItemMeta(material);
+        if (material.Id.Path.Contains("banner"))
+        {
+            Meta = new BannerMeta(material);
+            return;
+        }
+
+        Meta = material.Id.Path switch
+        {
+            "player_head" => new SkullMeta(material),
+            _ => new DefaultItemMeta(material)
+        };
     }
 
     /// <summary>

@@ -13,12 +13,12 @@ internal class FunctionRegistryImpl : IFunctionRegistry
 
     public void WriteTo(RegistryOutputStream<IFunction> stream)
     {
-        if (stream is not FunctionOutputStream)
+        if (stream is not FunctionOutputStream fout)
             return;
 
         foreach (var element in RegisteredFunctions)
         {
-            stream.Write(element);
+            fout.Write(element);
         }
     }
 

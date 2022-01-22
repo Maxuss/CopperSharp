@@ -1,20 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using CopperSharp.Item;
+using CopperSharp.Item.Meta;
 
-using CopperSharp.Data.Attributes;
-using CopperSharp.Item;
-using CopperSharp.Text;
-
-var stack = new ItemStack(Material.DiamondSword);
-stack.Meta
-    .Enchant(
-        new Enchantment(Enchant.Fortune, 3),
-        new Enchantment(Enchant.Sharpness, 10, true))
-    .AddAttributes(
-        new AttributeModifier(GenericAttribute.MovementSpeed, AttributeAction.Multiply, 1.4d, ItemSlot.OffHand))
-    .HideFlags(ItemFlag.Unbreakable, ItemFlag.Effects)
-    .AppendLore(
-        new TextComponent(" "),
-        new TextComponent("LEGENDARY").Formatted(FormattingType.Bold).NoItalic().Colored(NamedTextColor.Gold))
-    .CustomName(
-        new TextComponent("Epic Sword").Colored(NamedTextColor.Gold).NoItalic());
-Console.WriteLine(stack.Serialize());
+var skull = new ItemStack(Material.PlayerHead);
+var meta = (SkullMeta) skull.Meta;
+meta.SetBase64Texture(
+    "MyZDc0NWRjNjk5NzllNzVkOWM5ZmMwNDVhZDBmN2YzMDY0NTVmNWMzODU4MzhjMmNiZjc0MmM4MGNiMDIxYyJ9fX0");
+skull.Meta = meta;
+Console.WriteLine(skull.Serialize());

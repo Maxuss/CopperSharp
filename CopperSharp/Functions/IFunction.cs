@@ -1,3 +1,4 @@
+using CopperSharp.Functions.Actions;
 using CopperSharp.Registry;
 
 namespace CopperSharp.Functions;
@@ -13,6 +14,12 @@ public interface IFunction : IRegistrable
     public Stack<IAction> Actions { get; }
 
     /// <summary>
+    /// Builds the function ready to be written to file
+    /// </summary>
+    /// <returns>Built function represented by string</returns>
+    string IRegistrable.Build() => string.Join("\n", Actions.Select(it => it.ToAction()));
+
+    /// <summary>
     /// Adds an action to this functions completion steps
     /// </summary>
     /// <param name="action"><see cref="IAction"/> to be added to this function</param>
@@ -25,10 +32,17 @@ public interface IFunction : IRegistrable
     public IAction? Pop();
 
     /// <summary>
-    /// Builds the function ready to be written to file
+    /// Writes data from this function into provided stream
     /// </summary>
-    /// <returns>Built function represented by string</returns>
-    string IRegistrable.Build() => string.Join("\n", Actions.Select(it => it.ToAction()));
+    /// <param name="stream">Stream into which the function contents should be dumped</param>
+    public void Dump(Stream stream)
+    {
+        using var sw = new StreamWriter(stream);
+        while (Actions.Any())
+        {
+            sw.Write((Pop() ?? new FunctionComment("Could not parse provided action!")).ToAction());
+        }
+    }
 }
 
 /// <summary>

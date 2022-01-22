@@ -3,9 +3,8 @@ using CopperSharp.Data.SNbt;
 using CopperSharp.Registry;
 using CopperSharp.Text;
 using CopperSharp.Utils;
-using Newtonsoft.Json;
 
-namespace CopperSharp.Item;
+namespace CopperSharp.Item.Meta;
 
 /// <summary>
 /// NBT Tag for items
@@ -151,7 +150,7 @@ public abstract class ItemMeta
         w.WritePropertyName("display");
         w.WriteBeginCompound();
         w.WritePropertyName("Name");
-        w.WriteRawValue(JsonConvert.SerializeObject(Name.Serialize()));
+        w.WriteString(Name.Serialize());
         if (Lore.Any())
         {
             w.WritePropertyName("Lore");

@@ -5,13 +5,20 @@ namespace CopperSharp.Registry;
 /// </summary>
 public readonly struct Identifier
 {
-    private readonly string _ns;
-    private readonly string _path;
+    /// <summary>
+    /// Namespace of this identifier
+    /// </summary>
+    public readonly string Namespace;
 
-    private Identifier(string ns, string path)
+    /// <summary>
+    /// Path of this identifier
+    /// </summary>
+    public readonly string Path;
+
+    private Identifier(string @namespace, string path)
     {
-        _ns = ns;
-        _path = path;
+        Namespace = @namespace;
+        Path = path;
     }
 
     /// <summary>
@@ -34,6 +41,6 @@ public readonly struct Identifier
     /// </summary>
     public override string ToString()
     {
-        return $"{_ns}:{_path}";
+        return $"{Namespace}:{Path}";
     }
 }

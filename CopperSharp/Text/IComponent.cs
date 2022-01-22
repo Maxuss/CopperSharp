@@ -11,6 +11,8 @@ namespace CopperSharp.Text;
 /// </summary>
 public interface IComponent : ICloneable
 {
+    private static readonly List<string> BlockIdentifiers = new() {"ore", "block", "banner", "glass", "head", "skull"};
+
     /// <summary>
     /// Type of current component
     /// </summary>
@@ -125,7 +127,11 @@ public interface IComponent : ICloneable
     /// <returns>Translatable component of this material</returns>
     public static IComponent Material(Material material)
     {
-        return new TranslatableComponent($"item.minecraft.{material.Id}").Formatted(FormattingType.Italic, false);
+        var prefix = "item";
+        if (BlockIdentifiers.Any(it => material.Id.Path.Contains(it)))
+            prefix = "block";
+        return new TranslatableComponent($"{prefix}.{material.Id.Namespace}.{material.Id.Path}").Formatted(
+            FormattingType.Italic, false);
     }
 
     /// <summary>

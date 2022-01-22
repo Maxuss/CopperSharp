@@ -1,3 +1,5 @@
+using CopperSharp.Item.Meta;
+
 namespace CopperSharp.Item;
 
 /// <summary>
