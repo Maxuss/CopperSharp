@@ -227,6 +227,8 @@ public abstract class AbstractEntity
 
         SerializeExtra(w);
 
+        if (!includeType)
+            w.WriteString("id", Type.Id.ToString());
         w.WriteEndCompound();
         return $"{(includeType ? Type.Id.ToString() : "")}{sw}";
     }
