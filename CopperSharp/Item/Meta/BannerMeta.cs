@@ -38,7 +38,7 @@ public sealed class BannerMeta : ItemMeta
     /// <param name="type">Type of the pattern to be applied</param>
     /// <param name="color">Color of the pattern</param>
     /// <returns>This banner meta</returns>
-    public BannerMeta Decorate(PatternType type, BannerColor color)
+    public BannerMeta Decorate(PatternType type, NumberedColor color)
     {
         Patterns.Add(new BannerPattern(color, type));
         return this;
@@ -101,7 +101,7 @@ public readonly struct BannerPattern
     /// </summary>
     /// <param name="color">Color of this pattern</param>
     /// <param name="pattern">Type of this pattern</param>
-    public BannerPattern(BannerColor color, PatternType pattern)
+    public BannerPattern(NumberedColor color, PatternType pattern)
     {
         Color = color;
         Pattern = pattern;
@@ -110,7 +110,7 @@ public readonly struct BannerPattern
     /// <summary>
     /// Color of this banner's pattern
     /// </summary>
-    public BannerColor Color { get; }
+    public NumberedColor Color { get; }
 
     /// <summary>
     /// Pattern of the banner
@@ -337,90 +337,4 @@ public readonly struct PatternType
     /// Snout
     /// </summary>
     public static PatternType Piglin { get; } = new("pig");
-}
-
-/// <summary>
-/// Represents a color of banner pattern
-/// </summary>
-public enum BannerColor
-{
-    /// <summary>
-    /// #FFFFFF 
-    /// </summary>
-    White = 0,
-
-    /// <summary>
-    /// #D87F33 
-    /// </summary>
-    Orange = 1,
-
-    /// <summary>
-    /// #B24CD8 
-    /// </summary>
-    Magenta = 2,
-
-    /// <summary>
-    /// #6699D8 
-    /// </summary>
-    LightBlue = 3,
-
-    /// <summary>
-    /// #E5E533 
-    /// </summary>
-    Yellow = 4,
-
-    /// <summary>
-    /// #7FCC19 
-    /// </summary>
-    Lime = 5,
-
-    /// <summary>
-    /// #F27FA5 
-    /// </summary>
-    Pink = 6,
-
-    /// <summary>
-    /// #4C4C4C 
-    /// </summary>
-    Gray = 7,
-
-    /// <summary>
-    /// #999999 
-    /// </summary>
-    LightGray = 8,
-
-    /// <summary>
-    /// #4C7F99 
-    /// </summary>
-    Cyan = 9,
-
-    /// <summary>
-    /// #7F3FB2 
-    /// </summary>
-    Purple = 10,
-
-    /// <summary>
-    /// #334CB2 
-    /// </summary>
-    Blue = 11,
-
-    /// <summary>
-    /// #664C33 
-    /// </summary>
-    Brown = 12,
-
-    /// <summary>
-    /// #667F33 
-    /// </summary>
-    Green = 13,
-
-    /// <summary>
-    /// #993333 
-    /// </summary>
-    Red = 14,
-
-    /// <summary>
-    /// #191919 
-    /// </summary>
-    Black = 15
 }

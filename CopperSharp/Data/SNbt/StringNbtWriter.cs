@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using CopperSharp.Data.Locations;
 using CopperSharp.Item;
 
 namespace CopperSharp.Data.SNbt;
@@ -230,6 +231,30 @@ public class StringNbtWriter : IDisposable
         ValidateCanWriteValue();
         sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
         FinalizeProperty();
+    }
+
+    /// <summary>
+    /// Writes a position
+    /// </summary>
+    /// <param name="loc">Location to be written</param>
+    public void WritePosition(Location loc)
+    {
+        WriteBeginCompound();
+        WriteInteger("X", (int) loc.X.Value);
+        WriteInteger("Y", (int) loc.Y.Value);
+        WriteInteger("Z", (int) loc.Z.Value);
+        WriteEndCompound();
+    }
+
+    /// <summary>
+    /// Writes a position
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="loc">Location to be written</param>
+    public void WritePosition(string property, Location loc)
+    {
+        WritePropertyName(property);
+        WritePosition(loc);
     }
 
     /// <summary>
