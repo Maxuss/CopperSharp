@@ -1,4 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using CopperSharp.Item;
 
 namespace CopperSharp.Data.SNbt;
 
@@ -220,6 +222,17 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
+    /// Writes a double
+    /// </summary>
+    /// <param name="d">Double to be written</param>
+    public void WriteDouble(double d)
+    {
+        ValidateCanWriteValue();
+        sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
+        FinalizeProperty();
+    }
+
+    /// <summary>
     /// Writes a double as float
     /// </summary>
     /// <param name="f">Float to be written</param>
@@ -334,6 +347,33 @@ public class StringNbtWriter : IDisposable
 
 
     /// <summary>
+    /// Writes an item to the stream
+    /// </summary>
+    /// <param name="item">Item to be written</param>
+    [SuppressMessage("ReSharper", "ConstantConditionalAccessQualifier")]
+    public void WriteItem(ItemStack? item)
+    {
+        if (item == null)
+        {
+            WriteBeginCompound();
+            WriteEndCompound();
+            return;
+        }
+
+        WriteBeginCompound();
+        WriteInteger("Count", item?.Amount ?? 0);
+        WriteString("id", item?.Material.Id.ToString() ?? "minecraft:null");
+        if (item?.Meta != null)
+        {
+            WritePropertyName("tag");
+            WriteRawValue(item?.Meta?.ToSNbt() ?? "{}");
+        }
+
+        WriteEndCompound();
+    }
+
+
+    /// <summary>
     /// Writes and escapes a string
     /// </summary>
     /// <param name="property">Property name</param>
@@ -398,6 +438,18 @@ public class StringNbtWriter : IDisposable
         WritePropertyName(property);
         WriteFloat(d);
     }
+
+    /// <summary>
+    /// Writes a double
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="d">Double to be written</param>
+    public void WriteDouble(string property, double d)
+    {
+        WritePropertyName(property);
+        WriteDouble(d);
+    }
+
 
     /// <summary>
     /// Writes a short

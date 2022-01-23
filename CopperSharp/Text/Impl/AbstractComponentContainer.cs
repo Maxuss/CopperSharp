@@ -15,6 +15,7 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     /// </summary>
     static AbstractComponentContainer()
     {
+        if (_jsonLoaded) return;
         var thread = new Thread(() =>
         {
             JsonConvert.SerializeObject(true);

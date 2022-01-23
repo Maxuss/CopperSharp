@@ -211,6 +211,7 @@ public abstract class AbstractEntity
         w.WriteFloat(Rotation.Yaw);
         w.WriteFloat(Rotation.Pitch);
         w.WriteEndArray();
+        w.WriteComma();
 
         if (Passengers.Any())
         {
@@ -223,6 +224,7 @@ public abstract class AbstractEntity
             }
 
             w.WriteEndArray();
+            w.WriteComma();
         }
 
         SerializeExtra(w);

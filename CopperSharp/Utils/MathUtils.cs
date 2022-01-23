@@ -2,6 +2,9 @@ using System.Drawing;
 
 namespace CopperSharp.Utils;
 
+/// <summary>
+/// Different Math-related utilities
+/// </summary>
 public static class MathUtils
 {
     /// <summary>

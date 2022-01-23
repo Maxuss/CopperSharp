@@ -17,7 +17,6 @@ public abstract class ItemMeta
     /// <param name="type"></param>
     protected ItemMeta(Material type)
     {
-        Name = IComponent.Material(type);
         Type = type;
     }
 
@@ -49,7 +48,7 @@ public abstract class ItemMeta
     /// <summary>
     /// Name of this item's display
     /// </summary>
-    private IComponent Name { get; set; }
+    private IComponent? Name { get; set; } = null;
 
     /// <summary>
     /// Lore of this item's display
@@ -147,24 +146,31 @@ public abstract class ItemMeta
         using var w = new StringNbtWriter(sw);
         w.WriteBeginCompound();
         // begin display tag
-        w.WritePropertyName("display");
-        w.WriteBeginCompound();
-        w.WritePropertyName("Name");
-        w.WriteString(Name.Serialize());
-        if (Lore.Any())
+        if (Name != null || Lore.Any())
         {
-            w.WritePropertyName("Lore");
-            w.WriteBeginArray();
-            foreach (var component in Lore)
+            w.WritePropertyName("display");
+            w.WriteBeginCompound();
+
+            if (Name != null)
             {
-                w.WriteString(component.Serialize());
+                w.WritePropertyName("Name");
+                w.WriteString(Name.Serialize());
             }
 
-            w.WriteEndArray();
-        }
+            if (Lore.Any())
+            {
+                w.WritePropertyName("Lore");
+                w.WriteBeginArray();
+                foreach (var component in Lore)
+                {
+                    w.WriteString(component.Serialize());
+                }
 
-        w.WriteEndCompound();
-        w.WriteComma();
+                w.WriteEndArray();
+            }
+
+            w.WriteEndCompound();
+        }
         // end display tag
 
         // begin enchantments tag

@@ -10,7 +10,7 @@ public interface IStack
     /// <summary>
     /// Amount of item in this stack
     /// </summary>
-    public int Amount { get; set; }
+    public sbyte Amount { get; set; }
 
     /// <summary>
     /// Material of this stack

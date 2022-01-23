@@ -9,7 +9,7 @@ namespace CopperSharp.Item;
 public struct ItemStack : IStack
 {
     /// <inheritdoc />
-    public int Amount { get; set; } = 1;
+    public sbyte Amount { get; set; } = 1;
 
     /// <inheritdoc />
     public Material Material { get; }
@@ -22,7 +22,7 @@ public struct ItemStack : IStack
     /// </summary>
     /// <param name="material">Material to use</param>
     /// <param name="amount">Amount of item in this stack</param>
-    public ItemStack(Material material, int amount = 1)
+    public ItemStack(Material material, sbyte amount = 1)
     {
         Material = material;
         Amount = amount;
