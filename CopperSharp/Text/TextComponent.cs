@@ -1,6 +1,7 @@
 // ReSharper disable RedundantCast
 
 using CopperSharp.Text.Impl;
+using CopperSharp.Utils;
 
 namespace CopperSharp.Text;
 
@@ -106,6 +107,59 @@ public readonly struct TextComponent : IComponent
     public AbstractComponentContainer Contain()
     {
         return new TextComponentContainer(this);
+    }
+
+    /// <summary>
+    /// Constructs a quadratic gradient between two colors
+    /// </summary>
+    /// <param name="from">From color</param>
+    /// <param name="to">To color</param>
+    /// <param name="fast">Whether to speed up gradient interpolation over time</param>
+    /// <returns>Modified copy of this component</returns>
+    /// <exception cref="Exception">Provided colors are named text colors, which are not supported</exception>
+    public IComponent QuadraticGradient(ITextColor from, ITextColor to, bool fast = true)
+    {
+        if (from is NamedTextColor || to is NamedTextColor)
+            throw new Exception("Can not build gradient from named text colors!");
+
+        var red = MathUtils.QuadraticInterpolation(from.R, to.R, Text.Length, fast);
+        var green = MathUtils.QuadraticInterpolation(from.G, to.G, Text.Length, fast);
+        var blue = MathUtils.QuadraticInterpolation(from.B, to.B, Text.Length, fast);
+
+        var empty = new TextComponent(Text[0].ToString()).Colored(ITextColor.Hex(red[0], green[0], blue[0]));
+        for (var i = 1; i < Text.Length; i++)
+        {
+            empty = empty.Child(
+                new TextComponent(Text[i].ToString()).Colored(ITextColor.Hex(red[i], green[i], blue[i])));
+        }
+
+        return empty;
+    }
+
+    /// <summary>
+    /// Constructs a linear gradient between two colors
+    /// </summary>
+    /// <param name="from">From color</param>
+    /// <param name="to">To color</param>
+    /// <returns>Modified copy of this component</returns>
+    /// <exception cref="Exception">Provided colors are named text colors, which are not supported</exception>
+    public IComponent LinearGradient(ITextColor from, ITextColor to)
+    {
+        if (from is NamedTextColor || to is NamedTextColor)
+            throw new Exception("Can not build gradient from named text colors!");
+
+        var red = MathUtils.LinearInterpolation(from.R, to.R, Text.Length);
+        var green = MathUtils.LinearInterpolation(from.G, to.G, Text.Length);
+        var blue = MathUtils.LinearInterpolation(from.B, to.B, Text.Length);
+
+        var empty = new TextComponent(Text[0].ToString()).Colored(ITextColor.Hex(red[0], green[0], blue[0]));
+        for (var i = 1; i < Text.Length; i++)
+        {
+            empty = empty.Child(
+                new TextComponent(Text[i].ToString()).Colored(ITextColor.Hex(red[i], green[i], blue[i])));
+        }
+
+        return empty;
     }
 
     /// <inheritdoc />

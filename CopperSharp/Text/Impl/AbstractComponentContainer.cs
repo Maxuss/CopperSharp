@@ -8,6 +8,24 @@ namespace CopperSharp.Text.Impl;
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public abstract class AbstractComponentContainer : IHoverEventContainer
 {
+    private static bool _jsonLoaded = false;
+
+    /// <summary>
+    /// Loads the Json.NET library on background thread, allowing faster serialization on first run
+    /// </summary>
+    static AbstractComponentContainer()
+    {
+        var thread = new Thread(() =>
+        {
+            JsonConvert.SerializeObject(true);
+            JsonConvert.SerializeObject(0xABC);
+            JsonConvert.SerializeObject("STRING");
+            JsonConvert.SerializeObject(125.43);
+            _jsonLoaded = true;
+        });
+        thread.Start();
+    }
+
     /// <summary>
     /// Initializes basic fields in this component container
     /// </summary>
@@ -34,10 +52,6 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     [JsonProperty("color")]
     public string? Color { get; protected set; }
 
-    /// <summary>
-    /// Formatting of this component container
-    /// </summary>
-    public Dictionary<FormattingType, bool> Formattings { get; protected set; }
 
     /// <summary>
     /// Insertion text to be inserted when this component is shift clicked
@@ -56,6 +70,11 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     /// </summary>
     [JsonProperty("hoverEvent")]
     public ComponentHoverEvent? HoverEvent { get; protected set; }
+
+    /// <summary>
+    /// Formatting of this component
+    /// </summary>
+    public Dictionary<FormattingType, bool> Formattings { get; protected set; }
 
     /// <summary>
     /// Writes extra data to the json

@@ -52,6 +52,18 @@ public interface ITextColor
     }
 
     /// <summary>
+    /// Creates a new <see cref="HexadecimalTextColor"/> from provided red green and blue values
+    /// </summary>
+    /// <param name="r">Red amount</param>
+    /// <param name="g">Green amount</param>
+    /// <param name="b">Blue amount</param>
+    public static ITextColor Hex(double r, double g, double b)
+    {
+        return new HexadecimalTextColor((int) r, (int) g, (int) b);
+    }
+
+
+    /// <summary>
     /// Creates a new <see cref="HexadecimalTextColor"/> from provided hex integer
     /// </summary>
     /// <param name="hex">Hex integer, containing red, green and blue values</param>

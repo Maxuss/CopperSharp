@@ -100,7 +100,7 @@ public interface IComponent : ICloneable
     /// Removes italic formatting from this component
     /// </summary>
     /// <returns>Copy of this component</returns>
-    public IComponent NoItalic()
+    public IComponent NoItalic<T>()
         => Formatted(FormattingType.Italic, false);
 
     /// <summary>
