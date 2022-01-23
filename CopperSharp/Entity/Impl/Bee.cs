@@ -6,7 +6,7 @@ namespace CopperSharp.Entity.Impl;
 /// <summary>
 /// Represents a bee entity
 /// </summary>
-public sealed class Bee : BreedableEntity
+public sealed class Bee : BreedableEntity, IAngerableEntity
 {
     internal Bee() : base(EntityType.Bee)
     {
@@ -16,23 +16,15 @@ public sealed class Bee : BreedableEntity
     private Location? FlowerPos { get; set; }
     private Location? HivePos { get; set; }
 
-    /// <summary>
-    /// Marks the entity, the bee is angry on
-    /// </summary>
-    /// <param name="id">Id of entity</param>
-    /// <returns>This bee</returns>
-    public Bee AngryOn(Guid id)
+    /// <inheritdoc />
+    public IAngerableEntity AngryOn(Guid id)
     {
         AngryAt = id;
         return this;
     }
 
-    /// <summary>
-    /// Sets the amount of time, this bee is angry
-    /// </summary>
-    /// <param name="duration">Amount of time in ticks</param>
-    /// <returns>This bee</returns>
-    public Bee AngerTime(int duration)
+    /// <inheritdoc />
+    public IAngerableEntity AngerTime(int duration)
     {
         Ints["AngerTime"] = duration;
         return this;
