@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DefaultDocumentationGeneratedPages>Types</DefaultDocumentationGeneratedPages>
-        <DefaultDocumentationFolder>../docs/pages/api</DefaultDocumentationFolder>
+        <DefaultDocumentationFolder>../docs/src/pages/api</DefaultDocumentationFolder>
     </PropertyGroup>
 
     <ItemGroup>
