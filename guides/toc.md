@@ -1,1 +1,0 @@
-# [Example Guide](example_guide.md)

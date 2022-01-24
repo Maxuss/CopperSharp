@@ -8,7 +8,7 @@ on:
     
 jobs:
   generate-docs:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
       - name: Checkout
@@ -21,14 +21,20 @@ jobs:
         run: dotnet restore
       - name: .NET build
         run: dotnet build --configuration Release
+      - name: Run DocFX
+        uses: nikeee/docfx-action@v1.0.0
+        with:
+          args: docs/docfx.json
+      - name: Install the DFMG tool
+        run: dotnet tool install -g DocFxMarkdownGen
+      - name: Generate DFMG markdown
+        run: cd docs && dfmg
       - name: Set up NPM
         uses: bahmutov/npm-install@v1
         with:
           working-directory: docs
       - name: Copy static files to documentation
         run: cp -R static_docs/* docs/src/pages/guides
-      - name: Install docusaurus
-        run: npm install docusaurus
       - name: Build docusaurus
         run: cd docs && npm run build
       - name: Publish
