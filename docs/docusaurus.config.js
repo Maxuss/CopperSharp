@@ -74,7 +74,7 @@ const config = {
                 to: '/docs/intro',
               },
             ],
-          }
+          },
           {
             title: 'API',
             items: [
