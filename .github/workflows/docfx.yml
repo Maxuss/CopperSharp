@@ -30,9 +30,7 @@ jobs:
       - name: Install docusaurus
         run: npm install docusaurus
       - name: Build docusaurus
-        run: npm run build
-        with: 
-          working_directory: "docs"
+        run: cd docs && npm run build
       - name: Publish
         if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v3.8.0
