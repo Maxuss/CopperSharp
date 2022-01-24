@@ -16,6 +16,6 @@ public interface IAngerableEntity
     /// Marks amount of time this entity is angry
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
-    /// <returns>This angerable entity</returns>
+    /// <returns>This angerable entityw</returns>
     public IAngerableEntity AngerTime(int time);
 }

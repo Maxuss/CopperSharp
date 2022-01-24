@@ -8,7 +8,7 @@ on:
     
 jobs:
   generate-docs:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
@@ -17,21 +17,27 @@ jobs:
         uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: 6.0.100
-      - name: Set up DocFX
-        uses: crazy-max/ghaction-chocolatey@v1.6.0
-        with:
-          args: install docfx
       - name: Install dependencies
         run: dotnet restore
       - name: .NET build
         run: dotnet build --configuration Release
-      - name: DocFX build
-        run: docfx docfx.json
+      - name: Set up NPM
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: docs
+      - name: Copy static files to documentation
+        run: cp –R /static_docs /docs
+      - name: Install docusaurus
+        run: npm install docusaurus
+      - name: Build docusaurus
+        run: npm run build
+        with: 
+          working_directory: "docs"
       - name: Publish
         if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v3.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs
+          publish_dir: docs/build
           cname: copper.maxus.space
           force_orphan: true

@@ -1,7 +1,0 @@
-- name: Home
-  href: index.md
-- name: Guides
-  href: guides/
-  homepage: guides/index.md
-- name: API Documentation
-  href: api/CopperSharp.html
