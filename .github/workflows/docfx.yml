@@ -26,7 +26,7 @@ jobs:
         with:
           working-directory: docs
       - name: Copy static files to documentation
-        run: cp –R static_docs/ docs/
+        run: cp -R static_docs/* docs/
       - name: Install docusaurus
         run: npm install docusaurus
       - name: Build docusaurus
