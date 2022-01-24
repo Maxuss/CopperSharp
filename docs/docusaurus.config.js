@@ -6,9 +6,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'CopperSharp',
+  tagline: 'Datapack library for C#',
+  url: 'https://copper.maxus.space.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -74,6 +74,15 @@ const config = {
                 to: '/docs/intro',
               },
             ],
+          }
+          {
+            title: 'API',
+            items: [
+              {
+                label: 'API Documentation',
+                to: '/docs/api',
+              },
+            ],
           },
           {
             title: 'More',
@@ -94,6 +103,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['csharp'],
       },
     }),
 };
