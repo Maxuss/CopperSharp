@@ -24,6 +24,12 @@ public abstract class LivingEntity : AbstractEntity
     private List<(IAttributeType, double)> Modifiers { get; set; } = new();
 
     /// <summary>
+    /// Extra string values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, string> Strings { get; set; } = new();
+
+
+    /// <summary>
     /// Extra bool values to store inside this entity
     /// </summary>
     protected Dictionary<string, bool> Bools { get; set; } = new();
@@ -359,6 +365,12 @@ public abstract class LivingEntity : AbstractEntity
         {
             sw.WriteBool(key, val);
         }
+
+        foreach (var (key, val) in Strings)
+        {
+            sw.WriteString(key, val);
+        }
+
 
         foreach (var (key, val) in Ints)
         {
