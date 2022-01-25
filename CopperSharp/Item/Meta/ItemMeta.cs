@@ -139,13 +139,16 @@ public abstract class ItemMeta
     /// <summary>
     /// Converts this item meta to Stringified NBT
     /// </summary>
-    /// <returns></returns>
-    public string ToSNbt()
+    /// <returns>Serialized StringNBT</returns>
+    public string ToSNbt(int? slot = null)
     {
         using var sw = new StringWriter();
         using var w = new StringNbtWriter(sw);
         w.WriteBeginCompound();
         // begin display tag
+        if (slot != null)
+            w.WriteInteger("Slot", slot ?? -1);
+
         if (Name != null || Lore.Any())
         {
             w.WritePropertyName("display");

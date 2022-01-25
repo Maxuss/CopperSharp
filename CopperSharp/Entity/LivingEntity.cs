@@ -28,6 +28,11 @@ public abstract class LivingEntity : AbstractEntity
     /// </summary>
     protected Dictionary<string, bool> Bools { get; set; } = new();
 
+    /// <summary>
+    /// Extra integers in this entity
+    /// </summary>
+    protected Dictionary<string, int> Ints { get; set; } = new();
+
     private float? HealthAmount { get; set; } = null;
 
     /// <summary>
@@ -353,6 +358,11 @@ public abstract class LivingEntity : AbstractEntity
         foreach (var (key, val) in Bools)
         {
             sw.WriteBool(key, val);
+        }
+
+        foreach (var (key, val) in Ints)
+        {
+            sw.WriteInteger(key, val);
         }
 
         sw.WritePropertyName("ArmorDropChances");

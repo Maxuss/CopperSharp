@@ -12,11 +12,6 @@ public abstract class BreedableEntity : LivingEntity
     {
     }
 
-    /// <summary>
-    /// Extra integers in this entity
-    /// </summary>
-    protected Dictionary<string, int> Ints { get; set; } = new();
-
     private Guid? LoveCause { get; set; }
 
     /// <summary>
@@ -58,11 +53,6 @@ public abstract class BreedableEntity : LivingEntity
     protected override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);
-
-        foreach (var (key, val) in Ints)
-        {
-            sw.WriteInteger(key, val);
-        }
 
         if (LoveCause != null)
             sw.WriteUuidArray("LoveCause", LoveCause ?? Guid.Empty);
