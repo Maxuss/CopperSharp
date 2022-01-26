@@ -24,6 +24,11 @@ public abstract class LivingEntity : AbstractEntity
     private List<(IAttributeType, double)> Modifiers { get; set; } = new();
 
     /// <summary>
+    /// Extra UUID values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, Guid> Ids { get; set; } = new();
+
+    /// <summary>
     /// Extra string values to store inside this entity
     /// </summary>
     protected Dictionary<string, string> Strings { get; set; } = new();
@@ -371,6 +376,10 @@ public abstract class LivingEntity : AbstractEntity
             sw.WriteString(key, val);
         }
 
+        foreach (var (key, val) in Ids)
+        {
+            sw.WriteUuidArray(key, val);
+        }
 
         foreach (var (key, val) in Ints)
         {
