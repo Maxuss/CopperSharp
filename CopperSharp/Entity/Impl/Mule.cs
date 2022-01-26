@@ -4,34 +4,34 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a donkey entity
+/// Represents a mule entity
 /// </summary>
-public class Donkey : HorseEntity
+public class Mule : HorseEntity
 {
-    internal Donkey() : base(EntityType.Donkey)
+    internal Mule() : base(EntityType.Mule)
     {
     }
 
     private List<ItemStack?> Inventory { get; set; } = new();
 
     /// <summary>
-    /// Marks whether this donkey has chests
+    /// Marks that this mule has chests
     /// </summary>
-    /// <param name="has">Whether the donkey has chests</param>
-    /// <returns>This donkey</returns>
-    public Donkey HasChests(bool has = true)
+    /// <param name="has">Whether this mule has chests</param>
+    /// <returns>This mule</returns>
+    public Mule HasChest(bool has = true)
     {
         Bools["ChestedHorse"] = has;
         return this;
     }
 
     /// <summary>
-    /// Adds an item to donkey's inventory
+    /// Adds an item to mule's inventory
     /// </summary>
     /// <param name="item">Item to be added</param>
     /// <param name="slot">Slot to which to add item. If negative, next free space will be used.</param>
     /// <returns>This donkey</returns>
-    public Donkey AddItem(ItemStack? item, int slot = -1)
+    public Mule AddItem(ItemStack? item, int slot = -1)
     {
         if (slot < 0)
         {

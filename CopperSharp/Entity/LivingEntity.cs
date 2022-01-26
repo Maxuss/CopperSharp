@@ -33,6 +33,10 @@ public abstract class LivingEntity : AbstractEntity
     /// </summary>
     protected Dictionary<string, string> Strings { get; set; } = new();
 
+    /// <summary>
+    /// Extra byte values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, byte> Bytes { get; set; } = new();
 
     /// <summary>
     /// Extra bool values to store inside this entity
@@ -369,6 +373,11 @@ public abstract class LivingEntity : AbstractEntity
         foreach (var (key, val) in Bools)
         {
             sw.WriteBool(key, val);
+        }
+
+        foreach (var (key, val) in Bytes)
+        {
+            sw.WriteByte(key, val);
         }
 
         foreach (var (key, val) in Strings)

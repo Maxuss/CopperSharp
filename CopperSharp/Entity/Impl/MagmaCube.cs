@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a magma cube
+/// Represents a magma cube entity
 /// </summary>
 public sealed class MagmaCube : LivingEntity
 {

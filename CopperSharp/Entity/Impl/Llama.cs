@@ -138,7 +138,7 @@ public sealed class Llama : BreedableEntity
     /// <returns>This llama</returns>
     public Llama Strength(int strength = 1)
     {
-        Ints["Strength"] = Math.Min(Math.Abs(strength), 5);
+        Ints["Strength"] = Math.Clamp(strength, 0, 5);
         return this;
     }
 
