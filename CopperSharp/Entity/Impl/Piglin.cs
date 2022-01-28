@@ -81,7 +81,8 @@ public class Piglin : LivingEntity
             var slot = 0;
             foreach (var item in Items)
             {
-                sw.WriteRawValue(item?.Meta?.ToSNbt(slot) ?? "{}");
+                sw.WriteItem(item, slot);
+                slot++;
             }
 
             sw.WriteEndArray();

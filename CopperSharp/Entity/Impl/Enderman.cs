@@ -28,6 +28,7 @@ public sealed class Enderman : LivingEntity, IAngerableEntity
         return this;
     }
 
+    /// <inheritdoc />
     protected override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);

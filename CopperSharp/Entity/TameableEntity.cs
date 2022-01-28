@@ -36,6 +36,7 @@ public abstract class TameableEntity : BreedableEntity
         return this;
     }
 
+    /// <inheritdoc />
     protected override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);

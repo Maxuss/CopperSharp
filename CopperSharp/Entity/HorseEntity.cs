@@ -101,9 +101,17 @@ public abstract class HorseEntity : BreedableEntity
         base.SerializeExtra(sw);
 
         if (ArmorItem != null)
-            sw.WriteRawValue("ArmorItem", ArmorItem?.Meta?.ToSNbt() ?? "{}");
+        {
+            sw.WritePropertyName("ArmorItem");
+            sw.WriteItem(ArmorItem);
+        }
+
         if (SaddleItem != null)
-            sw.WriteRawValue("SaddleItem", SaddleItem?.Meta?.ToSNbt() ?? "{}");
+        {
+            sw.WritePropertyName("SaddleItem");
+            sw.WriteItem(SaddleItem);
+        }
+
         if (Owner != null)
             sw.WriteUuidArray(Owner ?? Guid.Empty);
     }

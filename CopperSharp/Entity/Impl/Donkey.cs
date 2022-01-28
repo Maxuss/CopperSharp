@@ -56,7 +56,7 @@ public class Donkey : HorseEntity
         sw.WriteBeginArray();
         foreach (var item in Inventory.Where(it => it != null))
         {
-            sw.WriteRawValue(item?.Meta?.ToSNbt(Inventory.IndexOf(item)) ?? "{}");
+            sw.WriteItem(item);
         }
 
         sw.WriteEndArray();

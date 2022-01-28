@@ -37,6 +37,11 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public void WriteBeginCompound()
     {
+        if (_state == State.PostProperty)
+        {
+            sw.Write(',');
+        }
+
         sw.Write('{');
         PushDepth(State.Compound);
     }
@@ -375,8 +380,9 @@ public class StringNbtWriter : IDisposable
     /// Writes an item to the stream
     /// </summary>
     /// <param name="item">Item to be written</param>
+    /// <param name="slot">Slot data of this item. Optional</param>
     [SuppressMessage("ReSharper", "ConstantConditionalAccessQualifier")]
-    public void WriteItem(ItemStack? item)
+    public void WriteItem(ItemStack? item, int? slot = null)
     {
         if (item == null)
         {
@@ -386,6 +392,8 @@ public class StringNbtWriter : IDisposable
         }
 
         WriteBeginCompound();
+        if (slot != null)
+            WriteInteger("Slot", slot ?? 0);
         WriteInteger("Count", item?.Amount ?? 0);
         WriteString("id", item?.Material.Id.ToString() ?? "minecraft:null");
         if (item?.Meta != null)
