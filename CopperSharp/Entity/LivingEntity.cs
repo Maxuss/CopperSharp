@@ -22,32 +22,6 @@ public abstract class LivingEntity : AbstractEntity
     private ItemStack?[] ArmorItems { get; set; } = {null, null, null, null};
     private ItemStack?[] HandItems { get; set; } = {null, null};
     private List<(IAttributeType, double)> Modifiers { get; set; } = new();
-
-    /// <summary>
-    /// Extra UUID values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, Guid> Ids { get; set; } = new();
-
-    /// <summary>
-    /// Extra string values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, string> Strings { get; set; } = new();
-
-    /// <summary>
-    /// Extra byte values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, byte> Bytes { get; set; } = new();
-
-    /// <summary>
-    /// Extra bool values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, bool> Bools { get; set; } = new();
-
-    /// <summary>
-    /// Extra integers in this entity
-    /// </summary>
-    protected Dictionary<string, int> Ints { get; set; } = new();
-
     private float? HealthAmount { get; set; } = null;
 
     /// <summary>
@@ -369,31 +343,6 @@ public abstract class LivingEntity : AbstractEntity
 
         if (HealthAmount != null)
             sw.WriteFloat("Health", HealthAmount ?? 0);
-
-        foreach (var (key, val) in Bools)
-        {
-            sw.WriteBool(key, val);
-        }
-
-        foreach (var (key, val) in Bytes)
-        {
-            sw.WriteByte(key, val);
-        }
-
-        foreach (var (key, val) in Strings)
-        {
-            sw.WriteString(key, val);
-        }
-
-        foreach (var (key, val) in Ids)
-        {
-            sw.WriteUuidArray(key, val);
-        }
-
-        foreach (var (key, val) in Ints)
-        {
-            sw.WriteInteger(key, val);
-        }
 
         sw.WritePropertyName("ArmorDropChances");
         sw.WriteBeginArray();

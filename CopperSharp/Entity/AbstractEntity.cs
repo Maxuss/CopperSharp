@@ -20,6 +20,37 @@ public abstract class AbstractEntity
         Type = type;
     }
 
+
+    /// <summary>
+    /// Extra UUID values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, Guid> Ids { get; set; } = new();
+
+    /// <summary>
+    /// Extra string values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, string> Strings { get; set; } = new();
+
+    /// <summary>
+    /// Extra byte values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, byte> Bytes { get; set; } = new();
+
+    /// <summary>
+    /// Extra bool values to store inside this entity
+    /// </summary>
+    protected Dictionary<string, bool> Bools { get; set; } = new();
+
+    /// <summary>
+    /// Extra integers in this entity
+    /// </summary>
+    protected Dictionary<string, int> Ints { get; set; } = new();
+
+    /// <summary>
+    /// Extra integers in this entity
+    /// </summary>
+    protected Dictionary<string, double> Doubles { get; set; } = new();
+
     /// <summary>
     /// Type of this entity
     /// </summary>
@@ -225,6 +256,36 @@ public abstract class AbstractEntity
 
             w.WriteEndArray();
             w.WriteComma();
+        }
+
+        foreach (var (key, val) in Bools)
+        {
+            w.WriteBool(key, val);
+        }
+
+        foreach (var (key, val) in Bytes)
+        {
+            w.WriteByte(key, val);
+        }
+
+        foreach (var (key, val) in Strings)
+        {
+            w.WriteString(key, val);
+        }
+
+        foreach (var (key, val) in Ids)
+        {
+            w.WriteUuidArray(key, val);
+        }
+
+        foreach (var (key, val) in Ints)
+        {
+            w.WriteInteger(key, val);
+        }
+
+        foreach (var (key, val) in Doubles)
+        {
+            w.WriteDouble(key, val);
         }
 
         SerializeExtra(w);
