@@ -1,3 +1,5 @@
+using CopperSharp.Contexts;
+using CopperSharp.Data.Locations;
 using CopperSharp.Data.SNbt;
 using CopperSharp.Text;
 using CopperSharp.Utils;
@@ -11,6 +13,8 @@ public abstract class AbstractEntity
 {
     private Dictionary<string, bool> _bools = new();
 
+    private bool _firstLock = true;
+
     /// <summary>
     /// Constructs a new abstract entity with provided type
     /// </summary>
@@ -19,6 +23,24 @@ public abstract class AbstractEntity
     {
         Type = type;
     }
+
+    private bool _locked { get; set; }
+    private WorldContext? _binding { get; set; }
+
+    /// <summary>
+    /// Position of this entity
+    /// </summary>
+    public Location Position { get; internal set; }
+
+    /// <summary>
+    /// Unique UUID of this entity
+    /// </summary>
+    public Guid EntityUid { get; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Extra data, stored inside this entity
+    /// </summary>
+    public NbtCompound ExtraData { get; set; } = new();
 
     /// <summary>
     /// Extra UUID values to store inside this entity
@@ -56,9 +78,9 @@ public abstract class AbstractEntity
     public EntityType Type { get; }
 
     private short Air { get; set; } = -1;
-    private IComponent? CustomName { get; set; } = null;
-    private Vec3 Motion { get; set; } = new(0, 0, 0);
-    private Vec2 Rotation { get; set; } = new(0, 0);
+    private IComponent? CustomName { get; set; }
+    private Vec3? Motion { get; set; }
+    private Vec2? Rotation { get; set; }
     private List<AbstractEntity> Passengers { get; } = new();
 
     /// <summary>
@@ -228,24 +250,27 @@ public abstract class AbstractEntity
             w.WriteString("CustomName", CustomName.Serialize());
         }
 
-        w.WritePropertyName("Motion");
-        w.WriteBeginArray();
-        w.WriteFloat(Motion.DX);
-        w.WriteFloat(Motion.DY);
-        w.WriteFloat(Motion.DZ);
-        w.WriteEndArray();
-        w.WriteComma();
+        if (Motion != null)
+        {
+            w.WritePropertyName("Motion");
+            w.WriteBeginArray();
+            w.WriteFloat(Motion?.DX ?? 0);
+            w.WriteFloat(Motion?.DY ?? 0);
+            w.WriteFloat(Motion?.DZ ?? 0);
+            w.WriteEndArray();
+        }
 
-        w.WritePropertyName("Rotation");
-        w.WriteBeginArray();
-        w.WriteFloat(Rotation.Yaw);
-        w.WriteFloat(Rotation.Pitch);
-        w.WriteEndArray();
-        w.WriteComma();
+        if (Rotation != null)
+        {
+            w.WritePropertyName("Rotation");
+            w.WriteBeginArray();
+            w.WriteFloat(Rotation?.Yaw ?? 0);
+            w.WriteFloat(Rotation?.Pitch ?? 0);
+            w.WriteEndArray();
+        }
 
         if (Passengers.Any())
         {
-            w.WriteComma();
             w.WritePropertyName("Passengers");
             w.WriteBeginArray();
             foreach (var passenger in Passengers)
@@ -254,7 +279,6 @@ public abstract class AbstractEntity
             }
 
             w.WriteEndArray();
-            w.WriteComma();
         }
 
         foreach (var (key, val) in Bools)
@@ -291,7 +315,38 @@ public abstract class AbstractEntity
 
         if (!includeType)
             w.WriteString("id", Type.Id.ToString());
+
+        ExtraData.SerializeInto(w, false);
+
+        w.WritePropertyName("Tags");
+        w.WriteBeginArray();
+        w.WriteString($"CID{EntityUid}");
+        w.WriteEndArray();
         w.WriteEndCompound();
-        return $"{(includeType ? Type.Id.ToString() : "")}{sw}";
+        return $"{sw}";
+    }
+
+    /// <summary>
+    /// Locks this entity under provided
+    /// </summary>
+    /// <param name="ctx"></param>
+    public void Lock(WorldContext ctx)
+    {
+        _binding = ctx;
+        _locked = true;
+    }
+
+    /// <summary>
+    /// Releases lock of this entity, and flushes
+    /// all changes to current context
+    /// </summary>
+    public AbstractEntity Release()
+    {
+        if (!_locked) return this;
+
+        _locked = false;
+        _binding?.Release(this, _firstLock);
+        _firstLock = false;
+        return this;
     }
 }

@@ -9,6 +9,10 @@ namespace CopperSharp.Entity.Impl;
 /// </summary>
 public sealed class ThrownPotion : AbstractThrownItem
 {
+    internal ThrownPotion() : base(EntityType.Potion)
+    {
+    }
+
     private PotionMeta? Meta { get; set; } = null;
 
     /// <summary>
@@ -21,7 +25,7 @@ public sealed class ThrownPotion : AbstractThrownItem
         Meta = meta;
         return this;
     }
-    
+
     /// <summary>
     /// Gets data from provided potion meta
     /// </summary>
@@ -36,11 +40,8 @@ public sealed class ThrownPotion : AbstractThrownItem
         Meta = pm;
         return this;
     }
-    
-    internal ThrownPotion() : base(EntityType.Potion)
-    {
-    }
 
+    /// <inheritdoc />
     protected override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);

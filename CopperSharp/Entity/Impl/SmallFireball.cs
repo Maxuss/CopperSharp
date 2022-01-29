@@ -8,6 +8,10 @@ namespace CopperSharp.Entity.Impl;
 /// </summary>
 public sealed class SmallFireball : AbstractFireball
 {
+    internal SmallFireball() : base(EntityType.SmallFireball)
+    {
+    }
+
     private ItemStack? Item { get; set; }
 
     /// <summary>
@@ -20,18 +24,15 @@ public sealed class SmallFireball : AbstractFireball
         Item = item;
         return this;
     }
-    
-    internal SmallFireball() : base(EntityType.SmallFireball)
-    {
-    }
 
+    /// <inheritdoc />
     protected override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);
 
         if (Item == null)
             return;
-        
+
         sw.WritePropertyName("Item");
         sw.WriteItem(Item);
     }

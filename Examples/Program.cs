@@ -1,27 +1,35 @@
-﻿using CopperSharp.Item;
-using CopperSharp.Item.Meta;
-using CopperSharp.Text;
+﻿using CopperSharp.Contexts;
+using CopperSharp.Data.Effects;
+using CopperSharp.Data.Locations;
+using CopperSharp.Entity;
+using CopperSharp.Item;
 using Newtonsoft.Json;
 
 JsonConvert.SerializeObject("");
 var startTime = DateTime.UtcNow;
 
-var meta = new FireworkMeta(Material.FireworkRocket).AddExplosions(
-    new FireworkExplosion()
-        .Flicker()
-        .Trail()
-        .Type(ExplosionType.Creeper)
-        .MainColors(NamedTextColor.Black, NamedTextColor.Gray)
-        .FadingColors(NamedTextColor.Gray, NamedTextColor.Gold),
-    new FireworkExplosion()
-        .Flicker()
-        .Trail()
-        .Type(ExplosionType.Burst)
-        .MainColors(NamedTextColor.Gold, NamedTextColor.Gray)
-        .FadingColors(NamedTextColor.Gray, NamedTextColor.Red
-        )).FlightDuration(10);;
+var ctx = new WorldContext();
+var entity = (LivingEntity) ctx.GenerateEntity(EntityType.WitherSkeleton, Location.FromString("~ ~1 ~"));
 
-Console.WriteLine(meta.Serialize());
+// first modifications:
+entity.Helmet(new ItemStack(Material.CrimsonPlanks));
+
+entity.Release();
+
+ctx.Flush(Console.Out);
+
+// second modifications:
+entity.Lock(ctx);
+
+entity.Boots(new ItemStack(Material.NetheriteBoots))
+    .MainHand(new ItemStack(Material.NetheriteSword))
+    .Chestplate(new ItemStack(Material.Elytra))
+    .AddEffect(StatusEffect.Speed, 1000, 25)
+    .CanUseElytra();
+
+entity.Release();
+
+ctx.Flush(Console.Out);
 
 var diff = DateTime.UtcNow - startTime;
 Console.WriteLine($"Took {diff.TotalMilliseconds}ms");

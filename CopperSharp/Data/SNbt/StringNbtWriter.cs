@@ -10,11 +10,11 @@ namespace CopperSharp.Data.SNbt;
 /// </summary>
 public class StringNbtWriter : IDisposable
 {
+    private readonly StringWriter _sw;
     private int _arrayPosition = 0;
     private int _depthLevel;
     private State _previous = State.Error;
     private State _state = State.Open;
-    private readonly StringWriter _sw;
 
     /// <summary>
     /// Generates a new string nbt writer, piped to provided writer
@@ -42,6 +42,7 @@ public class StringNbtWriter : IDisposable
             _sw.Write(',');
         }
 
+        ValidateArray();
         _sw.Write('{');
         PushDepth(State.Compound);
     }
@@ -65,40 +66,17 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the component begin tag
-    /// </summary>
-    public async Task WriteBeginCompoundAsync()
-    {
-        await _sw.WriteAsync('{');
-        PushDepth(State.Compound);
-    }
-
-    /// <summary>
-    /// Writes the component end tag
-    /// </summary>
-    public async Task WriteEndCompoundAsync()
-    {
-        await _sw.WriteAsync('}');
-        PullDepth();
-    }
-
-    /// <summary>
     /// Writes the array begin tag
     /// </summary>
     public void WriteBeginArray()
     {
+        if (_state == State.PostProperty)
+        {
+            _sw.Write(',');
+        }
+
         ValidateArray();
         _sw.Write('[');
-        PushDepth(State.Array);
-    }
-
-    /// <summary>
-    /// Writes the array begin tag
-    /// </summary>
-    public async Task WriteBeginArrayAsync()
-    {
-        await ValidateArrayAsync();
-        await _sw.WriteAsync('[');
         PushDepth(State.Array);
     }
 
@@ -108,16 +86,6 @@ public class StringNbtWriter : IDisposable
     public void WriteEndArray()
     {
         _sw.Write(']');
-        PullDepth();
-        _arrayPosition = 0;
-    }
-
-    /// <summary>
-    /// Writes the array end tag
-    /// </summary>
-    public async Task WriteEndArrayAsync()
-    {
-        await _sw.WriteAsync(']');
         PullDepth();
         _arrayPosition = 0;
     }
@@ -184,7 +152,7 @@ public class StringNbtWriter : IDisposable
         _sw.Write($"{b}b");
         FinalizeProperty();
     }
-    
+
     /// <summary>
     /// Writes a signed byte tag
     /// </summary>
@@ -567,15 +535,6 @@ public class StringNbtWriter : IDisposable
         _sw.Write(',');
     }
 
-    /// <summary>
-    /// Explicitly writes a comma to the writer
-    /// </summary>
-    public async Task WriteCommaAsync()
-    {
-        await _sw.WriteAsync(',');
-    }
-
-
     private void ValidateArray()
     {
         if (_state != State.Array) return;
@@ -636,7 +595,7 @@ public class StringNbtWriter : IDisposable
     {
         if (_depthLevel <= 0) return;
         _depthLevel--;
-        _state = _previous;
+        _state = State.PostProperty;
     }
 
     private void PushDepth(State newState)

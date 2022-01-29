@@ -50,8 +50,6 @@ public sealed class ChestMinecart : AbstractMinecart
         foreach (var item in Items)
         {
             var ind = Items.IndexOf(item);
-            if (ind != 0)
-                sw.WriteComma();
 
             sw.WriteItem(item, ind);
         }

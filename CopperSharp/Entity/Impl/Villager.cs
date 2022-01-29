@@ -126,7 +126,6 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (Offers.Any())
@@ -158,7 +157,6 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
 
             sw.WriteEndArray();
             sw.WriteEndCompound();
-            sw.WriteComma();
         }
 
         sw.WritePropertyName("VillagerData");

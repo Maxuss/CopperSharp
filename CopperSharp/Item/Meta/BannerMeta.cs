@@ -76,8 +76,6 @@ public sealed class BannerMeta : ItemMeta
         w.WriteBeginArray();
         foreach (var pat in Patterns)
         {
-            if (Patterns.IndexOf(pat) != 0)
-                w.WriteComma();
             w.WriteBeginCompound();
             w.WritePropertyName("Color");
             w.WriteInteger((int) pat.Color);

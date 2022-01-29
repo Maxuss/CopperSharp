@@ -186,8 +186,6 @@ public abstract class ItemMeta
                 var edata = enchant.Enchant.GetEnchantData() ??
                             throw new Exception("Invalid enchantment data provided!");
                 var lvl = enchant.Level;
-                if (Enchantments.IndexOf(enchant) != 0)
-                    w.WriteComma();
                 w.WriteBeginCompound();
                 w.WritePropertyName("id");
                 w.WriteString($"minecraft:{edata.Id}");
@@ -197,7 +195,6 @@ public abstract class ItemMeta
             }
 
             w.WriteEndArray();
-            w.WriteComma();
         }
         // end enchantments tag
 
@@ -212,7 +209,6 @@ public abstract class ItemMeta
             }
 
             w.WriteEndArray();
-            w.WriteComma();
         }
         // end CanDestroy tag
 
@@ -231,8 +227,6 @@ public abstract class ItemMeta
             w.WriteBeginArray();
             foreach (var attr in AttributeModifiers)
             {
-                if (AttributeModifiers.IndexOf(attr) != 0)
-                    w.WriteComma();
                 w.WriteBeginCompound();
                 w.WritePropertyName("AttributeName");
                 w.WriteString(attr.Type);

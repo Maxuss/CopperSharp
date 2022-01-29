@@ -51,8 +51,6 @@ public sealed class FireworkMeta : ItemMeta
         sw.WriteBeginArray();
         foreach (var e in Explosions)
         {
-            if (Explosions.IndexOf(e) != 0)
-                sw.WriteComma();
             e.Serialize(sw);
         }
 
@@ -139,7 +137,6 @@ public sealed class FireworkExplosion
         }
 
         sw.WriteEndArray();
-        sw.WriteComma();
         sw.WritePropertyName("FadeColors");
         sw.WriteBeginArray();
         sw.WriteArrayIdentifier("I");
@@ -149,7 +146,6 @@ public sealed class FireworkExplosion
         }
 
         sw.WriteEndArray();
-        sw.WriteComma();
         sw.WriteBool("Flicker", Flickering);
         sw.WriteBool("Trail", Trailing);
         sw.WriteByte("Type", ExplosionType);

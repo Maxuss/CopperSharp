@@ -1,6 +1,5 @@
 using CopperSharp.Data.Effects;
 using CopperSharp.Data.SNbt;
-using CopperSharp.Entity;
 using CopperSharp.Text;
 
 namespace CopperSharp.Item.Meta;
@@ -10,9 +9,14 @@ namespace CopperSharp.Item.Meta;
 /// </summary>
 public sealed class PotionMeta : ItemMeta
 {
+    /// <inheritdoc />
+    public PotionMeta(Material type) : base(type)
+    {
+    }
+
     private int? CustomPotionColor { get; set; }
     internal List<PotionEffect> Effects { get; set; } = new();
-    
+
     /// <summary>
     /// Adds a custom potion color to this meta
     /// </summary>
@@ -55,26 +59,19 @@ public sealed class PotionMeta : ItemMeta
         Effects.Add(new PotionEffect(effect, duration, level, showParticles, showIcon, ambient));
         return this;
     }
-    
-    /// <inheritdoc />
-    public PotionMeta(Material type) : base(type)
-    {
-    }
 
     internal override void WriteExternalMetaData(StringNbtWriter sw)
     {
-        if(CustomPotionColor != null)
+        if (CustomPotionColor != null)
             sw.WriteInteger("CustomPotionColor", CustomPotionColor ?? 0);
 
         if (!Effects.Any())
             return;
-        
+
         sw.WritePropertyName("CustomPotionEffects");
         sw.WriteBeginArray();
         foreach (var eff in Effects)
         {
-            if(Effects.IndexOf(eff) != 0)
-                sw.WriteComma();
             sw.WriteBeginCompound();
             sw.WriteByte("Id", eff.Id);
             sw.WriteByte("Amplifier", eff.Level);
@@ -84,6 +81,7 @@ public sealed class PotionMeta : ItemMeta
             sw.WriteBool("ShowIcon", eff.ShowIcon);
             sw.WriteEndCompound();
         }
+
         sw.WriteEndArray();
     }
 }

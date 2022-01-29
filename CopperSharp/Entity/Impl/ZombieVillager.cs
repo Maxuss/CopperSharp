@@ -105,7 +105,6 @@ public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (Offers.Any())
@@ -137,7 +136,6 @@ public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
 
             sw.WriteEndArray();
             sw.WriteEndCompound();
-            sw.WriteComma();
         }
 
         sw.WritePropertyName("VillagerData");

@@ -17,12 +17,12 @@ public abstract class LivingEntity : AbstractEntity
 
     private List<PotionEffect> Effects { get; set; } = new();
     private float? AbsorptionAmount { get; set; }
-    private float[] ArmorDropChance { get; set; } = {0f, 0f, 0f, 0f};
-    private float[] HandDropChance { get; set; } = {0f, 0f};
+    private float[]? ArmorDropChance { get; set; }
+    private float[]? HandDropChance { get; set; }
     private ItemStack?[] ArmorItems { get; set; } = {null, null, null, null};
     private ItemStack?[] HandItems { get; set; } = {null, null};
     private List<(IAttributeType, double)> Modifiers { get; set; } = new();
-    private float? HealthAmount { get; set; } = null;
+    private float? HealthAmount { get; set; }
 
     /// <summary>
     /// Adds provided potion effects to this entity
@@ -67,6 +67,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity HelmetDropChance(float newChance)
     {
+        ArmorDropChance ??= new float[4];
         ArmorDropChance[3] = newChance;
         return this;
     }
@@ -78,6 +79,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity ChestplateDropChance(float newChance)
     {
+        ArmorDropChance ??= new float[4];
         ArmorDropChance[2] = newChance;
         return this;
     }
@@ -89,6 +91,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity LeggingsDropChance(float newChance)
     {
+        ArmorDropChance ??= new float[4];
         ArmorDropChance[1] = newChance;
         return this;
     }
@@ -100,6 +103,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity BootsDropChance(float newChance)
     {
+        ArmorDropChance ??= new float[4];
         ArmorDropChance[0] = newChance;
         return this;
     }
@@ -177,6 +181,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity MainHandDropChance(float chance)
     {
+        HandDropChance ??= new float[2];
         HandDropChance[0] = chance;
         return this;
     }
@@ -188,6 +193,7 @@ public abstract class LivingEntity : AbstractEntity
     /// <returns>This living entity</returns>
     public LivingEntity OffHandDropChance(float chance)
     {
+        HandDropChance ??= new float[2];
         HandDropChance[1] = chance;
         return this;
     }
@@ -239,7 +245,7 @@ public abstract class LivingEntity : AbstractEntity
     /// </summary>
     /// <param name="can">Whether this entity can use elytra</param>
     /// <returns>This living entity</returns>
-    public LivingEntity CanUseElytra(bool can)
+    public LivingEntity CanUseElytra(bool can = true)
     {
         Bools["FallFlying"] = can;
         return this;
@@ -280,8 +286,6 @@ public abstract class LivingEntity : AbstractEntity
             sw.WriteBeginArray();
             foreach (var eff in Effects)
             {
-                if (Effects.IndexOf(eff) != 0)
-                    sw.WriteComma();
                 sw.WriteBeginCompound();
                 sw.WriteBool("Ambient", eff.Ambient);
                 sw.WriteByte("Amplifier", eff.Level);
@@ -293,7 +297,6 @@ public abstract class LivingEntity : AbstractEntity
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (HandItems.Any(it => it != null))
@@ -303,11 +306,9 @@ public abstract class LivingEntity : AbstractEntity
             foreach (var item in HandItems)
             {
                 sw.WriteItem(item);
-                sw.WriteComma();
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (ArmorItems.Any(it => it != null))
@@ -317,11 +318,9 @@ public abstract class LivingEntity : AbstractEntity
             foreach (var item in ArmorItems)
             {
                 sw.WriteItem(item);
-                sw.WriteComma();
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (Modifiers.Any())
@@ -334,26 +333,27 @@ public abstract class LivingEntity : AbstractEntity
                 sw.WriteDouble("Base", val);
                 sw.WriteRawValue("Name", mod.Name);
                 sw.WriteEndCompound();
-                sw.WriteComma();
             }
 
             sw.WriteEndArray();
-            sw.WriteComma();
         }
 
         if (HealthAmount != null)
             sw.WriteFloat("Health", HealthAmount ?? 0);
 
-        sw.WritePropertyName("ArmorDropChances");
-        sw.WriteBeginArray();
-        foreach (var chance in ArmorDropChance)
+        if (ArmorDropChance != null)
         {
-            sw.WriteFloat(chance);
+            sw.WritePropertyName("ArmorDropChances");
+            sw.WriteBeginArray();
+            foreach (var chance in ArmorDropChance)
+            {
+                sw.WriteFloat(chance);
+            }
+
+            sw.WriteEndArray();
         }
 
-        sw.WriteEndArray();
-        sw.WriteComma();
-
+        if (HandDropChance == null) return;
         sw.WritePropertyName("HandDropChances");
         sw.WriteBeginArray();
         foreach (var chance in HandDropChance)
