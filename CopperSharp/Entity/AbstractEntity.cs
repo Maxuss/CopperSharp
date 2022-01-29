@@ -20,7 +20,6 @@ public abstract class AbstractEntity
         Type = type;
     }
 
-
     /// <summary>
     /// Extra UUID values to store inside this entity
     /// </summary>
