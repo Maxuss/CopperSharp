@@ -1,7 +1,6 @@
 using CopperSharp.Data.SNbt;
-using CopperSharp.Item.Meta;
 
-namespace CopperSharp.Item.Impl;
+namespace CopperSharp.Item.Meta;
 
 /// <summary>
 /// Default item meta implementation
@@ -17,7 +16,7 @@ public sealed class DefaultItemMeta : ItemMeta
     }
 
     /// <inheritdoc />
-    protected override void WriteExternalMetaData(StringNbtWriter w)
+    internal override void WriteExternalMetaData(StringNbtWriter w)
     {
     }
 }

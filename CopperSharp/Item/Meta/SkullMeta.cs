@@ -7,7 +7,7 @@ namespace CopperSharp.Item.Meta;
 /// <summary>
 /// Metadata container for player skulls
 /// </summary>
-public class SkullMeta : ItemMeta
+public sealed class SkullMeta : ItemMeta
 {
     private bool _complexOwner;
 
@@ -75,7 +75,7 @@ public class SkullMeta : ItemMeta
     }
 
     /// <inheritdoc />
-    protected override void WriteExternalMetaData(StringNbtWriter w)
+    internal override void WriteExternalMetaData(StringNbtWriter w)
     {
         if (SkullOwner == null) return;
         w.WritePropertyName("SkullOwner");

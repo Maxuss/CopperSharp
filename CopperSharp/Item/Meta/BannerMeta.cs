@@ -56,7 +56,7 @@ public sealed class BannerMeta : ItemMeta
     }
 
     /// <inheritdoc />
-    protected override void WriteExternalMetaData(StringNbtWriter w)
+    internal override void WriteExternalMetaData(StringNbtWriter w)
     {
         w.WritePropertyName("BlockEntityTag");
         w.WriteBeginCompound();

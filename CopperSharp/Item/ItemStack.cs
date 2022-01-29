@@ -1,4 +1,3 @@
-using CopperSharp.Item.Impl;
 using CopperSharp.Item.Meta;
 
 namespace CopperSharp.Item;
@@ -45,6 +44,6 @@ public struct ItemStack : IStack
     /// <returns>Serialized item</returns>
     public string Serialize()
     {
-        return $"{Material.Id}{Meta?.ToSNbt()} {Amount}";
+        return $"{Material.Id}{Meta?.Serialize()} {Amount}";
     }
 }

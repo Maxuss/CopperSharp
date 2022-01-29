@@ -23,12 +23,20 @@ public interface ITextColor
     public int B { get; }
 
     /// <summary>
+    /// Converts this color to a hex integer
+    /// </summary>
+    /// <returns>Converted hex integer</returns>
+    public sealed int ToHexInteger()
+    {
+        return Convert.ToInt32(ToHexString().Replace("#", ""), 16);
+    }
+
+    /// <summary>
     /// Hex string representation of this text color
     /// </summary>
     public sealed string ToHexString()
     {
-        var myColor = Color.FromArgb(R, R, B);
-        return $"#{myColor.R:X2}{myColor.G:X2}{myColor.B:X2}";
+        return $"#{R:X2}{G:X2}{B:X2}";
     }
 
     /// <summary>

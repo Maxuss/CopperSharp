@@ -140,7 +140,7 @@ public abstract class ItemMeta
     /// Converts this item meta to Stringified NBT
     /// </summary>
     /// <returns>Serialized StringNBT</returns>
-    public string ToSNbt(int? slot = null)
+    public string Serialize(int? slot = null)
     {
         using var sw = new StringWriter();
         using var w = new StringNbtWriter(sw);
@@ -292,5 +292,5 @@ public abstract class ItemMeta
     /// Writes external meta data to the writer as nbt
     /// </summary>
     /// <param name="w">Writer to which external meta data should be written</param>
-    protected abstract void WriteExternalMetaData(StringNbtWriter w);
+    internal abstract void WriteExternalMetaData(StringNbtWriter w);
 }

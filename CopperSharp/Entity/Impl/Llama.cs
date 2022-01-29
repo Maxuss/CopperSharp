@@ -171,7 +171,7 @@ public sealed class Llama : BreedableEntity
         base.SerializeExtra(sw);
 
         if (DecorItem != null)
-            sw.WriteRawValue("DecorItem", DecorItem?.Meta?.ToSNbt() ?? "{}");
+            sw.WriteRawValue("DecorItem", DecorItem?.Meta?.Serialize() ?? "{}");
 
         if (Bools.ContainsKey("ChestedHorse") && Bools["ChestedHorse"] && Items.Any(it => it != null))
         {
@@ -180,7 +180,7 @@ public sealed class Llama : BreedableEntity
             var slot = 0;
             foreach (var item in Items)
             {
-                sw.WriteRawValue(item?.Meta?.ToSNbt(slot) ?? "{}");
+                sw.WriteRawValue(item?.Meta?.Serialize(slot) ?? "{}");
                 slot++;
             }
 

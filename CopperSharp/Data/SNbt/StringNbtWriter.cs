@@ -14,7 +14,7 @@ public class StringNbtWriter : IDisposable
     private int _depthLevel;
     private State _previous = State.Error;
     private State _state = State.Open;
-    private StringWriter sw;
+    private readonly StringWriter _sw;
 
     /// <summary>
     /// Generates a new string nbt writer, piped to provided writer
@@ -22,14 +22,14 @@ public class StringNbtWriter : IDisposable
     /// <param name="sw">Writer to which current SNBT writer should be piped</param>
     public StringNbtWriter(StringWriter sw)
     {
-        this.sw = sw;
+        this._sw = sw;
     }
 
     /// <inheritdoc />
     public void Dispose()
     {
         GC.SuppressFinalize(this);
-        sw.Dispose();
+        _sw.Dispose();
     }
 
     /// <summary>
@@ -39,10 +39,10 @@ public class StringNbtWriter : IDisposable
     {
         if (_state == State.PostProperty)
         {
-            sw.Write(',');
+            _sw.Write(',');
         }
 
-        sw.Write('{');
+        _sw.Write('{');
         PushDepth(State.Compound);
     }
 
@@ -51,8 +51,17 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public void WriteEndCompound()
     {
-        sw.Write('}');
+        _sw.Write('}');
         PullDepth();
+    }
+
+    /// <summary>
+    /// Writes an identifier for array, e.g. I, or D
+    /// </summary>
+    /// <param name="id">Identifier to be written</param>
+    public void WriteArrayIdentifier(string id)
+    {
+        _sw.Write($"{id};");
     }
 
     /// <summary>
@@ -60,7 +69,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public async Task WriteBeginCompoundAsync()
     {
-        await sw.WriteAsync('{');
+        await _sw.WriteAsync('{');
         PushDepth(State.Compound);
     }
 
@@ -69,7 +78,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public async Task WriteEndCompoundAsync()
     {
-        await sw.WriteAsync('}');
+        await _sw.WriteAsync('}');
         PullDepth();
     }
 
@@ -79,7 +88,7 @@ public class StringNbtWriter : IDisposable
     public void WriteBeginArray()
     {
         ValidateArray();
-        sw.Write('[');
+        _sw.Write('[');
         PushDepth(State.Array);
     }
 
@@ -89,7 +98,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteBeginArrayAsync()
     {
         await ValidateArrayAsync();
-        await sw.WriteAsync('[');
+        await _sw.WriteAsync('[');
         PushDepth(State.Array);
     }
 
@@ -98,7 +107,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public void WriteEndArray()
     {
-        sw.Write(']');
+        _sw.Write(']');
         PullDepth();
         _arrayPosition = 0;
     }
@@ -108,7 +117,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public async Task WriteEndArrayAsync()
     {
-        await sw.WriteAsync(']');
+        await _sw.WriteAsync(']');
         PullDepth();
         _arrayPosition = 0;
     }
@@ -121,10 +130,10 @@ public class StringNbtWriter : IDisposable
     {
         if (_state == State.PostProperty)
         {
-            sw.Write(',');
+            _sw.Write(',');
         }
 
-        sw.Write($"{name}:");
+        _sw.Write($"{name}:");
         _state = State.InProperty;
     }
 
@@ -136,10 +145,10 @@ public class StringNbtWriter : IDisposable
     {
         if (_state == State.PostProperty)
         {
-            await sw.WriteAsync(',');
+            await _sw.WriteAsync(',');
         }
 
-        await sw.WriteAsync($"{name}:");
+        await _sw.WriteAsync($"{name}:");
         _state = State.InProperty;
     }
 
@@ -172,7 +181,18 @@ public class StringNbtWriter : IDisposable
     public void WriteByte(byte b)
     {
         ValidateCanWriteValue();
-        sw.Write($"{b}b");
+        _sw.Write($"{b}b");
+        FinalizeProperty();
+    }
+    
+    /// <summary>
+    /// Writes a signed byte tag
+    /// </summary>
+    /// <param name="b">Signed byte to be written</param>
+    public void WriteSByte(sbyte b)
+    {
+        ValidateCanWriteValue();
+        _sw.Write($"{b}b");
         FinalizeProperty();
     }
 
@@ -183,7 +203,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteByteAsync(byte b)
     {
         await ValidateCanWriteValueAsync();
-        await sw.WriteAsync($"{b}b");
+        await _sw.WriteAsync($"{b}b");
         FinalizeProperty();
     }
 
@@ -212,7 +232,7 @@ public class StringNbtWriter : IDisposable
     public void WriteInteger(int i)
     {
         ValidateCanWriteValue();
-        sw.Write(i.ToString());
+        _sw.Write(i.ToString());
         FinalizeProperty();
     }
 
@@ -223,7 +243,7 @@ public class StringNbtWriter : IDisposable
     public void WriteFloat(float f)
     {
         ValidateCanWriteValue();
-        sw.Write($"{f.ToString(CultureInfo.InvariantCulture)}f");
+        _sw.Write($"{f.ToString(CultureInfo.InvariantCulture)}f");
         FinalizeProperty();
     }
 
@@ -234,7 +254,7 @@ public class StringNbtWriter : IDisposable
     public void WriteDouble(double d)
     {
         ValidateCanWriteValue();
-        sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
+        _sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
         FinalizeProperty();
     }
 
@@ -269,7 +289,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteFloatAsync(float f)
     {
         await ValidateCanWriteValueAsync();
-        await sw.WriteAsync($"{f.ToString(CultureInfo.InvariantCulture)}f");
+        await _sw.WriteAsync($"{f.ToString(CultureInfo.InvariantCulture)}f");
         FinalizeProperty();
     }
 
@@ -280,7 +300,7 @@ public class StringNbtWriter : IDisposable
     public void WriteFloat(double d)
     {
         ValidateCanWriteValue();
-        sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}f");
+        _sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}f");
         FinalizeProperty();
     }
 
@@ -291,7 +311,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteFloatAsync(double d)
     {
         await ValidateCanWriteValueAsync();
-        await sw.WriteAsync($"{d.ToString(CultureInfo.InvariantCulture)}f");
+        await _sw.WriteAsync($"{d.ToString(CultureInfo.InvariantCulture)}f");
         FinalizeProperty();
     }
 
@@ -302,7 +322,7 @@ public class StringNbtWriter : IDisposable
     public void WriteShort(short s)
     {
         ValidateCanWriteValue();
-        sw.Write($"{s}s");
+        _sw.Write($"{s}s");
         FinalizeProperty();
     }
 
@@ -313,7 +333,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteShortAsync(short s)
     {
         await ValidateCanWriteValueAsync();
-        await sw.WriteAsync($"{s}s");
+        await _sw.WriteAsync($"{s}s");
         FinalizeProperty();
     }
 
@@ -324,7 +344,7 @@ public class StringNbtWriter : IDisposable
     public void WriteLong(long l)
     {
         ValidateCanWriteValue();
-        sw.Write($"{l}L");
+        _sw.Write($"{l}L");
         FinalizeProperty();
     }
 
@@ -360,7 +380,7 @@ public class StringNbtWriter : IDisposable
     public void WriteRawValue(string raw)
     {
         ValidateCanWriteValue();
-        sw.Write(raw);
+        _sw.Write(raw);
         FinalizeProperty();
     }
 
@@ -371,7 +391,7 @@ public class StringNbtWriter : IDisposable
     public async Task WriteRawValueAsync(string raw)
     {
         await ValidateCanWriteValueAsync();
-        await sw.WriteAsync(raw);
+        await _sw.WriteAsync(raw);
         FinalizeProperty();
     }
 
@@ -399,7 +419,7 @@ public class StringNbtWriter : IDisposable
         if (item?.Meta != null)
         {
             WritePropertyName("tag");
-            WriteRawValue(item?.Meta?.ToSNbt() ?? "{}");
+            WriteRawValue(item?.Meta?.Serialize() ?? "{}");
         }
 
         WriteEndCompound();
@@ -544,7 +564,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public void WriteComma()
     {
-        sw.Write(',');
+        _sw.Write(',');
     }
 
     /// <summary>
@@ -552,7 +572,7 @@ public class StringNbtWriter : IDisposable
     /// </summary>
     public async Task WriteCommaAsync()
     {
-        await sw.WriteAsync(',');
+        await _sw.WriteAsync(',');
     }
 
 
@@ -560,7 +580,7 @@ public class StringNbtWriter : IDisposable
     {
         if (_state != State.Array) return;
         if (_arrayPosition > 0)
-            sw.Write(",");
+            _sw.Write(",");
         _arrayPosition++;
     }
 
@@ -568,7 +588,7 @@ public class StringNbtWriter : IDisposable
     {
         if (_state != State.Array) return;
         if (_arrayPosition > 0)
-            await sw.WriteAsync(",");
+            await _sw.WriteAsync(",");
         _arrayPosition++;
     }
 
@@ -583,13 +603,13 @@ public class StringNbtWriter : IDisposable
     private void WriteEscapedString(string val)
     {
         var escaped = val.Replace("\"", "\\\"");
-        sw.Write($"\"{escaped}\"");
+        _sw.Write($"\"{escaped}\"");
     }
 
     private async Task WriteEscapedStringAsync(string val)
     {
         var escaped = val.Replace("\"", "\\\"");
-        await sw.WriteAsync($"\"{escaped}\"");
+        await _sw.WriteAsync($"\"{escaped}\"");
     }
 
     private void ValidateCanWriteValue()
