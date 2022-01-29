@@ -1,4 +1,5 @@
-using CopperSharp.Item;
+using CopperSharp.Block;
+using CopperSharp.Data.SNbt;
 
 namespace CopperSharp.Entity;
 
@@ -11,16 +12,16 @@ public abstract class AbstractMinecart : AbstractEntity
     {
     }
 
-    private string? BlockId { get; set; } = null;
+    private string? BlockState { get; set; } = null;
 
     /// <summary>
     /// Sets custom decoration block to be displayed in this minecart.
     /// </summary>
-    /// <param name="block">Type of block to be set</param>
+    /// <param name="state">Block state to be used</param>
     /// <returns>This abstract minecart</returns>
-    public AbstractMinecart CustomBlock(Material block)
+    public AbstractMinecart CustomBlock(BlockState state)
     {
-        BlockId = block.Id.ToString();
+        BlockState = state.Serialize();
         Bools["CustomDisplayTile"] = true;
         return this;
     }
@@ -35,5 +36,16 @@ public abstract class AbstractMinecart : AbstractEntity
     {
         Ints["DisplayOffset"] = pixels;
         return this;
+    }
+
+    /// <inheritdoc />
+    protected override void SerializeExtra(StringNbtWriter sw)
+    {
+        base.SerializeExtra(sw);
+
+        if (BlockState == null)
+            return;
+
+        sw.WriteRawValue("DisplayState", BlockState);
     }
 }
