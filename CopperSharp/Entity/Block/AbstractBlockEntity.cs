@@ -66,7 +66,7 @@ public abstract class AbstractBlockEntity
     /// Serializes extra data from this inheritor
     /// </summary>
     /// <param name="sw">Writer to which the data should be written</param>
-    protected virtual void SerializeExtra(StringNbtWriter sw)
+    internal virtual void SerializeExtra(StringNbtWriter sw)
     {
     }
 
