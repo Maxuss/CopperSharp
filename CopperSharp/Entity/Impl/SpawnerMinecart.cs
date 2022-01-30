@@ -1,5 +1,5 @@
+using CopperSharp.Block.Impl;
 using CopperSharp.Data.SNbt;
-using CopperSharp.Entity.Block.Impl;
 
 namespace CopperSharp.Entity.Impl;
 

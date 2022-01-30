@@ -2,18 +2,18 @@ using CopperSharp.Data.SNbt;
 using CopperSharp.Item;
 using CopperSharp.Registry;
 
-namespace CopperSharp.Entity.Block;
+namespace CopperSharp.Block;
 
 /// <summary>
 /// Abstract implementation for block entity
 /// </summary>
-public abstract class AbstractBlockEntity : IBlockEntity
+public abstract class AbstractTileEntity : ITileEntity
 {
     /// <summary>
     /// Constructs a new block entity
     /// </summary>
     /// <param name="id">Block material of this block entity</param>
-    protected AbstractBlockEntity(Material id)
+    protected AbstractTileEntity(Material id)
     {
         Id = id.Id;
     }
@@ -25,7 +25,7 @@ public abstract class AbstractBlockEntity : IBlockEntity
     public NbtCompound Data { get; set; } = new();
 
     /// <inheritdoc />
-    public IBlockEntity IsInvalidated(bool inv = true)
+    public ITileEntity IsInvalidated(bool inv = true)
     {
         Data["keepPacked"] = inv;
         return this;

@@ -1,12 +1,13 @@
 using CopperSharp.Data.SNbt;
+using CopperSharp.Entity;
 using CopperSharp.Item;
 
-namespace CopperSharp.Entity.Block.Impl;
+namespace CopperSharp.Block.Impl;
 
 /// <summary>
 /// Represents a spawner block
 /// </summary>
-public sealed class MobSpawner : AbstractBlockEntity
+public sealed class MobSpawner : AbstractTileEntity
 {
     internal MobSpawner() : base(Material.Spawner)
     {
