@@ -167,27 +167,6 @@ internal readonly struct CompoundNbtValue : INbtValue
     }
 }
 
-internal readonly struct ListNbtValue : INbtValue
-{
-    private readonly List<INbtValue> _v;
-
-    public ListNbtValue(List<INbtValue> v)
-    {
-        _v = v;
-    }
-
-    public void SerializeInto(StringNbtWriter sw)
-    {
-        sw.WriteBeginArray();
-        foreach (var val in _v)
-        {
-            val.SerializeInto(sw);
-        }
-
-        sw.WriteEndArray();
-    }
-}
-
 internal readonly struct RawNbtValue : INbtValue
 {
     private readonly string _v;

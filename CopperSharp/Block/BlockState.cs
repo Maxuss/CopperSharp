@@ -17,6 +17,11 @@ public abstract class BlockState
         Id = id;
     }
 
+    /// <summary>
+    /// Data stored inside this block state
+    /// </summary>
+    protected NbtCompound Data { get; set; } = new();
+
     private Identifier Id { get; set; }
 
     /// <summary>

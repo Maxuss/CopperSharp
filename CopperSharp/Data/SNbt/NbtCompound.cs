@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CopperSharp.Data.SNbt;
@@ -6,7 +7,7 @@ namespace CopperSharp.Data.SNbt;
 /// A container to store any kind of NBT data
 /// </summary>
 [SuppressMessage("ReSharper", "RedundantCast")]
-public sealed class NbtCompound
+public sealed class NbtCompound : IEnumerable<INbtField<INbtValue>>
 {
     private List<INbtField<INbtValue>> Fields { get; } = new();
 
@@ -19,6 +20,17 @@ public sealed class NbtCompound
         set => Add(key, value);
     }
 
+    /// <inheritdoc />
+    public IEnumerator<INbtField<INbtValue>> GetEnumerator()
+    {
+        return Fields.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
     /// <summary>
     /// Adds a value inside this compound
     /// </summary>
@@ -26,7 +38,7 @@ public sealed class NbtCompound
     /// <param name="value">Value of this pair</param>
     public void Add(string key, object value)
     {
-        Fields.Add(new NbtFieldImpl<INbtValue>(key, INbtValue.Encapsulate(value)) as INbtField<INbtValue>);
+        Fields.Add(new NbtFieldImpl<INbtValue>(key, INbtValue.Wrap(value)) as INbtField<INbtValue>);
     }
 
     /// <summary>

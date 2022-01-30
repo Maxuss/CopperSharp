@@ -12,7 +12,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     {
     }
 
-    private AbstractEntity? Spawning { get; set; } = null;
+    private AbstractEntity? Spawning { get; set; }
 
     /// <summary>
     /// Sets delay until this spawner can spawn entity
@@ -21,7 +21,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     /// <returns>This mob spawner</returns>
     public MobSpawner Delay(short ticks)
     {
-        Ints["Delay"] = ticks;
+        Data["Delay"] = ticks;
         return this;
     }
 
@@ -32,7 +32,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     /// <returns>This mob spawner</returns>
     public MobSpawner MaxSpawnAmount(short amount)
     {
-        Ints["MaxNearbyEntities"] = amount;
+        Data["MaxNearbyEntities"] = amount;
         return this;
     }
 
@@ -43,7 +43,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     /// <returns>This mob spawner</returns>
     public MobSpawner MaxDelay(short delay)
     {
-        Ints["MaxSpawnDelay"] = delay;
+        Data["MaxSpawnDelay"] = delay;
         return this;
     }
 
@@ -54,7 +54,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     /// <returns>This mob spawner</returns>
     public MobSpawner MinDelay(short delay)
     {
-        Ints["MinSpawnDelay"] = delay;
+        Data["MinSpawnDelay"] = delay;
         return this;
     }
 
@@ -76,7 +76,7 @@ public sealed class MobSpawner : AbstractBlockEntity
     /// <returns>This mob spawner</returns>
     public MobSpawner SpawnRange(short range)
     {
-        Ints["SpawnRange"] = range;
+        Data["SpawnRange"] = range;
         return this;
     }
 

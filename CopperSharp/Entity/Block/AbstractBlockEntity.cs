@@ -5,75 +5,33 @@ using CopperSharp.Registry;
 namespace CopperSharp.Entity.Block;
 
 /// <summary>
-/// A global abstract superclass for all block entities
+/// Abstract implementation for block entity
 /// </summary>
-public abstract class AbstractBlockEntity
+public abstract class AbstractBlockEntity : IBlockEntity
 {
     /// <summary>
     /// Constructs a new block entity
     /// </summary>
-    /// <param name="block">Type of block entity</param>
-    protected AbstractBlockEntity(Material block)
+    /// <param name="id">Block material of this block entity</param>
+    protected AbstractBlockEntity(Material id)
     {
-        Id = block.Id;
+        Id = id.Id;
     }
 
-    private Identifier Id { get; set; }
+    /// <inheritdoc />
+    public Identifier Id { get; set; }
 
-    /// <summary>
-    /// Extra UUID values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, Guid> Ids { get; set; } = new();
+    /// <inheritdoc />
+    public NbtCompound Data { get; set; } = new();
 
-    /// <summary>
-    /// Extra string values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, string> Strings { get; set; } = new();
-
-    /// <summary>
-    /// Extra byte values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, byte> Bytes { get; set; } = new();
-
-    /// <summary>
-    /// Extra bool values to store inside this entity
-    /// </summary>
-    protected Dictionary<string, bool> Bools { get; set; } = new();
-
-    /// <summary>
-    /// Extra integers in this entity
-    /// </summary>
-    protected Dictionary<string, int> Ints { get; set; } = new();
-
-    /// <summary>
-    /// Extra integers in this entity
-    /// </summary>
-    protected Dictionary<string, double> Doubles { get; set; } = new();
-
-    /// <summary>
-    /// Whether this entity is invalidated, and thus does
-    /// not immediately place the block in a loaded chunk
-    /// </summary>
-    /// <param name="inv">Marker</param>
-    /// <returns>This abstract block entity</returns>
-    public AbstractBlockEntity IsInvalidated(bool inv = true)
+    /// <inheritdoc />
+    public IBlockEntity IsInvalidated(bool inv = true)
     {
-        Bools["keepPacked"] = inv;
+        Data["keepPacked"] = inv;
         return this;
     }
 
-    /// <summary>
-    /// Serializes extra data from this inheritor
-    /// </summary>
-    /// <param name="sw">Writer to which the data should be written</param>
-    internal virtual void SerializeExtra(StringNbtWriter sw)
-    {
-    }
-
-    /// <summary>
-    /// Serializes this entity into SNBT
-    /// </summary>
-    /// <returns>Serialized entity</returns>
+    /// <inheritdoc />
     public string Serialize()
     {
         using var sw = new StringWriter();
@@ -81,39 +39,19 @@ public abstract class AbstractBlockEntity
 
         w.WriteBeginCompound();
 
-        foreach (var (key, val) in Bools)
-        {
-            w.WriteBool(key, val);
-        }
-
-        foreach (var (key, val) in Bytes)
-        {
-            w.WriteByte(key, val);
-        }
-
-        foreach (var (key, val) in Strings)
-        {
-            w.WriteString(key, val);
-        }
-
-        foreach (var (key, val) in Ids)
-        {
-            w.WriteUuidArray(key, val);
-        }
-
-        foreach (var (key, val) in Ints)
-        {
-            w.WriteInteger(key, val);
-        }
-
-        foreach (var (key, val) in Doubles)
-        {
-            w.WriteDouble(key, val);
-        }
+        Data.SerializeInto(w, false);
 
         SerializeExtra(w);
         w.WriteEndCompound();
 
         return sw.ToString();
+    }
+
+    /// <summary>
+    /// Serializes extra data into provided string nbt writer
+    /// </summary>
+    /// <param name="sw">Writer into which to write data</param>
+    internal virtual void SerializeExtra(StringNbtWriter sw)
+    {
     }
 }
