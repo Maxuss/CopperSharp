@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can have multiple attached faces
 /// </summary>
-public interface IMultipleFacing : ITileEntity
+public interface IMultipleFacing : IBlockData
 {
     /// <summary>
     /// Gets whether this entity has provided block face

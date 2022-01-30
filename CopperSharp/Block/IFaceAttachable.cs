@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can be attached to a block's face
 /// </summary>
-public interface IFaceAttachable : ITileEntity
+public interface IFaceAttachable : IBlockData
 {
     /// <summary>
     /// Type of attached face

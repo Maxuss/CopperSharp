@@ -1,11 +1,9 @@
-using CopperSharp.Item;
-
 namespace CopperSharp.Block.Impl;
 
 /// <summary>
 /// Represents a bamboo block
 /// </summary>
-public sealed class Bamboo : AbstractTileEntity, IAgeable, ISapling
+public sealed class Bamboo : AbstractBlockData, IAgeable, ISapling
 {
     /// <summary>
     /// Represents type of bamboo leaves
@@ -26,10 +24,6 @@ public sealed class Bamboo : AbstractTileEntity, IAgeable, ISapling
         /// Bamboo has big leaves
         /// </summary>
         Large
-    }
-
-    internal Bamboo() : base(Material.Bamboo)
-    {
     }
 
     /// <inheritdoc />

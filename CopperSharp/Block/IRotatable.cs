@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a rotatable tile entity
 /// </summary>
-public interface IRotatable : ITileEntity
+public interface IRotatable : IBlockData
 {
     /// <summary>
     /// Rotates this tile entity to provided block face

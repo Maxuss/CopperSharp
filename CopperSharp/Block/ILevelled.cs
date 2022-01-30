@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can have level containers
 /// </summary>
-public interface ILevelled : ITileEntity
+public interface ILevelled : IBlockData
 {
     /// <summary>
     /// Sets level of this levelled tile entity

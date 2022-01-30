@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can be snowy
 /// </summary>
-public interface ISnowable : ITileEntity
+public interface ISnowable : IBlockData
 {
     /// <summary>
     /// Sets whether this tile entity is snowy

@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a waterlogged block entity
 /// </summary>
-public interface IWaterlogged : ITileEntity
+public interface IWaterlogged : IBlockData
 {
     /// <summary>
     /// Makes this block entity waterlogged

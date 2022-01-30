@@ -1,18 +1,12 @@
 using CopperSharp.Data.SNbt;
-using CopperSharp.Registry;
 
 namespace CopperSharp.Block;
 
 /// <summary>
 /// A global abstract superclass for all block entities
 /// </summary>
-public interface ITileEntity
+public interface IBlockData
 {
-    /// <summary>
-    /// ID of this block entity
-    /// </summary>
-    public Identifier Id { get; set; }
-
     /// <summary>
     /// All extra NBT data for this tile entity
     /// </summary>
@@ -24,7 +18,7 @@ public interface ITileEntity
     /// </summary>
     /// <param name="inv">Marker</param>
     /// <returns>This abstract block entity</returns>
-    public ITileEntity IsInvalidated(bool inv = true);
+    public IBlockData IsInvalidated(bool inv = true);
 
     /// <summary>
     /// Serializes this entity into SNBT

@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can be attached to a block
 /// </summary>
-public interface IAttachable : ITileEntity
+public interface IAttachable : IBlockData
 {
     /// <summary>
     /// Makes this tripwire form a complete circuit, ready to output signal

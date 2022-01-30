@@ -1,11 +1,9 @@
-using CopperSharp.Item;
-
 namespace CopperSharp.Block.Impl;
 
 /// <summary>
 /// Represents a bed block
 /// </summary>
-public sealed class Bed : AbstractTileEntity, IDirectional
+public sealed class Bed : AbstractBlockData, IDirectional
 {
     /// <summary>
     /// Part of bed
@@ -21,10 +19,6 @@ public sealed class Bed : AbstractTileEntity, IDirectional
         /// Head part
         /// </summary>
         Head
-    }
-
-    internal Bed(Material bed) : base(bed)
-    {
     }
 
     /// <inheritdoc />

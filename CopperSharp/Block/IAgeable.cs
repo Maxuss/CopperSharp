@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can have age
 /// </summary>
-public interface IAgeable : ITileEntity
+public interface IAgeable : IBlockData
 {
     /// <summary>
     /// Sets age of this tile entity

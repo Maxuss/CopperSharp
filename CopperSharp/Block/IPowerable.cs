@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can have powered state
 /// </summary>
-public interface IPowerable : ITileEntity
+public interface IPowerable : IBlockData
 {
     /// <summary>
     /// Whether to make this tile entity powered

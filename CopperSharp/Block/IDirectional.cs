@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a block entity that has different directions
 /// </summary>
-public interface IDirectional : ITileEntity
+public interface IDirectional : IBlockData
 {
     /// <summary>
     /// Sets facing rotation of this directional entity
@@ -21,7 +21,7 @@ public readonly struct BlockFace
     /// <summary>
     /// String representation of this block face
     /// </summary>
-    public string Name { get; }
+    public readonly string Name;
 
     /// <summary>
     /// Index of this block face

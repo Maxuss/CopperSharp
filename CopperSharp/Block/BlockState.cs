@@ -6,31 +6,23 @@ namespace CopperSharp.Block;
 /// <summary>
 /// An abstract superclass for all block states
 /// </summary>
-public abstract class BlockState
+public sealed class BlockState
 {
     /// <summary>
     /// Creates a new block state
     /// </summary>
     /// <param name="id">Material ID of block</param>
-    protected BlockState(Identifier id)
+    public BlockState(Identifier id)
     {
         Id = id;
     }
 
     /// <summary>
-    /// Data stored inside this block state
+    /// Extra data on this block
     /// </summary>
-    protected NbtCompound Data { get; set; } = new();
+    public IBlockData? BlockData { get; set; }
 
     private Identifier Id { get; set; }
-
-    /// <summary>
-    /// Serializes extra data of this block state
-    /// </summary>
-    /// <param name="sw">String writer into which all data should be written</param>
-    internal virtual void SerializeExtra(StringNbtWriter sw)
-    {
-    }
 
     /// <summary>
     /// Serializes this block state into stringified NBT
@@ -43,10 +35,7 @@ public abstract class BlockState
 
         w.WriteBeginCompound();
         w.WriteString("Name", Id.ToString());
-        w.WritePropertyName("Properties");
-        w.WriteBeginCompound();
-        SerializeExtra(w);
-        w.WriteEndCompound();
+        w.WriteRawValue("Properties", BlockData?.Serialize() ?? "{}");
         w.WriteEndCompound();
 
         return sw.ToString();

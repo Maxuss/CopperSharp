@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a lightable tile entity
 /// </summary>
-public interface ILightable : ITileEntity
+public interface ILightable : IBlockData
 {
     /// <summary>
     /// Whether this lightable entity is lit

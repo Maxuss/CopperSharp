@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can emit analogue signal
 /// </summary>
-public interface ISignalEmitter : ITileEntity
+public interface ISignalEmitter : IBlockData
 {
     /// <summary>
     /// Sets analogue redstone output level of this entity

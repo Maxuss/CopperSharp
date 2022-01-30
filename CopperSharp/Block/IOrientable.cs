@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents an orientable tile entity
 /// </summary>
-public interface IOrientable : ITileEntity
+public interface IOrientable : IBlockData
 {
     /// <summary>
     /// Sets axis rotation of this orientable entity

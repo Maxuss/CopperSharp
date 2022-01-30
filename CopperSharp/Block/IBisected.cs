@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a bisected entity, that is split into two parts
 /// </summary>
-public interface IBisected : ITileEntity
+public interface IBisected : IBlockData
 {
     /// <summary>
     /// Type of bisected half

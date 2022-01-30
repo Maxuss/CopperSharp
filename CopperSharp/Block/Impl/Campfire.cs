@@ -1,21 +1,33 @@
 namespace CopperSharp.Block.Impl;
 
 /// <summary>
-/// Represents an amethyst cluster block
+/// Represents a campfire block data
 /// </summary>
-public sealed class AmethystCluster : AbstractBlockData, IDirectional, IWaterlogged
+public sealed class Campfire :
+    AbstractBlockData,
+    IDirectional,
+    ILightable,
+    IWaterlogged
 {
     /// <inheritdoc />
     public IDirectional Facing(BlockFace face)
     {
         if (!face.Cartesian)
             return this;
+
         Data["facing"] = face.Name;
         return this;
     }
 
     /// <inheritdoc />
-    public IWaterlogged Waterlogged(bool logged = true)
+    public ILightable Lit(bool lit)
+    {
+        Data["lit"] = lit;
+        return this;
+    }
+
+    /// <inheritdoc />
+    public IWaterlogged Waterlogged(bool logged)
     {
         Data["waterlogged"] = logged;
         return this;

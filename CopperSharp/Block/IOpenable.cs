@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a tile entity that can be opened
 /// </summary>
-public interface IOpenable : ITileEntity
+public interface IOpenable : IBlockData
 {
     /// <summary>
     /// Opens this openable tile entity

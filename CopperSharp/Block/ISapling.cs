@@ -3,7 +3,7 @@ namespace CopperSharp.Block;
 /// <summary>
 /// Represents a growable tile entity
 /// </summary>
-public interface ISapling : ITileEntity
+public interface ISapling : IBlockData
 {
     /// <summary>
     /// Whether this sapling is trying to grow
