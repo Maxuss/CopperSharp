@@ -14,7 +14,7 @@ public readonly struct Material
     /// ID of material item
     /// </summary>
     public Identifier Id { get; }
-    
+
     /// <summary>
     /// Extra type of block data
     /// </summary>
@@ -124,7 +124,7 @@ public readonly struct Material
 
     /// <summary>Represents item by ID of minecraft:jungle_sapling.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material JungleSapling = new(Identifier.Minecraft("jungle_sapling"), typeof(Sapling));
-    
+
     /// <summary>Represents item by ID of minecraft:acacia_sapling.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material AcaciaSapling = new(Identifier.Minecraft("acacia_sapling"), typeof(Sapling));
 
@@ -142,28 +142,28 @@ public readonly struct Material
 
     /// <summary>Represents item by ID of minecraft:sand.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material Sand = new(Identifier.Minecraft("sand"));
-    
+
     /// <summary>Represents item by ID of minecraft:red_sand.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material RedSand = new(Identifier.Minecraft("red_sand"));
-    
+
     /// <summary>Represents item by ID of minecraft:gravel.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material Gravel = new(Identifier.Minecraft("gravel"));
-    
+
     /// <summary>Represents item by ID of minecraft:gold_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material GoldOre = new(Identifier.Minecraft("gold_ore"));
-    
+
     /// <summary>Represents item by ID of minecraft:deepslate_gold_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material DeepslateGoldOre = new(Identifier.Minecraft("deepslate_gold_ore"));
-    
+
     /// <summary>Represents item by ID of minecraft:iron_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material IronOre = new(Identifier.Minecraft("iron_ore"));
-    
+
     /// <summary>Represents item by ID of minecraft:deepslate_iron_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material DeepslateIronOre = new(Identifier.Minecraft("deepslate_iron_ore"));
-    
+
     /// <summary>Represents item by ID of minecraft:coal_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material CoalOre = new(Identifier.Minecraft("coal_ore"));
-    
+
     /// <summary>Represents item by ID of minecraft:deepslate_coal_ore.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material DeepslateCoalOre = new(Identifier.Minecraft("deepslate_coal_ore"));
 
@@ -297,7 +297,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:flowering_azalea_leaves.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material FloweringAzaleaLeaves = new(Identifier.Minecraft("flowering_azalea_leaves"), typeof(Leaves));
+    public static readonly Material FloweringAzaleaLeaves =
+        new(Identifier.Minecraft("flowering_azalea_leaves"), typeof(Leaves));
 
 
     /// <summary>Represents item by ID of minecraft:sponge.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -781,7 +782,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:redstone_wall_torch.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RedstoneWallTorch = new(Identifier.Minecraft("redstone_wall_torch"), typeof(RedstoneWallTorch));
+    public static readonly Material RedstoneWallTorch =
+        new(Identifier.Minecraft("redstone_wall_torch"), typeof(RedstoneWallTorch));
 
 
     /// <summary>Represents item by ID of minecraft:stone_button.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -849,7 +851,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:soul_wall_torch.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SoulWallTorch = new(Identifier.Minecraft("soul_wall_torch"), typeof(RedstoneWallTorch));
+    public static readonly Material SoulWallTorch =
+        new(Identifier.Minecraft("soul_wall_torch"), typeof(RedstoneWallTorch));
 
 
     /// <summary>Represents item by ID of minecraft:glowstone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -997,11 +1000,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:infested_cracked_stone_bricks.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material InfestedCrackedStoneBricks = new(Identifier.Minecraft("infested_cracked_stone_bricks"));
+    public static readonly Material InfestedCrackedStoneBricks =
+        new(Identifier.Minecraft("infested_cracked_stone_bricks"));
 
 
     /// <summary>Represents item by ID of minecraft:infested_chiseled_stone_bricks.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material InfestedChiseledStoneBricks = new(Identifier.Minecraft("infested_chiseled_stone_bricks"));
+    public static readonly Material InfestedChiseledStoneBricks =
+        new(Identifier.Minecraft("infested_chiseled_stone_bricks"));
 
 
     /// <summary>Represents item by ID of minecraft:brown_mushroom_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1085,7 +1090,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:nether_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material NetherBrickStairs = new(Identifier.Minecraft("nether_brick_stairs"), typeof(Stairs));
+    public static readonly Material
+        NetherBrickStairs = new(Identifier.Minecraft("nether_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:nether_wart.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1121,7 +1127,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:end_portal_frame.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material EndPortalFrame = new(Identifier.Minecraft("end_portal_frame"), typeof(EndPortalFrame));
+    public static readonly Material EndPortalFrame =
+        new(Identifier.Minecraft("end_portal_frame"), typeof(EndPortalFrame));
 
 
     /// <summary>Represents item by ID of minecraft:end_stone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1190,9 +1197,10 @@ public readonly struct Material
 
     /// <summary>Represents item by ID of minecraft:cobblestone_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material CobblestoneWall = new(Identifier.Minecraft("cobblestone_wall"), typeof(Wall));
-    
+
     /// <summary>Represents item by ID of minecraft:mossy_cobblestone_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyCobblestoneWall = new(Identifier.Minecraft("mossy_cobblestone_wall"), typeof(Wall));
+    public static readonly Material MossyCobblestoneWall =
+        new(Identifier.Minecraft("mossy_cobblestone_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:flower_pot.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1392,18 +1400,21 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:light_weighted_pressure_plate.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightWeightedPressurePlate = new(Identifier.Minecraft("light_weighted_pressure_plate"));
+    public static readonly Material LightWeightedPressurePlate =
+        new(Identifier.Minecraft("light_weighted_pressure_plate"));
 
 
     /// <summary>Represents item by ID of minecraft:heavy_weighted_pressure_plate.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material HeavyWeightedPressurePlate = new(Identifier.Minecraft("heavy_weighted_pressure_plate"));
-    
+    public static readonly Material HeavyWeightedPressurePlate =
+        new(Identifier.Minecraft("heavy_weighted_pressure_plate"));
+
     /// <summary>Represents item by ID of minecraft:comparator.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
     public static readonly Material Comparator = new(Identifier.Minecraft("comparator"), typeof(Comparator));
 
 
     /// <summary>Represents item by ID of minecraft:daylight_detector.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DaylightDetector = new(Identifier.Minecraft("daylight_detector"), typeof(DaylightSensor));
+    public static readonly Material DaylightDetector =
+        new(Identifier.Minecraft("daylight_detector"), typeof(DaylightSensor));
 
 
     /// <summary>Represents item by ID of minecraft:redstone_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1507,67 +1518,83 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:white_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WhiteStainedGlassPane = new(Identifier.Minecraft("white_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material WhiteStainedGlassPane =
+        new(Identifier.Minecraft("white_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:orange_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material OrangeStainedGlassPane = new(Identifier.Minecraft("orange_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material OrangeStainedGlassPane =
+        new(Identifier.Minecraft("orange_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:magenta_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MagentaStainedGlassPane = new(Identifier.Minecraft("magenta_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material MagentaStainedGlassPane =
+        new(Identifier.Minecraft("magenta_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:light_blue_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightBlueStainedGlassPane = new(Identifier.Minecraft("light_blue_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material LightBlueStainedGlassPane =
+        new(Identifier.Minecraft("light_blue_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:yellow_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material YellowStainedGlassPane = new(Identifier.Minecraft("yellow_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material YellowStainedGlassPane =
+        new(Identifier.Minecraft("yellow_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:lime_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LimeStainedGlassPane = new(Identifier.Minecraft("lime_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material LimeStainedGlassPane =
+        new(Identifier.Minecraft("lime_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:pink_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PinkStainedGlassPane = new(Identifier.Minecraft("pink_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material PinkStainedGlassPane =
+        new(Identifier.Minecraft("pink_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:gray_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material GrayStainedGlassPane = new(Identifier.Minecraft("gray_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material GrayStainedGlassPane =
+        new(Identifier.Minecraft("gray_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:light_gray_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightGrayStainedGlassPane = new(Identifier.Minecraft("light_gray_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material LightGrayStainedGlassPane =
+        new(Identifier.Minecraft("light_gray_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:cyan_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CyanStainedGlassPane = new(Identifier.Minecraft("cyan_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material CyanStainedGlassPane =
+        new(Identifier.Minecraft("cyan_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:purple_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PurpleStainedGlassPane = new(Identifier.Minecraft("purple_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material PurpleStainedGlassPane =
+        new(Identifier.Minecraft("purple_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:blue_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material BlueStainedGlassPane = new(Identifier.Minecraft("blue_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material BlueStainedGlassPane =
+        new(Identifier.Minecraft("blue_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:brown_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material BrownStainedGlassPane = new(Identifier.Minecraft("brown_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material BrownStainedGlassPane =
+        new(Identifier.Minecraft("brown_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:green_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material GreenStainedGlassPane = new(Identifier.Minecraft("green_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material GreenStainedGlassPane =
+        new(Identifier.Minecraft("green_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:red_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RedStainedGlassPane = new(Identifier.Minecraft("red_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material RedStainedGlassPane =
+        new(Identifier.Minecraft("red_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:black_stained_glass_pane.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material BlackStainedGlassPane = new(Identifier.Minecraft("black_stained_glass_pane"), typeof(GlassPane));
+    public static readonly Material BlackStainedGlassPane =
+        new(Identifier.Minecraft("black_stained_glass_pane"), typeof(GlassPane));
 
 
     /// <summary>Represents item by ID of minecraft:acacia_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1615,7 +1642,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:dark_prismarine_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DarkPrismarineStairs = new(Identifier.Minecraft("dark_prismarine_stairs"), typeof(Stairs));
+    public static readonly Material DarkPrismarineStairs =
+        new(Identifier.Minecraft("dark_prismarine_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:prismarine_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1623,11 +1651,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:prismarine_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PrismarineBrickSlab = new(Identifier.Minecraft("prismarine_brick_slab"), typeof(Slab));
+    public static readonly Material PrismarineBrickSlab =
+        new(Identifier.Minecraft("prismarine_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:dark_prismarine_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DarkPrismarineSlab = new(Identifier.Minecraft("dark_prismarine_slab"), typeof(Slab));
+    public static readonly Material
+        DarkPrismarineSlab = new(Identifier.Minecraft("dark_prismarine_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:sea_lantern.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1939,7 +1969,7 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:nether_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material NetherBrickSlab = new(Identifier.Minecraft("nether_brick_slab")), typeof(Slab);
+    public static readonly Material NetherBrickSlab = new(Identifier.Minecraft("nether_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:quartz_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -1951,7 +1981,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:cut_red_sandstone_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CutRedSandstoneSlab = new(Identifier.Minecraft("cut_red_sandstone_slab"), typeof(Slab));
+    public static readonly Material CutRedSandstoneSlab =
+        new(Identifier.Minecraft("cut_red_sandstone_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:purpur_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2075,11 +2106,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:repeating_command_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RepeatingCommandBlock = new(Identifier.Minecraft("repeating_command_block"), typeof(CommandBlock));
+    public static readonly Material RepeatingCommandBlock =
+        new(Identifier.Minecraft("repeating_command_block"), typeof(CommandBlock));
 
 
     /// <summary>Represents item by ID of minecraft:chain_command_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material ChainCommandBlock = new(Identifier.Minecraft("chain_command_block"), typeof(CommandBlock));
+    public static readonly Material ChainCommandBlock =
+        new(Identifier.Minecraft("chain_command_block"), typeof(CommandBlock));
 
 
     /// <summary>Represents item by ID of minecraft:frosted_ice.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2191,7 +2224,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:light_blue_glazed_terracotta.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightBlueGlazedTerracotta = new(Identifier.Minecraft("light_blue_glazed_terracotta"));
+    public static readonly Material LightBlueGlazedTerracotta =
+        new(Identifier.Minecraft("light_blue_glazed_terracotta"));
 
 
     /// <summary>Represents item by ID of minecraft:yellow_glazed_terracotta.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2211,7 +2245,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:light_gray_glazed_terracotta.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightGrayGlazedTerracotta = new(Identifier.Minecraft("light_gray_glazed_terracotta"));
+    public static readonly Material LightGrayGlazedTerracotta =
+        new(Identifier.Minecraft("light_gray_glazed_terracotta"));
 
 
     /// <summary>Represents item by ID of minecraft:cyan_glazed_terracotta.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2507,43 +2542,53 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:dead_tube_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeadTubeCoralWallFan = new(Identifier.Minecraft("dead_tube_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material DeadTubeCoralWallFan =
+        new(Identifier.Minecraft("dead_tube_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:dead_brain_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeadBrainCoralWallFan = new(Identifier.Minecraft("dead_brain_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material DeadBrainCoralWallFan =
+        new(Identifier.Minecraft("dead_brain_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:dead_bubble_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeadBubbleCoralWallFan = new(Identifier.Minecraft("dead_bubble_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material DeadBubbleCoralWallFan =
+        new(Identifier.Minecraft("dead_bubble_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:dead_fire_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeadFireCoralWallFan = new(Identifier.Minecraft("dead_fire_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material DeadFireCoralWallFan =
+        new(Identifier.Minecraft("dead_fire_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:dead_horn_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeadHornCoralWallFan = new(Identifier.Minecraft("dead_horn_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material DeadHornCoralWallFan =
+        new(Identifier.Minecraft("dead_horn_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:tube_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material TubeCoralWallFan = new(Identifier.Minecraft("tube_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material TubeCoralWallFan =
+        new(Identifier.Minecraft("tube_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:brain_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material BrainCoralWallFan = new(Identifier.Minecraft("brain_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material BrainCoralWallFan =
+        new(Identifier.Minecraft("brain_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:bubble_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material BubbleCoralWallFan = new(Identifier.Minecraft("bubble_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material BubbleCoralWallFan =
+        new(Identifier.Minecraft("bubble_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:fire_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material FireCoralWallFan = new(Identifier.Minecraft("fire_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material FireCoralWallFan =
+        new(Identifier.Minecraft("fire_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:horn_coral_wall_fan.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material HornCoralWallFan = new(Identifier.Minecraft("horn_coral_wall_fan"), typeof(CoralWallFan));
+    public static readonly Material HornCoralWallFan =
+        new(Identifier.Minecraft("horn_coral_wall_fan"), typeof(CoralWallFan));
 
 
     /// <summary>Represents item by ID of minecraft:sea_pickle.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2583,27 +2628,33 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:polished_granite_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedGraniteStairs = new(Identifier.Minecraft("polished_granite_stairs"), typeof(Stairs));
+    public static readonly Material PolishedGraniteStairs =
+        new(Identifier.Minecraft("polished_granite_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:smooth_red_sandstone_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmoothRedSandstoneStairs = new(Identifier.Minecraft("smooth_red_sandstone_stairs"), typeof(Stairs));
+    public static readonly Material SmoothRedSandstoneStairs =
+        new(Identifier.Minecraft("smooth_red_sandstone_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:mossy_stone_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyStoneBrickStairs = new(Identifier.Minecraft("mossy_stone_brick_stairs"), typeof(Stairs));
+    public static readonly Material MossyStoneBrickStairs =
+        new(Identifier.Minecraft("mossy_stone_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:polished_diorite_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedDioriteStairs = new(Identifier.Minecraft("polished_diorite_stairs"), typeof(Stairs));
+    public static readonly Material PolishedDioriteStairs =
+        new(Identifier.Minecraft("polished_diorite_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:mossy_cobblestone_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyCobblestoneStairs = new(Identifier.Minecraft("mossy_cobblestone_stairs"), typeof(Stairs));
+    public static readonly Material MossyCobblestoneStairs =
+        new(Identifier.Minecraft("mossy_cobblestone_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:end_stone_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material EndStoneBrickStairs = new(Identifier.Minecraft("end_stone_brick_stairs"), typeof(Stairs));
+    public static readonly Material EndStoneBrickStairs =
+        new(Identifier.Minecraft("end_stone_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:stone_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2611,11 +2662,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:smooth_sandstone_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmoothSandstoneStairs = new(Identifier.Minecraft("smooth_sandstone_stairs"), typeof(Stairs));
+    public static readonly Material SmoothSandstoneStairs =
+        new(Identifier.Minecraft("smooth_sandstone_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:smooth_quartz_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmoothQuartzStairs = new(Identifier.Minecraft("smooth_quartz_stairs"), typeof(Stairs));
+    public static readonly Material SmoothQuartzStairs =
+        new(Identifier.Minecraft("smooth_quartz_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:granite_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2627,11 +2680,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:red_nether_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RedNetherBrickStairs = new(Identifier.Minecraft("red_nether_brick_stairs"), typeof(Stairs));
+    public static readonly Material RedNetherBrickStairs =
+        new(Identifier.Minecraft("red_nether_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:polished_andesite_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedAndesiteStairs = new(Identifier.Minecraft("polished_andesite_stairs"), typeof(Stairs));
+    public static readonly Material PolishedAndesiteStairs =
+        new(Identifier.Minecraft("polished_andesite_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:diorite_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2639,23 +2694,28 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:polished_granite_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedGraniteSlab = new(Identifier.Minecraft("polished_granite_slab"), typeof(Slab));
+    public static readonly Material PolishedGraniteSlab =
+        new(Identifier.Minecraft("polished_granite_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:smooth_red_sandstone_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmoothRedSandstoneSlab = new(Identifier.Minecraft("smooth_red_sandstone_slab"), typeof(Slab));
+    public static readonly Material SmoothRedSandstoneSlab =
+        new(Identifier.Minecraft("smooth_red_sandstone_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:mossy_stone_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyStoneBrickSlab = new(Identifier.Minecraft("mossy_stone_brick_slab"), typeof(Slab));
+    public static readonly Material MossyStoneBrickSlab =
+        new(Identifier.Minecraft("mossy_stone_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:polished_diorite_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedDioriteSlab = new(Identifier.Minecraft("polished_diorite_slab"), typeof(Slab));
+    public static readonly Material PolishedDioriteSlab =
+        new(Identifier.Minecraft("polished_diorite_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:mossy_cobblestone_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyCobblestoneSlab = new(Identifier.Minecraft("mossy_cobblestone_slab"), typeof(Slab));
+    public static readonly Material MossyCobblestoneSlab =
+        new(Identifier.Minecraft("mossy_cobblestone_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:end_stone_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2663,7 +2723,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:smooth_sandstone_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmoothSandstoneSlab = new(Identifier.Minecraft("smooth_sandstone_slab"), typeof(Slab));
+    public static readonly Material SmoothSandstoneSlab =
+        new(Identifier.Minecraft("smooth_sandstone_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:smooth_quartz_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2679,11 +2740,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:red_nether_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RedNetherBrickSlab = new(Identifier.Minecraft("red_nether_brick_slab"), typeof(Slab));
+    public static readonly Material RedNetherBrickSlab =
+        new(Identifier.Minecraft("red_nether_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:polished_andesite_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedAndesiteSlab = new(Identifier.Minecraft("polished_andesite_slab"), typeof(Slab));
+    public static readonly Material PolishedAndesiteSlab =
+        new(Identifier.Minecraft("polished_andesite_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:diorite_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2703,7 +2766,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:mossy_stone_brick_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MossyStoneBrickWall = new(Identifier.Minecraft("mossy_stone_brick_wall"), typeof(Wall));
+    public static readonly Material MossyStoneBrickWall =
+        new(Identifier.Minecraft("mossy_stone_brick_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:granite_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2723,7 +2787,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:red_nether_brick_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material RedNetherBrickWall = new(Identifier.Minecraft("red_nether_brick_wall"), typeof(Wall));
+    public static readonly Material RedNetherBrickWall =
+        new(Identifier.Minecraft("red_nether_brick_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:sandstone_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2795,7 +2860,7 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:campfire.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material Campfire = new(Identifier.Minecraft("campfire"), typeof(Campfire);
+    public static readonly Material Campfire = new(Identifier.Minecraft("campfire"), typeof(Campfire));
 
 
     /// <summary>Represents item by ID of minecraft:soul_campfire.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -2979,7 +3044,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:structure_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material StructureBlock = new(Identifier.Minecraft("structure_block"), typeof(StructureBlock));
+    public static readonly Material StructureBlock =
+        new(Identifier.Minecraft("structure_block"), typeof(StructureBlock));
 
 
     /// <summary>Represents item by ID of minecraft:jigsaw.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3071,23 +3137,28 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:cracked_polished_blackstone_bricks.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CrackedPolishedBlackstoneBricks = new(Identifier.Minecraft("cracked_polished_blackstone_bricks"));
+    public static readonly Material CrackedPolishedBlackstoneBricks =
+        new(Identifier.Minecraft("cracked_polished_blackstone_bricks"));
 
 
     /// <summary>Represents item by ID of minecraft:chiseled_polished_blackstone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material ChiseledPolishedBlackstone = new(Identifier.Minecraft("chiseled_polished_blackstone"));
+    public static readonly Material ChiseledPolishedBlackstone =
+        new(Identifier.Minecraft("chiseled_polished_blackstone"));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneBrickSlab = new(Identifier.Minecraft("polished_blackstone_brick_slab"), typeof(Slab));
+    public static readonly Material PolishedBlackstoneBrickSlab =
+        new(Identifier.Minecraft("polished_blackstone_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneBrickStairs = new(Identifier.Minecraft("polished_blackstone_brick_stairs"), typeof(Stairs));
+    public static readonly Material PolishedBlackstoneBrickStairs =
+        new(Identifier.Minecraft("polished_blackstone_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_brick_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneBrickWall = new(Identifier.Minecraft("polished_blackstone_brick_wall"), typeof(Wall));
+    public static readonly Material PolishedBlackstoneBrickWall =
+        new(Identifier.Minecraft("polished_blackstone_brick_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:gilded_blackstone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3095,15 +3166,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneStairs = new(Identifier.Minecraft("polished_blackstone_stairs"), typeof(Stairs));
+    public static readonly Material PolishedBlackstoneStairs =
+        new(Identifier.Minecraft("polished_blackstone_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneSlab = new(Identifier.Minecraft("polished_blackstone_slab"), typeof(Slab));
+    public static readonly Material PolishedBlackstoneSlab =
+        new(Identifier.Minecraft("polished_blackstone_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_pressure_plate.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstonePressurePlate = new(Identifier.Minecraft("polished_blackstone_pressure_plate"));
+    public static readonly Material PolishedBlackstonePressurePlate =
+        new(Identifier.Minecraft("polished_blackstone_pressure_plate"));
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_button.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3111,7 +3185,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:polished_blackstone_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedBlackstoneWall = new(Identifier.Minecraft("polished_blackstone_wall"), typeof(Wall));
+    public static readonly Material PolishedBlackstoneWall =
+        new(Identifier.Minecraft("polished_blackstone_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:chiseled_nether_bricks.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3207,11 +3282,13 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:magenta_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material MagentaCandleCake = new(Identifier.Minecraft("magenta_candle_cake"), typeof(Candle));
+    public static readonly Material
+        MagentaCandleCake = new(Identifier.Minecraft("magenta_candle_cake"), typeof(Candle));
 
 
     /// <summary>Represents item by ID of minecraft:light_blue_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightBlueCandleCake = new(Identifier.Minecraft("light_blue_candle_cake"), typeof(Candle));
+    public static readonly Material LightBlueCandleCake =
+        new(Identifier.Minecraft("light_blue_candle_cake"), typeof(Candle));
 
 
     /// <summary>Represents item by ID of minecraft:yellow_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3223,7 +3300,7 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:pink_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PinkCandleCake = new(Identifier.Minecraft("pink_candle_cake", typeof(Candle)));
+    public static readonly Material PinkCandleCake = new(Identifier.Minecraft("pink_candle_cake"), typeof(Candle));
 
 
     /// <summary>Represents item by ID of minecraft:gray_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3231,7 +3308,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:light_gray_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material LightGrayCandleCake = new(Identifier.Minecraft("light_gray_candle_cake"), typeof(Candle));
+    public static readonly Material LightGrayCandleCake =
+        new(Identifier.Minecraft("light_gray_candle_cake"), typeof(Candle));
 
 
     /// <summary>Represents item by ID of minecraft:cyan_candle_cake.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3271,7 +3349,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:amethyst_cluster.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material AmethystCluster = new(Identifier.Minecraft("amethyst_cluster"), typeof(AmethystCluster));
+    public static readonly Material AmethystCluster =
+        new(Identifier.Minecraft("amethyst_cluster"), typeof(AmethystCluster));
 
 
     /// <summary>Represents item by ID of minecraft:large_amethyst_bud.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3347,15 +3426,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:oxidized_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material OxidizedCutCopperStairs = new(Identifier.Minecraft("oxidized_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material OxidizedCutCopperStairs =
+        new(Identifier.Minecraft("oxidized_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:weathered_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WeatheredCutCopperStairs = new(Identifier.Minecraft("weathered_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material WeatheredCutCopperStairs =
+        new(Identifier.Minecraft("weathered_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:exposed_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material ExposedCutCopperStairs = new(Identifier.Minecraft("exposed_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material ExposedCutCopperStairs =
+        new(Identifier.Minecraft("exposed_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3363,15 +3445,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:oxidized_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material OxidizedCutCopperSlab = new(Identifier.Minecraft("oxidized_cut_copper_slab"), typeof(Slab));
+    public static readonly Material OxidizedCutCopperSlab =
+        new(Identifier.Minecraft("oxidized_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:weathered_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WeatheredCutCopperSlab = new(Identifier.Minecraft("weathered_cut_copper_slab"), typeof(Slab));
+    public static readonly Material WeatheredCutCopperSlab =
+        new(Identifier.Minecraft("weathered_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:exposed_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material ExposedCutCopperSlab = new(Identifier.Minecraft("exposed_cut_copper_slab"), typeof(Slab));
+    public static readonly Material ExposedCutCopperSlab =
+        new(Identifier.Minecraft("exposed_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3411,35 +3496,43 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:waxed_oxidized_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedOxidizedCutCopperStairs = new(Identifier.Minecraft("waxed_oxidized_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material WaxedOxidizedCutCopperStairs =
+        new(Identifier.Minecraft("waxed_oxidized_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_weathered_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedWeatheredCutCopperStairs = new(Identifier.Minecraft("waxed_weathered_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material WaxedWeatheredCutCopperStairs =
+        new(Identifier.Minecraft("waxed_weathered_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_exposed_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedExposedCutCopperStairs = new(Identifier.Minecraft("waxed_exposed_cut_copper_stairs"), typeof(Stairs));
+    public static readonly Material WaxedExposedCutCopperStairs =
+        new(Identifier.Minecraft("waxed_exposed_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_cut_copper_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedCutCopperStairs = new(Identifier.Minecraft("waxed_cut_copper_stairs"), typeof(Stairs)));
+    public static readonly Material WaxedCutCopperStairs =
+        new(Identifier.Minecraft("waxed_cut_copper_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_oxidized_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedOxidizedCutCopperSlab = new(Identifier.Minecraft("waxed_oxidized_cut_copper_slab"), typeof(Slab));
+    public static readonly Material WaxedOxidizedCutCopperSlab =
+        new(Identifier.Minecraft("waxed_oxidized_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_weathered_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedWeatheredCutCopperSlab = new(Identifier.Minecraft("waxed_weathered_cut_copper_slab"), typeof(Slab));
+    public static readonly Material WaxedWeatheredCutCopperSlab =
+        new(Identifier.Minecraft("waxed_weathered_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_exposed_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedExposedCutCopperSlab = new(Identifier.Minecraft("waxed_exposed_cut_copper_slab"), typeof(Slab));
+    public static readonly Material WaxedExposedCutCopperSlab =
+        new(Identifier.Minecraft("waxed_exposed_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:waxed_cut_copper_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material WaxedCutCopperSlab = new(Identifier.Minecraft("waxed_cut_copper_slab"), typeof(Slab));
+    public static readonly Material WaxedCutCopperSlab =
+        new(Identifier.Minecraft("waxed_cut_copper_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:lightning_rod.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3447,7 +3540,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:pointed_dripstone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PointedDripstone = new(Identifier.Minecraft("pointed_dripstone"), typeof(PointedDripstone));
+    public static readonly Material PointedDripstone =
+        new(Identifier.Minecraft("pointed_dripstone"), typeof(PointedDripstone));
 
 
     /// <summary>Represents item by ID of minecraft:dripstone_block.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3491,7 +3585,7 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:small_dripleaf.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material SmallDripleaf = new(Identifier.Minecraft("small_dripleaf"), , typeof(SmallDripleaf));
+    public static readonly Material SmallDripleaf = new(Identifier.Minecraft("small_dripleaf"), typeof(SmallDripleaf));
 
 
     /// <summary>Represents item by ID of minecraft:hanging_roots.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3511,15 +3605,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:cobbled_deepslate_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CobbledDeepslateStairs = new(Identifier.Minecraft("cobbled_deepslate_stairs"), typeof(Stairs));
+    public static readonly Material CobbledDeepslateStairs =
+        new(Identifier.Minecraft("cobbled_deepslate_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:cobbled_deepslate_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CobbledDeepslateSlab = new(Identifier.Minecraft("cobbled_deepslate_slab"), typeof(Slab));
+    public static readonly Material CobbledDeepslateSlab =
+        new(Identifier.Minecraft("cobbled_deepslate_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:cobbled_deepslate_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material CobbledDeepslateWall = new(Identifier.Minecraft("cobbled_deepslate_wall"), typeof(Wall));
+    public static readonly Material CobbledDeepslateWall =
+        new(Identifier.Minecraft("cobbled_deepslate_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:polished_deepslate.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3527,15 +3624,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:polished_deepslate_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedDeepslateStairs = new(Identifier.Minecraft("polished_deepslate_stairs"), typeof(Stairs));
+    public static readonly Material PolishedDeepslateStairs =
+        new(Identifier.Minecraft("polished_deepslate_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:polished_deepslate_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedDeepslateSlab = new(Identifier.Minecraft("polished_deepslate_slab"), typeof(Slab));
+    public static readonly Material PolishedDeepslateSlab =
+        new(Identifier.Minecraft("polished_deepslate_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:polished_deepslate_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PolishedDeepslateWall = new(Identifier.Minecraft("polished_deepslate_wall"), typeof(Wall));
+    public static readonly Material PolishedDeepslateWall =
+        new(Identifier.Minecraft("polished_deepslate_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_tiles.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3543,7 +3643,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_tile_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeepslateTileStairs = new(Identifier.Minecraft("deepslate_tile_stairs"), typeof(Stairs));
+    public static readonly Material DeepslateTileStairs =
+        new(Identifier.Minecraft("deepslate_tile_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_tile_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3559,15 +3660,18 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_brick_stairs.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeepslateBrickStairs = new(Identifier.Minecraft("deepslate_brick_stairs"), typeof(Stairs));
+    public static readonly Material DeepslateBrickStairs =
+        new(Identifier.Minecraft("deepslate_brick_stairs"), typeof(Stairs));
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_brick_slab.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeepslateBrickSlab = new(Identifier.Minecraft("deepslate_brick_slab"), typeof(Slab));
+    public static readonly Material
+        DeepslateBrickSlab = new(Identifier.Minecraft("deepslate_brick_slab"), typeof(Slab));
 
 
     /// <summary>Represents item by ID of minecraft:deepslate_brick_wall.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material DeepslateBrickWall = new(Identifier.Minecraft("deepslate_brick_wall"), typeof(Wall));
+    public static readonly Material
+        DeepslateBrickWall = new(Identifier.Minecraft("deepslate_brick_wall"), typeof(Wall));
 
 
     /// <summary>Represents item by ID of minecraft:chiseled_deepslate.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
@@ -3607,7 +3711,8 @@ public readonly struct Material
 
 
     /// <summary>Represents item by ID of minecraft:potted_flowering_azalea_bush.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
-    public static readonly Material PottedFloweringAzaleaBush = new(Identifier.Minecraft("potted_flowering_azalea_bush"));
+    public static readonly Material PottedFloweringAzaleaBush =
+        new(Identifier.Minecraft("potted_flowering_azalea_bush"));
 
 
     /// <summary>Represents item by ID of minecraft:redstone.</summary><remarks>This material constant is <b>Auto-Generated</b>!</remarks>
