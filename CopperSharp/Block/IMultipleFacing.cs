@@ -6,12 +6,6 @@ namespace CopperSharp.Block;
 public interface IMultipleFacing : IBlockData
 {
     /// <summary>
-    /// Gets whether this entity has provided block face
-    /// </summary>
-    /// <param name="face">Face to be checked for</param>
-    public bool HasFace(BlockFace face);
-
-    /// <summary>
     /// Sets whether this entity has this face attached
     /// </summary>
     /// <param name="face">Face to be set</param>
