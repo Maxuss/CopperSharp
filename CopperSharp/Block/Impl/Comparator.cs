@@ -1,5 +1,8 @@
 namespace CopperSharp.Block.Impl;
 
+/// <summary>
+/// Represents a comparator block
+/// </summary>
 public sealed class Comparator : AbstractBlockData, IDirectional, IPowerable
 {
     /// <inheritdoc />

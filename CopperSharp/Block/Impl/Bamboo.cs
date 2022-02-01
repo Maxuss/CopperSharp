@@ -3,7 +3,7 @@ namespace CopperSharp.Block.Impl;
 /// <summary>
 /// Represents a bamboo block
 /// </summary>
-public sealed class Bamboo : AbstractBlockData, IAgeable, ISapling
+public sealed class Bamboo : Sapling, IAgeable
 {
     /// <summary>
     /// Represents type of bamboo leaves
@@ -30,13 +30,6 @@ public sealed class Bamboo : AbstractBlockData, IAgeable, ISapling
     public IAgeable Age(int age)
     {
         Data["age"] = age;
-        return this;
-    }
-
-    /// <inheritdoc />
-    public ISapling Growing(bool growing)
-    {
-        Data["stage"] = growing ? 1 : 0;
         return this;
     }
 
