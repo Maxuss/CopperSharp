@@ -1,4 +1,7 @@
+using System.Reflection;
+using CopperSharp.Block.Data;
 using CopperSharp.Data.SNbt;
+using CopperSharp.Item;
 using CopperSharp.Registry;
 
 namespace CopperSharp.Block;
@@ -12,9 +15,11 @@ public sealed class BlockState
     /// Creates a new block state
     /// </summary>
     /// <param name="id">Material ID of block</param>
-    public BlockState(Identifier id)
+    public BlockState(Material id)
     {
-        Id = id;
+        Id = id.Id;
+        if (id.BlockType != null)
+            BlockData = id.BlockType.GetConstructors(BindingFlags.Instance)[0].Invoke(null) as IBlockData;
     }
 
     /// <summary>
