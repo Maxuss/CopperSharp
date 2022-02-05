@@ -1,6 +1,6 @@
 // THIS FILE IS AUTO GENERATED!
 
-using CopperSharp.Block.Data.Impl;
+using CopperSharp.Blocks.Data.Impl;
 using CopperSharp.Registry;
 
 namespace CopperSharp.Item;

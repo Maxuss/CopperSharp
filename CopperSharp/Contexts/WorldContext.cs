@@ -1,6 +1,8 @@
 using System.Reflection;
+using CopperSharp.Blocks;
 using CopperSharp.Data.Locations;
 using CopperSharp.Entity;
+using CopperSharp.Item;
 
 namespace CopperSharp.Contexts;
 
@@ -25,11 +27,24 @@ public sealed class WorldContext
     }
 
     /// <summary>
+    /// Releases lock on provided block
+    /// </summary>
+    /// <param name="block">Block to be unlocked</param>
+    /// <param name="place">Whether to place a new block, or modify existing</param>
+    public void Release(Block block, bool place)
+    {
+        var cmd = place
+            ? $"setblock {block.Location} {block.Type.Id}{block.State?.Serialize() ?? "{}"}"
+            : $"data merge block {block.Location} {block.State?.Serialize() ?? "{}"}";
+        Cache.Add(cmd);
+    }
+
+    /// <summary>
     /// Generates and <b>locks</b> an entity.
     ///
     /// Note that to actually summon entity
     /// you will need to call <see cref="AbstractEntity.Release"/> on your
-    /// entity, to flush all metadata to summon command.
+    /// entity, to flush all metadata to the setblock command.
     /// </summary>
     /// <param name="type">Type of entity to be spawned</param>
     /// <param name="pos">Position where to spawn entity</param>
@@ -46,6 +61,23 @@ public sealed class WorldContext
         entity.Position = pos;
 
         return entity;
+    }
+    
+    /// <summary>
+    /// Generates and <b>locks</b> a block.
+    ///
+    /// Note that to actually set the block
+    /// you will need to call <see cref="Block.Release"/> on your
+    /// block, to flush all metadata to the setblock command.
+    /// </summary>
+    /// <param name="blockType">Type of block to be placed</param>
+    /// <param name="pos">Position where to place the block</param>
+    /// <returns>Generated and locked block</returns>
+    public Block SetBlock(Material blockType, Location pos)
+    {
+        var block = new Block(blockType, pos);
+        block.Lock(this);
+        return block;
     }
 
     /// <summary>

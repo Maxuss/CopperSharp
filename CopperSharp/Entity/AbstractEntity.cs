@@ -340,6 +340,7 @@ public abstract class AbstractEntity
     /// Releases lock of this entity, and flushes
     /// all changes to current context
     /// </summary>
+    /// <returns>This abstract entity</returns>
     public AbstractEntity Release()
     {
         if (!_locked) return this;

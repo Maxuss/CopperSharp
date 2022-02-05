@@ -1,5 +1,6 @@
 using System.Collections;
 using CopperSharp.Data.SNbt;
+using Xunit;
 
 namespace CopperSharp.Item;
 
@@ -12,6 +13,7 @@ public abstract class Inventory : IEnumerable<(ItemStack?, int)>
     /// Max amount of items in this inventory
     /// </summary>
     protected abstract int MaxSize { get; }
+
     private List<(ItemStack?, int)> Slots { get; set; } = new();
     public IEnumerator<(ItemStack?, int)> GetEnumerator() => Slots.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -37,7 +39,7 @@ public abstract class Inventory : IEnumerable<(ItemStack?, int)>
     /// <returns>This inventory</returns>
     public Inventory SetItem(ItemStack? item, int pos)
     {
-        Slots[pos] = (item, pos);
+        Slots.Add((item, pos));
         Slots.Capacity = MaxSize;
         Slots.TrimExcess();
         return this;
@@ -72,21 +74,19 @@ public abstract class Inventory : IEnumerable<(ItemStack?, int)>
     /// <param name="enclosed">Whether to enclose the compound in braces</param>
     public void SerializeInto(StringNbtWriter sw, bool enclosed = true)
     {
-
         if (enclosed)
         {
             sw.WriteBeginCompound();
         }
 
         sw.WritePropertyName("Items");
-        var nonNulls = new List<(ItemStack, int)>();
-        foreach (var (item, index) in Slots)
+
+        sw.WriteBeginArray();
+        foreach (var (item, index) in Slots.Where(it => it.Item1 != null))
         {
-            if(item != null)
-                nonNulls.Add(((ItemStack) item, index));
+            sw.WriteItem(item, index);
         }
-        var nbt = INbtValue.Wrap(nonNulls);
-        nbt.SerializeInto(sw);
+        sw.WriteEndArray();
         if (enclosed)
         {
             sw.WriteEndCompound();
