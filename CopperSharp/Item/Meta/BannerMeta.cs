@@ -16,7 +16,7 @@ public sealed class BannerMeta : ItemMeta
     }
 
     private IComponent? BannerName { get; set; } = null;
-
+    internal bool WriteBlockEntityTag = true;
     private List<BannerPattern> Patterns { get; } = new();
 
     /// <summary>
@@ -58,8 +58,12 @@ public sealed class BannerMeta : ItemMeta
     /// <inheritdoc />
     internal override void WriteExternalMetaData(StringNbtWriter w)
     {
-        w.WritePropertyName("BlockEntityTag");
-        w.WriteBeginCompound();
+        if (WriteBlockEntityTag)
+        {
+            w.WritePropertyName("BlockEntityTag");
+            w.WriteBeginCompound();
+        }
+
         if (BannerName != null)
         {
             w.WritePropertyName("CustomName");
@@ -85,7 +89,8 @@ public sealed class BannerMeta : ItemMeta
         }
 
         w.WriteEndArray();
-        w.WriteEndCompound();
+        if(WriteBlockEntityTag)
+            w.WriteEndCompound();
     }
 }
 
