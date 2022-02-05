@@ -1,23 +1,23 @@
 using CopperSharp.Item;
 using CopperSharp.Registry;
-using CopperSharp.Text;
 
 namespace CopperSharp.Block.State;
 
 /// <summary>
-/// Represents a barrel block
+/// Represents a dispenser block state
 /// </summary>
-public sealed class BarrelState : InventoryBlock<ChestInventory>, ILootable, ILockable
+public sealed class DispenserState : InventoryBlock<DispenserInventory>, ILootable, ILockable
 {
-    internal BarrelState(Material id) : base(id)
+
+    internal DispenserState(Material id) : base(id)
     {
-        Inventory = new ChestInventory();
+        Inventory = new DispenserInventory();
     }
 
     /// <inheritdoc />
     public ILootable LootTable(Identifier table)
     {
-        Data["LootTable"] = table.ToString();
+        Data["LootTable"] = table;
         return this;
     }
 

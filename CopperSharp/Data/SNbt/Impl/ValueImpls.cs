@@ -1,3 +1,4 @@
+using CopperSharp.Data.Locations;
 using CopperSharp.Item;
 
 namespace CopperSharp.Data.SNbt.Impl;
@@ -209,5 +210,20 @@ internal readonly struct SlotItemNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteItem(_v.Item1, _v.Item2);
+    }
+}
+
+internal readonly struct LocationNbtValue : INbtValue
+{
+    private readonly Location _v;
+
+    public LocationNbtValue(Location v)
+    {
+        _v = v;
+    }
+
+    public void SerializeInto(StringNbtWriter sw)
+    {
+        sw.WritePosition(_v);
     }
 }

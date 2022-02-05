@@ -1,3 +1,4 @@
+using CopperSharp.Data.Locations;
 using CopperSharp.Data.SNbt.Impl;
 using CopperSharp.Item;
 
@@ -32,6 +33,7 @@ public interface INbtValue
             short s => new ShortNbtValue(s) as INbtValue,
             long l => new LongNbtValue(l) as INbtValue,
             bool z => new BoolNbtValue(z) as INbtValue,
+            Location loc => new LocationNbtValue(loc) as INbtValue,
             Guid id => new GuidNbtValue(id) as INbtValue,
             NbtCompound cmp => new CompoundNbtValue(cmp) as INbtValue,
             ItemStack it => new ItemNbtValue(it) as INbtValue,

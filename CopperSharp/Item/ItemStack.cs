@@ -7,6 +7,11 @@ namespace CopperSharp.Item;
 /// </summary>
 public struct ItemStack : IStack
 {
+    /// <summary>
+    /// Represents an empty air stack
+    /// </summary>
+    public static ItemStack AirStack => new ItemStack(Material.Air);
+    
     /// <inheritdoc />
     public sbyte Amount { get; set; } = 1;
 
@@ -31,9 +36,16 @@ public struct ItemStack : IStack
             return;
         }
 
+        if (material.Id.Path.Contains("potion"))
+        {
+            Meta = new PotionMeta(material);
+            return;
+        }
+        
         Meta = material.Id.Path switch
         {
-            "player_head" => new SkullMeta(material),
+            "firework_rocket" => new FireworkMeta(material),
+            "player_head" => new SkullMeta(),
             _ => new DefaultItemMeta(material)
         };
     }

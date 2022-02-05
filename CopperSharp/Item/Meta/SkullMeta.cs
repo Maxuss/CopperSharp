@@ -12,10 +12,8 @@ public sealed class SkullMeta : ItemMeta
     private bool _complexOwner;
 
     /// <inheritdoc />
-    public SkullMeta(Material type) : base(type)
+    public SkullMeta() : base(Material.PlayerHead)
     {
-        if (type.Id.ToString() != Material.PlayerHead.Id.ToString())
-            throw new Exception($"Can not apply SkullMeta to material of type {type.Id}");
     }
 
     private string? SkullOwner { get; set; }
