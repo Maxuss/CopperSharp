@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a chain block
+///     Represents a chain block
 /// </summary>
 public sealed class Chain : AbstractBlockData, IOrientable, IWaterlogged
 {

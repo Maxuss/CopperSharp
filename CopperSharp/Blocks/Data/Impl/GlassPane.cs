@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a glass pane block
+///     Represents a glass pane block
 /// </summary>
 public sealed class GlassPane : AbstractBlockData, IMultipleFacing, IWaterlogged
 {

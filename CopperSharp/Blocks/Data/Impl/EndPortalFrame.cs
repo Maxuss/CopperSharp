@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents an end portal frame block
+///     Represents an end portal frame block
 /// </summary>
 public sealed class EndPortalFrame : AbstractBlockData, IDirectional
 {
@@ -13,7 +13,7 @@ public sealed class EndPortalFrame : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Sets whether this end portal frame has an eye
+    ///     Sets whether this end portal frame has an eye
     /// </summary>
     /// <param name="has">Whether it has an eye</param>
     /// <returns>This end portal frame</returns>

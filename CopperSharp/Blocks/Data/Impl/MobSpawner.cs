@@ -4,14 +4,14 @@ using CopperSharp.Entity;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a spawner block
+///     Represents a spawner block
 /// </summary>
 public sealed class MobSpawner : AbstractBlockData
 {
     private AbstractEntity? Spawning { get; set; }
 
     /// <summary>
-    /// Sets delay until this spawner can spawn entity
+    ///     Sets delay until this spawner can spawn entity
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This mob spawner</returns>
@@ -22,7 +22,7 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets max amount of entities the spawner can spawn
+    ///     Sets max amount of entities the spawner can spawn
     /// </summary>
     /// <param name="amount">Amount of entities</param>
     /// <returns>This mob spawner</returns>
@@ -33,7 +33,7 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets maximum delay until the spawner can spawn entities again
+    ///     Sets maximum delay until the spawner can spawn entities again
     /// </summary>
     /// <param name="delay">Amount of time in ticks</param>
     /// <returns>This mob spawner</returns>
@@ -44,7 +44,7 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets minimum delay until the spawner can spawn entities again
+    ///     Sets minimum delay until the spawner can spawn entities again
     /// </summary>
     /// <param name="delay">Amount of time in ticks</param>
     /// <returns>This mob spawner</returns>
@@ -55,7 +55,7 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets the entity to be spawned
+    ///     Sets the entity to be spawned
     /// </summary>
     /// <param name="spawn">Entity to be spawned</param>
     /// <returns>This mob spawner</returns>
@@ -66,7 +66,7 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets spawn range of this spawner
+    ///     Sets spawn range of this spawner
     /// </summary>
     /// <param name="range">Range to be set</param>
     /// <returns>This mob spawner</returns>

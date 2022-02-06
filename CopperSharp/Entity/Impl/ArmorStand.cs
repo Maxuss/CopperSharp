@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an armor stand entity
+///     Represents an armor stand entity
 /// </summary>
 public sealed class ArmorStand : AbstractEntity
 {
@@ -12,10 +12,10 @@ public sealed class ArmorStand : AbstractEntity
     {
     }
 
-    private Dictionary<string, (float, float, float)> Poses { get; set; } = new();
+    private Dictionary<string, (float, float, float)> Poses { get; } = new();
 
     /// <summary>
-    /// Locks specified slot
+    ///     Locks specified slot
     /// </summary>
     /// <param name="slot">Slot to be locked</param>
     /// <param name="flag">Type of lock</param>
@@ -23,19 +23,15 @@ public sealed class ArmorStand : AbstractEntity
     public ArmorStand LockSlot(ItemSlot slot, StandFlag flag)
     {
         if (Ints.ContainsKey("DisabledSlots"))
-        {
             Ints["DisabledSlots"] += 1 << ((int) slot + (int) flag);
-        }
         else
-        {
             Ints["DisabledSlots"] = 1 << ((int) slot + (int) flag);
-        }
 
         return this;
     }
 
     /// <summary>
-    /// Makes this armor stand invisible
+    ///     Makes this armor stand invisible
     /// </summary>
     /// <param name="invis">Marker</param>
     /// <returns>This armor stand</returns>
@@ -46,8 +42,8 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Makes this armor stand a marker, setting size to 0
-    /// and decreasing size of hitbox
+    ///     Makes this armor stand a marker, setting size to 0
+    ///     and decreasing size of hitbox
     /// </summary>
     /// <param name="marker">Marker</param>
     /// <returns>This armor stand</returns>
@@ -58,7 +54,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// If true, ArmorStand does not display the base beneath it.
+    ///     If true, ArmorStand does not display the base beneath it.
     /// </summary>
     /// <param name="plate">Whether to remove the plate</param>
     /// <returns>This armor stand</returns>
@@ -69,7 +65,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Shows arms of this armor stand
+    ///     Shows arms of this armor stand
     /// </summary>
     /// <param name="show">Whether to show the arms</param>
     /// <returns>This armor stand</returns>
@@ -80,7 +76,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Makes this armor stand small
+    ///     Makes this armor stand small
     /// </summary>
     /// <param name="small">Marker</param>
     /// <returns>This armor stand</returns>
@@ -91,7 +87,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets body rotation of this armor stand
+    ///     Sets body rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -104,7 +100,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets head rotation of this armor stand
+    ///     Sets head rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -117,7 +113,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets left arm rotation of this armor stand
+    ///     Sets left arm rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -130,7 +126,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets left leg rotation of this armor stand
+    ///     Sets left leg rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -143,7 +139,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets right arm rotation of this armor stand
+    ///     Sets right arm rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -156,7 +152,7 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <summary>
-    /// Sets right leg rotation of this armor stand
+    ///     Sets right leg rotation of this armor stand
     /// </summary>
     /// <param name="x">X rotation</param>
     /// <param name="y">Y rotation</param>
@@ -193,22 +189,22 @@ public sealed class ArmorStand : AbstractEntity
 }
 
 /// <summary>
-/// An extra policy flag for armor stand
+///     An extra policy flag for armor stand
 /// </summary>
 public enum StandFlag
 {
     /// <summary>
-    /// Disables removing item from this slot
+    ///     Disables removing item from this slot
     /// </summary>
     NoRemove = 1,
 
     /// <summary>
-    /// Disables replacing item in this slot
+    ///     Disables replacing item in this slot
     /// </summary>
     NoReplace = 8,
 
     /// <summary>
-    /// Disables placing item in this slot
+    ///     Disables placing item in this slot
     /// </summary>
     NoPlace = 16
 }

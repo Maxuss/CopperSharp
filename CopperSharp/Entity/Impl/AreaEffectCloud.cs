@@ -5,7 +5,7 @@ using CopperSharp.Text;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an Area Effect Cloud entity
+///     Represents an Area Effect Cloud entity
 /// </summary>
 public sealed class AreaEffectCloud : AbstractEntity
 {
@@ -13,10 +13,10 @@ public sealed class AreaEffectCloud : AbstractEntity
     {
     }
 
-    private List<PotionEffect> Effects { get; set; } = new();
+    private List<PotionEffect> Effects { get; } = new();
 
     /// <summary>
-    /// Age of this AEC
+    ///     Age of this AEC
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This AEC</returns>
@@ -27,7 +27,7 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <summary>
-    /// Sets color of this AEC
+    ///     Sets color of this AEC
     /// </summary>
     /// <param name="color">Color to be set</param>
     /// <returns>This AEC</returns>
@@ -38,7 +38,7 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <summary>
-    /// Sets duration of effect of this AEC
+    ///     Sets duration of effect of this AEC
     /// </summary>
     /// <param name="duration">Amount of time in ticks</param>
     /// <returns>This AEC</returns>
@@ -49,7 +49,7 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <summary>
-    /// Adds provided effects to this AEC
+    ///     Adds provided effects to this AEC
     /// </summary>
     /// <param name="effects">Effects to be added</param>
     /// <returns>This AEC</returns>
@@ -60,7 +60,7 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <summary>
-    /// Sets type of particles emitted by this AEC
+    ///     Sets type of particles emitted by this AEC
     /// </summary>
     /// <param name="particle">Type of particle to set</param>
     /// <returns>This AEC</returns>
@@ -71,7 +71,7 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <summary>
-    /// Sets radius of this AEC
+    ///     Sets radius of this AEC
     /// </summary>
     /// <param name="radius">Radius to be set</param>
     /// <returns>This AEC</returns>

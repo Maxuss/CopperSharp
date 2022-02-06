@@ -7,12 +7,12 @@ using CopperSharp.Utils;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// NBT Tag for items
+///     NBT Tag for items
 /// </summary>
 public abstract class ItemMeta
 {
     /// <summary>
-    /// Instantiates a new item meta class
+    ///     Instantiates a new item meta class
     /// </summary>
     /// <param name="type"></param>
     protected ItemMeta(Material type)
@@ -21,57 +21,57 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Material of this item
+    ///     Material of this item
     /// </summary>
     private Material Type { get; }
 
     /// <summary>
-    /// Attribute modifiers on this item
+    ///     Attribute modifiers on this item
     /// </summary>
     private List<AttributeModifier> AttributeModifiers { get; } = new();
 
     /// <summary>
-    /// All enchantments applied to this item
+    ///     All enchantments applied to this item
     /// </summary>
     private List<Enchantment> Enchantments { get; } = new();
 
     /// <summary>
-    /// Item flags to be hidden
+    ///     Item flags to be hidden
     /// </summary>
     private List<ItemFlag> HiddenFlags { get; } = new();
 
     /// <summary>
-    /// Whether this item is unbreakable
+    ///     Whether this item is unbreakable
     /// </summary>
     public bool? Unbreakable { get; set; } = null;
 
     /// <summary>
-    /// Name of this item's display
+    ///     Name of this item's display
     /// </summary>
-    private IComponent? Name { get; set; } = null;
+    private IComponent? Name { get; set; }
 
     /// <summary>
-    /// Lore of this item's display
+    ///     Lore of this item's display
     /// </summary>
     private List<IComponent> Lore { get; } = new();
 
     /// <summary>
-    /// Represents blocks this item can/can not destroy
+    ///     Represents blocks this item can/can not destroy
     /// </summary>
     private List<string> Destroyable { get; } = new();
 
     /// <summary>
-    /// Time required to pick this item up in ticks (when dropped)
+    ///     Time required to pick this item up in ticks (when dropped)
     /// </summary>
     public int? PickupDelay { get; set; } = null;
 
     /// <summary>
-    /// Time it takes this item to disappear in ticks (when dropped)
+    ///     Time it takes this item to disappear in ticks (when dropped)
     /// </summary>
     public int? Age { get; set; } = null;
 
     /// <summary>
-    /// Adds specific enchantments to this item
+    ///     Adds specific enchantments to this item
     /// </summary>
     /// <param name="enchants">Enchantments to be added</param>
     /// <returns>This item meta</returns>
@@ -82,7 +82,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Appends provided components to item's lore display
+    ///     Appends provided components to item's lore display
     /// </summary>
     /// <param name="lore">Lines to be appended to item lore</param>
     /// <returns>This item meta</returns>
@@ -93,7 +93,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Adds a custom name to this item's lore display
+    ///     Adds a custom name to this item's lore display
     /// </summary>
     /// <param name="name">New custom name of the item</param>
     /// <returns>This item meta</returns>
@@ -104,7 +104,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Adds attribute modifiers to this item's meta
+    ///     Adds attribute modifiers to this item's meta
     /// </summary>
     /// <param name="modifiers">Modifiers to be applied to this item</param>
     /// <returns>This item meta</returns>
@@ -115,7 +115,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Hides provided item flags from item meta
+    ///     Hides provided item flags from item meta
     /// </summary>
     /// <param name="flags">Item flags to be hidden on this item</param>
     /// <returns>This item meta</returns>
@@ -126,7 +126,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Adds provided ids as blocks, this item can destroy
+    ///     Adds provided ids as blocks, this item can destroy
     /// </summary>
     /// <param name="ids">Blocks that can be destroyed</param>
     /// <returns>This item meta</returns>
@@ -137,7 +137,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Converts this item meta to Stringified NBT
+    ///     Converts this item meta to Stringified NBT
     /// </summary>
     /// <returns>Serialized StringNBT</returns>
     public string Serialize(int? slot = null)
@@ -164,10 +164,7 @@ public abstract class ItemMeta
             {
                 w.WritePropertyName("Lore");
                 w.WriteBeginArray();
-                foreach (var component in Lore)
-                {
-                    w.WriteString(component.Serialize());
-                }
+                foreach (var component in Lore) w.WriteString(component.Serialize());
 
                 w.WriteEndArray();
             }
@@ -203,10 +200,7 @@ public abstract class ItemMeta
         {
             w.WritePropertyName("CanDestroy");
             w.WriteBeginArray();
-            foreach (var dest in Destroyable)
-            {
-                w.WriteString(dest);
-            }
+            foreach (var dest in Destroyable) w.WriteString(dest);
 
             w.WriteEndArray();
         }
@@ -283,7 +277,7 @@ public abstract class ItemMeta
     }
 
     /// <summary>
-    /// Writes external meta data to the writer as nbt
+    ///     Writes external meta data to the writer as nbt
     /// </summary>
     /// <param name="w">Writer to which external meta data should be written</param>
     internal abstract void WriteExternalMetaData(StringNbtWriter w);

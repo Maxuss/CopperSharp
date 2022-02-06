@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a redstone wall torch block
+///     Represents a redstone wall torch block
 /// </summary>
 public sealed class RedstoneWallTorch :
     AbstractBlockData,

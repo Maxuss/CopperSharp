@@ -1,73 +1,73 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a horse
+///     Represents a horse
 /// </summary>
 public sealed class Horse : HorseEntity
 {
     /// <summary>
-    /// Base color of the horse
+    ///     Base color of the horse
     /// </summary>
     public enum Color
     {
         /// <summary>
-        /// Plain White
+        ///     Plain White
         /// </summary>
         White = 0,
 
         /// <summary>
-        /// Creamy
+        ///     Creamy
         /// </summary>
         Creamy = 1,
 
         /// <summary>
-        /// Light Brown
+        ///     Light Brown
         /// </summary>
         Chestnut = 2,
 
         /// <summary>
-        /// Dark Brown
+        ///     Dark Brown
         /// </summary>
         Brown = 3,
 
         /// <summary>
-        /// Black
+        ///     Black
         /// </summary>
         Black = 4,
 
         /// <summary>
-        /// Gray
+        ///     Gray
         /// </summary>
         Gray = 5
     }
 
     /// <summary>
-    /// Extra markings on the horse
+    ///     Extra markings on the horse
     /// </summary>
     public enum Markings
     {
         /// <summary>
-        /// No markings
+        ///     No markings
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// White socks
+        ///     White socks
         /// </summary>
         White = 256,
 
         /// <summary>
-        /// White fields
+        ///     White fields
         /// </summary>
         WhiteField = 512,
 
         /// <summary>
-        /// White dots
+        ///     White dots
         /// </summary>
         WhiteDots = 768,
 
         /// <summary>
-        /// Black dots
+        ///     Black dots
         /// </summary>
         BlackDots = 1024
     }
@@ -77,7 +77,7 @@ public sealed class Horse : HorseEntity
     }
 
     /// <summary>
-    /// Sets color variant of the horse
+    ///     Sets color variant of the horse
     /// </summary>
     /// <param name="color">Main color of the horse</param>
     /// <param name="markings">Extra markings on the horse</param>

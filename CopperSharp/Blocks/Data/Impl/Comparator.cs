@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a comparator block
+///     Represents a comparator block
 /// </summary>
 public sealed class Comparator : AbstractBlockData, IDirectional, IPowerable
 {
@@ -23,7 +23,7 @@ public sealed class Comparator : AbstractBlockData, IDirectional, IPowerable
     }
 
     /// <summary>
-    /// Whether this comparator subtracts values or compares them
+    ///     Whether this comparator subtracts values or compares them
     /// </summary>
     /// <param name="sub">Subtracts if true, otherwise compares</param>
     /// <returns>This comparator</returns>

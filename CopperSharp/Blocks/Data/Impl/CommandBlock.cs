@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a command block
+///     Represents a command block
 /// </summary>
 public sealed class CommandBlock : AbstractBlockData, IDirectional
 {
@@ -16,7 +16,7 @@ public sealed class CommandBlock : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Makes this command block conditional
+    ///     Makes this command block conditional
     /// </summary>
     /// <param name="cond">Whether this command block is conditional</param>
     /// <returns>This command block</returns>

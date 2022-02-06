@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a pillager entity
+///     Represents a pillager entity
 /// </summary>
 public sealed class Pillager : RaidEntity
 {

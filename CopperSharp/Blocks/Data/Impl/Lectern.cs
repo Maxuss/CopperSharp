@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a lectern block
+///     Represents a lectern block
 /// </summary>
 public sealed class Lectern : AbstractBlockData, IDirectional, IPowerable
 {
@@ -23,7 +23,7 @@ public sealed class Lectern : AbstractBlockData, IDirectional, IPowerable
     }
 
     /// <summary>
-    /// Whether this lectern has a book
+    ///     Whether this lectern has a book
     /// </summary>
     /// <param name="has">Marker</param>
     /// <returns>This lectern</returns>

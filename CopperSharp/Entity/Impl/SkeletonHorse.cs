@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a skeleton horse entity
+///     Represents a skeleton horse entity
 /// </summary>
 public sealed class SkeletonHorse : HorseEntity
 {
@@ -10,7 +10,7 @@ public sealed class SkeletonHorse : HorseEntity
     }
 
     /// <summary>
-    /// Whether this horse is trapped
+    ///     Whether this horse is trapped
     /// </summary>
     /// <param name="trap">Marker</param>
     /// <returns>This skeleton horse</returns>
@@ -21,8 +21,8 @@ public sealed class SkeletonHorse : HorseEntity
     }
 
     /// <summary>
-    /// If it's a trap, the horse automatically despawns<br/>
-    /// after this value reaches 18000 ticks
+    ///     If it's a trap, the horse automatically despawns<br />
+    ///     after this value reaches 18000 ticks
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This skeleton horse</returns>

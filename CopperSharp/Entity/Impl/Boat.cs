@@ -3,7 +3,7 @@ using CopperSharp.Utils;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a boat vehicle
+///     Represents a boat vehicle
 /// </summary>
 public sealed class Boat : AbstractEntity
 {
@@ -12,7 +12,7 @@ public sealed class Boat : AbstractEntity
     }
 
     /// <summary>
-    /// Sets style of boat
+    ///     Sets style of boat
     /// </summary>
     /// <param name="type">Type of boat to be set</param>
     /// <returns>This boat</returns>

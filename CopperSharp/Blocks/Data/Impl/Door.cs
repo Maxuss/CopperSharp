@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a door block
+///     Represents a door block
 /// </summary>
 public sealed class Door :
     AbstractBlockData,
@@ -11,17 +11,17 @@ public sealed class Door :
     IBisected
 {
     /// <summary>
-    /// Which side the door is attached to
+    ///     Which side the door is attached to
     /// </summary>
     public enum Hinge
     {
         /// <summary>
-        /// Left side
+        ///     Left side
         /// </summary>
         Left,
 
         /// <summary>
-        /// Right side
+        ///     Right side
         /// </summary>
         Right
     }
@@ -58,7 +58,7 @@ public sealed class Door :
     }
 
     /// <summary>
-    /// Sets hinge of this door
+    ///     Sets hinge of this door
     /// </summary>
     /// <param name="hinge">Hinge to be set</param>
     /// <returns>This door</returns>

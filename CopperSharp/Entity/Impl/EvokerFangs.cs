@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents evoker fangs entity
+///     Represents evoker fangs entity
 /// </summary>
 public sealed class EvokerFangs : AbstractEntity
 {
@@ -10,7 +10,7 @@ public sealed class EvokerFangs : AbstractEntity
     }
 
     /// <summary>
-    /// Sets owner of this fangs
+    ///     Sets owner of this fangs
     /// </summary>
     /// <param name="owner">UUID of owner entity</param>
     /// <returns>These evoker fangs</returns>
@@ -21,7 +21,7 @@ public sealed class EvokerFangs : AbstractEntity
     }
 
     /// <summary>
-    /// Sets time until these fangs appear
+    ///     Sets time until these fangs appear
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>These evoker fangs</returns>

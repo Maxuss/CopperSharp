@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an evoker entity
+///     Represents an evoker entity
 /// </summary>
 public class Evoker : RaidEntity
 {
@@ -10,7 +10,7 @@ public class Evoker : RaidEntity
     }
 
     /// <summary>
-    /// Number of ticks until a spell can be cast
+    ///     Number of ticks until a spell can be cast
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This evoker</returns>

@@ -1,47 +1,47 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a rabbit entity
+///     Represents a rabbit entity
 /// </summary>
 public sealed class Rabbit : BreedableEntity
 {
     /// <summary>
-    /// Represents color type of rabbit
+    ///     Represents color type of rabbit
     /// </summary>
     public enum Color
     {
         /// <summary>
-        /// Brown
+        ///     Brown
         /// </summary>
         Brown = 0,
 
         /// <summary>
-        /// White
+        ///     White
         /// </summary>
         White = 1,
 
         /// <summary>
-        /// Black
+        ///     Black
         /// </summary>
         Black = 2,
 
         /// <summary>
-        /// Black and white
+        ///     Black and white
         /// </summary>
         BlackAndWhite = 3,
 
         /// <summary>
-        /// Gold
+        ///     Gold
         /// </summary>
         Gold = 4,
 
         /// <summary>
-        /// Brown and white
+        ///     Brown and white
         /// </summary>
         SaltAndPepper = 5,
 
         /// <summary>
-        /// The killer bunny
+        ///     The killer bunny
         /// </summary>
         Killer = 99
     }
@@ -51,7 +51,7 @@ public sealed class Rabbit : BreedableEntity
     }
 
     /// <summary>
-    /// Sets color type of this rabbit
+    ///     Sets color type of this rabbit
     /// </summary>
     /// <param name="type">Color type of this rabbit</param>
     /// <returns>This rabbit</returns>

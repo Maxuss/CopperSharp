@@ -1,37 +1,37 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a parrot entity
+///     Represents a parrot entity
 /// </summary>
 public sealed class Parrot : TameableEntity
 {
     /// <summary>
-    /// Represents a type of parrot's color
+    ///     Represents a type of parrot's color
     /// </summary>
     public enum Variant
     {
         /// <summary>
-        /// Red
+        ///     Red
         /// </summary>
         Red = 0,
 
         /// <summary>
-        /// Blue
+        ///     Blue
         /// </summary>
         Blue = 1,
 
         /// <summary>
-        /// Green
+        ///     Green
         /// </summary>
         Green = 2,
 
         /// <summary>
-        /// Cyan
+        ///     Cyan
         /// </summary>
         Cyan = 3,
 
         /// <summary>
-        /// Gray
+        ///     Gray
         /// </summary>
         Gray = 4
     }
@@ -41,7 +41,7 @@ public sealed class Parrot : TameableEntity
     }
 
     /// <summary>
-    /// Sets color of this parrot
+    ///     Sets color of this parrot
     /// </summary>
     /// <param name="color">Color to be set</param>
     /// <returns>This parrot</returns>

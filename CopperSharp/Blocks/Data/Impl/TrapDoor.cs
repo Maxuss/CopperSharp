@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a trap door block
+///     Represents a trap door block
 /// </summary>
 public sealed class TrapDoor :
     AbstractBlockData,

@@ -1,37 +1,37 @@
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Represents type of wood
+///     Represents type of wood
 /// </summary>
 public enum WoodType
 {
     /// <summary>
-    /// Oak wood
+    ///     Oak wood
     /// </summary>
     [EnumData("oak")] Oak,
 
     /// <summary>
-    /// Spruce wood
+    ///     Spruce wood
     /// </summary>
     [EnumData("spruce")] Spruce,
 
     /// <summary>
-    /// Birch wood
+    ///     Birch wood
     /// </summary>
     [EnumData("birch")] Birch,
 
     /// <summary>
-    /// Jungle wood
+    ///     Jungle wood
     /// </summary>
     [EnumData("jungle")] Jungle,
 
     /// <summary>
-    /// Acacia wood
+    ///     Acacia wood
     /// </summary>
     [EnumData("acacia")] Acacia,
 
     /// <summary>
-    /// Dark oak wood
+    ///     Dark oak wood
     /// </summary>
     [EnumData("dark_oak")] DarkOak
 }

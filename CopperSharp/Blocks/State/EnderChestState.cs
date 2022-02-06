@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents an ender chest block state
+///     Represents an ender chest block state
 /// </summary>
 public sealed class EnderChestState : BlockState
 {

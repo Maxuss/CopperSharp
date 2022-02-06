@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a light block (yep, it does exist)
+///     Represents a light block (yep, it does exist)
 /// </summary>
 public sealed class Light : AbstractBlockData, ILevelled, IWaterlogged
 {

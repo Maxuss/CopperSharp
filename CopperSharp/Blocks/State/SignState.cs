@@ -6,7 +6,7 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a sign block state
+///     Represents a sign block state
 /// </summary>
 public sealed class SignState : BlockState
 {
@@ -15,7 +15,7 @@ public sealed class SignState : BlockState
     }
 
     /// <summary>
-    /// Sets text on this sign to provided text
+    ///     Sets text on this sign to provided text
     /// </summary>
     /// <param name="line">Line on which to change text. Must be in range of 1 to 4</param>
     /// <param name="text">Text to be set</param>
@@ -27,7 +27,7 @@ public sealed class SignState : BlockState
     }
 
     /// <summary>
-    /// Makes this text sign glow
+    ///     Makes this text sign glow
     /// </summary>
     /// <param name="glowing">Marker</param>
     /// <returns>This sign state</returns>
@@ -38,7 +38,7 @@ public sealed class SignState : BlockState
     }
 
     /// <summary>
-    /// Sets color of this sing
+    ///     Sets color of this sing
     /// </summary>
     /// <param name="color">Color to be set</param>
     /// <returns>This sign state</returns>

@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a lever block
+///     Represents a lever block
 /// </summary>
 public sealed class Lever :
     AbstractBlockData,

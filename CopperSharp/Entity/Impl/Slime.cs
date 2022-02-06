@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a slime entity
+///     Represents a slime entity
 /// </summary>
 public sealed class Slime : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Slime : LivingEntity
     }
 
     /// <summary>
-    /// Sets zero-based size of this slime
+    ///     Sets zero-based size of this slime
     /// </summary>
     /// <param name="size">New size of this slime</param>
     /// <returns>This slime</returns>
@@ -21,7 +21,7 @@ public sealed class Slime : LivingEntity
     }
 
     /// <summary>
-    /// Whether this slime was on ground
+    ///     Whether this slime was on ground
     /// </summary>
     /// <param name="ground">Marker</param>
     /// <returns>This slime</returns>

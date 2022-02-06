@@ -3,7 +3,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Blocks.Data;
 
 /// <summary>
-/// Abstract implementation for block entity
+///     Abstract implementation for block entity
 /// </summary>
 public abstract class AbstractBlockData : IBlockData
 {
@@ -34,7 +34,7 @@ public abstract class AbstractBlockData : IBlockData
     }
 
     /// <summary>
-    /// Serializes extra data into provided string nbt writer
+    ///     Serializes extra data into provided string nbt writer
     /// </summary>
     /// <param name="sw">Writer into which to write data</param>
     internal virtual void SerializeExtra(StringNbtWriter sw)

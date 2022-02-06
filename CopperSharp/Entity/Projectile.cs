@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents a projectile
+///     Represents a projectile
 /// </summary>
 public abstract class Projectile : AbstractEntity
 {
@@ -11,7 +11,7 @@ public abstract class Projectile : AbstractEntity
     }
 
     /// <summary>
-    /// Marks whether this projectile was shot
+    ///     Marks whether this projectile was shot
     /// </summary>
     /// <param name="was">Marker</param>
     /// <returns>This projectile</returns>
@@ -22,8 +22,8 @@ public abstract class Projectile : AbstractEntity
     }
 
     /// <summary>
-    /// Marks whether this projectile has escaped owner's hitbox
-    /// and can collide with entities
+    ///     Marks whether this projectile has escaped owner's hitbox
+    ///     and can collide with entities
     /// </summary>
     /// <param name="escaped">Marker</param>
     /// <returns>This projectile</returns>
@@ -34,7 +34,7 @@ public abstract class Projectile : AbstractEntity
     }
 
     /// <summary>
-    /// Sets owner of this projectile
+    ///     Sets owner of this projectile
     /// </summary>
     /// <param name="owner">UUID of entity that shoot this projectile</param>
     /// <returns>This projectile</returns>

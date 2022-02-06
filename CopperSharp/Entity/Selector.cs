@@ -4,42 +4,42 @@ using CopperSharp.Utils;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// An entity selector
+///     An entity selector
 /// </summary>
 public readonly struct Selector
 {
     /// <summary>
-    /// Nearest player to the caller
+    ///     Nearest player to the caller
     /// </summary>
     public static Selector NearestPlayer = new("@p");
 
     /// <summary>
-    /// All entities in the callers world
+    ///     All entities in the callers world
     /// </summary>
     public static Selector AllEntities = new("@e");
 
     /// <summary>
-    /// All players in the callers world
+    ///     All players in the callers world
     /// </summary>
     public static Selector AllPlayers = new("@a");
 
     /// <summary>
-    /// Random entity from the callers world
+    ///     Random entity from the callers world
     /// </summary>
     public static Selector RandomEntity = new("@r");
 
     /// <summary>
-    /// Selector type of entity
+    ///     Selector type of entity
     /// </summary>
     private string Search { get; }
 
     /// <summary>
-    /// Extra arguments for the selector
+    ///     Extra arguments for the selector
     /// </summary>
     private Dictionary<string, string> Args { get; }
 
     /// <summary>
-    /// Creates a new selector for entity with provided name
+    ///     Creates a new selector for entity with provided name
     /// </summary>
     /// <param name="name">Name of the entity for which to search</param>
     public Selector(string name)
@@ -49,7 +49,7 @@ public readonly struct Selector
     }
 
     /// <summary>
-    /// Creates a new selector for all entities, to which calls the provided selector and extra arguments
+    ///     Creates a new selector for all entities, to which calls the provided selector and extra arguments
     /// </summary>
     /// <param name="sel">Selector for entities</param>
     /// <param name="args">Extra args for the selector</param>
@@ -60,7 +60,7 @@ public readonly struct Selector
     }
 
     /// <summary>
-    /// Creates a new selector for all entities, to which calls the provided selector
+    ///     Creates a new selector for all entities, to which calls the provided selector
     /// </summary>
     /// <param name="sel">Selector for entities</param>
     public Selector(SelectorType sel) : this(sel, new Dictionary<string, string>())
@@ -68,7 +68,7 @@ public readonly struct Selector
     }
 
     /// <summary>
-    /// Converts this selector to string
+    ///     Converts this selector to string
     /// </summary>
     /// <returns>String representation of this selector</returns>
     public override string ToString()

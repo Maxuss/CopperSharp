@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a magma cube entity
+///     Represents a magma cube entity
 /// </summary>
 public sealed class MagmaCube : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class MagmaCube : LivingEntity
     }
 
     /// <summary>
-    /// Sets zero-based size of this magma cube
+    ///     Sets zero-based size of this magma cube
     /// </summary>
     /// <param name="size">New size of this magma cube</param>
     /// <returns>This magma cube</returns>
@@ -21,7 +21,7 @@ public sealed class MagmaCube : LivingEntity
     }
 
     /// <summary>
-    /// Whether this cube was on ground
+    ///     Whether this cube was on ground
     /// </summary>
     /// <param name="ground">Marker</param>
     /// <returns>This magma cube</returns>

@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a coral wall fan block
+///     Represents a coral wall fan block
 /// </summary>
 public sealed class CoralWallFan : AbstractBlockData, IDirectional, IWaterlogged
 {

@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents an end gateway block state
+///     Represents an end gateway block state
 /// </summary>
 public sealed class EndGatewayState : BlockState
 {
@@ -13,7 +13,7 @@ public sealed class EndGatewayState : BlockState
     }
 
     /// <summary>
-    /// Sets exit location for this end gateway
+    ///     Sets exit location for this end gateway
     /// </summary>
     /// <param name="exit">Exit location for this end gateway</param>
     /// <param name="teleportExactly">Whether to teleport exactly at the exit location, and not near it.</param>

@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a donkey entity
+///     Represents a donkey entity
 /// </summary>
 public class Donkey : HorseEntity
 {
@@ -12,10 +12,10 @@ public class Donkey : HorseEntity
     {
     }
 
-    private List<ItemStack?> Inventory { get; set; } = new();
+    private List<ItemStack?> Inventory { get; } = new();
 
     /// <summary>
-    /// Marks whether this donkey has chests
+    ///     Marks whether this donkey has chests
     /// </summary>
     /// <param name="has">Whether the donkey has chests</param>
     /// <returns>This donkey</returns>
@@ -26,7 +26,7 @@ public class Donkey : HorseEntity
     }
 
     /// <summary>
-    /// Adds an item to donkey's inventory
+    ///     Adds an item to donkey's inventory
     /// </summary>
     /// <param name="item">Item to be added</param>
     /// <param name="slot">Slot to which to add item. If negative, next free space will be used.</param>
@@ -40,7 +40,10 @@ public class Donkey : HorseEntity
             else
                 Inventory.Add(item);
         }
-        else Inventory[Math.Min(15, slot)] = item;
+        else
+        {
+            Inventory[Math.Min(15, slot)] = item;
+        }
 
         return this;
     }
@@ -54,10 +57,7 @@ public class Donkey : HorseEntity
 
         sw.WritePropertyName("Inventory");
         sw.WriteBeginArray();
-        foreach (var item in Inventory.Where(it => it != null))
-        {
-            sw.WriteItem(item);
-        }
+        foreach (var item in Inventory.Where(it => it != null)) sw.WriteItem(item);
 
         sw.WriteEndArray();
     }

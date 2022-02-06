@@ -1,27 +1,27 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a pufferfish entity
+///     Represents a pufferfish entity
 /// </summary>
 public sealed class Pufferfish : LivingEntity
 {
     /// <summary>
-    /// Represents pufferfish inflation state
+    ///     Represents pufferfish inflation state
     /// </summary>
     public enum State
     {
         /// <summary>
-        /// The fish is deflated
+        ///     The fish is deflated
         /// </summary>
         Deflated = 0,
 
         /// <summary>
-        /// The fish is slightly puffed
+        ///     The fish is slightly puffed
         /// </summary>
         SlightlyPuffed = 1,
 
         /// <summary>
-        /// The fish is fully puffed
+        ///     The fish is fully puffed
         /// </summary>
         FullyPuffed = 2
     }
@@ -31,7 +31,7 @@ public sealed class Pufferfish : LivingEntity
     }
 
     /// <summary>
-    /// Whether this pufferfish was released from bucket
+    ///     Whether this pufferfish was released from bucket
     /// </summary>
     /// <param name="from">Marker</param>
     /// <returns>This pufferfish</returns>
@@ -42,7 +42,7 @@ public sealed class Pufferfish : LivingEntity
     }
 
     /// <summary>
-    /// Sets state of this pufferfish puff state
+    ///     Sets state of this pufferfish puff state
     /// </summary>
     /// <param name="state">State to be set</param>
     /// <returns>This pufferfish</returns>

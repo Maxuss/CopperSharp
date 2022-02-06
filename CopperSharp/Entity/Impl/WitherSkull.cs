@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a wither skull projectile
+///     Represents a wither skull projectile
 /// </summary>
 public sealed class WitherSkull : AbstractFireball
 {

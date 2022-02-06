@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// A superclass for dripleafs
+///     A superclass for dripleafs
 /// </summary>
 public class Dripleaf : AbstractBlockData, IDirectional, IWaterlogged
 {

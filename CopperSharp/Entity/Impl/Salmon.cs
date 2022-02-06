@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a salmon entity
+///     Represents a salmon entity
 /// </summary>
 public class Salmon : LivingEntity
 {
@@ -10,7 +10,7 @@ public class Salmon : LivingEntity
     }
 
     /// <summary>
-    /// Whether this salmon was released from bucket
+    ///     Whether this salmon was released from bucket
     /// </summary>
     /// <param name="from">Marker</param>
     /// <returns>This salmon</returns>

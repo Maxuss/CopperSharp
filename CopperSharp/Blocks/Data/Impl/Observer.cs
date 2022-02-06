@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents an observer block
+///     Represents an observer block
 /// </summary>
 public sealed class Observer :
     AbstractBlockData,

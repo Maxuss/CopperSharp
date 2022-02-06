@@ -3,12 +3,12 @@ using CopperSharp.Utils;
 namespace CopperSharp.Item;
 
 /// <summary>
-/// Represents an applicable enchantment
+///     Represents an applicable enchantment
 /// </summary>
 public readonly struct Enchantment
 {
     /// <summary>
-    /// Initializes a new enchantment with provided enchant type and level
+    ///     Initializes a new enchantment with provided enchant type and level
     /// </summary>
     /// <param name="level">Level of the enchantment.</param>
     /// <param name="enchant">Type of enchantment</param>
@@ -24,12 +24,12 @@ public readonly struct Enchantment
     }
 
     /// <summary>
-    /// Type of enchantment
+    ///     Type of enchantment
     /// </summary>
     public Enchant Enchant { get; }
 
     /// <summary>
-    /// Level of this enchantment
+    ///     Level of this enchantment
     /// </summary>
     public int Level { get; }
 }

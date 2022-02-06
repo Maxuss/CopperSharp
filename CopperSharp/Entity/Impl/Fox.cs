@@ -3,7 +3,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a fox entity
+///     Represents a fox entity
 /// </summary>
 public sealed class Fox : BreedableEntity
 {
@@ -11,10 +11,10 @@ public sealed class Fox : BreedableEntity
     {
     }
 
-    private List<Guid> Trusted { get; set; } = new();
+    private List<Guid> Trusted { get; } = new();
 
     /// <summary>
-    /// Makes the fox crouch
+    ///     Makes the fox crouch
     /// </summary>
     /// <param name="crouch">Whether the fox crouches</param>
     /// <returns>This fox</returns>
@@ -25,7 +25,7 @@ public sealed class Fox : BreedableEntity
     }
 
     /// <summary>
-    /// Makes the fox sit
+    ///     Makes the fox sit
     /// </summary>
     /// <param name="sit">Whether the fox sits</param>
     /// <returns>This fox</returns>
@@ -36,7 +36,7 @@ public sealed class Fox : BreedableEntity
     }
 
     /// <summary>
-    /// Makes the fox sleep
+    ///     Makes the fox sleep
     /// </summary>
     /// <param name="sleep">Whether the fox sleeps</param>
     /// <returns>This fox</returns>
@@ -47,7 +47,7 @@ public sealed class Fox : BreedableEntity
     }
 
     /// <summary>
-    /// Makes the fox trust players with provided ids
+    ///     Makes the fox trust players with provided ids
     /// </summary>
     /// <param name="players">Players to be trusted</param>
     /// <returns>This fox</returns>
@@ -58,7 +58,7 @@ public sealed class Fox : BreedableEntity
     }
 
     /// <summary>
-    /// Makes the fox a snow variant
+    ///     Makes the fox a snow variant
     /// </summary>
     /// <param name="snow">Whether the fox should be snow</param>
     /// <returns>This fox</returns>
@@ -77,10 +77,7 @@ public sealed class Fox : BreedableEntity
         {
             sw.WritePropertyName("Trusted");
             sw.WriteBeginArray();
-            foreach (var id in Trusted)
-            {
-                sw.WriteUuidArray(id);
-            }
+            foreach (var id in Trusted) sw.WriteUuidArray(id);
 
             sw.WriteEndArray();
         }

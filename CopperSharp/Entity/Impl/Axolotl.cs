@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an axolotl entity
+///     Represents an axolotl entity
 /// </summary>
 public sealed class Axolotl : BreedableEntity
 {
@@ -10,7 +10,7 @@ public sealed class Axolotl : BreedableEntity
     }
 
     /// <summary>
-    /// Marks that the axolotl was released from bucket
+    ///     Marks that the axolotl was released from bucket
     /// </summary>
     /// <param name="from">Whether the axolotl was released from bucket</param>
     /// <returns>This axolotl</returns>
@@ -21,7 +21,7 @@ public sealed class Axolotl : BreedableEntity
     }
 
     /// <summary>
-    /// Sets a unique variant (color) of this axolotl
+    ///     Sets a unique variant (color) of this axolotl
     /// </summary>
     /// <param name="color">Variant of color</param>
     /// <returns>This axolotl</returns>
@@ -33,32 +33,32 @@ public sealed class Axolotl : BreedableEntity
 }
 
 /// <summary>
-/// Represents a color of axolotl
+///     Represents a color of axolotl
 /// </summary>
 public enum AxolotlColor
 {
     /// <summary>
-    /// Pink
+    ///     Pink
     /// </summary>
     Lucy,
 
     /// <summary>
-    /// Brown
+    ///     Brown
     /// </summary>
     Wild,
 
     /// <summary>
-    /// Gold
+    ///     Gold
     /// </summary>
     Gold,
 
     /// <summary>
-    /// Cyan
+    ///     Cyan
     /// </summary>
     Cyan,
 
     /// <summary>
-    /// Blue
+    ///     Blue
     /// </summary>
     Blue
 }

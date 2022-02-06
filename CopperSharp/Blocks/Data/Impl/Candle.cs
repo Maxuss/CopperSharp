@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a candle block data
+///     Represents a candle block data
 /// </summary>
 public sealed class Candle : AbstractBlockData, ILightable, IWaterlogged
 {
@@ -20,7 +20,7 @@ public sealed class Candle : AbstractBlockData, ILightable, IWaterlogged
     }
 
     /// <summary>
-    /// Sets amount of candles 
+    ///     Sets amount of candles
     /// </summary>
     /// <param name="amount">Amount in range of 1 to 4 to be set</param>
     /// <returns>This candle</returns>

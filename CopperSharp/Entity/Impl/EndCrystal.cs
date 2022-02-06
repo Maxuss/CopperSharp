@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an end crystal entity
+///     Represents an end crystal entity
 /// </summary>
 public sealed class EndCrystal : AbstractEntity
 {
@@ -15,7 +15,7 @@ public sealed class EndCrystal : AbstractEntity
     private Location? BeamTarget { get; set; }
 
     /// <summary>
-    /// Sets beam target of this end crystal
+    ///     Sets beam target of this end crystal
     /// </summary>
     /// <param name="loc">Location to which the beam targets</param>
     /// <returns>This end crystal</returns>
@@ -26,7 +26,7 @@ public sealed class EndCrystal : AbstractEntity
     }
 
     /// <summary>
-    /// Whether to show bedrock statue beneath the crystal
+    ///     Whether to show bedrock statue beneath the crystal
     /// </summary>
     /// <param name="show">Marker</param>
     /// <returns>This end crystal</returns>

@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a blaze entity
+///     Represents a blaze entity
 /// </summary>
 public sealed class Blaze : LivingEntity
 {

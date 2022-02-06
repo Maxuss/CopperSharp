@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// Metadata container for player skulls
+///     Metadata container for player skulls
 /// </summary>
 public sealed class SkullMeta : ItemMeta
 {
@@ -19,7 +19,7 @@ public sealed class SkullMeta : ItemMeta
     private string? SkullOwner { get; set; }
 
     /// <summary>
-    /// Sets owner of this skull as player's name
+    ///     Sets owner of this skull as player's name
     /// </summary>
     /// <param name="playerName">Name of the player to set as this skull's owner</param>
     /// <returns>This skull meta</returns>
@@ -31,11 +31,11 @@ public sealed class SkullMeta : ItemMeta
     }
 
     /// <summary>
-    /// Sets owner of this skull as base64 texture value.
+    ///     Sets owner of this skull as base64 texture value.
     /// </summary>
     /// <remarks>
-    /// You can find a lot of custom Base64 values<br/>
-    /// on https://minecraft-heads.com/custom-heads
+    ///     You can find a lot of custom Base64 values<br />
+    ///     on https://minecraft-heads.com/custom-heads
     /// </remarks>
     /// <param name="base64">Base64 encoded texture value</param>
     /// <returns>This skull meta</returns>
@@ -47,7 +47,7 @@ public sealed class SkullMeta : ItemMeta
     }
 
     /// <summary>
-    /// Sets owner of this skull as url to texture
+    ///     Sets owner of this skull as url to texture
     /// </summary>
     /// <param name="url">URL leading to skin texture</param>
     /// <returns>This skull meta</returns>

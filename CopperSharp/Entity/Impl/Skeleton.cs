@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a skeleton entity
+///     Represents a skeleton entity
 /// </summary>
 public class Skeleton : LivingEntity
 {
@@ -10,7 +10,7 @@ public class Skeleton : LivingEntity
     }
 
     /// <summary>
-    /// Sets amount of time left until this skeleton converts into stray
+    ///     Sets amount of time left until this skeleton converts into stray
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This skeleton</returns>

@@ -3,7 +3,7 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a note block 
+///     Represents a note block
 /// </summary>
 public sealed class NoteBlock : AbstractBlockData, IPowerable
 {
@@ -15,7 +15,7 @@ public sealed class NoteBlock : AbstractBlockData, IPowerable
     }
 
     /// <summary>
-    /// Sets type of sound for this note block
+    ///     Sets type of sound for this note block
     /// </summary>
     /// <param name="instr">Instrument type to be set</param>
     /// <returns>This note block</returns>
@@ -26,7 +26,7 @@ public sealed class NoteBlock : AbstractBlockData, IPowerable
     }
 
     /// <summary>
-    /// Sets pitch of this note block
+    ///     Sets pitch of this note block
     /// </summary>
     /// <param name="note">Pitch amount in range of 0 to 24 to be set</param>
     /// <returns>This note block</returns>
@@ -38,87 +38,87 @@ public sealed class NoteBlock : AbstractBlockData, IPowerable
 }
 
 /// <summary>
-/// Represents a type of instrument for note blocks
+///     Represents a type of instrument for note blocks
 /// </summary>
 public enum Instrument
 {
     /// <summary>
-    /// Banjo
+    ///     Banjo
     /// </summary>
     [EnumData("banjo")] Banjo,
 
     /// <summary>
-    /// Base drum
+    ///     Base drum
     /// </summary>
     [EnumData("basedrum")] BaseDrum,
 
     /// <summary>
-    /// Bass
+    ///     Bass
     /// </summary>
     [EnumData("bass")] Bass,
 
     /// <summary>
-    /// Bell
+    ///     Bell
     /// </summary>
     [EnumData("bell")] Bell,
 
     /// <summary>
-    /// Bit
+    ///     Bit
     /// </summary>
     [EnumData("bit")] Bit,
 
     /// <summary>
-    /// Chime
+    ///     Chime
     /// </summary>
     [EnumData("chime")] Chime,
 
     /// <summary>
-    /// Cow bell
+    ///     Cow bell
     /// </summary>
     [EnumData("cow_bell")] CowBell,
 
     /// <summary>
-    /// Didgeridoo
+    ///     Didgeridoo
     /// </summary>
     [EnumData("didgeridoo")] Didgeridoo,
 
     /// <summary>
-    /// Flute
+    ///     Flute
     /// </summary>
     [EnumData("flute")] Flute,
 
     /// <summary>
-    /// Guitar
+    ///     Guitar
     /// </summary>
     [EnumData("guitar")] Guitar,
 
     /// <summary>
-    /// Harp
+    ///     Harp
     /// </summary>
     [EnumData("harp")] Harp,
 
     /// <summary>
-    /// Hat
+    ///     Hat
     /// </summary>
     [EnumData("hat")] Hat,
 
     /// <summary>
-    /// Iron Xylophone
+    ///     Iron Xylophone
     /// </summary>
     [EnumData("iron_xylophone")] IronXylophone,
 
     /// <summary>
-    /// Pling
+    ///     Pling
     /// </summary>
     [EnumData("pling")] Pling,
 
     /// <summary>
-    /// Snare
+    ///     Snare
     /// </summary>
     [EnumData("snare")] Snare,
 
     /// <summary>
-    /// Xylophone
+    ///     Xylophone
     /// </summary>
     [EnumData("xylophone")] Xylophone
 }

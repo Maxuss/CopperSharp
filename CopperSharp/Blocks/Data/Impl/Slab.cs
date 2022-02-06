@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a slab block
+///     Represents a slab block
 /// </summary>
 public sealed class Slab : AbstractBlockData, IWaterlogged
 {
@@ -13,7 +13,7 @@ public sealed class Slab : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets this slab as double slab
+    ///     Sets this slab as double slab
     /// </summary>
     /// <param name="dbl">Whether to make this slab double</param>
     /// <returns>This slab</returns>
@@ -24,7 +24,7 @@ public sealed class Slab : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets this slab as bottom slab
+    ///     Sets this slab as bottom slab
     /// </summary>
     /// <param name="btm">True for bottom slab, false for top slab</param>
     /// <returns>This slab</returns>

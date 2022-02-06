@@ -5,17 +5,17 @@ using CopperSharp.Text.Impl;
 namespace CopperSharp.Text;
 
 /// <summary>
-/// A translatable component, that can be localized client-side
+///     A translatable component, that can be localized client-side
 /// </summary>
 public readonly struct TranslatableComponent : IComponent
 {
     /// <summary>
-    /// Translation key for this component
+    ///     Translation key for this component
     /// </summary>
     public string Key { get; }
 
     /// <summary>
-    /// Extra slots to fit into formatting
+    ///     Extra slots to fit into formatting
     /// </summary>
     public List<IComponent> ExtraSlots { get; } = new();
 
@@ -41,7 +41,7 @@ public readonly struct TranslatableComponent : IComponent
     public ITextColor? Color { get; }
 
     /// <summary>
-    /// Creates a new translatable component from provided text
+    ///     Creates a new translatable component from provided text
     /// </summary>
     /// <param name="key">Localization key to be put in component</param>
     public TranslatableComponent(string key)
@@ -112,7 +112,7 @@ public readonly struct TranslatableComponent : IComponent
     }
 
     /// <summary>
-    /// Adds an extra slot, to fit into the component formatting
+    ///     Adds an extra slot, to fit into the component formatting
     /// </summary>
     /// <param name="slot">Slot to be put</param>
     /// <returns>Copy of this component</returns>

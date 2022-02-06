@@ -3,7 +3,7 @@ using CopperSharp.Data.Effects;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a mooshroom entity
+///     Represents a mooshroom entity
 /// </summary>
 public sealed class Mooshroom : BreedableEntity
 {
@@ -12,7 +12,7 @@ public sealed class Mooshroom : BreedableEntity
     }
 
     /// <summary>
-    /// Sets effect duration this mooshroom gives if it is brown.
+    ///     Sets effect duration this mooshroom gives if it is brown.
     /// </summary>
     /// <param name="duration">Amount of time in ticks</param>
     /// <returns>This mooshroom</returns>
@@ -23,7 +23,7 @@ public sealed class Mooshroom : BreedableEntity
     }
 
     /// <summary>
-    /// Sets effect this mooshroom gives if it is brown
+    ///     Sets effect this mooshroom gives if it is brown
     /// </summary>
     /// <param name="effect">Type of effect</param>
     /// <returns>This mooshroom</returns>
@@ -34,8 +34,8 @@ public sealed class Mooshroom : BreedableEntity
     }
 
     /// <summary>
-    /// Makes this mooshroom brown, allowing to milk it for<br/>
-    /// Suspicious stew.
+    ///     Makes this mooshroom brown, allowing to milk it for<br />
+    ///     Suspicious stew.
     /// </summary>
     /// <param name="brown">Whether to make this mooshroom brown</param>
     /// <returns>This mooshroom</returns>

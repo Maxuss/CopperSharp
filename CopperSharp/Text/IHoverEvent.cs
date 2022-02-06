@@ -8,21 +8,23 @@ using CopperSharp.Text.Impl;
 namespace CopperSharp.Text;
 
 /// <summary>
-/// Represents a hover event
+///     Represents a hover event
 /// </summary>
 public interface IHoverEvent
 {
     /// <summary>
-    /// Creates a new text hover event.
+    ///     Creates a new text hover event.
     /// </summary>
     /// <param name="txt">Component to be displayed on hover.</param>
     /// <returns>New hover event instance</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IHoverEvent Text(IComponent txt)
-        => new DisplayTextHover(txt) as IHoverEvent;
+    {
+        return new DisplayTextHover(txt) as IHoverEvent;
+    }
 
     /// <summary>
-    /// Creates a new item display hover event
+    ///     Creates a new item display hover event
     /// </summary>
     /// <param name="id">Identifier of item.</param>
     /// <param name="count">Amount of items. Optional.</param>
@@ -30,10 +32,12 @@ public interface IHoverEvent
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IHoverEvent Item(Identifier id, int? count = null, ItemMeta? tag = null)
-        => new DisplayItemHover(id, count, tag) as IHoverEvent;
+    {
+        return new DisplayItemHover(id, count, tag) as IHoverEvent;
+    }
 
     /// <summary>
-    /// Creates a new entity display hover event
+    ///     Creates a new entity display hover event
     /// </summary>
     /// <param name="id">Identifier of entity.</param>
     /// <param name="uuid">Custom (or random) UUID of entity.</param>
@@ -41,24 +45,26 @@ public interface IHoverEvent
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IHoverEvent Entity(Identifier id, Guid uuid, IComponent? name = null)
-        => new DisplayEntityHover(id, uuid, name) as IHoverEvent;
+    {
+        return new DisplayEntityHover(id, uuid, name) as IHoverEvent;
+    }
 
     /// <summary>
-    /// Converts this hover event to parseable container
+    ///     Converts this hover event to parseable container
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public ComponentHoverEvent Contain();
 }
 
 /// <summary>
-/// Displays provided component on hover
+///     Displays provided component on hover
 /// </summary>
 public readonly struct DisplayTextHover : IHoverEvent
 {
     private readonly IComponent _component;
 
     /// <summary>
-    /// Displays provided component on hover
+    ///     Displays provided component on hover
     /// </summary>
     /// <param name="component">Component to be displayed on hover</param>
     public DisplayTextHover(IComponent component)
@@ -68,11 +74,13 @@ public readonly struct DisplayTextHover : IHoverEvent
 
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
-        => new("show_text", _component.Contain());
+    {
+        return new("show_text", _component.Contain());
+    }
 }
 
 /// <summary>
-/// Displays provided item data on hover
+///     Displays provided item data on hover
 /// </summary>
 public readonly struct DisplayItemHover : IHoverEvent
 {
@@ -81,7 +89,7 @@ public readonly struct DisplayItemHover : IHoverEvent
     private readonly ItemMeta? _tag;
 
     /// <summary>
-    /// Displays provided item data on hover
+    ///     Displays provided item data on hover
     /// </summary>
     /// <param name="id">Type of item. E.g. minecraft:diamond</param>
     /// <param name="count">Count of items. Optional.</param>
@@ -95,11 +103,13 @@ public readonly struct DisplayItemHover : IHoverEvent
 
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
-        => new("show_item", new ShowItemHoverEvent(_id.ToString(), _count, _tag?.ToString()));
+    {
+        return new("show_item", new ShowItemHoverEvent(_id.ToString(), _count, _tag?.ToString()));
+    }
 }
 
 /// <summary>
-/// Displays provided entity data on hover
+///     Displays provided entity data on hover
 /// </summary>
 public readonly struct DisplayEntityHover : IHoverEvent
 {
@@ -108,7 +118,7 @@ public readonly struct DisplayEntityHover : IHoverEvent
     private readonly IComponent? _name;
 
     /// <summary>
-    /// Displays provided entity data on hover
+    ///     Displays provided entity data on hover
     /// </summary>
     /// <param name="id">Type of entity. E.g. minecraft:pig</param>
     /// <param name="uuid">UUID of entity. Can be random.</param>
@@ -122,5 +132,7 @@ public readonly struct DisplayEntityHover : IHoverEvent
 
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
-        => new("show_entity", new ShowEntityHoverEvent(_id.ToString(), _uuid.ToString(), _name?.Contain()));
+    {
+        return new("show_entity", new ShowEntityHoverEvent(_id.ToString(), _uuid.ToString(), _name?.Contain()));
+    }
 }

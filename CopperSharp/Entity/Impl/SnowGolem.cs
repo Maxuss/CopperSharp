@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a snow golem entity
+///     Represents a snow golem entity
 /// </summary>
 public sealed class SnowGolem : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class SnowGolem : LivingEntity
     }
 
     /// <summary>
-    /// Whether this golem has a pumpkin
+    ///     Whether this golem has a pumpkin
     /// </summary>
     /// <param name="has">Marker</param>
     /// <returns>This snow golem</returns>

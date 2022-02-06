@@ -4,17 +4,22 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks;
 
 /// <summary>
-/// Represents a block that can have an inventory inside
+///     Represents a block that can have an inventory inside
 /// </summary>
 public abstract class InventoryBlock<TInventory> : BlockState where TInventory : Inventory
 {
-    /// <summary>
-    /// Inventory of this inventory block state
-    /// </summary>
-    public TInventory Inventory { get; protected set;  }
+    /// <inheritdoc />
+    protected InventoryBlock(Material id) : base(id)
+    {
+    }
 
     /// <summary>
-    /// Adds an item to this inventory container
+    ///     Inventory of this inventory block state
+    /// </summary>
+    public TInventory Inventory { get; protected set; }
+
+    /// <summary>
+    ///     Adds an item to this inventory container
     /// </summary>
     /// <param name="item">Item to be added</param>
     /// <param name="at">Position on which to add item. -1 For next avaialable</param>
@@ -34,12 +39,7 @@ public abstract class InventoryBlock<TInventory> : BlockState where TInventory :
     {
         base.SerializeExtra(sw);
 
-        if(Inventory.Any(it => it.Item1 != null))
+        if (Inventory.Any(it => it.Item1 != null))
             Inventory.SerializeInto(sw, false);
-    }
-
-    /// <inheritdoc />
-    protected InventoryBlock(Material id) : base(id)
-    {
     }
 }

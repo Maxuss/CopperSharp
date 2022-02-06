@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents an enchanting table block state
+///     Represents an enchanting table block state
 /// </summary>
 public sealed class EnchantingTableState : BlockState
 {

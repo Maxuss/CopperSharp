@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a stray entity
+///     Represents a stray entity
 /// </summary>
 public sealed class Stray : LivingEntity
 {

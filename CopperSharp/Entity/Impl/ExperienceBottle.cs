@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an experience bottle projectile
+///     Represents an experience bottle projectile
 /// </summary>
 public sealed class ExperienceBottle : AbstractThrownItem
 {

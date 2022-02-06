@@ -1,27 +1,27 @@
 namespace CopperSharp.Data.Locations;
 
 /// <summary>
-/// Represents a location in world space
+///     Represents a location in world space
 /// </summary>
 public readonly struct Location
 {
     /// <summary>
-    /// X position of this location
+    ///     X position of this location
     /// </summary>
     public Coordinate X { get; }
 
     /// <summary>
-    /// Y position of this location
+    ///     Y position of this location
     /// </summary>
     public Coordinate Y { get; }
 
     /// <summary>
-    /// Z position of this location
+    ///     Z position of this location
     /// </summary>
     public Coordinate Z { get; }
 
     /// <summary>
-    /// Constructs a new location with provided coordinates
+    ///     Constructs a new location with provided coordinates
     /// </summary>
     /// <param name="x">X position</param>
     /// <param name="y">Y position</param>
@@ -34,7 +34,7 @@ public readonly struct Location
     }
 
     /// <summary>
-    /// Constructs a new location with provided pre-built coordinates
+    ///     Constructs a new location with provided pre-built coordinates
     /// </summary>
     /// <param name="x">X coordinate</param>
     /// <param name="y">Y coordinate</param>
@@ -47,7 +47,7 @@ public readonly struct Location
     }
 
     /// <summary>
-    /// Parses a location from string
+    ///     Parses a location from string
     /// </summary>
     /// <param name="str">String, that contains location</param>
     /// <returns>Serialized location</returns>
@@ -61,5 +61,8 @@ public readonly struct Location
     }
 
     /// <inheritdoc />
-    public override string ToString() => $"{X} {Y} {Z}";
+    public override string ToString()
+    {
+        return $"{X} {Y} {Z}";
+    }
 }

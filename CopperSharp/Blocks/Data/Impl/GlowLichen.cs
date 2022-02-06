@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a glow lichen block
+///     Represents a glow lichen block
 /// </summary>
 public sealed class GlowLichen : AbstractBlockData, IMultipleFacing, IWaterlogged
 {

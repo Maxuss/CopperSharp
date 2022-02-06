@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a repeater block
+///     Represents a repeater block
 /// </summary>
 public sealed class Repeater :
     AbstractBlockData,
@@ -26,7 +26,7 @@ public sealed class Repeater :
     }
 
     /// <summary>
-    /// Sets delay of this repeater
+    ///     Sets delay of this repeater
     /// </summary>
     /// <param name="delay">Delay in range of 1 to 4</param>
     /// <returns>This repeater</returns>
@@ -37,7 +37,7 @@ public sealed class Repeater :
     }
 
     /// <summary>
-    /// Makes this repeater locked
+    ///     Makes this repeater locked
     /// </summary>
     /// <param name="locked">Whether to make the repeater locked</param>
     /// <returns>This repeater</returns>

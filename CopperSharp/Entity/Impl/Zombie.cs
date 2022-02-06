@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a zombie entity
+///     Represents a zombie entity
 /// </summary>
 public sealed class Zombie : ZombieEntity
 {

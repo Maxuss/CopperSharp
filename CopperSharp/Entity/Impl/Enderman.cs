@@ -4,7 +4,7 @@ namespace CopperSharp.Entity.Impl;
 
 // Need to add blockstate later
 /// <summary>
-/// Represents an enderman
+///     Represents an enderman
 /// </summary>
 public sealed class Enderman : LivingEntity, IAngerableEntity
 {
@@ -12,7 +12,7 @@ public sealed class Enderman : LivingEntity, IAngerableEntity
     {
     }
 
-    private Guid? Anger { get; set; } = null;
+    private Guid? Anger { get; set; }
 
     /// <inheritdoc />
     public IAngerableEntity AngryOn(Guid on)

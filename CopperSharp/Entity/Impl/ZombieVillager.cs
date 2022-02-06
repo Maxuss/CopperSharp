@@ -5,7 +5,7 @@ using CopperSharp.Utils;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a zombie villager entity
+///     Represents a zombie villager entity
 /// </summary>
 public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
 {
@@ -13,8 +13,8 @@ public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
     {
     }
 
-    private List<Gossip> Gossips { get; set; } = new();
-    private List<TradeOffer> Offers { get; set; } = new();
+    private List<Gossip> Gossips { get; } = new();
+    private List<TradeOffer> Offers { get; } = new();
 
     private int VLevel { get; set; } = 1;
     private string? VSkin { get; set; }
@@ -64,7 +64,7 @@ public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets the player curing this villager
+    ///     Sets the player curing this villager
     /// </summary>
     /// <param name="player">Player, that is curing this villager</param>
     /// <returns>This zombie villager</returns>
@@ -75,7 +75,7 @@ public sealed class ZombieVillager : ZombieEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets time until this zombie villager converts to normal villager
+    ///     Sets time until this zombie villager converts to normal villager
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This zombie villager</returns>

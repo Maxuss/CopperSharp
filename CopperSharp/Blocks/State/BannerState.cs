@@ -5,14 +5,18 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a banner block state
+///     Represents a banner block state
 /// </summary>
 public sealed class BannerState : BlockState
 {
+    internal BannerState(Material id) : base(id)
+    {
+    }
+
     private BannerMeta? Meta { get; set; }
-    
+
     /// <summary>
-    /// Adds banner meta to this banner block
+    ///     Adds banner meta to this banner block
     /// </summary>
     /// <param name="meta">Meta to be added</param>
     /// <returns>This banner</returns>
@@ -21,10 +25,6 @@ public sealed class BannerState : BlockState
         meta.WriteBlockEntityTag = false;
         Meta = meta;
         return this;
-    }
-    
-    internal BannerState(Material id) : base(id)
-    {
     }
 
     /// <inheritdoc />

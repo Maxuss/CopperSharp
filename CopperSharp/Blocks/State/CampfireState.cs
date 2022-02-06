@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a campfire block state
+///     Represents a campfire block state
 /// </summary>
 public class CampfireState : InventoryBlock<CampfireInventory>
 {

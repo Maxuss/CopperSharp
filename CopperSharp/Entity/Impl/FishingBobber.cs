@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a fishing bobber entity
+///     Represents a fishing bobber entity
 /// </summary>
 public sealed class FishingBobber : AbstractEntity
 {

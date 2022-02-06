@@ -5,7 +5,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a hopper minecart vehicle
+///     Represents a hopper minecart vehicle
 /// </summary>
 public class HopperMinecart : AbstractMinecart
 {
@@ -13,10 +13,10 @@ public class HopperMinecart : AbstractMinecart
     {
     }
 
-    private List<ItemStack> Items { get; set; } = new();
+    private List<ItemStack> Items { get; } = new();
 
     /// <summary>
-    /// Whether to enable this hopper minecart
+    ///     Whether to enable this hopper minecart
     /// </summary>
     /// <param name="enable">Marker</param>
     /// <returns>This hopper minecart</returns>
@@ -27,11 +27,9 @@ public class HopperMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets cooldown between this hopper can transfer items.
-    ///
-    /// Cooldown must be within range of 0 to 8.
-    ///
-    /// Set 0 if there is no transfer
+    ///     Sets cooldown between this hopper can transfer items.
+    ///     Cooldown must be within range of 0 to 8.
+    ///     Set 0 if there is no transfer
     /// </summary>
     /// <param name="cd"></param>
     /// <returns></returns>
@@ -42,7 +40,7 @@ public class HopperMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Adds provided items to this minecart's storage
+    ///     Adds provided items to this minecart's storage
     /// </summary>
     /// <param name="items">Items to be added</param>
     /// <returns>This hopper minecart</returns>
@@ -53,7 +51,7 @@ public class HopperMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets loot table used to populate this minecart's contents
+    ///     Sets loot table used to populate this minecart's contents
     /// </summary>
     /// <param name="table">Loot table identifier</param>
     /// <returns>This hopper minecart</returns>

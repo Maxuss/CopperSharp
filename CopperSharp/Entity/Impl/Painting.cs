@@ -3,7 +3,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a painting entity
+///     Represents a painting entity
 /// </summary>
 public sealed class Painting : AbstractEntity
 {
@@ -12,7 +12,7 @@ public sealed class Painting : AbstractEntity
     }
 
     /// <summary>
-    /// Sets style of this painting
+    ///     Sets style of this painting
     /// </summary>
     /// <param name="motive">Motive of painting</param>
     /// <returns>This painting</returns>

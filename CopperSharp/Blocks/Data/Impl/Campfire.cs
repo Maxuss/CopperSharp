@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a campfire block data
+///     Represents a campfire block data
 /// </summary>
 public sealed class Campfire :
     AbstractBlockData,

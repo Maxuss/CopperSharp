@@ -3,20 +3,20 @@ using Newtonsoft.Json;
 namespace CopperSharp.Text.Impl;
 
 /// <summary>
-/// A simple interface to distinguish hover event handlers
+///     A simple interface to distinguish hover event handlers
 /// </summary>
 public interface IHoverEventContainer
 {
 }
 
 /// <summary>
-/// Represents a hover event for component
+///     Represents a hover event for component
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public readonly struct ComponentHoverEvent
 {
     /// <summary>
-    /// Represents a hover event for component
+    ///     Represents a hover event for component
     /// </summary>
     /// <param name="action">Type of action</param>
     /// <param name="contents">Contents of this component hover event</param>
@@ -36,13 +36,13 @@ public readonly struct ComponentHoverEvent
 }
 
 /// <summary>
-/// A container for <see cref="ComponentHoverEvent" />
+///     A container for <see cref="ComponentHoverEvent" />
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public readonly struct ShowItemHoverEvent : IHoverEventContainer
 {
     /// <summary>
-    /// A container for <see cref="ComponentHoverEvent" />
+    ///     A container for <see cref="ComponentHoverEvent" />
     /// </summary>
     /// <param name="id">ID of item. E.g. minecraft:diamond</param>
     /// <param name="count">Count of item. Optional.</param>
@@ -68,22 +68,22 @@ public readonly struct ShowItemHoverEvent : IHoverEventContainer
 }
 
 /// <summary>
-/// A container for <see cref="ComponentHoverEvent" />
+///     A container for <see cref="ComponentHoverEvent" />
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public readonly struct ShowEntityHoverEvent : IHoverEventContainer
 {
     /// <summary>
-    /// A container for <see cref="ComponentHoverEvent" />
+    ///     A container for <see cref="ComponentHoverEvent" />
     /// </summary>
     /// <param name="name">Name of the entity. Optional.</param>
     /// <param name="entityType">Type of the entity. E.g. minecraft:pig</param>
     /// <param name="entityId">UUID of entity</param>
     public ShowEntityHoverEvent(string entityType, string entityId, AbstractComponentContainer? name = null)
     {
-        this.EntityType = entityType;
-        this.EntityId = entityId;
-        this.Name = name;
+        EntityType = entityType;
+        EntityId = entityId;
+        Name = name;
     }
 
     /// <summary>Type of the entity. E.g. minecraft:pig</summary>

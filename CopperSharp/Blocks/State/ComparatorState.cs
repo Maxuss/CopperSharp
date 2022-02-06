@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents comparator block state
+///     Represents comparator block state
 /// </summary>
 public sealed class ComparatorState : BlockState
 {
@@ -12,7 +12,7 @@ public sealed class ComparatorState : BlockState
     }
 
     /// <summary>
-    /// Sets strength of the output analog signal
+    ///     Sets strength of the output analog signal
     /// </summary>
     /// <param name="strength">Strength of the signal</param>
     /// <returns>This comparator state</returns>

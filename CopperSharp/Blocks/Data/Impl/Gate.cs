@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a fence gate block
+///     Represents a fence gate block
 /// </summary>
 public sealed class Gate :
     AbstractBlockData,
@@ -31,7 +31,7 @@ public sealed class Gate :
     }
 
     /// <summary>
-    /// Makes the gate as attached to a wall
+    ///     Makes the gate as attached to a wall
     /// </summary>
     /// <param name="inside">Whether the gate is inside the wall</param>
     /// <returns>This gate</returns>

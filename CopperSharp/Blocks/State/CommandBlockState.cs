@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a command block state
+///     Represents a command block state
 /// </summary>
 public sealed class CommandBlockState : BlockState
 {
@@ -12,7 +12,7 @@ public sealed class CommandBlockState : BlockState
     }
 
     /// <summary>
-    /// Whether this command block state is always powered
+    ///     Whether this command block state is always powered
     /// </summary>
     /// <param name="auto">Marker</param>
     /// <returns>This command block state</returns>
@@ -23,7 +23,7 @@ public sealed class CommandBlockState : BlockState
     }
 
     /// <summary>
-    /// Whether the condition for this conditional command block was met
+    ///     Whether the condition for this conditional command block was met
     /// </summary>
     /// <param name="met">Marker</param>
     /// <returns>This command block state</returns>
@@ -34,7 +34,7 @@ public sealed class CommandBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets the command inside this command block state
+    ///     Sets the command inside this command block state
     /// </summary>
     /// <param name="cmd">Command to be set</param>
     /// <returns>This command block state</returns>
@@ -45,7 +45,7 @@ public sealed class CommandBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets the last command block output contents 
+    ///     Sets the last command block output contents
     /// </summary>
     /// <param name="output">String output</param>
     /// <param name="at">Tick at which the output was produced</param>
@@ -58,7 +58,7 @@ public sealed class CommandBlockState : BlockState
     }
 
     /// <summary>
-    /// Whether this command block is powered by redstone
+    ///     Whether this command block is powered by redstone
     /// </summary>
     /// <param name="powered">Marker</param>
     /// <returns>This command block state</returns>

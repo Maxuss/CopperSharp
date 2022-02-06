@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a snowball projectile
+///     Represents a snowball projectile
 /// </summary>
 public sealed class Snowball : AbstractThrownItem
 {

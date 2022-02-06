@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a piglin entity
+///     Represents a piglin entity
 /// </summary>
 public class Piglin : LivingEntity
 {
@@ -12,10 +12,10 @@ public class Piglin : LivingEntity
     {
     }
 
-    private List<ItemStack?> Items { get; set; } = new();
+    private List<ItemStack?> Items { get; } = new();
 
     /// <summary>
-    /// Whether this piglin can hunt hoglins
+    ///     Whether this piglin can hunt hoglins
     /// </summary>
     /// <param name="can">Marker</param>
     /// <returns>This piglin</returns>
@@ -26,7 +26,7 @@ public class Piglin : LivingEntity
     }
 
     /// <summary>
-    /// Whether this piglin is a baby
+    ///     Whether this piglin is a baby
     /// </summary>
     /// <param name="baby">Marker</param>
     /// <returns>This piglin</returns>
@@ -37,7 +37,7 @@ public class Piglin : LivingEntity
     }
 
     /// <summary>
-    /// Whether this piglin is immune to zombification
+    ///     Whether this piglin is immune to zombification
     /// </summary>
     /// <param name="immune">Marker</param>
     /// <returns>This piglin</returns>
@@ -48,7 +48,7 @@ public class Piglin : LivingEntity
     }
 
     /// <summary>
-    /// Time this piglin has spent in the overworld
+    ///     Time this piglin has spent in the overworld
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This piglin</returns>
@@ -59,7 +59,7 @@ public class Piglin : LivingEntity
     }
 
     /// <summary>
-    /// Adds items to this piglin's inventory
+    ///     Adds items to this piglin's inventory
     /// </summary>
     /// <param name="items"></param>
     /// <returns></returns>

@@ -6,7 +6,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents an entity, that is a mob
+///     Represents an entity, that is a mob
 /// </summary>
 public abstract class LivingEntity : AbstractEntity
 {
@@ -15,17 +15,17 @@ public abstract class LivingEntity : AbstractEntity
     {
     }
 
-    private List<PotionEffect> Effects { get; set; } = new();
+    private List<PotionEffect> Effects { get; } = new();
     private float? AbsorptionAmount { get; set; }
     private float[]? ArmorDropChance { get; set; }
     private float[]? HandDropChance { get; set; }
-    private ItemStack?[] ArmorItems { get; set; } = {null, null, null, null};
-    private ItemStack?[] HandItems { get; set; } = {null, null};
-    private List<(IAttributeType, double)> Modifiers { get; set; } = new();
+    private ItemStack?[] ArmorItems { get; } = {null, null, null, null};
+    private ItemStack?[] HandItems { get; } = {null, null};
+    private List<(IAttributeType, double)> Modifiers { get; } = new();
     private float? HealthAmount { get; set; }
 
     /// <summary>
-    /// Adds provided potion effects to this entity
+    ///     Adds provided potion effects to this entity
     /// </summary>
     /// <param name="effects">Effects to be added</param>
     /// <returns>This living entity</returns>
@@ -36,7 +36,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Adds an effect to this entity
+    ///     Adds an effect to this entity
     /// </summary>
     /// <param name="type">Type of effect</param>
     /// <param name="duration">Duration of the effect</param>
@@ -46,11 +46,13 @@ public abstract class LivingEntity : AbstractEntity
     /// <param name="ambient">Whether the effect is ambient</param>
     /// <returns>This living entity</returns>
     public LivingEntity AddEffect(StatusEffect type, int duration, byte level = 0, bool showIcon = true,
-        bool showParticles = true, bool ambient = false) =>
-        AddEffect(new PotionEffect(type, duration, level, showParticles, showIcon, ambient));
+        bool showParticles = true, bool ambient = false)
+    {
+        return AddEffect(new PotionEffect(type, duration, level, showParticles, showIcon, ambient));
+    }
 
     /// <summary>
-    /// Sets absorption amount to this entity
+    ///     Sets absorption amount to this entity
     /// </summary>
     /// <param name="absorption">Amount of absorption</param>
     /// <returns>This living entity</returns>
@@ -61,7 +63,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop helmet
+    ///     Sets chance to drop helmet
     /// </summary>
     /// <param name="newChance">New drop chance</param>
     /// <returns>This living entity</returns>
@@ -73,7 +75,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop chestplate
+    ///     Sets chance to drop chestplate
     /// </summary>
     /// <param name="newChance">New drop chance</param>
     /// <returns>This living entity</returns>
@@ -85,7 +87,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop leggings
+    ///     Sets chance to drop leggings
     /// </summary>
     /// <param name="newChance">New drop chance</param>
     /// <returns>This living entity</returns>
@@ -97,7 +99,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop boots
+    ///     Sets chance to drop boots
     /// </summary>
     /// <param name="newChance">New drop chance</param>
     /// <returns>This living entity</returns>
@@ -109,7 +111,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets helmet of this entity
+    ///     Sets helmet of this entity
     /// </summary>
     /// <param name="item">New helmet</param>
     /// <returns>This living entity</returns>
@@ -120,7 +122,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chestplate of this entity
+    ///     Sets chestplate of this entity
     /// </summary>
     /// <param name="item">New chestplate</param>
     /// <returns>This living entity</returns>
@@ -131,7 +133,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets leggings of this entity
+    ///     Sets leggings of this entity
     /// </summary>
     /// <param name="item">New leggings</param>
     /// <returns>This living entity</returns>
@@ -142,7 +144,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets boots of this entity
+    ///     Sets boots of this entity
     /// </summary>
     /// <param name="item">New boots</param>
     /// <returns>This living entity</returns>
@@ -153,7 +155,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets item in main hand of this entity
+    ///     Sets item in main hand of this entity
     /// </summary>
     /// <param name="item">New item</param>
     /// <returns>This living entity</returns>
@@ -164,7 +166,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets item in off hand of this entity
+    ///     Sets item in off hand of this entity
     /// </summary>
     /// <param name="item">New item</param>
     /// <returns>This living entity</returns>
@@ -175,7 +177,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop item from main hand by this entity
+    ///     Sets chance to drop item from main hand by this entity
     /// </summary>
     /// <param name="chance">Chance to drop item</param>
     /// <returns>This living entity</returns>
@@ -187,7 +189,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets chance to drop item from off hand by this entity
+    ///     Sets chance to drop item from off hand by this entity
     /// </summary>
     /// <param name="chance">Chance to drop item</param>
     /// <returns>This living entity</returns>
@@ -199,7 +201,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Disables AI for this entity
+    ///     Disables AI for this entity
     /// </summary>
     /// <returns>This living entity</returns>
     // ReSharper disable once InconsistentNaming
@@ -210,7 +212,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Makes this entity left-handed
+    ///     Makes this entity left-handed
     /// </summary>
     /// <returns>This living entity</returns>
     public LivingEntity LeftHanded()
@@ -220,7 +222,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Disables default despawning for this entity
+    ///     Disables default despawning for this entity
     /// </summary>
     /// <returns>This living entity</returns>
     public LivingEntity DontDespawn()
@@ -230,7 +232,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Makes this entity able to pick up loot
+    ///     Makes this entity able to pick up loot
     /// </summary>
     /// <param name="can">Whether the entity can pick up loot</param>
     /// <returns>This living entity</returns>
@@ -241,7 +243,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Whether to allow this entity to use elytra
+    ///     Whether to allow this entity to use elytra
     /// </summary>
     /// <param name="can">Whether this entity can use elytra</param>
     /// <returns>This living entity</returns>
@@ -252,7 +254,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Sets default health for this entity
+    ///     Sets default health for this entity
     /// </summary>
     /// <param name="health">Health amount</param>
     /// <returns>This living entity</returns>
@@ -263,7 +265,7 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <summary>
-    /// Adds an extra attribute to this entity
+    ///     Adds an extra attribute to this entity
     /// </summary>
     /// <param name="attribute">Type of attribute</param>
     /// <param name="value">Value of the attribute</param>
@@ -303,10 +305,7 @@ public abstract class LivingEntity : AbstractEntity
         {
             sw.WritePropertyName("HandItems");
             sw.WriteBeginArray();
-            foreach (var item in HandItems)
-            {
-                sw.WriteItem(item);
-            }
+            foreach (var item in HandItems) sw.WriteItem(item);
 
             sw.WriteEndArray();
         }
@@ -315,10 +314,7 @@ public abstract class LivingEntity : AbstractEntity
         {
             sw.WritePropertyName("ArmorItems");
             sw.WriteBeginArray();
-            foreach (var item in ArmorItems)
-            {
-                sw.WriteItem(item);
-            }
+            foreach (var item in ArmorItems) sw.WriteItem(item);
 
             sw.WriteEndArray();
         }
@@ -345,10 +341,7 @@ public abstract class LivingEntity : AbstractEntity
         {
             sw.WritePropertyName("ArmorDropChances");
             sw.WriteBeginArray();
-            foreach (var chance in ArmorDropChance)
-            {
-                sw.WriteFloat(chance);
-            }
+            foreach (var chance in ArmorDropChance) sw.WriteFloat(chance);
 
             sw.WriteEndArray();
         }
@@ -356,10 +349,7 @@ public abstract class LivingEntity : AbstractEntity
         if (HandDropChance == null) return;
         sw.WritePropertyName("HandDropChances");
         sw.WriteBeginArray();
-        foreach (var chance in HandDropChance)
-        {
-            sw.WriteFloat(chance);
-        }
+        foreach (var chance in HandDropChance) sw.WriteFloat(chance);
 
         sw.WriteEndArray();
     }

@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a zoglin entity
+///     Represents a zoglin entity
 /// </summary>
 public sealed class Zoglin : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Zoglin : LivingEntity
     }
 
     /// <summary>
-    /// Sets whether this zoglin is baby
+    ///     Sets whether this zoglin is baby
     /// </summary>
     /// <param name="baby">Whether this zoglin is baby</param>
     /// <returns>This zoglin</returns>

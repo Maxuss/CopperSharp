@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a cow mob
+///     Represents a cow mob
 /// </summary>
 public sealed class Cow : BreedableEntity
 {

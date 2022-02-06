@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a spawner minecart vehicle
+///     Represents a spawner minecart vehicle
 /// </summary>
 public sealed class SpawnerMinecart : AbstractMinecart
 {
@@ -12,10 +12,10 @@ public sealed class SpawnerMinecart : AbstractMinecart
     {
     }
 
-    private MobSpawner? Data { get; set; } = null;
+    private MobSpawner? Data { get; set; }
 
     /// <summary>
-    /// Gets spawner data from this mob spawner
+    ///     Gets spawner data from this mob spawner
     /// </summary>
     /// <param name="spawner">Spawner from which to get data</param>
     /// <returns>This spawner minecart</returns>

@@ -3,7 +3,7 @@ using CopperSharp.Data.Locations;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a turtle entity
+///     Represents a turtle entity
 /// </summary>
 public sealed class Turtle : BreedableEntity
 {
@@ -12,7 +12,7 @@ public sealed class Turtle : BreedableEntity
     }
 
     /// <summary>
-    /// Sets whether this turtle has an egg
+    ///     Sets whether this turtle has an egg
     /// </summary>
     /// <param name="has">Marker</param>
     /// <returns>This turtle</returns>
@@ -23,7 +23,7 @@ public sealed class Turtle : BreedableEntity
     }
 
     /// <summary>
-    /// Sets home location, where this turtle will lay eggs after breeding
+    ///     Sets home location, where this turtle will lay eggs after breeding
     /// </summary>
     /// <param name="home">Location to be set</param>
     /// <returns>This turtle</returns>
@@ -36,7 +36,7 @@ public sealed class Turtle : BreedableEntity
     }
 
     /// <summary>
-    /// Location for swimming in random points in water
+    ///     Location for swimming in random points in water
     /// </summary>
     /// <param name="travel">Location to which this turtle will travel</param>
     /// <returns>This turtle</returns>

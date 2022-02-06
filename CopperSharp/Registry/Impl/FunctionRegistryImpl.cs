@@ -16,10 +16,7 @@ internal class FunctionRegistryImpl : IFunctionRegistry
         if (stream is not FunctionOutputStream fout)
             return;
 
-        foreach (var element in RegisteredFunctions)
-        {
-            fout.Write(element);
-        }
+        foreach (var element in RegisteredFunctions) fout.Write(element);
     }
 
     public void Flush()

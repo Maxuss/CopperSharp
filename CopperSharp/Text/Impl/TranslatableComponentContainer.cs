@@ -23,10 +23,7 @@ internal class TranslatableComponentContainer : AbstractComponentContainer
         w.WriteValue(Key);
         w.WritePropertyName("with");
         w.WriteStartArray();
-        foreach (var slot in WithSlots)
-        {
-            w.WriteRawValue(slot.Serialize());
-        }
+        foreach (var slot in WithSlots) w.WriteRawValue(slot.Serialize());
 
         w.WriteEndArray();
     }

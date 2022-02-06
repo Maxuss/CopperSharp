@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a TNT minecart vehicle
+///     Represents a TNT minecart vehicle
 /// </summary>
 public sealed class TntMinecart : AbstractMinecart
 {
@@ -10,9 +10,8 @@ public sealed class TntMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets fuse timer, until this TNT explodes.
-    ///
-    /// Set to-1 if deactivated.
+    ///     Sets fuse timer, until this TNT explodes.
+    ///     Set to-1 if deactivated.
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This TNT minecart</returns>

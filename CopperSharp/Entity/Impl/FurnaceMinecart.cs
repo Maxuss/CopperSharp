@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a furnace minecart vehicle
+///     Represents a furnace minecart vehicle
 /// </summary>
 public sealed class FurnaceMinecart : AbstractMinecart
 {
@@ -10,7 +10,7 @@ public sealed class FurnaceMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets fuel amount inside this minecart
+    ///     Sets fuel amount inside this minecart
     /// </summary>
     /// <param name="fuel">Amount of fuel</param>
     /// <returns>This furnace minecart</returns>
@@ -21,7 +21,7 @@ public sealed class FurnaceMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets force applied to this furnace minecart
+    ///     Sets force applied to this furnace minecart
     /// </summary>
     /// <param name="x">Force along X axis</param>
     /// <param name="z">Force along Z axis</param>

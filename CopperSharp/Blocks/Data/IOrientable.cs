@@ -1,12 +1,12 @@
 namespace CopperSharp.Blocks.Data;
 
 /// <summary>
-/// Represents an orientable tile entity
+///     Represents an orientable tile entity
 /// </summary>
 public interface IOrientable : IBlockData
 {
     /// <summary>
-    /// Sets axis rotation of this orientable entity
+    ///     Sets axis rotation of this orientable entity
     /// </summary>
     /// <param name="axis">Axis to be set</param>
     /// <returns>This orientable entity</returns>
@@ -14,22 +14,22 @@ public interface IOrientable : IBlockData
 }
 
 /// <summary>
-/// Represents axis in the world
+///     Represents axis in the world
 /// </summary>
 public enum Axis
 {
     /// <summary>
-    /// The X horizontal axis
+    ///     The X horizontal axis
     /// </summary>
     X,
 
     /// <summary>
-    /// The Y vertical axis
+    ///     The Y vertical axis
     /// </summary>
     Y,
 
     /// <summary>
-    /// The Z horizontal axis
+    ///     The Z horizontal axis
     /// </summary>
     Z
 }

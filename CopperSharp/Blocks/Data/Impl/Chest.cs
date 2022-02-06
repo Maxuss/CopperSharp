@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a chest block
+///     Represents a chest block
 /// </summary>
 public sealed class Chest : AbstractBlockData, IDirectional, IWaterlogged
 {

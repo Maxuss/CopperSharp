@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a conduit block state
+///     Represents a conduit block state
 /// </summary>
 public sealed class ConduitState : BlockState
 {
@@ -12,7 +12,7 @@ public sealed class ConduitState : BlockState
     }
 
     /// <summary>
-    /// Sets target this conduit is attacking
+    ///     Sets target this conduit is attacking
     /// </summary>
     /// <param name="target">Target to be set</param>
     /// <returns>This conduit block state</returns>

@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a piglin brute entity
+///     Represents a piglin brute entity
 /// </summary>
 public sealed class PiglinBrute : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class PiglinBrute : LivingEntity
     }
 
     /// <summary>
-    /// Whether this piglin is immune to zombification
+    ///     Whether this piglin is immune to zombification
     /// </summary>
     /// <param name="immune">Marker</param>
     /// <returns>This piglin</returns>
@@ -21,7 +21,7 @@ public sealed class PiglinBrute : LivingEntity
     }
 
     /// <summary>
-    /// Time this piglin has spent in the overworld
+    ///     Time this piglin has spent in the overworld
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This piglin</returns>

@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a tripwire hook block
+///     Represents a tripwire hook block
 /// </summary>
 public sealed class TripwireHook :
     AbstractBlockData,

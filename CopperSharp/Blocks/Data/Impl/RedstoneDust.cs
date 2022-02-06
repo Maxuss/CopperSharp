@@ -1,27 +1,27 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a redstone dust block
+///     Represents a redstone dust block
 /// </summary>
 public sealed class RedstoneDust : AbstractBlockData, ISignalEmitter
 {
     /// <summary>
-    /// Type of redstone dust connection
+    ///     Type of redstone dust connection
     /// </summary>
     public enum Connection
     {
         /// <summary>
-        /// Not connected
+        ///     Not connected
         /// </summary>
         None,
 
         /// <summary>
-        /// Connected to the side
+        ///     Connected to the side
         /// </summary>
         Side,
 
         /// <summary>
-        /// Connected ascending
+        ///     Connected ascending
         /// </summary>
         Up
     }
@@ -34,7 +34,7 @@ public sealed class RedstoneDust : AbstractBlockData, ISignalEmitter
     }
 
     /// <summary>
-    /// Sets connection of this redstone dust
+    ///     Sets connection of this redstone dust
     /// </summary>
     /// <param name="face">Face to be connected to</param>
     /// <param name="connection">Type of connection</param>

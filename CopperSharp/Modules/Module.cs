@@ -1,36 +1,28 @@
 // ReSharper disable MemberCanBePrivate.Global
 
 using CopperSharp.Datapack;
+using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace CopperSharp.Modules;
 
 /// <summary>
-/// <b>Module</b> <br/><br/>
-/// Module represents a Datapack, that can be combined with other packs into a single Datapack.
-/// <br/>
-/// <br/>
-/// A Module can <i>internally</i> contain different items and entities, that will be converted to functions on runtime.
-/// It can also normally contain different functions, advancements, recipes, etc.
+///     <b>Module</b> <br /><br />
+///     Module represents a Datapack, that can be combined with other packs into a single Datapack.
+///     <br />
+///     <br />
+///     A Module can <i>internally</i> contain different items and entities, that will be converted to functions on
+///     runtime.
+///     It can also normally contain different functions, advancements, recipes, etc.
 /// </summary>
 public abstract class Module
 {
     /// <summary>
-    /// Config of the module
-    /// </summary>
-    public ModuleConfig Config { get; }
-
-    /// <summary>
-    /// Format of the pack, depends on minecraft version
-    /// </summary>
-    public PackFormat Format { get; }
-
-    /// <summary>
-    /// Creates a new module, and initializes fields in it
+    ///     Creates a new module, and initializes fields in it
     /// </summary>
     protected Module()
     {
-        var des = new YamlDotNet.Serialization.DeserializerBuilder()
+        var des = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
         Config = des.Deserialize<ModuleConfig>(File.ReadAllText(Path.Join(Directory.GetCurrentDirectory(), "Pack",
@@ -46,4 +38,14 @@ public abstract class Module
             _ => PackFormat.v1_18
         };
     }
+
+    /// <summary>
+    ///     Config of the module
+    /// </summary>
+    public ModuleConfig Config { get; }
+
+    /// <summary>
+    ///     Format of the pack, depends on minecraft version
+    /// </summary>
+    public PackFormat Format { get; }
 }

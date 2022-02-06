@@ -5,7 +5,7 @@ using CopperSharp.Utils;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a villager entity
+///     Represents a villager entity
 /// </summary>
 public sealed class Villager : BreedableEntity, IVillagerEntity
 {
@@ -13,8 +13,8 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     {
     }
 
-    private List<Gossip> Gossips { get; set; } = new();
-    private List<TradeOffer> Offers { get; set; } = new();
+    private List<Gossip> Gossips { get; } = new();
+    private List<TradeOffer> Offers { get; } = new();
 
     private int VLevel { get; set; } = 1;
     private string? VSkin { get; set; }
@@ -64,7 +64,7 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets date of last restock
+    ///     Sets date of last restock
     /// </summary>
     /// <param name="ticks">Date in ticks</param>
     /// <returns>This villager</returns>
@@ -75,7 +75,7 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets date of last gossip
+    ///     Sets date of last gossip
     /// </summary>
     /// <param name="ticks">Date in ticks</param>
     /// <returns>This villager</returns>
@@ -86,7 +86,7 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets amount of restocks villager has done in 10 minutes from the last restock
+    ///     Sets amount of restocks villager has done in 10 minutes from the last restock
     /// </summary>
     /// <param name="restocks">Amount of restocks</param>
     /// <returns>This villager</returns>
@@ -97,7 +97,7 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     }
 
     /// <summary>
-    /// Sets whether this villager is ready to mate
+    ///     Sets whether this villager is ready to mate
     /// </summary>
     /// <param name="ready">Marker</param>
     /// <returns>This villager</returns>
@@ -178,7 +178,7 @@ internal readonly struct Gossip
 
     public Gossip(Guid on, VillagerGossip type, int weight)
     {
-        On = @on;
+        On = on;
         Type = type;
         Weight = weight;
     }

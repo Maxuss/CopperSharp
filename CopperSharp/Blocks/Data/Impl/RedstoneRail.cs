@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a redstone rail block
+///     Represents a redstone rail block
 /// </summary>
 public sealed class RedstoneRail : Rail, IPowerable
 {

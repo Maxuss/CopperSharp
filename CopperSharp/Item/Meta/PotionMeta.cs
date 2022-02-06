@@ -5,7 +5,7 @@ using CopperSharp.Text;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// A container for potion metadata
+///     A container for potion metadata
 /// </summary>
 public sealed class PotionMeta : ItemMeta
 {
@@ -18,7 +18,7 @@ public sealed class PotionMeta : ItemMeta
     internal List<PotionEffect> Effects { get; set; } = new();
 
     /// <summary>
-    /// Adds a custom potion color to this meta
+    ///     Adds a custom potion color to this meta
     /// </summary>
     /// <param name="color">Color to be set</param>
     /// <returns>This potion meta</returns>
@@ -29,7 +29,7 @@ public sealed class PotionMeta : ItemMeta
     }
 
     /// <summary>
-    /// Adds extra potion effects to this meta
+    ///     Adds extra potion effects to this meta
     /// </summary>
     /// <param name="effects">Effects to be added</param>
     /// <returns>This potion meta</returns>
@@ -40,7 +40,7 @@ public sealed class PotionMeta : ItemMeta
     }
 
     /// <summary>
-    /// Adds a new potion effect to this meta
+    ///     Adds a new potion effect to this meta
     /// </summary>
     /// <param name="effect">Type of status effect</param>
     /// <param name="duration">Duration of effect in ticks</param>

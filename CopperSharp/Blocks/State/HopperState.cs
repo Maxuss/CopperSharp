@@ -4,7 +4,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a hopper block state
+///     Represents a hopper block state
 /// </summary>
 public sealed class HopperState : InventoryBlock<DispenserInventory>, ILockable, ILootable
 {

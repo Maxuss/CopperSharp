@@ -7,14 +7,13 @@ using Xunit.Abstractions;
 namespace CopperSharp.Tests;
 
 /// <summary>
-/// Test classes
+///     Test classes
 /// </summary>
 public class Tests
 {
     private readonly ITestOutputHelper _testOutputHelper;
 
     /// <summary>
-    /// 
     /// </summary>
     /// <param name="testOutputHelper"></param>
     public Tests(ITestOutputHelper testOutputHelper)
@@ -23,7 +22,6 @@ public class Tests
     }
 
     /// <summary>
-    /// 
     /// </summary>
     [Fact]
     public void RawComponentSerialization()

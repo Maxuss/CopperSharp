@@ -1,22 +1,22 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a bed block
+///     Represents a bed block
 /// </summary>
 public sealed class Bed : AbstractBlockData, IDirectional
 {
     /// <summary>
-    /// Part of bed
+    ///     Part of bed
     /// </summary>
     public enum Part
     {
         /// <summary>
-        /// Foot part
+        ///     Foot part
         /// </summary>
         Foot,
 
         /// <summary>
-        /// Head part
+        ///     Head part
         /// </summary>
         Head
     }
@@ -32,7 +32,7 @@ public sealed class Bed : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Sets part of this bed
+    ///     Sets part of this bed
     /// </summary>
     /// <param name="part">Part to be set</param>
     /// <returns>This bed</returns>

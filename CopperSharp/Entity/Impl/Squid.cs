@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a squid entity
+///     Represents a squid entity
 /// </summary>
 public sealed class Squid : LivingEntity
 {

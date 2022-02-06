@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a small dripleaf block
+///     Represents a small dripleaf block
 /// </summary>
 public sealed class SmallDripleaf : Dripleaf, IBisected
 {

@@ -3,7 +3,7 @@ using CopperSharp.Data.Locations;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a vec entity
+///     Represents a vec entity
 /// </summary>
 public sealed class Vex : LivingEntity
 {
@@ -12,7 +12,7 @@ public sealed class Vex : LivingEntity
     }
 
     /// <summary>
-    /// Sets position around which this vex will roam
+    ///     Sets position around which this vex will roam
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This vex</returns>
@@ -25,7 +25,7 @@ public sealed class Vex : LivingEntity
     }
 
     /// <summary>
-    /// Sets amount of life ticks this vex has left
+    ///     Sets amount of life ticks this vex has left
     /// </summary>
     /// <param name="ticks">Amount of time in tix</param>
     /// <returns>This vex</returns>

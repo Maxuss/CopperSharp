@@ -6,17 +6,17 @@ using CopperSharp.Registry;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents a specific type of entity
+///     Represents a specific type of entity
 /// </summary>
 public readonly struct EntityType
 {
     /// <summary>
-    /// ID of this entity
+    ///     ID of this entity
     /// </summary>
     public Identifier Id { get; }
 
     /// <summary>
-    /// Class of this entity. Should have a no-args constructor
+    ///     Class of this entity. Should have a no-args constructor
     /// </summary>
     public Type Class { get; }
 
@@ -27,12 +27,15 @@ public readonly struct EntityType
     }
 
     /// <summary>
-    /// Injects an entity type. Not recommended to do
+    ///     Injects an entity type. Not recommended to do
     /// </summary>
     /// <param name="id">ID of the new entity</param>
     /// <param name="class">Class of the entity</param>
     /// <returns>New generated entity type</returns>
-    public static EntityType Inject(Identifier id, Type @class) => new(id, @class);
+    public static EntityType Inject(Identifier id, Type @class)
+    {
+        return new(id, @class);
+    }
 
     /// <summary>Represents entity of type minecraft:area_effect_cloud</summary>
     /// <remarks>This field is <b>auto-generated</b>!</remarks>

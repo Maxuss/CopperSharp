@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a falling block entity
+///     Represents a falling block entity
 /// </summary>
 public sealed class FallingBlock : AbstractEntity
 {
@@ -15,7 +15,7 @@ public sealed class FallingBlock : AbstractEntity
     private BlockState? State { get; set; }
 
     /// <summary>
-    /// Whether this falling block drops item
+    ///     Whether this falling block drops item
     /// </summary>
     /// <param name="drops">Whether it drops item</param>
     /// <returns>This falling block</returns>
@@ -26,7 +26,7 @@ public sealed class FallingBlock : AbstractEntity
     }
 
     /// <summary>
-    /// Whether this block hurts entities
+    ///     Whether this block hurts entities
     /// </summary>
     /// <param name="hurts">Marker</param>
     /// <returns>This falling block</returns>
@@ -37,7 +37,7 @@ public sealed class FallingBlock : AbstractEntity
     }
 
     /// <summary>
-    /// Multiplier of this block's hurt amount on fall
+    ///     Multiplier of this block's hurt amount on fall
     /// </summary>
     /// <param name="amount">Multiplier</param>
     /// <returns>This falling block</returns>
@@ -48,7 +48,7 @@ public sealed class FallingBlock : AbstractEntity
     }
 
     /// <summary>
-    /// Sets block state of this falling block
+    ///     Sets block state of this falling block
     /// </summary>
     /// <param name="state">Block state to be se</param>
     /// <returns>This falling block</returns>

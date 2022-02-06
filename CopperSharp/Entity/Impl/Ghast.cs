@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a ghast
+///     Represents a ghast
 /// </summary>
 public sealed class Ghast : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Ghast : LivingEntity
     }
 
     /// <summary>
-    /// Sets explosion power of this ghast
+    ///     Sets explosion power of this ghast
     /// </summary>
     /// <param name="power">Radius of explosion caused by fireballs</param>
     /// <returns>This ghast</returns>

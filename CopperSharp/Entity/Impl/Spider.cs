@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a spider entity
+///     Represents a spider entity
 /// </summary>
 public sealed class Spider : LivingEntity
 {

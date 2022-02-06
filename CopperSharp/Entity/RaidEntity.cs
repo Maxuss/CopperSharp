@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents an entity that can be spawned during raid
+///     Represents an entity that can be spawned during raid
 /// </summary>
 public abstract class RaidEntity : LivingEntity
 {
@@ -16,7 +16,7 @@ public abstract class RaidEntity : LivingEntity
     private Location? PatrolTarget { get; set; }
 
     /// <summary>
-    /// Whether the mob can join the raid when it starts
+    ///     Whether the mob can join the raid when it starts
     /// </summary>
     /// <param name="can">Can the mob join raid</param>
     /// <returns>This raid entity</returns>
@@ -27,7 +27,7 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <summary>
-    /// Whether this mob is the patrol leader
+    ///     Whether this mob is the patrol leader
     /// </summary>
     /// <param name="leader">Marker</param>
     /// <returns>This raid entity</returns>
@@ -38,7 +38,7 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <summary>
-    /// Whether this mob is patrolling
+    ///     Whether this mob is patrolling
     /// </summary>
     /// <param name="patrolling">Marker</param>
     /// <returns>This raid entity</returns>
@@ -49,7 +49,7 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets patrolling target for this entity
+    ///     Sets patrolling target for this entity
     /// </summary>
     /// <param name="target">Target to be set</param>
     /// <returns>This raid entity</returns>
@@ -60,7 +60,7 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets numeric ID of the raid this mob participates
+    ///     Sets numeric ID of the raid this mob participates
     /// </summary>
     /// <param name="id">ID of the raid</param>
     /// <returns>This raid entity</returns>
@@ -71,7 +71,7 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets raid wave in which this mob spawned
+    ///     Sets raid wave in which this mob spawned
     /// </summary>
     /// <param name="wave">Wave in which mob spawned</param>
     /// <returns>This raid entity</returns>

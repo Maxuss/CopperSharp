@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a furnace block
+///     Represents a furnace block
 /// </summary>
 public sealed class Furnace : AbstractBlockData, IDirectional, ILightable
 {

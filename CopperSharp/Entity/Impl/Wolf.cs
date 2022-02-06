@@ -3,7 +3,7 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a wolf entity
+///     Represents a wolf entity
 /// </summary>
 public class Wolf : TameableEntity, IAngerableEntity
 {
@@ -12,7 +12,7 @@ public class Wolf : TameableEntity, IAngerableEntity
     }
 
     /// <inheritdoc />
-    public IAngerableEntity AngryOn(Guid @on)
+    public IAngerableEntity AngryOn(Guid on)
     {
         Ids["AngryAt"] = on;
         return this;
@@ -26,7 +26,7 @@ public class Wolf : TameableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Sets color of this wolf's collar
+    ///     Sets color of this wolf's collar
     /// </summary>
     /// <param name="color">Color to be set</param>
     /// <returns>This wolf</returns>

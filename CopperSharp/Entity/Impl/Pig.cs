@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a pig entity
+///     Represents a pig entity
 /// </summary>
 public sealed class Pig : BreedableEntity
 {
@@ -10,7 +10,7 @@ public sealed class Pig : BreedableEntity
     }
 
     /// <summary>
-    /// Sets whether this pig has saddle
+    ///     Sets whether this pig has saddle
     /// </summary>
     /// <param name="has">Marker</param>
     /// <returns>This pig</returns>

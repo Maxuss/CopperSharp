@@ -3,62 +3,62 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a rail blocks
+///     Represents a rail blocks
 /// </summary>
 public class Rail : AbstractBlockData, IWaterlogged
 {
     /// <summary>
-    /// Represents shape of rails
+    ///     Represents shape of rails
     /// </summary>
     public enum Shape
     {
         /// <summary>
-        /// East-west
+        ///     East-west
         /// </summary>
         [EnumData("east_west")] EastWest,
 
         /// <summary>
-        /// North-east
+        ///     North-east
         /// </summary>
         [EnumData("north_east")] NorthEast,
 
         /// <summary>
-        /// North-south
+        ///     North-south
         /// </summary>
         [EnumData("north_south")] NorthSouth,
 
         /// <summary>
-        /// North-west
+        ///     North-west
         /// </summary>
         [EnumData("north_west")] NorthWest,
 
         /// <summary>
-        /// South-east
+        ///     South-east
         /// </summary>
         [EnumData("south_east")] SouthEast,
 
         /// <summary>
-        /// South-west
+        ///     South-west
         /// </summary>
         [EnumData("south_west")] SouthWest,
 
         /// <summary>
-        /// Ascending east
+        ///     Ascending east
         /// </summary>
         [EnumData("ascending_east")] AscendingEast,
 
         /// <summary>
-        /// Ascending north
+        ///     Ascending north
         /// </summary>
         [EnumData("ascending north")] AscendingNorth,
 
         /// <summary>
-        /// Ascending south
+        ///     Ascending south
         /// </summary>
         [EnumData("ascending_south")] AscendingSouth,
 
         /// <summary>
-        /// Ascending west
+        ///     Ascending west
         /// </summary>
         [EnumData("ascending_west")] AscendingWest
     }
@@ -71,7 +71,7 @@ public class Rail : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets shape of these rails
+    ///     Sets shape of these rails
     /// </summary>
     /// <param name="shape">Shape to be set</param>
     /// <returns>These rails</returns>

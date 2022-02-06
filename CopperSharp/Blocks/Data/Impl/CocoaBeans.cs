@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a cocoa beans block
+///     Represents a cocoa beans block
 /// </summary>
 public sealed class CocoaBeans : AbstractBlockData, IDirectional, IAgeable
 {

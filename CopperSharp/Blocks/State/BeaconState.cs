@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a beacon block state
+///     Represents a beacon block state
 /// </summary>
 public sealed class BeaconState : BlockState, ILockable
 {
@@ -12,8 +12,15 @@ public sealed class BeaconState : BlockState, ILockable
     {
     }
 
+    /// <inheritdoc />
+    public ILockable Allow(string name)
+    {
+        Data["lock"] = name;
+        return this;
+    }
+
     /// <summary>
-    /// Sets amount of beacon levels
+    ///     Sets amount of beacon levels
     /// </summary>
     /// <param name="value">Levels to be set</param>
     /// <returns>This beacon state</returns>
@@ -24,7 +31,7 @@ public sealed class BeaconState : BlockState, ILockable
     }
 
     /// <summary>
-    /// Sets primary effect of this beacon
+    ///     Sets primary effect of this beacon
     /// </summary>
     /// <param name="effect">Effect to be set</param>
     /// <returns>This beacon state</returns>
@@ -35,20 +42,13 @@ public sealed class BeaconState : BlockState, ILockable
     }
 
     /// <summary>
-    /// Sets secondary effect of this beacon. Requires a secondary effect.
+    ///     Sets secondary effect of this beacon. Requires a secondary effect.
     /// </summary>
     /// <param name="effect">Effect to be set</param>
     /// <returns>This beacon state</returns>
     public BeaconState SecondaryEffect(StatusEffect effect)
     {
         Data["Secondary"] = (int) effect;
-        return this;
-    }
-
-    /// <inheritdoc />
-    public ILockable Allow(string name)
-    {
-        Data["lock"] = name;
         return this;
     }
 }

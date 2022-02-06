@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a polar bear entity
+///     Represents a polar bear entity
 /// </summary>
 public sealed class PolarBear : BreedableEntity, IAngerableEntity
 {

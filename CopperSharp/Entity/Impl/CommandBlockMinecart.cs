@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a command block minecart
+///     Represents a command block minecart
 /// </summary>
 public sealed class CommandBlockMinecart : AbstractMinecart
 {
@@ -10,7 +10,7 @@ public sealed class CommandBlockMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets command in this minecart
+    ///     Sets command in this minecart
     /// </summary>
     /// <param name="cmd">Command to be set</param>
     /// <returns>This command block minecart</returns>

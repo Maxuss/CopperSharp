@@ -3,7 +3,7 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a sheep entity
+///     Represents a sheep entity
 /// </summary>
 public sealed class Sheep : BreedableEntity
 {
@@ -12,7 +12,7 @@ public sealed class Sheep : BreedableEntity
     }
 
     /// <summary>
-    /// Makes this sheep sheared
+    ///     Makes this sheep sheared
     /// </summary>
     /// <param name="sheared">Whether to shear the sheep</param>
     /// <returns>This sheep</returns>
@@ -23,7 +23,7 @@ public sealed class Sheep : BreedableEntity
     }
 
     /// <summary>
-    /// Colors this sheep
+    ///     Colors this sheep
     /// </summary>
     /// <param name="color">Color to be applied to this sheep</param>
     /// <returns>This sheep</returns>

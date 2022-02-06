@@ -4,14 +4,18 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a thrown trident projectile
+///     Represents a thrown trident projectile
 /// </summary>
 public sealed class ThrownTrident : AbstractArrow
 {
-    private ItemStack? TridentItem { get; set; } = null;
-    
+    internal ThrownTrident() : base(EntityType.Trident)
+    {
+    }
+
+    private ItemStack? TridentItem { get; set; }
+
     /// <summary>
-    /// Whether the trident has already damaged entity.
+    ///     Whether the trident has already damaged entity.
     /// </summary>
     /// <param name="damaged">Marker</param>
     /// <returns>This thrown trident</returns>
@@ -22,7 +26,7 @@ public sealed class ThrownTrident : AbstractArrow
     }
 
     /// <summary>
-    /// Sets item, that is given to player when they pick the trident up.
+    ///     Sets item, that is given to player when they pick the trident up.
     /// </summary>
     /// <param name="pick">Item to be set</param>
     /// <returns>This thrown trident</returns>
@@ -30,10 +34,6 @@ public sealed class ThrownTrident : AbstractArrow
     {
         TridentItem = pick;
         return this;
-    }
-    
-    internal ThrownTrident() : base(EntityType.Trident)
-    {
     }
 
     /// <inheritdoc />
@@ -43,7 +43,7 @@ public sealed class ThrownTrident : AbstractArrow
 
         if (TridentItem == null)
             return;
-        
+
         sw.WritePropertyName("Trident");
         sw.WriteItem(TridentItem);
     }

@@ -1,32 +1,32 @@
 namespace CopperSharp.Text;
 
 /// <summary>
-/// Type of component
+///     Type of component
 /// </summary>
 public enum ComponentType
 {
     /// <summary>
-    /// Default raw text component
+    ///     Default raw text component
     /// </summary>
     Text,
 
     /// <summary>
-    /// Translatable key component
+    ///     Translatable key component
     /// </summary>
     Translatable,
 
     /// <summary>
-    /// Scoreboard score component
+    ///     Scoreboard score component
     /// </summary>
     Scoreboard,
 
     /// <summary>
-    /// Entity selector component
+    ///     Entity selector component
     /// </summary>
     Entity,
 
     /// <summary>
-    /// NBT data component
+    ///     NBT data component
     /// </summary>
     Nbt
 }

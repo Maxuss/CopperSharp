@@ -7,16 +7,16 @@ using CopperSharp.Utils;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// A global interface for entity
+///     A global interface for entity
 /// </summary>
 public abstract class AbstractEntity
 {
-    private Dictionary<string, bool> _bools = new();
+    private readonly Dictionary<string, bool> _bools = new();
 
     private bool _firstLock = true;
 
     /// <summary>
-    /// Constructs a new abstract entity with provided type
+    ///     Constructs a new abstract entity with provided type
     /// </summary>
     /// <param name="type">Type of this entity</param>
     protected AbstractEntity(EntityType type)
@@ -28,52 +28,52 @@ public abstract class AbstractEntity
     private WorldContext? _binding { get; set; }
 
     /// <summary>
-    /// Position of this entity
+    ///     Position of this entity
     /// </summary>
     public Location Position { get; internal set; }
 
     /// <summary>
-    /// Unique UUID of this entity
+    ///     Unique UUID of this entity
     /// </summary>
     public Guid EntityUid { get; } = Guid.NewGuid();
 
     /// <summary>
-    /// Extra data, stored inside this entity
+    ///     Extra data, stored inside this entity
     /// </summary>
     public NbtCompound ExtraData { get; set; } = new();
 
     /// <summary>
-    /// Extra UUID values to store inside this entity
+    ///     Extra UUID values to store inside this entity
     /// </summary>
     protected Dictionary<string, Guid> Ids { get; set; } = new();
 
     /// <summary>
-    /// Extra string values to store inside this entity
+    ///     Extra string values to store inside this entity
     /// </summary>
     protected Dictionary<string, string> Strings { get; set; } = new();
 
     /// <summary>
-    /// Extra byte values to store inside this entity
+    ///     Extra byte values to store inside this entity
     /// </summary>
     protected Dictionary<string, byte> Bytes { get; set; } = new();
 
     /// <summary>
-    /// Extra bool values to store inside this entity
+    ///     Extra bool values to store inside this entity
     /// </summary>
     protected Dictionary<string, bool> Bools { get; set; } = new();
 
     /// <summary>
-    /// Extra integers in this entity
+    ///     Extra integers in this entity
     /// </summary>
     protected Dictionary<string, int> Ints { get; set; } = new();
 
     /// <summary>
-    /// Extra integers in this entity
+    ///     Extra integers in this entity
     /// </summary>
     protected Dictionary<string, double> Doubles { get; set; } = new();
 
     /// <summary>
-    /// Type of this entity
+    ///     Type of this entity
     /// </summary>
     public EntityType Type { get; }
 
@@ -84,7 +84,7 @@ public abstract class AbstractEntity
     private List<AbstractEntity> Passengers { get; } = new();
 
     /// <summary>
-    /// Disables gravity for this entity
+    ///     Disables gravity for this entity
     /// </summary>
     /// <returns></returns>
     public AbstractEntity DisableGravity()
@@ -94,7 +94,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Makes this entity silent, not making any noise at all
+    ///     Makes this entity silent, not making any noise at all
     /// </summary>
     /// <param name="silent">Whether to make this entity silent</param>
     /// <returns>This entity</returns>
@@ -105,7 +105,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Makes the entity immune to all attacks
+    ///     Makes the entity immune to all attacks
     /// </summary>
     /// <param name="immune">Whether to make entity immune to all attacks</param>
     /// <returns>This entity</returns>
@@ -116,7 +116,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Configures the left amount of breathing air for this entity
+    ///     Configures the left amount of breathing air for this entity
     /// </summary>
     /// <returns>This entity</returns>
     public AbstractEntity BreathingAirLeft(short air)
@@ -126,7 +126,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Adds a visual-only fire effect to this entity
+    ///     Adds a visual-only fire effect to this entity
     /// </summary>
     /// <returns>This entity</returns>
     public AbstractEntity VisualFire()
@@ -136,7 +136,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Applies a glowing effect to this entity
+    ///     Applies a glowing effect to this entity
     /// </summary>
     /// <param name="glow">Whether the entity should glow</param>
     /// <returns>This entity</returns>
@@ -147,7 +147,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Sets custom name of this entity
+    ///     Sets custom name of this entity
     /// </summary>
     /// <param name="name">New name of this entity</param>
     /// <param name="alwaysVisible">Whether the name should be always visible</param>
@@ -160,7 +160,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Applies a provided rotation to this entity
+    ///     Applies a provided rotation to this entity
     /// </summary>
     /// <returns>This entity</returns>
     public AbstractEntity Rotate(Vec2 rotation)
@@ -170,7 +170,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Applies a provided rotation to this entity
+    ///     Applies a provided rotation to this entity
     /// </summary>
     /// <param name="pitch">Pitch rotation of this entity</param>
     /// <param name="yaw">Yaw rotation of this entity</param>
@@ -182,7 +182,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Applies a provided velocity to this entity
+    ///     Applies a provided velocity to this entity
     /// </summary>
     /// <param name="motion">Velocity to be applied</param>
     /// <returns>This entity</returns>
@@ -193,19 +193,25 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Gets velocity of this entity
+    ///     Gets velocity of this entity
     /// </summary>
     /// <returns>This entity's velocity</returns>
-    public Vec3? Velocity() => Motion;
+    public Vec3? Velocity()
+    {
+        return Motion;
+    }
 
     /// <summary>
-    /// Gets rotation of this entity
+    ///     Gets rotation of this entity
     /// </summary>
     /// <returns>This entity's rotation</returns>
-    public Vec2? EntityRotation() => Rotation;
+    public Vec2? EntityRotation()
+    {
+        return Rotation;
+    }
 
     /// <summary>
-    /// Adds all provided entities as passengers to this entity
+    ///     Adds all provided entities as passengers to this entity
     /// </summary>
     /// <param name="passengers">Passengers to be added</param>
     /// <returns>This entity</returns>
@@ -216,7 +222,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Serializes extra data from this inheritor
+    ///     Serializes extra data from this inheritor
     /// </summary>
     /// <param name="sw">Writer to which the data should be written</param>
     protected virtual void SerializeExtra(StringNbtWriter sw)
@@ -224,7 +230,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Serializes this entity into SNBT
+    ///     Serializes this entity into SNBT
     /// </summary>
     /// <returns>Serialized entity</returns>
     public string Serialize(bool includeType = true)
@@ -240,15 +246,9 @@ public abstract class AbstractEntity
             w.WriteBool(value);
         }
 
-        if (Air != -1)
-        {
-            w.WriteShort("Air", Air);
-        }
+        if (Air != -1) w.WriteShort("Air", Air);
 
-        if (CustomName != null)
-        {
-            w.WriteString("CustomName", CustomName.Serialize());
-        }
+        if (CustomName != null) w.WriteString("CustomName", CustomName.Serialize());
 
         if (Motion != null)
         {
@@ -273,43 +273,22 @@ public abstract class AbstractEntity
         {
             w.WritePropertyName("Passengers");
             w.WriteBeginArray();
-            foreach (var passenger in Passengers)
-            {
-                w.WriteRawValue(passenger.Serialize(false));
-            }
+            foreach (var passenger in Passengers) w.WriteRawValue(passenger.Serialize(false));
 
             w.WriteEndArray();
         }
 
-        foreach (var (key, val) in Bools)
-        {
-            w.WriteBool(key, val);
-        }
+        foreach (var (key, val) in Bools) w.WriteBool(key, val);
 
-        foreach (var (key, val) in Bytes)
-        {
-            w.WriteByte(key, val);
-        }
+        foreach (var (key, val) in Bytes) w.WriteByte(key, val);
 
-        foreach (var (key, val) in Strings)
-        {
-            w.WriteString(key, val);
-        }
+        foreach (var (key, val) in Strings) w.WriteString(key, val);
 
-        foreach (var (key, val) in Ids)
-        {
-            w.WriteUuidArray(key, val);
-        }
+        foreach (var (key, val) in Ids) w.WriteUuidArray(key, val);
 
-        foreach (var (key, val) in Ints)
-        {
-            w.WriteInteger(key, val);
-        }
+        foreach (var (key, val) in Ints) w.WriteInteger(key, val);
 
-        foreach (var (key, val) in Doubles)
-        {
-            w.WriteDouble(key, val);
-        }
+        foreach (var (key, val) in Doubles) w.WriteDouble(key, val);
 
         SerializeExtra(w);
 
@@ -327,7 +306,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Locks this entity under provided
+    ///     Locks this entity under provided
     /// </summary>
     /// <param name="ctx"></param>
     public void Lock(WorldContext ctx)
@@ -337,8 +316,8 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Releases lock of this entity, and flushes
-    /// all changes to current context
+    ///     Releases lock of this entity, and flushes
+    ///     all changes to current context
     /// </summary>
     /// <returns>This abstract entity</returns>
     public AbstractEntity Release()

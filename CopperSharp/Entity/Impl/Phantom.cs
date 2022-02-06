@@ -3,7 +3,7 @@ using CopperSharp.Data.Locations;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a phantom entity
+///     Represents a phantom entity
 /// </summary>
 public sealed class Phantom : LivingEntity
 {
@@ -12,7 +12,7 @@ public sealed class Phantom : LivingEntity
     }
 
     /// <summary>
-    /// Sets location around which the phantom will be circling
+    ///     Sets location around which the phantom will be circling
     /// </summary>
     /// <param name="loc">The location</param>
     /// <returns>This phantom</returns>
@@ -25,7 +25,7 @@ public sealed class Phantom : LivingEntity
     }
 
     /// <summary>
-    /// Sets zero-based size of this phantom
+    ///     Sets zero-based size of this phantom
     /// </summary>
     /// <param name="size">Size in range of 0 to 64</param>
     /// <returns>This phantom</returns>

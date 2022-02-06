@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a hoglin entity
+///     Represents a hoglin entity
 /// </summary>
 public sealed class Hoglin : BreedableEntity
 {
@@ -10,7 +10,7 @@ public sealed class Hoglin : BreedableEntity
     }
 
     /// <summary>
-    /// Whether this hoglin can be hunted by piglins
+    ///     Whether this hoglin can be hunted by piglins
     /// </summary>
     /// <param name="can">Marker</param>
     /// <returns>This hoglin</returns>
@@ -21,7 +21,7 @@ public sealed class Hoglin : BreedableEntity
     }
 
     /// <summary>
-    /// Whether this hoglin is immune to being zombified
+    ///     Whether this hoglin is immune to being zombified
     /// </summary>
     /// <param name="immune">Marker</param>
     /// <returns>This hoglin</returns>
@@ -32,7 +32,7 @@ public sealed class Hoglin : BreedableEntity
     }
 
     /// <summary>
-    /// Amount of time spent in overworld
+    ///     Amount of time spent in overworld
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This hoglin</returns>

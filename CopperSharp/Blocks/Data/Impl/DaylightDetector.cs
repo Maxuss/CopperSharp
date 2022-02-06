@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a daylight detector block
+///     Represents a daylight detector block
 /// </summary>
 public class DaylightSensor : AbstractBlockData, ISignalEmitter
 {
@@ -13,7 +13,7 @@ public class DaylightSensor : AbstractBlockData, ISignalEmitter
     }
 
     /// <summary>
-    /// Whether this daylight detector is inverted
+    ///     Whether this daylight detector is inverted
     /// </summary>
     /// <param name="inverted">Marker</param>
     /// <returns>This daylight sensor</returns>

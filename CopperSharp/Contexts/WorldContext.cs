@@ -7,14 +7,14 @@ using CopperSharp.Item;
 namespace CopperSharp.Contexts;
 
 /// <summary>
-/// Represents a world-scoped context, in which the function will be invoked
+///     Represents a world-scoped context, in which the function will be invoked
 /// </summary>
 public sealed class WorldContext
 {
-    private List<string> Cache { get; set; } = new();
+    private List<string> Cache { get; } = new();
 
     /// <summary>
-    /// Releases lock on provided entity
+    ///     Releases lock on provided entity
     /// </summary>
     /// <param name="entity">Entity to be unlocked</param>
     /// <param name="summon">Whether to summon a new entity or modify it's data</param>
@@ -27,7 +27,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Releases lock on provided block
+    ///     Releases lock on provided block
     /// </summary>
     /// <param name="block">Block to be unlocked</param>
     /// <param name="place">Whether to place a new block, or modify existing</param>
@@ -40,11 +40,10 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Generates and <b>locks</b> an entity.
-    ///
-    /// Note that to actually summon entity
-    /// you will need to call <see cref="AbstractEntity.Release"/> on your
-    /// entity, to flush all metadata to the setblock command.
+    ///     Generates and <b>locks</b> an entity.
+    ///     Note that to actually summon entity
+    ///     you will need to call <see cref="AbstractEntity.Release" /> on your
+    ///     entity, to flush all metadata to the setblock command.
     /// </summary>
     /// <param name="type">Type of entity to be spawned</param>
     /// <param name="pos">Position where to spawn entity</param>
@@ -62,13 +61,12 @@ public sealed class WorldContext
 
         return entity;
     }
-    
+
     /// <summary>
-    /// Generates and <b>locks</b> a block.
-    ///
-    /// Note that to actually set the block
-    /// you will need to call <see cref="Block.Release"/> on your
-    /// block, to flush all metadata to the setblock command.
+    ///     Generates and <b>locks</b> a block.
+    ///     Note that to actually set the block
+    ///     you will need to call <see cref="Block.Release" /> on your
+    ///     block, to flush all metadata to the setblock command.
     /// </summary>
     /// <param name="blockType">Type of block to be placed</param>
     /// <param name="pos">Position where to place the block</param>
@@ -81,7 +79,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Flushes contents of this context into provided text writer
+    ///     Flushes contents of this context into provided text writer
     /// </summary>
     /// <param name="w">TextWriter to which data should be written</param>
     public void Flush(TextWriter w)
@@ -95,7 +93,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Flushes contents of this context into provided stream writer
+    ///     Flushes contents of this context into provided stream writer
     /// </summary>
     /// <param name="w">StreamWriter to which data should be written</param>
     public void Flush(StreamWriter w)
@@ -104,7 +102,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Flushes contents of this context into provided stream
+    ///     Flushes contents of this context into provided stream
     /// </summary>
     /// <param name="to">Stream to which data should be written</param>
     public void Flush(Stream to)

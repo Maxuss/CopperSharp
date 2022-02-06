@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a fused TNT entity
+///     Represents a fused TNT entity
 /// </summary>
 public sealed class Tnt : AbstractEntity
 {
@@ -10,7 +10,7 @@ public sealed class Tnt : AbstractEntity
     }
 
     /// <summary>
-    /// Sets fuse timer of this TNT, until this TNT explodes
+    ///     Sets fuse timer of this TNT, until this TNT explodes
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This TNT</returns>

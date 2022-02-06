@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a fence block
+///     Represents a fence block
 /// </summary>
 public sealed class Fence : AbstractBlockData, IMultipleFacing, IWaterlogged
 {

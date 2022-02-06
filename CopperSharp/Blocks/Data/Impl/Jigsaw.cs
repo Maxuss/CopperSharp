@@ -3,78 +3,78 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a jigsaw block
+///     Represents a jigsaw block
 /// </summary>
 public sealed class Jigsaw : AbstractBlockData
 {
     /// <summary>
-    /// The direction the jigsaw block is facing.
+    ///     The direction the jigsaw block is facing.
     /// </summary>
     public enum Orientation
     {
         /// <summary>
-        /// Down east
+        ///     Down east
         /// </summary>
         [EnumData("down_east")] DownEast,
 
         /// <summary>
-        /// Down north
+        ///     Down north
         /// </summary>
         [EnumData("down_north")] DownNorth,
 
         /// <summary>
-        /// Down south
+        ///     Down south
         /// </summary>
         [EnumData("down_south")] DownSouth,
 
         /// <summary>
-        /// Down west
+        ///     Down west
         /// </summary>
         [EnumData("down_west")] DownWest,
 
         /// <summary>
-        /// East up
+        ///     East up
         /// </summary>
         [EnumData("east_up")] EastUp,
 
         /// <summary>
-        /// North up
+        ///     North up
         /// </summary>
         [EnumData("north_up")] NorthUp,
 
         /// <summary>
-        /// South up
+        ///     South up
         /// </summary>
         [EnumData("south_up")] SouthUp,
 
         /// <summary>
-        /// Up east
+        ///     Up east
         /// </summary>
         [EnumData("up_east")] UpEast,
 
         /// <summary>
-        /// Up north
+        ///     Up north
         /// </summary>
         [EnumData("up_north")] UpNorth,
 
         /// <summary>
-        /// Up south
+        ///     Up south
         /// </summary>
         [EnumData("up_south")] UpSouth,
 
         /// <summary>
-        /// Up west
+        ///     Up west
         /// </summary>
         [EnumData("up_west")] UpWest,
 
         /// <summary>
-        /// West up
+        ///     West up
         /// </summary>
         [EnumData("west_up")] WestUp
     }
 
     /// <summary>
-    /// Sets the direction this jigsaw block is facing
+    ///     Sets the direction this jigsaw block is facing
     /// </summary>
     /// <param name="orient">Type of orientation</param>
     /// <returns>This jigsaw</returns>

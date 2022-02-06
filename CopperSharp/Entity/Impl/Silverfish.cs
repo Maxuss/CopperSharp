@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a silverfish entity
+///     Represents a silverfish entity
 /// </summary>
 public sealed class Silverfish : LivingEntity
 {

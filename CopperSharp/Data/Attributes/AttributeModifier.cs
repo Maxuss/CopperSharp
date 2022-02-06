@@ -4,12 +4,12 @@ using CopperSharp.Utils;
 namespace CopperSharp.Data.Attributes;
 
 /// <summary>
-/// An attribute modifier, containing a type and a modifier
+///     An attribute modifier, containing a type and a modifier
 /// </summary>
 public readonly struct AttributeModifier
 {
     /// <summary>
-    /// Constructs a new attribute modifier
+    ///     Constructs a new attribute modifier
     /// </summary>
     /// <param name="provider">Type of attribute</param>
     /// <param name="action">Action to be performed with provided amount</param>
@@ -27,27 +27,27 @@ public readonly struct AttributeModifier
     }
 
     /// <summary>
-    /// Slot for this attribute modifier to work
+    ///     Slot for this attribute modifier to work
     /// </summary>
     public string? Slot { get; }
 
     /// <summary>
-    /// Name of this attribute modifier
+    ///     Name of this attribute modifier
     /// </summary>
     public string Name { get; }
 
     /// <summary>
-    /// Type of this attribute modifier
+    ///     Type of this attribute modifier
     /// </summary>
     public string Type { get; }
 
     /// <summary>
-    /// Amount to be applied to this attribute
+    ///     Amount to be applied to this attribute
     /// </summary>
     public double Amount { get; }
 
     /// <summary>
-    /// Action to be performed with this attribute
+    ///     Action to be performed with this attribute
     /// </summary>
     public AttributeAction Action { get; }
 }

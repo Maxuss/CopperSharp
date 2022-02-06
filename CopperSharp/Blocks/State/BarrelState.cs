@@ -4,13 +4,20 @@ using CopperSharp.Registry;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a barrel block
+///     Represents a barrel block
 /// </summary>
 public sealed class BarrelState : InventoryBlock<ChestInventory>, ILootable, ILockable
 {
     internal BarrelState(Material id) : base(id)
     {
         Inventory = new ChestInventory();
+    }
+
+    /// <inheritdoc />
+    public ILockable Allow(string name)
+    {
+        Data["Lock"] = name;
+        return this;
     }
 
     /// <inheritdoc />
@@ -24,13 +31,6 @@ public sealed class BarrelState : InventoryBlock<ChestInventory>, ILootable, ILo
     public ILootable Seed(long seed)
     {
         Data["LootTableSeed"] = seed;
-        return this;
-    }
-
-    /// <inheritdoc />
-    public ILockable Allow(string name)
-    {
-        Data["Lock"] = name;
         return this;
     }
 }

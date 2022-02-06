@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a bee entity
+///     Represents a bee entity
 /// </summary>
 public sealed class Bee : BreedableEntity, IAngerableEntity
 {
@@ -31,7 +31,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Sets the amount of time the bee can not enter the hive
+    ///     Sets the amount of time the bee can not enter the hive
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This bee</returns>
@@ -42,7 +42,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// How many crops the bee has grown since its last pollination
+    ///     How many crops the bee has grown since its last pollination
     /// </summary>
     /// <param name="crops">The amount of crops</param>
     /// <returns>This bee</returns>
@@ -53,7 +53,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Coordinates of the flower the bee is circling. 
+    ///     Coordinates of the flower the bee is circling.
     /// </summary>
     /// <param name="loc">The location</param>
     /// <returns>This bee</returns>
@@ -64,7 +64,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Marks whether the bee has nectar
+    ///     Marks whether the bee has nectar
     /// </summary>
     /// <param name="has">Whether the bee has nectar</param>
     /// <returns>This bee</returns>
@@ -75,7 +75,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Marks whether the bee has already stung
+    ///     Marks whether the bee has already stung
     /// </summary>
     /// <param name="has">Whether the bee has stung</param>
     /// <returns>This bee</returns>
@@ -86,7 +86,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Sets coordinates of the bee's hive.
+    ///     Sets coordinates of the bee's hive.
     /// </summary>
     /// <param name="loc">The location</param>
     /// <returns>This bee</returns>
@@ -97,7 +97,7 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Sets the number of ticks passed since the bee's last pollination.
+    ///     Sets the number of ticks passed since the bee's last pollination.
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This bee</returns>

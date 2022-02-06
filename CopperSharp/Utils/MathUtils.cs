@@ -3,12 +3,12 @@ using System.Drawing;
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Different Math-related utilities
+///     Different Math-related utilities
 /// </summary>
 public static class MathUtils
 {
     /// <summary>
-    /// Produces quadratic interpolation on provided values
+    ///     Produces quadratic interpolation on provided values
     /// </summary>
     /// <param name="from">From value</param>
     /// <param name="to">To value</param>
@@ -20,26 +20,20 @@ public static class MathUtils
         if (mode)
         {
             var a = (to - from) / (max * max);
-            for (var i = 0; i < results.Length; i++)
-            {
-                results[i] = a * i * i + from;
-            }
+            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + @from;
         }
         else
         {
             var a = (from - to) / (max * max);
             var b = -2 * a * max;
-            for (var i = 0; i < results.Length; i++)
-            {
-                results[i] = a * i * i + b * i + from;
-            }
+            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + b * i + @from;
         }
 
         return results;
     }
 
     /// <summary>
-    /// Produces linear interpolation on provided values
+    ///     Produces linear interpolation on provided values
     /// </summary>
     /// <param name="from">From value</param>
     /// <param name="to">To value</param>
@@ -48,16 +42,13 @@ public static class MathUtils
     public static double[] LinearInterpolation(double from, double to, int max)
     {
         var res = new double[max];
-        for (var i = 0; i < max; i++)
-        {
-            res[i] = from + i * ((to - from) / (max - 1));
-        }
+        for (var i = 0; i < max; i++) res[i] = @from + i * ((to - @from) / (max - 1));
 
         return res;
     }
 
     /// <summary>
-    /// Converts RGB to HSV
+    ///     Converts RGB to HSV
     /// </summary>
     /// <param name="r">Red value</param>
     /// <param name="g">Green value</param>

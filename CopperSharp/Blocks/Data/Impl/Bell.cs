@@ -3,32 +3,32 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a bell tile entity
+///     Represents a bell tile entity
 /// </summary>
 public sealed class Bell : AbstractBlockData, IDirectional, IPowerable
 {
     /// <summary>
-    /// Type of bell's attachment
+    ///     Type of bell's attachment
     /// </summary>
     public enum Attachment
     {
         /// <summary>
-        /// Attached to the ceiling
+        ///     Attached to the ceiling
         /// </summary>
         [EnumData("ceiling")] Ceiling,
 
         /// <summary>
-        /// Two walls
+        ///     Two walls
         /// </summary>
         [EnumData("double_wall")] DoubleWall,
 
         /// <summary>
-        /// Floor
+        ///     Floor
         /// </summary>
         [EnumData("floor")] Floor,
 
         /// <summary>
-        /// One wall
+        ///     One wall
         /// </summary>
         [EnumData("single_wall")] SingleWall
     }
@@ -51,7 +51,7 @@ public sealed class Bell : AbstractBlockData, IDirectional, IPowerable
     }
 
     /// <summary>
-    /// Sets type of this bell's attachment
+    ///     Sets type of this bell's attachment
     /// </summary>
     /// <param name="attach">Type of attachment to be set</param>
     /// <returns>This bell</returns>

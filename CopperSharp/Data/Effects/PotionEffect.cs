@@ -1,42 +1,42 @@
 namespace CopperSharp.Data.Effects;
 
 /// <summary>
-/// Represents an applicable potion effect
+///     Represents an applicable potion effect
 /// </summary>
 public readonly struct PotionEffect
 {
     /// <summary>
-    /// Whether the effect is ambient
+    ///     Whether the effect is ambient
     /// </summary>
     public bool Ambient { get; }
 
     /// <summary>
-    /// Zero-based level of this effect
+    ///     Zero-based level of this effect
     /// </summary>
     public byte Level { get; }
 
     /// <summary>
-    /// Duration of this effect in ticks
+    ///     Duration of this effect in ticks
     /// </summary>
     public int Duration { get; }
 
     /// <summary>
-    /// Byte id of this effect
+    ///     Byte id of this effect
     /// </summary>
     public byte Id { get; }
 
     /// <summary>
-    /// Whether to show icon 
+    ///     Whether to show icon
     /// </summary>
     public bool ShowIcon { get; }
 
     /// <summary>
-    /// Whether to show particles
+    ///     Whether to show particles
     /// </summary>
     public bool ShowParticles { get; }
 
     /// <summary>
-    /// Constructs a new potion effect
+    ///     Constructs a new potion effect
     /// </summary>
     /// <param name="effect">Type of status effect</param>
     /// <param name="duration">Duration of effect in ticks</param>

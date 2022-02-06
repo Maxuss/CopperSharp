@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a chicken mob
+///     Represents a chicken mob
 /// </summary>
 public sealed class Chicken : BreedableEntity
 {
@@ -10,7 +10,7 @@ public sealed class Chicken : BreedableEntity
     }
 
     /// <summary>
-    /// Number of ticks until the chicken lays its egg.
+    ///     Number of ticks until the chicken lays its egg.
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This chicken</returns>
@@ -21,7 +21,7 @@ public sealed class Chicken : BreedableEntity
     }
 
     /// <summary>
-    /// Marks that the chicken is a chicken jokey
+    ///     Marks that the chicken is a chicken jokey
     /// </summary>
     /// <param name="isJokey">Whether the chicken is jokey</param>
     /// <returns>This chicken</returns>

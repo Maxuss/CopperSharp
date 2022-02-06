@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a fireball projectile
+///     Represents a fireball projectile
 /// </summary>
 public sealed class Fireball : AbstractFireball
 {
@@ -15,7 +15,7 @@ public sealed class Fireball : AbstractFireball
     private ItemStack? Item { get; set; }
 
     /// <summary>
-    /// Sets an item, this fireball is rendered as
+    ///     Sets an item, this fireball is rendered as
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This fireball</returns>
@@ -26,7 +26,7 @@ public sealed class Fireball : AbstractFireball
     }
 
     /// <summary>
-    /// Sets explosion power of this fireball
+    ///     Sets explosion power of this fireball
     /// </summary>
     /// <param name="power">Power to be set</param>
     /// <returns>This fireball</returns>

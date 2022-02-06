@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a dispenser block
+///     Represents a dispenser block
 /// </summary>
 public sealed class Dispenser : AbstractBlockData, IDirectional
 {
@@ -16,7 +16,7 @@ public sealed class Dispenser : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Sets whether this dispenser is activated
+    ///     Sets whether this dispenser is activated
     /// </summary>
     /// <param name="trigger">Marker</param>
     /// <returns>This dispenser</returns>

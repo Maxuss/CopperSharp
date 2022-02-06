@@ -1,12 +1,16 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a spectral arrow projectile
+///     Represents a spectral arrow projectile
 /// </summary>
 public sealed class SpectralArrow : AbstractArrow
 {
+    internal SpectralArrow() : base(EntityType.SpectralArrow)
+    {
+    }
+
     /// <summary>
-    /// Sets duration of Glowing effect
+    ///     Sets duration of Glowing effect
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This spectral arrow</returns>
@@ -14,9 +18,5 @@ public sealed class SpectralArrow : AbstractArrow
     {
         Ints["Duration"] = ticks;
         return this;
-    }
-    
-    internal SpectralArrow() : base(EntityType.SpectralArrow)
-    {
     }
 }

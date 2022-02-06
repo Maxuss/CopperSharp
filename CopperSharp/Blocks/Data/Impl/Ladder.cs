@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a ladder block
+///     Represents a ladder block
 /// </summary>
 public sealed class Ladder : AbstractBlockData, IDirectional, IWaterlogged
 {

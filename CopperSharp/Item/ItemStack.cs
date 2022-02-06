@@ -3,15 +3,15 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Item;
 
 /// <summary>
-/// Represents some amount of items
+///     Represents some amount of items
 /// </summary>
 public struct ItemStack : IStack
 {
     /// <summary>
-    /// Represents an empty air stack
+    ///     Represents an empty air stack
     /// </summary>
-    public static ItemStack AirStack => new ItemStack(Material.Air);
-    
+    public static ItemStack AirStack => new(Material.Air);
+
     /// <inheritdoc />
     public sbyte Amount { get; set; } = 1;
 
@@ -22,7 +22,7 @@ public struct ItemStack : IStack
     public ItemMeta? Meta { get; set; }
 
     /// <summary>
-    /// Constructs a new item stack from provided parameters
+    ///     Constructs a new item stack from provided parameters
     /// </summary>
     /// <param name="material">Material to use</param>
     /// <param name="amount">Amount of item in this stack</param>
@@ -41,7 +41,7 @@ public struct ItemStack : IStack
             Meta = new PotionMeta(material);
             return;
         }
-        
+
         Meta = material.Id.Path switch
         {
             "firework_rocket" => new FireworkMeta(material),
@@ -51,7 +51,7 @@ public struct ItemStack : IStack
     }
 
     /// <summary>
-    /// Serializes this item into minecraft-readable format
+    ///     Serializes this item into minecraft-readable format
     /// </summary>
     /// <returns>Serialized item</returns>
     public string Serialize()

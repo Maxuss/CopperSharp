@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a sea pickle block
+///     Represents a sea pickle block
 /// </summary>
 public sealed class SeaPickle : AbstractBlockData, IWaterlogged
 {
@@ -13,7 +13,7 @@ public sealed class SeaPickle : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets amount of pickles within this pickles
+    ///     Sets amount of pickles within this pickles
     /// </summary>
     /// <param name="pickles">Amount of pickles in range of 1 to 4</param>
     /// <returns>This sea pickle</returns>

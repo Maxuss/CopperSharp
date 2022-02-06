@@ -4,7 +4,7 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a shulker entity
+///     Represents a shulker entity
 /// </summary>
 public sealed class Shulker : LivingEntity
 {
@@ -13,7 +13,7 @@ public sealed class Shulker : LivingEntity
     }
 
     /// <summary>
-    /// Sets approximate location of this shulker
+    ///     Sets approximate location of this shulker
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This shulker</returns>
@@ -26,7 +26,7 @@ public sealed class Shulker : LivingEntity
     }
 
     /// <summary>
-    /// Sets direction to which this shulker is attached
+    ///     Sets direction to which this shulker is attached
     /// </summary>
     /// <param name="direction">Block face to be set</param>
     /// <returns>This shulker</returns>
@@ -37,7 +37,7 @@ public sealed class Shulker : LivingEntity
     }
 
     /// <summary>
-    /// Applies a provided color to this shulker
+    ///     Applies a provided color to this shulker
     /// </summary>
     /// <param name="color">Color to be applied</param>
     /// <returns>This shulker</returns>
@@ -48,7 +48,7 @@ public sealed class Shulker : LivingEntity
     }
 
     /// <summary>
-    /// Sets the height of the head of this shulker
+    ///     Sets the height of the head of this shulker
     /// </summary>
     /// <param name="height">Height to be set</param>
     /// <returns>This shulker</returns>

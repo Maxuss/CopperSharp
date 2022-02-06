@@ -3,7 +3,7 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a cat entity
+///     Represents a cat entity
 /// </summary>
 public sealed class Cat : TameableEntity
 {
@@ -12,7 +12,7 @@ public sealed class Cat : TameableEntity
     }
 
     /// <summary>
-    /// Sets type of cat's skin
+    ///     Sets type of cat's skin
     /// </summary>
     /// <param name="type">Type of skin</param>
     /// <returns>This cat</returns>
@@ -23,7 +23,7 @@ public sealed class Cat : TameableEntity
     }
 
     /// <summary>
-    /// Sets color of cat's collar
+    ///     Sets color of cat's collar
     /// </summary>
     /// <param name="color">Color of collar</param>
     /// <returns>This cat</returns>
@@ -35,62 +35,62 @@ public sealed class Cat : TameableEntity
 }
 
 /// <summary>
-/// Represents type of cat's skin
+///     Represents type of cat's skin
 /// </summary>
 public enum CatType
 {
     /// <summary>
-    /// Brown
+    ///     Brown
     /// </summary>
     Tabby,
 
     /// <summary>
-    /// Black and white
+    ///     Black and white
     /// </summary>
     Tuxedo,
 
     /// <summary>
-    /// Plain orange
+    ///     Plain orange
     /// </summary>
     Red,
 
     /// <summary>
-    /// Creme white and black
+    ///     Creme white and black
     /// </summary>
     Siamese,
 
     /// <summary>
-    /// Light gray
+    ///     Light gray
     /// </summary>
     BritishShorthair,
 
     /// <summary>
-    /// Creme yellow and brown
+    ///     Creme yellow and brown
     /// </summary>
     Calico,
 
     /// <summary>
-    /// Light orange
+    ///     Light orange
     /// </summary>
     Persian,
 
     /// <summary>
-    /// Creme white
+    ///     Creme white
     /// </summary>
     Ragdoll,
 
     /// <summary>
-    /// White
+    ///     White
     /// </summary>
     White,
 
     /// <summary>
-    /// Jellie (white and gray)
+    ///     Jellie (white and gray)
     /// </summary>
     Jellie,
 
     /// <summary>
-    /// Black
+    ///     Black
     /// </summary>
     Black
 }

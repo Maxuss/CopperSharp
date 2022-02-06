@@ -3,16 +3,32 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a jigsaw block state
+///     Represents a jigsaw block state
 /// </summary>
 public sealed class JigsawState : BlockState
 {
+    /// <summary>
+    ///     Represents type of jigsaw's joint
+    /// </summary>
+    public enum Joint
+    {
+        /// <summary>
+        ///     Rollable joint
+        /// </summary>
+        Rollable,
+
+        /// <summary>
+        ///     Aligned joint
+        /// </summary>
+        Aligned
+    }
+
     internal JigsawState(Material id) : base(id)
     {
     }
 
     /// <summary>
-    /// Sets the block this jigsaw block becomes
+    ///     Sets the block this jigsaw block becomes
     /// </summary>
     /// <param name="block">Block to be set</param>
     /// <returns>This jigsaw state</returns>
@@ -23,7 +39,7 @@ public sealed class JigsawState : BlockState
     }
 
     /// <summary>
-    /// Sets the joint of this jigsaw
+    ///     Sets the joint of this jigsaw
     /// </summary>
     /// <param name="joint">Type of joint to be set</param>
     /// <returns>This jigsaw state</returns>
@@ -34,7 +50,7 @@ public sealed class JigsawState : BlockState
     }
 
     /// <summary>
-    /// Sets the name of this jigsaw block
+    ///     Sets the name of this jigsaw block
     /// </summary>
     /// <param name="name">Name to be set</param>
     /// <returns>This jigsaw state</returns>
@@ -45,7 +61,7 @@ public sealed class JigsawState : BlockState
     }
 
     /// <summary>
-    /// Sets structure pool for this jigsaw
+    ///     Sets structure pool for this jigsaw
     /// </summary>
     /// <param name="pool">Pool to be set</param>
     /// <returns>This jigsaw state</returns>
@@ -56,7 +72,7 @@ public sealed class JigsawState : BlockState
     }
 
     /// <summary>
-    /// Sets target jigsaw block of this jigsaw block
+    ///     Sets target jigsaw block of this jigsaw block
     /// </summary>
     /// <param name="name">Name of the target</param>
     /// <returns>This jigsaw block state</returns>
@@ -64,20 +80,5 @@ public sealed class JigsawState : BlockState
     {
         Data["target"] = name;
         return this;
-    }
-
-    /// <summary>
-    /// Represents type of jigsaw's joint
-    /// </summary>
-    public enum Joint
-    {
-        /// <summary>
-        /// Rollable joint
-        /// </summary>
-        Rollable,
-        /// <summary>
-        /// Aligned joint
-        /// </summary>
-        Aligned
     }
 }

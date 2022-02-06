@@ -1,38 +1,38 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a big drip leaf
+///     Represents a big drip leaf
 /// </summary>
 public sealed class BigDripleaf : Dripleaf
 {
     /// <summary>
-    /// Tilt of dripleaf
+    ///     Tilt of dripleaf
     /// </summary>
     public enum Tilt
     {
         /// <summary>
-        /// Fully tilted
+        ///     Fully tilted
         /// </summary>
         Full,
 
         /// <summary>
-        /// Partially tilted
+        ///     Partially tilted
         /// </summary>
         Partial,
 
         /// <summary>
-        /// Unstable
+        ///     Unstable
         /// </summary>
         Unstable,
 
         /// <summary>
-        /// No tilt
+        ///     No tilt
         /// </summary>
         None
     }
 
     /// <summary>
-    /// Sets tilting of this dripleaf
+    ///     Sets tilting of this dripleaf
     /// </summary>
     /// <param name="tilt">Type of tilt</param>
     /// <returns>This big dripleaf</returns>

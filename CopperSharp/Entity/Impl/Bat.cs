@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents bat entity
+///     Represents bat entity
 /// </summary>
 public sealed class Bat : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Bat : LivingEntity
     }
 
     /// <summary>
-    /// Marks that the bat is hanging upside-down
+    ///     Marks that the bat is hanging upside-down
     /// </summary>
     /// <param name="upside">Whether the bat is upside down</param>
     /// <returns>This bat</returns>

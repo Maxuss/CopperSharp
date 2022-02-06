@@ -1,27 +1,27 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a wall block
+///     Represents a wall block
 /// </summary>
 public sealed class Wall : AbstractBlockData, IWaterlogged
 {
     /// <summary>
-    /// Represents wall's height
+    ///     Represents wall's height
     /// </summary>
     public enum Height
     {
         /// <summary>
-        /// The wall does not extend
+        ///     The wall does not extend
         /// </summary>
         None,
 
         /// <summary>
-        /// The wall extends a bit
+        ///     The wall extends a bit
         /// </summary>
         Low,
 
         /// <summary>
-        /// The wall extends by a lot
+        ///     The wall extends by a lot
         /// </summary>
         Tall
     }
@@ -34,7 +34,7 @@ public sealed class Wall : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets how the wall extends at provided block face
+    ///     Sets how the wall extends at provided block face
     /// </summary>
     /// <param name="face">Face at which the wall extends</param>
     /// <param name="extends">Sets amount of the wall's extend</param>
@@ -49,7 +49,7 @@ public sealed class Wall : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets whether this wall has a center post
+    ///     Sets whether this wall has a center post
     /// </summary>
     /// <param name="up">Marker</param>
     /// <returns>This wall</returns>

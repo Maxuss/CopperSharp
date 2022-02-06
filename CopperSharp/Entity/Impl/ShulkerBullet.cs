@@ -1,14 +1,18 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a shulker bullet projectile
+///     Represents a shulker bullet projectile
 /// </summary>
 public sealed class ShulkerBullet : Projectile
 {
+    internal ShulkerBullet() : base(EntityType.ShulkerBullet)
+    {
+    }
+
     /// <summary>
-    /// Sets "steps" it takes to get to target entity.
-    /// If it is 0, the bullet will just travel in straight line,
-    /// according to <see cref="Offset"/>
+    ///     Sets "steps" it takes to get to target entity.
+    ///     If it is 0, the bullet will just travel in straight line,
+    ///     according to <see cref="Offset" />
     /// </summary>
     /// <param name="accuracy">Accuracy to be set</param>
     /// <returns>This shulker bullet</returns>
@@ -19,7 +23,7 @@ public sealed class ShulkerBullet : Projectile
     }
 
     /// <summary>
-    /// Sets target of this bullet
+    ///     Sets target of this bullet
     /// </summary>
     /// <param name="target">Target to be set</param>
     /// <returns>This shulker bullet</returns>
@@ -30,7 +34,7 @@ public sealed class ShulkerBullet : Projectile
     }
 
     /// <summary>
-    /// Sets offset with which this bullet travels
+    ///     Sets offset with which this bullet travels
     /// </summary>
     /// <param name="x">X offset</param>
     /// <param name="y">Y offset</param>
@@ -42,9 +46,5 @@ public sealed class ShulkerBullet : Projectile
         Doubles["TYD"] = y;
         Doubles["TZD"] = z;
         return this;
-    }
-    
-    internal ShulkerBullet() : base(EntityType.ShulkerBullet)
-    {
     }
 }

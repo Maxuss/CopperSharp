@@ -3,14 +3,14 @@ using System.Globalization;
 namespace CopperSharp.Data.Locations;
 
 /// <summary>
-/// Represents a single coordinate position
+///     Represents a single coordinate position
 /// </summary>
 public readonly struct Coordinate
 {
     private static readonly char[] AllowedExtraChars = {'~', '^'};
 
     /// <summary>
-    /// Value stored inside this coordinate
+    ///     Value stored inside this coordinate
     /// </summary>
     public double Value { get; }
 
@@ -23,28 +23,37 @@ public readonly struct Coordinate
     }
 
     /// <summary>
-    /// Constructs a new simple coordinate
+    ///     Constructs a new simple coordinate
     /// </summary>
     /// <param name="val">Value of the coordinate</param>
     /// <returns>A simple coordinate</returns>
-    public static Coordinate Simple(double val) => new(val);
+    public static Coordinate Simple(double val)
+    {
+        return new(val);
+    }
 
     /// <summary>
-    /// Constructs a new relative coordinate
+    ///     Constructs a new relative coordinate
     /// </summary>
     /// <param name="val">Value of the coordinate</param>
     /// <returns>A relative coordinate</returns>
-    public static Coordinate Relative(double val) => new(val, '~');
+    public static Coordinate Relative(double val)
+    {
+        return new(val, '~');
+    }
 
     /// <summary>
-    /// Constructs a new local coordinate
+    ///     Constructs a new local coordinate
     /// </summary>
     /// <param name="val">Value of the coordinate</param>
     /// <returns>A local coordinate</returns>
-    public static Coordinate Local(double val) => new(val, '^');
+    public static Coordinate Local(double val)
+    {
+        return new(val, '^');
+    }
 
     /// <summary>
-    /// Creates a new coordinate from provided string
+    ///     Creates a new coordinate from provided string
     /// </summary>
     /// <param name="str">String to be parsed</param>
     /// <returns>A new parsed coordinate</returns>

@@ -4,10 +4,12 @@ using CopperSharp.Text;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// Metadata container for banners
+///     Metadata container for banners
 /// </summary>
 public sealed class BannerMeta : ItemMeta
 {
+    internal bool WriteBlockEntityTag = true;
+
     /// <inheritdoc />
     public BannerMeta(Material type) : base(type)
     {
@@ -15,14 +17,13 @@ public sealed class BannerMeta : ItemMeta
             throw new Exception($"Material of type {type.Id} can not be used as a banner!");
     }
 
-    private IComponent? BannerName { get; set; } = null;
-    internal bool WriteBlockEntityTag = true;
+    private IComponent? BannerName { get; set; }
     private List<BannerPattern> Patterns { get; } = new();
 
     /// <summary>
-    /// The name of this banner as component,<br/>
-    /// which appears when attempting to open it,<br/>
-    /// while it is locked.
+    ///     The name of this banner as component,<br />
+    ///     which appears when attempting to open it,<br />
+    ///     while it is locked.
     /// </summary>
     /// <param name="comp">New custom name</param>
     /// <returns>This banner meta</returns>
@@ -33,7 +34,7 @@ public sealed class BannerMeta : ItemMeta
     }
 
     /// <summary>
-    /// Decorates this banner with provided pattern type and color
+    ///     Decorates this banner with provided pattern type and color
     /// </summary>
     /// <param name="type">Type of the pattern to be applied</param>
     /// <param name="color">Color of the pattern</param>
@@ -45,7 +46,7 @@ public sealed class BannerMeta : ItemMeta
     }
 
     /// <summary>
-    /// Decorates this banner with provided patterns
+    ///     Decorates this banner with provided patterns
     /// </summary>
     /// <param name="patterns">Patterns to be applied to the banner</param>
     /// <returns>This banner meta</returns>
@@ -89,18 +90,18 @@ public sealed class BannerMeta : ItemMeta
         }
 
         w.WriteEndArray();
-        if(WriteBlockEntityTag)
+        if (WriteBlockEntityTag)
             w.WriteEndCompound();
     }
 }
 
 /// <summary>
-/// A pattern to store inside a banner
+///     A pattern to store inside a banner
 /// </summary>
 public readonly struct BannerPattern
 {
     /// <summary>
-    /// Initializes a new banner pattern
+    ///     Initializes a new banner pattern
     /// </summary>
     /// <param name="color">Color of this pattern</param>
     /// <param name="pattern">Type of this pattern</param>
@@ -111,23 +112,23 @@ public readonly struct BannerPattern
     }
 
     /// <summary>
-    /// Color of this banner's pattern
+    ///     Color of this banner's pattern
     /// </summary>
     public NumberedColor Color { get; }
 
     /// <summary>
-    /// Pattern of the banner
+    ///     Pattern of the banner
     /// </summary>
     public PatternType Pattern { get; }
 }
 
 /// <summary>
-/// Represents a type of banner pattern
+///     Represents a type of banner pattern
 /// </summary>
 public readonly struct PatternType
 {
     /// <summary>
-    /// Short internal code for this pattern type
+    ///     Short internal code for this pattern type
     /// </summary>
     public readonly string Name;
 
@@ -137,207 +138,207 @@ public readonly struct PatternType
     }
 
     /// <summary>
-    /// Fully color Field  
+    ///     Fully color Field
     /// </summary>
     public static PatternType Base { get; } = new("b");
 
     /// <summary>
-    /// Base
+    ///     Base
     /// </summary>
     public static PatternType BottomStripe { get; } = new("bs");
 
     /// <summary>
-    /// Chief
+    ///     Chief
     /// </summary>
     public static PatternType TopStripe { get; } = new("ts");
 
     /// <summary>
-    /// Pale dexter 
+    ///     Pale dexter
     /// </summary>
     public static PatternType LeftStripe { get; } = new("ls");
 
     /// <summary>
-    /// Pale sinister 
+    ///     Pale sinister
     /// </summary>
     public static PatternType RightStripe { get; } = new("rs");
 
     /// <summary>
-    /// Pale
+    ///     Pale
     /// </summary>
     public static PatternType CenterStripe { get; } = new("cs");
 
     /// <summary>
-    /// Fess
+    ///     Fess
     /// </summary>
     public static PatternType MiddleStripe { get; } = new("ms");
 
     /// <summary>
-    /// Bend
+    ///     Bend
     /// </summary>
     public static PatternType DownRightStripe { get; } = new("drs");
 
     /// <summary>
-    /// Bend sinister 
+    ///     Bend sinister
     /// </summary>
     public static PatternType DownLeftStripe { get; } = new("dls");
 
     /// <summary>
-    /// Paly
+    ///     Paly
     /// </summary>
     public static PatternType SmallVerticalStripes { get; } = new("ss");
 
     /// <summary>
-    /// Saltire
+    ///     Saltire
     /// </summary>
     public static PatternType DiagonalCross { get; } = new("cr");
 
     /// <summary>
-    /// Cross
+    ///     Cross
     /// </summary>
     public static PatternType SquareCross { get; } = new("cs");
 
     /// <summary>
-    /// Per bend sinister 
+    ///     Per bend sinister
     /// </summary>
     public static PatternType LeftOfDiagonal { get; } = new("ld");
 
     /// <summary>
-    /// Per bend 
+    ///     Per bend
     /// </summary>
     public static PatternType RightOfReversedDiagonal { get; } = new("rud");
 
     /// <summary>
-    /// Per bend inverted 
+    ///     Per bend inverted
     /// </summary>
     public static PatternType LeftOfReversedDiagonal { get; } = new("lud");
 
     /// <summary>
-    /// Per bend sinister inverted 
+    ///     Per bend sinister inverted
     /// </summary>
     public static PatternType RightOfDiagonal { get; } = new("rd");
 
     /// <summary>
-    /// Per pale 
+    ///     Per pale
     /// </summary>
     public static PatternType LeftVerticalHalf { get; } = new("vh");
 
     /// <summary>
-    /// Per pale inverted 
+    ///     Per pale inverted
     /// </summary>
     public static PatternType RightVerticalHalf { get; } = new("vhr");
 
     /// <summary>
-    /// Per fess 
+    ///     Per fess
     /// </summary>
     public static PatternType TopHorizontalHalf { get; } = new("hh");
 
     /// <summary>
-    /// Per fess inverted 
+    ///     Per fess inverted
     /// </summary>
     public static PatternType BottomHorizontalHalf { get; } = new("hhb");
 
     /// <summary>
-    /// Base dexter canton 
+    ///     Base dexter canton
     /// </summary>
     public static PatternType BottomLeftCorner { get; } = new("bl");
 
     /// <summary>
-    /// Base sinister canton 
+    ///     Base sinister canton
     /// </summary>
     public static PatternType BottomRightCorner { get; } = new("br");
 
     /// <summary>
-    /// Chief dexter canton 
+    ///     Chief dexter canton
     /// </summary>
     public static PatternType TopLeftCorner { get; } = new("tl");
 
     /// <summary>
-    /// Chief sinister canton 
+    ///     Chief sinister canton
     /// </summary>
     public static PatternType TopRightCorner { get; } = new("tr");
 
     /// <summary>
-    /// Chevron
+    ///     Chevron
     /// </summary>
     public static PatternType BottomTriangle { get; } = new("bt");
 
     /// <summary>
-    /// Inverted chevron 
+    ///     Inverted chevron
     /// </summary>
     public static PatternType TopTriangle { get; } = new("tt");
 
     /// <summary>
-    /// Base indented 
+    ///     Base indented
     /// </summary>
     public static PatternType BottomTriangleSawtooth { get; } = new("bts");
 
     /// <summary>
-    /// Chief indented 
+    ///     Chief indented
     /// </summary>
     public static PatternType TopTriangleSawtooth { get; } = new("tts");
 
     /// <summary>
-    /// Roundel 
+    ///     Roundel
     /// </summary>
     public static PatternType MiddleCircle { get; } = new("mc");
 
     /// <summary>
-    /// Lozenge
+    ///     Lozenge
     /// </summary>
     public static PatternType MiddleRhombus { get; } = new("mr");
 
     /// <summary>
-    /// Bordure 
+    ///     Bordure
     /// </summary>
     public static PatternType Border { get; } = new("bo");
 
     /// <summary>
-    /// Bordure indented 
+    ///     Bordure indented
     /// </summary>
     public static PatternType CurlyBorder { get; } = new("cbo");
 
     /// <summary>
-    /// Field masoned 
+    ///     Field masoned
     /// </summary>
     public static PatternType Bricks { get; } = new("bri");
 
     /// <summary>
-    /// Gradient
+    ///     Gradient
     /// </summary>
     public static PatternType Gradient { get; } = new("gra");
 
     /// <summary>
-    /// Base gradient 
+    ///     Base gradient
     /// </summary>
     public static PatternType GradientUpsideDown { get; } = new("gru");
 
     /// <summary>
-    /// Creeper charge 
+    ///     Creeper charge
     /// </summary>
     public static PatternType Creeper { get; } = new("cre");
 
     /// <summary>
-    /// Skull charge 
+    ///     Skull charge
     /// </summary>
     public static PatternType Skull { get; } = new("sku");
 
     /// <summary>
-    /// Flower charge 
+    ///     Flower charge
     /// </summary>
     public static PatternType Flower { get; } = new("flo");
 
     /// <summary>
-    /// Thing 
+    ///     Thing
     /// </summary>
     public static PatternType Mojang { get; } = new("moj");
 
     /// <summary>
-    /// Globe
+    ///     Globe
     /// </summary>
     public static PatternType Globe { get; } = new("glb");
 
     /// <summary>
-    /// Snout
+    ///     Snout
     /// </summary>
     public static PatternType Piglin { get; } = new("pig");
 }

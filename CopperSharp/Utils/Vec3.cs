@@ -1,12 +1,12 @@
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Represents a motion vector
+///     Represents a motion vector
 /// </summary>
 public readonly struct Vec3
 {
     /// <summary>
-    /// Constructs a new Vec3
+    ///     Constructs a new Vec3
     /// </summary>
     /// <param name="dx">X Motion</param>
     /// <param name="dy">Y Motion</param>
@@ -19,22 +19,22 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Motion by X
+    ///     Motion by X
     /// </summary>
     public double DX { get; }
 
     /// <summary>
-    /// Motion by Y
+    ///     Motion by Y
     /// </summary>
     public double DY { get; }
 
     /// <summary>
-    /// Motion by Z
+    ///     Motion by Z
     /// </summary>
     public double DZ { get; }
 
     /// <summary>
-    /// Multiplies this vector by another vector
+    ///     Multiplies this vector by another vector
     /// </summary>
     /// <param name="by">Vector, by which this vector should be multiplied</param>
     /// <returns>Multiplied copy of this vector</returns>
@@ -44,7 +44,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Multiplies this vector by provided value
+    ///     Multiplies this vector by provided value
     /// </summary>
     /// <param name="by">Amount by which this vector should be multiplied</param>
     /// <returns>Multiplied copy of this vector</returns>
@@ -54,7 +54,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Divides this vector by another vector
+    ///     Divides this vector by another vector
     /// </summary>
     /// <param name="by">Vector, by which this vector should be divided</param>
     /// <returns>Divided copy of this vector</returns>
@@ -64,7 +64,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Divides this vector by provided value
+    ///     Divides this vector by provided value
     /// </summary>
     /// <param name="by">Amount by which this vector should be divided</param>
     /// <returns>Divided copy of this vector</returns>
@@ -74,7 +74,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Sums this vector with another one
+    ///     Sums this vector with another one
     /// </summary>
     /// <param name="other">Vector to be added to this</param>
     /// <returns>Modified copy of this vector</returns>
@@ -84,7 +84,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Adds provided amount to this vector
+    ///     Adds provided amount to this vector
     /// </summary>
     /// <param name="amount">Amount to be added</param>
     /// <returns>Modified copy of this vector</returns>
@@ -94,7 +94,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Subtracts provided vector from this vector
+    ///     Subtracts provided vector from this vector
     /// </summary>
     /// <param name="other">Vector to be subtracted to this</param>
     /// <returns>Modified copy of this vector</returns>
@@ -104,7 +104,7 @@ public readonly struct Vec3
     }
 
     /// <summary>
-    /// Subtracts provided amount from this vector
+    ///     Subtracts provided amount from this vector
     /// </summary>
     /// <param name="amount">Amount to be subtracted</param>
     /// <returns>Modified copy of this vector</returns>
@@ -113,49 +113,49 @@ public readonly struct Vec3
         return new Vec3(DX - amount, DY - amount, DZ - amount);
     }
 
-    ///<inheritdoc cref="Multiply(Vec3)"/>
+    /// <inheritdoc cref="Multiply(Vec3)" />
     public static Vec3 operator *(Vec3 cur, Vec3 other)
     {
         return cur.Multiply(other);
     }
 
-    ///<inheritdoc cref="Multiply(double)"/>
+    /// <inheritdoc cref="Multiply(double)" />
     public static Vec3 operator *(Vec3 cur, double by)
     {
         return cur.Multiply(by);
     }
 
-    ///<inheritdoc cref="Divide(double)"/>
+    /// <inheritdoc cref="Divide(double)" />
     public static Vec3 operator /(Vec3 cur, Vec3 by)
     {
         return cur.Divide(by);
     }
 
-    ///<inheritdoc cref="Divide(double)"/>
+    /// <inheritdoc cref="Divide(double)" />
     public static Vec3 operator /(Vec3 cur, double by)
     {
         return cur.Divide(by);
     }
 
-    ///<inheritdoc cref="Add(Vec3)"/>
+    /// <inheritdoc cref="Add(Vec3)" />
     public static Vec3 operator +(Vec3 cur, Vec3 other)
     {
         return cur.Add(other);
     }
 
-    ///<inheritdoc cref="Add(double)"/>
+    /// <inheritdoc cref="Add(double)" />
     public static Vec3 operator +(Vec3 cur, double by)
     {
         return cur.Add(by);
     }
 
-    ///<inheritdoc cref="Sub(Vec3)"/>
+    /// <inheritdoc cref="Sub(Vec3)" />
     public static Vec3 operator -(Vec3 cur, Vec3 by)
     {
         return cur.Sub(by);
     }
 
-    ///<inheritdoc cref="Sub(double)"/>
+    /// <inheritdoc cref="Sub(double)" />
     public static Vec3 operator -(Vec3 cur, double by)
     {
         return cur.Sub(by);

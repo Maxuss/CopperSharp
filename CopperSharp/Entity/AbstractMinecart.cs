@@ -4,7 +4,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// An abstract superclass for minecart
+///     An abstract superclass for minecart
 /// </summary>
 public abstract class AbstractMinecart : AbstractEntity
 {
@@ -12,10 +12,10 @@ public abstract class AbstractMinecart : AbstractEntity
     {
     }
 
-    private string? BlockState { get; set; } = null;
+    private string? BlockState { get; set; }
 
     /// <summary>
-    /// Sets custom decoration block to be displayed in this minecart.
+    ///     Sets custom decoration block to be displayed in this minecart.
     /// </summary>
     /// <param name="state">Block state to be used</param>
     /// <returns>This abstract minecart</returns>
@@ -27,8 +27,8 @@ public abstract class AbstractMinecart : AbstractEntity
     }
 
     /// <summary>
-    /// Sets display block offset of this minecart.
-    /// 16 pixels equals to one block size
+    ///     Sets display block offset of this minecart.
+    ///     16 pixels equals to one block size
     /// </summary>
     /// <param name="pixels">Amount of offset in pixels.</param>
     /// <returns>This abstract minecart</returns>

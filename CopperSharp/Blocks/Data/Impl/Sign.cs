@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a sign block data
+///     Represents a sign block data
 /// </summary>
 public sealed class Sign :
     AbstractBlockData,

@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a zombified piglin entity
+///     Represents a zombified piglin entity
 /// </summary>
 public sealed class ZombifiedPiglin : ZombieEntity, IAngerableEntity
 {

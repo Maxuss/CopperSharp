@@ -6,23 +6,23 @@ using CopperSharp.Item;
 namespace CopperSharp.Data.SNbt;
 
 /// <summary>
-/// A writer, that can write string NBT objects to string.
+///     A writer, that can write string NBT objects to string.
 /// </summary>
 public class StringNbtWriter : IDisposable
 {
     private readonly StringWriter _sw;
-    private int _arrayPosition = 0;
+    private int _arrayPosition;
     private int _depthLevel;
     private State _previous = State.Error;
     private State _state = State.Open;
 
     /// <summary>
-    /// Generates a new string nbt writer, piped to provided writer
+    ///     Generates a new string nbt writer, piped to provided writer
     /// </summary>
     /// <param name="sw">Writer to which current SNBT writer should be piped</param>
     public StringNbtWriter(StringWriter sw)
     {
-        this._sw = sw;
+        _sw = sw;
     }
 
     /// <inheritdoc />
@@ -33,14 +33,11 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the component begin tag
+    ///     Writes the component begin tag
     /// </summary>
     public void WriteBeginCompound()
     {
-        if (_state == State.PostProperty)
-        {
-            _sw.Write(',');
-        }
+        if (_state == State.PostProperty) _sw.Write(',');
 
         ValidateArray();
         _sw.Write('{');
@@ -48,7 +45,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the component end tag
+    ///     Writes the component end tag
     /// </summary>
     public void WriteEndCompound()
     {
@@ -57,7 +54,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes an identifier for array, e.g. I, or D
+    ///     Writes an identifier for array, e.g. I, or D
     /// </summary>
     /// <param name="id">Identifier to be written</param>
     public void WriteArrayIdentifier(string id)
@@ -66,14 +63,11 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the array begin tag
+    ///     Writes the array begin tag
     /// </summary>
     public void WriteBeginArray()
     {
-        if (_state == State.PostProperty)
-        {
-            _sw.Write(',');
-        }
+        if (_state == State.PostProperty) _sw.Write(',');
 
         ValidateArray();
         _sw.Write('[');
@@ -81,7 +75,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the array end tag
+    ///     Writes the array end tag
     /// </summary>
     public void WriteEndArray()
     {
@@ -91,37 +85,31 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes the property name and allows writing value
+    ///     Writes the property name and allows writing value
     /// </summary>
     /// <param name="name">Name of the property to be written</param>
     public void WritePropertyName(string name)
     {
-        if (_state == State.PostProperty)
-        {
-            _sw.Write(',');
-        }
+        if (_state == State.PostProperty) _sw.Write(',');
 
         _sw.Write($"{name}:");
         _state = State.InProperty;
     }
 
     /// <summary>
-    /// Writes the property name and allows writing value
+    ///     Writes the property name and allows writing value
     /// </summary>
     /// <param name="name">Name of the property to be written</param>
     public async Task WritePropertyNameAsync(string name)
     {
-        if (_state == State.PostProperty)
-        {
-            await _sw.WriteAsync(',');
-        }
+        if (_state == State.PostProperty) await _sw.WriteAsync(',');
 
         await _sw.WriteAsync($"{name}:");
         _state = State.InProperty;
     }
 
     /// <summary>
-    /// Writes and escapes a string
+    ///     Writes and escapes a string
     /// </summary>
     /// <param name="str">String to be written</param>
     public void WriteString(string str)
@@ -132,7 +120,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes and escapes a string
+    ///     Writes and escapes a string
     /// </summary>
     /// <param name="str">String to be written</param>
     public async Task WriteStringAsync(string str)
@@ -143,7 +131,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a byte tag
+    ///     Writes a byte tag
     /// </summary>
     /// <param name="b">Byte to be written</param>
     public void WriteByte(byte b)
@@ -154,7 +142,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a signed byte tag
+    ///     Writes a signed byte tag
     /// </summary>
     /// <param name="b">Signed byte to be written</param>
     public void WriteSByte(sbyte b)
@@ -165,7 +153,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a byte tag
+    ///     Writes a byte tag
     /// </summary>
     /// <param name="b">Byte to be written</param>
     public async Task WriteByteAsync(byte b)
@@ -176,7 +164,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a boolean
+    ///     Writes a boolean
     /// </summary>
     /// <param name="b">Boolean to be written</param>
     public void WriteBool(bool b)
@@ -185,7 +173,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a boolean
+    ///     Writes a boolean
     /// </summary>
     /// <param name="b">Boolean to be written</param>
     public async Task WriteBoolAsync(bool b)
@@ -194,7 +182,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes an int
+    ///     Writes an int
     /// </summary>
     /// <param name="i">Integer to be written</param>
     public void WriteInteger(int i)
@@ -205,7 +193,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a float
+    ///     Writes a float
     /// </summary>
     /// <param name="f">Float to be written</param>
     public void WriteFloat(float f)
@@ -216,7 +204,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double
+    ///     Writes a double
     /// </summary>
     /// <param name="d">Double to be written</param>
     public void WriteDouble(double d)
@@ -227,7 +215,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a position
+    ///     Writes a position
     /// </summary>
     /// <param name="loc">Location to be written</param>
     public void WritePosition(Location loc)
@@ -240,7 +228,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a position
+    ///     Writes a position
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="loc">Location to be written</param>
@@ -251,7 +239,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double as float
+    ///     Writes a double as float
     /// </summary>
     /// <param name="f">Float to be written</param>
     public async Task WriteFloatAsync(float f)
@@ -262,7 +250,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double as float
+    ///     Writes a double as float
     /// </summary>
     /// <param name="d">Double to be written</param>
     public void WriteFloat(double d)
@@ -273,7 +261,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double as float
+    ///     Writes a double as float
     /// </summary>
     /// <param name="d">Double to be written</param>
     public async Task WriteFloatAsync(double d)
@@ -284,7 +272,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a short
+    ///     Writes a short
     /// </summary>
     /// <param name="s">Short to be written</param>
     public void WriteShort(short s)
@@ -295,7 +283,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a short
+    ///     Writes a short
     /// </summary>
     /// <param name="s">Short to be written</param>
     public async Task WriteShortAsync(short s)
@@ -306,7 +294,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a long
+    ///     Writes a long
     /// </summary>
     /// <param name="l">Long to be written</param>
     public void WriteLong(long l)
@@ -317,7 +305,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a provided UUID
+    ///     Writes a provided UUID
     /// </summary>
     /// <param name="id"></param>
     public void WriteUuid(Guid id)
@@ -326,23 +314,20 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a provided UUID as an array of integers
+    ///     Writes a provided UUID as an array of integers
     /// </summary>
     /// <param name="id">Id to be written</param>
     public void WriteUuidArray(Guid id)
     {
         var bytes = id.ToByteArray();
         var ints = new int[4];
-        for (var i = 0; i < 4; i++)
-        {
-            ints[i] = BitConverter.ToInt32(bytes, i * 4);
-        }
+        for (var i = 0; i < 4; i++) ints[i] = BitConverter.ToInt32(bytes, i * 4);
 
         WriteRawValue($"[I; {ints[0]}, {ints[1]}, {ints[2]}, {ints[3]}]");
     }
 
     /// <summary>
-    /// Writes a raw value, represented by string
+    ///     Writes a raw value, represented by string
     /// </summary>
     /// <param name="raw">Value to be written</param>
     public void WriteRawValue(string raw)
@@ -353,7 +338,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a raw value, represented by string
+    ///     Writes a raw value, represented by string
     /// </summary>
     /// <param name="raw">Value to be written</param>
     public async Task WriteRawValueAsync(string raw)
@@ -365,7 +350,7 @@ public class StringNbtWriter : IDisposable
 
 
     /// <summary>
-    /// Writes an item to the stream
+    ///     Writes an item to the stream
     /// </summary>
     /// <param name="item">Item to be written</param>
     /// <param name="slot">Slot data of this item. Optional</param>
@@ -395,7 +380,7 @@ public class StringNbtWriter : IDisposable
 
 
     /// <summary>
-    /// Writes and escapes a string
+    ///     Writes and escapes a string
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="str">String to be written</param>
@@ -406,7 +391,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a byte tag
+    ///     Writes a byte tag
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="b">Byte to be written</param>
@@ -417,7 +402,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a boolean
+    ///     Writes a boolean
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="b">Boolean to be written</param>
@@ -428,7 +413,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes an int
+    ///     Writes an int
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="i">Integer to be written</param>
@@ -439,7 +424,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a float
+    ///     Writes a float
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="f">Float to be written</param>
@@ -450,7 +435,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double as float
+    ///     Writes a double as float
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="d">Double to be written</param>
@@ -461,7 +446,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a double
+    ///     Writes a double
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="d">Double to be written</param>
@@ -473,7 +458,7 @@ public class StringNbtWriter : IDisposable
 
 
     /// <summary>
-    /// Writes a short
+    ///     Writes a short
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="s">Short to be written</param>
@@ -484,7 +469,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a long
+    ///     Writes a long
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="l">Long to be written</param>
@@ -495,7 +480,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a provided UUID
+    ///     Writes a provided UUID
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="id"></param>
@@ -506,7 +491,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a provided UUID as an array of integers
+    ///     Writes a provided UUID as an array of integers
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="id">Id to be written</param>
@@ -517,7 +502,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Writes a raw value, represented by string
+    ///     Writes a raw value, represented by string
     /// </summary>
     /// <param name="property">Property name</param>
     /// <param name="raw">Value to be written</param>
@@ -528,7 +513,7 @@ public class StringNbtWriter : IDisposable
     }
 
     /// <summary>
-    /// Explicitly writes a comma to the writer
+    ///     Explicitly writes a comma to the writer
     /// </summary>
     public void WriteComma()
     {
@@ -553,10 +538,7 @@ public class StringNbtWriter : IDisposable
 
     private void FinalizeProperty()
     {
-        if (_state != State.Array)
-        {
-            _state = State.PostProperty;
-        }
+        if (_state != State.Array) _state = State.PostProperty;
     }
 
     private void WriteEscapedString(string val)
@@ -574,9 +556,7 @@ public class StringNbtWriter : IDisposable
     private void ValidateCanWriteValue()
     {
         if (_state != State.Array && _state != State.InProperty)
-        {
             throw new Exception("Writing a value in current state would result in malformed SNBT!");
-        }
 
         ValidateArray();
     }
@@ -584,9 +564,7 @@ public class StringNbtWriter : IDisposable
     private async Task ValidateCanWriteValueAsync()
     {
         if (_state != State.Array && _state != State.InProperty)
-        {
             throw new Exception("Writing a value in current state would result in malformed SNBT!");
-        }
 
         await ValidateArrayAsync();
     }

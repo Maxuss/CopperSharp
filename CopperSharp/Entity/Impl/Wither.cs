@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a wither entity
+///     Represents a wither entity
 /// </summary>
 public sealed class Wither : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Wither : LivingEntity
     }
 
     /// <summary>
-    /// Sets amount of invulnerability ticks left for this wither
+    ///     Sets amount of invulnerability ticks left for this wither
     /// </summary>
     /// <param name="ticks">Amount of ticks left</param>
     /// <returns>This wither</returns>

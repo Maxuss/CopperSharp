@@ -1,4 +1,3 @@
-using System.Reflection;
 using CopperSharp.Blocks.Data;
 using CopperSharp.Data.SNbt;
 using CopperSharp.Item;
@@ -8,12 +7,12 @@ using CopperSharp.Text;
 namespace CopperSharp.Blocks;
 
 /// <summary>
-/// An abstract superclass for all block states
+///     An abstract superclass for all block states
 /// </summary>
 public abstract class BlockState : IState
 {
     /// <summary>
-    /// Creates a new block state
+    ///     Creates a new block state
     /// </summary>
     /// <param name="id">Material ID of block</param>
     protected BlockState(Material id)
@@ -23,35 +22,15 @@ public abstract class BlockState : IState
             BlockData = id.BlockType.GetConstructors()[0].Invoke(null) as IBlockData;
     }
 
-    /// <inheritdoc />
-    public virtual IBlockData? BlockData { get; set; }
-
-    private Identifier Id { get; set; }
+    private Identifier Id { get; }
 
     /// <summary>
-    /// Extra NBT data for this block state
+    ///     Extra NBT data for this block state
     /// </summary>
     protected NbtCompound Data { get; set; } = new();
 
-    /// <summary>
-    /// Sets custom name of this block state
-    /// </summary>
-    /// <param name="name">Name to be set</param>
-    /// <returns>This block state</returns>
-    public BlockState CustomName(IComponent name)
-    {
-        Data["CustomName"] = name.Serialize();
-        return this;
-    }
-    
-    /// <summary>
-    /// Writes extra data of this block state
-    /// </summary>
-    /// <param name="sw">Writes extra data here</param>
-    protected virtual void SerializeExtra(StringNbtWriter sw)
-    {
-        
-    }
+    /// <inheritdoc />
+    public virtual IBlockData? BlockData { get; set; }
 
     /// <inheritdoc />
     public string Serialize()
@@ -67,5 +46,24 @@ public abstract class BlockState : IState
         w.WriteEndCompound();
 
         return sw.ToString();
+    }
+
+    /// <summary>
+    ///     Sets custom name of this block state
+    /// </summary>
+    /// <param name="name">Name to be set</param>
+    /// <returns>This block state</returns>
+    public BlockState CustomName(IComponent name)
+    {
+        Data["CustomName"] = name.Serialize();
+        return this;
+    }
+
+    /// <summary>
+    ///     Writes extra data of this block state
+    /// </summary>
+    /// <param name="sw">Writes extra data here</param>
+    protected virtual void SerializeExtra(StringNbtWriter sw)
+    {
     }
 }

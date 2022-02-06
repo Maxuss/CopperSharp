@@ -1,22 +1,22 @@
 namespace CopperSharp.Text;
 
 /// <summary>
-/// Represents a formatting for text
+///     Represents a formatting for text
 /// </summary>
 public struct TextFormatting
 {
     /// <summary>
-    /// Type of this formatting
+    ///     Type of this formatting
     /// </summary>
     public FormattingType Formatting { get; }
 
     /// <summary>
-    /// Whether the formatting is toggled on
+    ///     Whether the formatting is toggled on
     /// </summary>
     public bool Toggled { get; set; }
 
     /// <summary>
-    /// Constructs a new text formatting from provided formatting type
+    ///     Constructs a new text formatting from provided formatting type
     /// </summary>
     /// <param name="type">Type of formatting</param>
     /// <param name="toggle">Whether the formatting should be toggled on</param>

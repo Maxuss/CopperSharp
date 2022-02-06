@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents an amethyst cluster block
+///     Represents an amethyst cluster block
 /// </summary>
 public sealed class AmethystCluster : AbstractBlockData, IDirectional, IWaterlogged
 {

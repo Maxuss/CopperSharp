@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a dropped item entity
+///     Represents a dropped item entity
 /// </summary>
 public sealed class DroppedItem : AbstractEntity
 {
@@ -12,14 +12,13 @@ public sealed class DroppedItem : AbstractEntity
     {
     }
 
-    private ItemStack? Container { get; set; } = null;
+    private ItemStack? Container { get; set; }
 
     /// <summary>
-    /// Sets age of this item.
-    /// When age reaches 6000 ticks, the orb disappears.
-    ///
-    /// Can be set to <see cref="short.MinValue"/>, for item to never
-    /// disappear.
+    ///     Sets age of this item.
+    ///     When age reaches 6000 ticks, the orb disappears.
+    ///     Can be set to <see cref="short.MinValue" />, for item to never
+    ///     disappear.
     /// </summary>
     /// <param name="age">Age to be set</param>
     /// <returns>This dropped item</returns>
@@ -30,8 +29,8 @@ public sealed class DroppedItem : AbstractEntity
     }
 
     /// <summary>
-    /// Sets owner of this item, to prevent other players
-    /// picking up this item.
+    ///     Sets owner of this item, to prevent other players
+    ///     picking up this item.
     /// </summary>
     /// <param name="playerOwner">UUID of owner player</param>
     /// <returns>This dropped item</returns>
@@ -42,10 +41,9 @@ public sealed class DroppedItem : AbstractEntity
     }
 
     /// <summary>
-    /// Sets delay until this item can be picked up.
-    ///
-    /// Can be set to <see cref="short.MaxValue"/> to never
-    /// be able to pick up this item.
+    ///     Sets delay until this item can be picked up.
+    ///     Can be set to <see cref="short.MaxValue" /> to never
+    ///     be able to pick up this item.
     /// </summary>
     /// <param name="delay">Amount of time in ticks</param>
     /// <returns>This dropped item</returns>
@@ -56,7 +54,7 @@ public sealed class DroppedItem : AbstractEntity
     }
 
     /// <summary>
-    /// Sets the item stored inside this dropped item
+    ///     Sets the item stored inside this dropped item
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This dropped item</returns>
@@ -67,8 +65,8 @@ public sealed class DroppedItem : AbstractEntity
     }
 
     /// <summary>
-    /// Sets health of this item.
-    /// Items get destroyed when health reaches 0.
+    ///     Sets health of this item.
+    ///     Items get destroyed when health reaches 0.
     /// </summary>
     /// <param name="health">Health to be set</param>
     /// <returns>This dropped item</returns>

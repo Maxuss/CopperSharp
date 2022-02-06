@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a scaffolding block
+///     Represents a scaffolding block
 /// </summary>
 public sealed class Scaffolding : AbstractBlockData, IWaterlogged
 {
@@ -13,7 +13,7 @@ public sealed class Scaffolding : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Whether this scaffolding is the bottom one, and will never fall
+    ///     Whether this scaffolding is the bottom one, and will never fall
     /// </summary>
     /// <param name="btm">Marker</param>
     /// <returns>This scaffolding</returns>
@@ -24,7 +24,7 @@ public sealed class Scaffolding : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Amount of distance to the bottom scaffolding from this one
+    ///     Amount of distance to the bottom scaffolding from this one
     /// </summary>
     /// <param name="distance">Distance in range of 0 to 7</param>
     /// <returns>This scaffolding</returns>

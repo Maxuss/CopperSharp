@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents lush cave vines plant
+///     Represents lush cave vines plant
 /// </summary>
 public sealed class CaveVines : AbstractBlockData, IAgeable
 {
@@ -13,7 +13,7 @@ public sealed class CaveVines : AbstractBlockData, IAgeable
     }
 
     /// <summary>
-    /// Sets whether these cave vines have berries
+    ///     Sets whether these cave vines have berries
     /// </summary>
     /// <param name="has">Marker</param>
     /// <returns>These cave vines</returns>

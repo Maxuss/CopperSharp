@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a vindicator
+///     Represents a vindicator
 /// </summary>
 public sealed class Vindicator : RaidEntity
 {
@@ -10,7 +10,7 @@ public sealed class Vindicator : RaidEntity
     }
 
     /// <summary>
-    /// Adds Johnny behaviour to this vindicator
+    ///     Adds Johnny behaviour to this vindicator
     /// </summary>
     /// <param name="attack">Whether to make this vindicator attack every mob</param>
     /// <returns>This vindicator</returns>

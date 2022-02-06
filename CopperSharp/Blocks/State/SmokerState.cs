@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a smoke block state
+///     Represents a smoke block state
 /// </summary>
 public sealed class SmokerState : FurnaceState
 {
@@ -11,5 +11,4 @@ public sealed class SmokerState : FurnaceState
     public SmokerState(Material id) : base(id)
     {
     }
-
 }

@@ -5,7 +5,7 @@ using CopperSharp.Text;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an arrow projectile
+///     Represents an arrow projectile
 /// </summary>
 public sealed class Arrow : AbstractArrow
 {
@@ -16,7 +16,7 @@ public sealed class Arrow : AbstractArrow
     private PotionMeta? Meta { get; set; }
 
     /// <summary>
-    /// Adds effects from provided potion meta
+    ///     Adds effects from provided potion meta
     /// </summary>
     /// <param name="from">Effects to be added</param>
     /// <returns>This arrow</returns>
@@ -27,13 +27,13 @@ public sealed class Arrow : AbstractArrow
     }
 
     /// <summary>
-    /// Sets color of this arrow
+    ///     Sets color of this arrow
     /// </summary>
     /// <param name="color">Color to be used</param>
     /// <returns>This arrow</returns>
     public Arrow Colored(ITextColor color)
     {
-        Ints["Color"] = color.R << 16 + color.G << 8 + color.B;
+        Ints["Color"] = color.R << (16 + color.G) << (8 + color.B);
         return this;
     }
 

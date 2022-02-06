@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a sculk sensor block
+///     Represents a sculk sensor block
 /// </summary>
 public sealed class SculkSensor :
     AbstractBlockData,
@@ -9,22 +9,22 @@ public sealed class SculkSensor :
     IWaterlogged
 {
     /// <summary>
-    /// Represents phase of sculk sensor
+    ///     Represents phase of sculk sensor
     /// </summary>
     public enum Phase
     {
         /// <summary>
-        /// Sensor is active
+        ///     Sensor is active
         /// </summary>
         Active,
 
         /// <summary>
-        /// Sensor is inactive
+        ///     Sensor is inactive
         /// </summary>
         Inactive,
 
         /// <summary>
-        /// Sensor is on cooldown
+        ///     Sensor is on cooldown
         /// </summary>
         Cooldown
     }
@@ -44,7 +44,7 @@ public sealed class SculkSensor :
     }
 
     /// <summary>
-    /// Sets this sensor's phase
+    ///     Sets this sensor's phase
     /// </summary>
     /// <param name="phase">Phase to be set</param>
     /// <returns>This sculk sensor</returns>

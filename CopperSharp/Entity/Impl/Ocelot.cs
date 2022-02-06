@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an ocelot entity
+///     Represents an ocelot entity
 /// </summary>
 public sealed class Ocelot : BreedableEntity
 {
@@ -10,7 +10,7 @@ public sealed class Ocelot : BreedableEntity
     }
 
     /// <summary>
-    /// True if this ocelot trusts players
+    ///     True if this ocelot trusts players
     /// </summary>
     /// <param name="trusts">Marker</param>
     /// <returns>This ocelot</returns>

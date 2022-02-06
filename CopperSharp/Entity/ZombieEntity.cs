@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents a zombie-like entity
+///     Represents a zombie-like entity
 /// </summary>
 public abstract class ZombieEntity : LivingEntity
 {
@@ -11,7 +11,7 @@ public abstract class ZombieEntity : LivingEntity
     }
 
     /// <summary>
-    /// Marks that this zombie can break doors
+    ///     Marks that this zombie can break doors
     /// </summary>
     /// <param name="can">Whether this zombie can break doors</param>
     /// <returns>This zombie entity</returns>
@@ -22,7 +22,7 @@ public abstract class ZombieEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets amount of time it takes to convert into drowned
+    ///     Sets amount of time it takes to convert into drowned
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This zombie entity</returns>
@@ -33,7 +33,7 @@ public abstract class ZombieEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets time this zombie is in water
+    ///     Sets time this zombie is in water
     /// </summary>
     /// <param name="time">Amount of time in ticks</param>
     /// <returns>This zombie entity</returns>
@@ -44,7 +44,7 @@ public abstract class ZombieEntity : LivingEntity
     }
 
     /// <summary>
-    /// Marks that this zombie is baby
+    ///     Marks that this zombie is baby
     /// </summary>
     /// <param name="isBaby">Whether this zombie is baby</param>
     /// <returns>This zombie entity</returns>

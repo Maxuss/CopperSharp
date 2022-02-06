@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a lightning bolt entity
+///     Represents a lightning bolt entity
 /// </summary>
 public sealed class LightningBolt : AbstractEntity
 {

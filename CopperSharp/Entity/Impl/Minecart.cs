@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a minecart vehicle
+///     Represents a minecart vehicle
 /// </summary>
 public sealed class Minecart : AbstractMinecart
 {

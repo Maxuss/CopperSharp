@@ -3,37 +3,37 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a pointed dripstone block
+///     Represents a pointed dripstone block
 /// </summary>
 public sealed class PointedDripstone : AbstractBlockData, IWaterlogged
 {
     /// <summary>
-    /// Thickness of this dripstone
+    ///     Thickness of this dripstone
     /// </summary>
     public enum Thickness
     {
         /// <summary>
-        /// Tip of dripstone
+        ///     Tip of dripstone
         /// </summary>
         [EnumData("tip")] Tip,
 
         /// <summary>
-        /// Merging tip of dripstone
+        ///     Merging tip of dripstone
         /// </summary>
         [EnumData("tip_merge")] TipMerge,
 
         /// <summary>
-        /// Frustum part
+        ///     Frustum part
         /// </summary>
         [EnumData("frustum")] Frustum,
 
         /// <summary>
-        /// Middle part
+        ///     Middle part
         /// </summary>
         [EnumData("middle")] Middle,
 
         /// <summary>
-        /// Base (the thickest)
+        ///     Base (the thickest)
         /// </summary>
         [EnumData("base")] Base
     }
@@ -46,7 +46,7 @@ public sealed class PointedDripstone : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets whether this dripstone is facing up or down
+    ///     Sets whether this dripstone is facing up or down
     /// </summary>
     /// <param name="up">True for up, false for down</param>
     /// <returns>This pointed dripstone</returns>
@@ -57,7 +57,7 @@ public sealed class PointedDripstone : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Sets thickness of this pointed dripstone
+    ///     Sets thickness of this pointed dripstone
     /// </summary>
     /// <param name="thick">Thickness to be set</param>
     /// <returns>This pointed dripstone</returns>

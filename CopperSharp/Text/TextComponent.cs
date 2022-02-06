@@ -6,12 +6,12 @@ using CopperSharp.Utils;
 namespace CopperSharp.Text;
 
 /// <summary>
-/// A text based component for raw strings
+///     A text based component for raw strings
 /// </summary>
 public readonly struct TextComponent : IComponent
 {
     /// <summary>
-    /// Text stored inside this component
+    ///     Text stored inside this component
     /// </summary>
     public string Text { get; }
 
@@ -37,7 +37,7 @@ public readonly struct TextComponent : IComponent
     public ITextColor? Color { get; }
 
     /// <summary>
-    /// Creates a new text component from provided text
+    ///     Creates a new text component from provided text
     /// </summary>
     /// <param name="text">Text to be put in component</param>
     public TextComponent(string text)
@@ -110,7 +110,7 @@ public readonly struct TextComponent : IComponent
     }
 
     /// <summary>
-    /// Constructs a quadratic gradient between two colors
+    ///     Constructs a quadratic gradient between two colors
     /// </summary>
     /// <param name="from">From color</param>
     /// <param name="to">To color</param>
@@ -128,16 +128,14 @@ public readonly struct TextComponent : IComponent
 
         var empty = new TextComponent(Text[0].ToString()).Colored(ITextColor.Hex(red[0], green[0], blue[0]));
         for (var i = 1; i < Text.Length; i++)
-        {
             empty = empty.Child(
                 new TextComponent(Text[i].ToString()).Colored(ITextColor.Hex(red[i], green[i], blue[i])));
-        }
 
         return empty;
     }
 
     /// <summary>
-    /// Constructs a linear gradient between two colors
+    ///     Constructs a linear gradient between two colors
     /// </summary>
     /// <param name="from">From color</param>
     /// <param name="to">To color</param>
@@ -154,10 +152,8 @@ public readonly struct TextComponent : IComponent
 
         var empty = new TextComponent(Text[0].ToString()).Colored(ITextColor.Hex(red[0], green[0], blue[0]));
         for (var i = 1; i < Text.Length; i++)
-        {
             empty = empty.Child(
                 new TextComponent(Text[i].ToString()).Colored(ITextColor.Hex(red[i], green[i], blue[i])));
-        }
 
         return empty;
     }

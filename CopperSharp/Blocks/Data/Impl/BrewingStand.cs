@@ -1,12 +1,12 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a brewing stand tile entity
+///     Represents a brewing stand tile entity
 /// </summary>
 public class BrewingStand : AbstractBlockData
 {
     /// <summary>
-    /// Sets bottle at provided slot
+    ///     Sets bottle at provided slot
     /// </summary>
     /// <param name="at">Slot, from 0 to 2</param>
     /// <param name="has">Whether to set the bottle</param>

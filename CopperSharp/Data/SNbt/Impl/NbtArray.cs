@@ -3,12 +3,12 @@ using System.Collections;
 namespace CopperSharp.Data.SNbt.Impl;
 
 /// <summary>
-/// Represents an array of nbt elements
+///     Represents an array of nbt elements
 /// </summary>
 public sealed class NbtArray : INbtValue, IEnumerable<INbtValue>
 {
     /// <summary>
-    /// Initializes this array with provided values
+    ///     Initializes this array with provided values
     /// </summary>
     /// <param name="values">Values to be added</param>
     public NbtArray(List<INbtValue> values)
@@ -17,13 +17,13 @@ public sealed class NbtArray : INbtValue, IEnumerable<INbtValue>
     }
 
     /// <summary>
-    /// Default constructor
+    ///     Default constructor
     /// </summary>
     public NbtArray()
     {
     }
 
-    private List<INbtValue> Values { get; set; } = new();
+    private List<INbtValue> Values { get; } = new();
 
     /// <inheritdoc />
     public IEnumerator<INbtValue> GetEnumerator()
@@ -40,28 +40,22 @@ public sealed class NbtArray : INbtValue, IEnumerable<INbtValue>
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteBeginArray();
-        foreach (var item in Values)
-        {
-            item.SerializeInto(sw);
-        }
+        foreach (var item in Values) item.SerializeInto(sw);
 
         sw.WriteEndArray();
     }
 
     /// <summary>
-    /// Adds range of values into this NB array
+    ///     Adds range of values into this NB array
     /// </summary>
     /// <param name="elements">Elements to be added</param>
     public void AddRange(params object[] elements)
     {
-        foreach (var element in elements)
-        {
-            Values.Add(INbtValue.Wrap(element));
-        }
+        foreach (var element in elements) Values.Add(INbtValue.Wrap(element));
     }
 
     /// <summary>
-    /// Adds an element to this NBT array
+    ///     Adds an element to this NBT array
     /// </summary>
     /// <param name="element">Element to be added</param>
     public void Add(object element)

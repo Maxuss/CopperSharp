@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a wall sign
+///     Represents a wall sign
 /// </summary>
 public sealed class WallSign : AbstractBlockData, IDirectional, IWaterlogged
 {

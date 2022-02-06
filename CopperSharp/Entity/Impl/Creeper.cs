@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a creeper entity
+///     Represents a creeper entity
 /// </summary>
 public sealed class Creeper : LivingEntity
 {
@@ -10,7 +10,7 @@ public sealed class Creeper : LivingEntity
     }
 
     /// <summary>
-    /// The radius of the explosion itself, default 3.
+    ///     The radius of the explosion itself, default 3.
     /// </summary>
     /// <param name="radius">Radius to be set</param>
     /// <returns>This creeper</returns>
@@ -21,7 +21,7 @@ public sealed class Creeper : LivingEntity
     }
 
     /// <summary>
-    /// States the initial value of the creeper's internal fuse timer
+    ///     States the initial value of the creeper's internal fuse timer
     /// </summary>
     /// <param name="fuse">New fuse timer</param>
     /// <returns>This creeper</returns>
@@ -32,7 +32,7 @@ public sealed class Creeper : LivingEntity
     }
 
     /// <summary>
-    /// Whether the creeper has been ignited
+    ///     Whether the creeper has been ignited
     /// </summary>
     /// <param name="ignited">Whether the creeper has been ignited</param>
     /// <returns>This creeper</returns>
@@ -43,7 +43,7 @@ public sealed class Creeper : LivingEntity
     }
 
     /// <summary>
-    /// Whether the creeper is charged from being struck by lightning.
+    ///     Whether the creeper is charged from being struck by lightning.
     /// </summary>
     /// <param name="powered">Whether to charge the creeper</param>
     /// <returns>This creeper</returns>

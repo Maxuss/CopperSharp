@@ -3,7 +3,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents an entity that can breed
+///     Represents an entity that can breed
 /// </summary>
 public abstract class BreedableEntity : LivingEntity
 {
@@ -15,7 +15,7 @@ public abstract class BreedableEntity : LivingEntity
     private Guid? LoveCause { get; set; }
 
     /// <summary>
-    /// Sets amount of time in ticks until the mob can breed
+    ///     Sets amount of time in ticks until the mob can breed
     /// </summary>
     /// <param name="age">Age of mob</param>
     /// <returns>This breedable entity</returns>
@@ -26,7 +26,7 @@ public abstract class BreedableEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets age this entity will be set to, when it becomes an adult
+    ///     Sets age this entity will be set to, when it becomes an adult
     /// </summary>
     /// <param name="age">Forced age of mob</param>
     /// <returns>This breedable entity</returns>
@@ -37,7 +37,7 @@ public abstract class BreedableEntity : LivingEntity
     }
 
     /// <summary>
-    /// Sets lover of this entity
+    ///     Sets lover of this entity
     /// </summary>
     /// <param name="lover">The UUID of the entity that caused this animal to breed</param>
     /// <param name="duration">Number of ticks until the mob loses its breeding hearts and stops searching for a mate</param>

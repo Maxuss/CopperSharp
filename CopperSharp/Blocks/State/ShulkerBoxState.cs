@@ -4,7 +4,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a shulker box block state
+///     Represents a shulker box block state
 /// </summary>
 public sealed class ShulkerBoxState : InventoryBlock<ChestInventory>, ILockable, ILootable
 {

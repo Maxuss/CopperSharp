@@ -5,14 +5,18 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a firework rocket projectile
+///     Represents a firework rocket projectile
 /// </summary>
 public sealed class FireworkRocket : Projectile
 {
-    private FireworkMeta? Meta { get; set; } = null;
+    internal FireworkRocket() : base(EntityType.FireworkRocket)
+    {
+    }
+
+    private FireworkMeta? Meta { get; set; }
 
     /// <summary>
-    /// Gets data from provided item meta
+    ///     Gets data from provided item meta
     /// </summary>
     /// <param name="meta">Meta from which to get firework data</param>
     /// <returns>This firework rocket</returns>
@@ -23,7 +27,7 @@ public sealed class FireworkRocket : Projectile
     }
 
     /// <summary>
-    /// Gets data from provided item stack
+    ///     Gets data from provided item stack
     /// </summary>
     /// <param name="stack">Stack from which to get firework data</param>
     /// <returns>This firework rocket</returns>
@@ -38,9 +42,9 @@ public sealed class FireworkRocket : Projectile
     }
 
     /// <summary>
-    /// Sets lifetime of this firework rocket.
-    /// By default it is
-    /// <c>((Flight + 1) * 10 + random(0 to 5) + random(0 to 6))</c>
+    ///     Sets lifetime of this firework rocket.
+    ///     By default it is
+    ///     <c>((Flight + 1) * 10 + random(0 to 5) + random(0 to 6))</c>
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This firework rocket</returns>
@@ -51,7 +55,7 @@ public sealed class FireworkRocket : Projectile
     }
 
     /// <summary>
-    /// Whether this rocket was shot from dispenser or crossbow.
+    ///     Whether this rocket was shot from dispenser or crossbow.
     /// </summary>
     /// <param name="shot">Marker</param>
     /// <returns>This firework rocket</returns>
@@ -59,10 +63,6 @@ public sealed class FireworkRocket : Projectile
     {
         Bools["ShotAtAngle"] = shot;
         return this;
-    }
-    
-    internal FireworkRocket() : base(EntityType.FireworkRocket)
-    {
     }
 
     /// <inheritdoc />
@@ -82,6 +82,7 @@ public sealed class FireworkRocket : Projectile
             sw.WriteBeginCompound();
             sw.WriteEndCompound();
         }
+
         sw.WriteEndCompound();
     }
 }

@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a lightning rod block
+///     Represents a lightning rod block
 /// </summary>
 public sealed class LightningRod :
     AbstractBlockData,

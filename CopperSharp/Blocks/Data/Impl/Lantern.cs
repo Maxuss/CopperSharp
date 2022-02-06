@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a lantern block
+///     Represents a lantern block
 /// </summary>
 public sealed class Lantern : AbstractBlockData, IWaterlogged
 {
@@ -13,7 +13,7 @@ public sealed class Lantern : AbstractBlockData, IWaterlogged
     }
 
     /// <summary>
-    /// Whether this lantern is hanging from a block
+    ///     Whether this lantern is hanging from a block
     /// </summary>
     /// <param name="hang">Marker</param>
     /// <returns>This lantern</returns>

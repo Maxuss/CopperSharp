@@ -6,28 +6,11 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks;
 
 /// <summary>
-/// Represents a single block
+///     Represents a single block
 /// </summary>
 public sealed class Block
 {
-    /// <summary>
-    /// Type of block
-    /// </summary>
-    public Material Type { get; }
-    
-    /// <summary>
-    /// Location of this block
-    /// </summary>
-    public Location Location { get; set; }
-    
-    /// <summary>
-    /// State of this block
-    /// </summary>
-    public BlockState? State { get; set; }
-    
     private bool _firstLock = true;
-    private bool _locked { get; set; }
-    private WorldContext? _binding { get; set; }
 
     internal Block(Material type, Location loc)
     {
@@ -36,7 +19,25 @@ public sealed class Block
     }
 
     /// <summary>
-    /// Locks this block to provided world context
+    ///     Type of block
+    /// </summary>
+    public Material Type { get; }
+
+    /// <summary>
+    ///     Location of this block
+    /// </summary>
+    public Location Location { get; set; }
+
+    /// <summary>
+    ///     State of this block
+    /// </summary>
+    public BlockState? State { get; set; }
+
+    private bool _locked { get; set; }
+    private WorldContext? _binding { get; set; }
+
+    /// <summary>
+    ///     Locks this block to provided world context
     /// </summary>
     /// <param name="lk">World context to which this block should be locked</param>
     public void Lock(WorldContext lk)
@@ -46,8 +47,8 @@ public sealed class Block
     }
 
     /// <summary>
-    /// Generates block state for this block.
-    /// <b>Requires</b> locking the block, using <see cref="Lock"/>!
+    ///     Generates block state for this block.
+    ///     <b>Requires</b> locking the block, using <see cref="Lock" />!
     /// </summary>
     public void GenerateState()
     {
@@ -101,14 +102,14 @@ public sealed class Block
     }
 
     /// <summary>
-    /// Releases lock from this block and
-    /// flushes all data to the context
+    ///     Releases lock from this block and
+    ///     flushes all data to the context
     /// </summary>
     /// <returns>This block</returns>
     public Block Release()
     {
         if (!_locked) return this;
-        
+
         _locked = false;
         _binding?.Release(this, _firstLock);
         _firstLock = false;

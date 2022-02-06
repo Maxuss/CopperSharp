@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a tripwire block
+///     Represents a tripwire block
 /// </summary>
 public sealed class Tripwire :
     AbstractBlockData,
@@ -34,7 +34,7 @@ public sealed class Tripwire :
     }
 
     /// <summary>
-    /// Makes this tripwire disarmed
+    ///     Makes this tripwire disarmed
     /// </summary>
     /// <param name="disarmed">Set to true to make tripwire not emit signal</param>
     /// <returns>This tripwire</returns>

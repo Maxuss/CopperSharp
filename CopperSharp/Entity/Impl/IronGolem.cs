@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an iron golem entity
+///     Represents an iron golem entity
 /// </summary>
 public sealed class IronGolem : LivingEntity, IAngerableEntity
 {
@@ -24,7 +24,7 @@ public sealed class IronGolem : LivingEntity, IAngerableEntity
     }
 
     /// <summary>
-    /// Whether this golem was made by player
+    ///     Whether this golem was made by player
     /// </summary>
     /// <param name="made">Marker</param>
     /// <returns>This iron golem</returns>

@@ -3,7 +3,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// A super class for all fireballs
+///     A super class for all fireballs
 /// </summary>
 public abstract class AbstractFireball : Projectile
 {
@@ -12,10 +12,10 @@ public abstract class AbstractFireball : Projectile
     {
     }
 
-    private double[] Power { get; set; } = {0, 0, 0};
+    private double[] Power { get; } = {0, 0, 0};
 
     /// <summary>
-    /// Sets acceleration for this fireball
+    ///     Sets acceleration for this fireball
     /// </summary>
     /// <param name="x">X acceleration</param>
     /// <param name="y">Y acceleration</param>

@@ -5,16 +5,68 @@ using CopperSharp.Utils;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a structure block state
+///     Represents a structure block state
 /// </summary>
 public sealed class StructureBlockState : BlockState
 {
+    /// <summary>
+    ///     Represents mode of structure block
+    /// </summary>
+    public enum Mode
+    {
+        /// <summary>
+        ///     SAVE
+        /// </summary>
+        Save,
+
+        /// <summary>
+        ///     LOAD
+        /// </summary>
+        Load,
+
+        /// <summary>
+        ///     CORNER
+        /// </summary>
+        Corner,
+
+        /// <summary>
+        ///     DATA
+        /// </summary>
+        Data
+    }
+
+    /// <summary>
+    ///     Represents rotation of the structure
+    /// </summary>
+    public enum Rotation
+    {
+        /// <summary>
+        ///     No rotation
+        /// </summary>
+        [EnumData("NONE")] None,
+
+        /// <summary>
+        ///     Clockwise 90 degree rotation
+        /// </summary>
+        [EnumData("CLOCKWISE_90")] Clockwise90,
+
+        /// <summary>
+        ///     Clockwise 180 degree rotation
+        /// </summary>
+        [EnumData("CLOCKWISE_180")] Clockwise180,
+
+        /// <summary>
+        ///     Counter clockwise 90 degree rotation
+        /// </summary>
+        [EnumData("COUNTER_CLOCKWISE_90")] CounterClockwise90
+    }
+
     internal StructureBlockState(Material id) : base(id)
     {
     }
 
     /// <summary>
-    /// Sets author of this structure
+    ///     Sets author of this structure
     /// </summary>
     /// <param name="author">Author's name. Set to "?" for vanilla structures</param>
     /// <returns>This structure block state</returns>
@@ -25,7 +77,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Whether the entities in the structure should be ignored
+    ///     Whether the entities in the structure should be ignored
     /// </summary>
     /// <param name="ignore">Marker</param>
     /// <returns>This structure block state</returns>
@@ -34,9 +86,9 @@ public sealed class StructureBlockState : BlockState
         Data["ignoreEntities"] = ignore;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets how complete this structure when comparing to original one
+    ///     Sets how complete this structure when comparing to original one
     /// </summary>
     /// <param name="integrity">Integrity in percents</param>
     /// <returns>This structure block state</returns>
@@ -47,7 +99,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets meta data for this structure block, if it is a data structure block
+    ///     Sets meta data for this structure block, if it is a data structure block
     /// </summary>
     /// <param name="metadata">Meta data to be set</param>
     /// <returns>This structure block state</returns>
@@ -58,7 +110,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets type of mirroring for this structure block
+    ///     Sets type of mirroring for this structure block
     /// </summary>
     /// <param name="mirror">Type of mirroring</param>
     /// <returns>This structure block state</returns>
@@ -69,7 +121,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets mode of this structure block state
+    ///     Sets mode of this structure block state
     /// </summary>
     /// <param name="mode">Mode to be set</param>
     /// <returns>This structure block state</returns>
@@ -80,7 +132,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets position at which to place the structure
+    ///     Sets position at which to place the structure
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This structure block state</returns>
@@ -93,7 +145,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets whether this structure block is powered
+    ///     Sets whether this structure block is powered
     /// </summary>
     /// <param name="powered">Marker</param>
     /// <returns>This structure block</returns>
@@ -104,7 +156,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets rotation of this structure
+    ///     Sets rotation of this structure
     /// </summary>
     /// <param name="rot">Rotation of the structure</param>
     /// <returns>This structure block state</returns>
@@ -115,7 +167,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets seed of this structure block
+    ///     Sets seed of this structure block
     /// </summary>
     /// <param name="seed">Seed to be set</param>
     /// <returns>This structure block state</returns>
@@ -126,7 +178,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Enables showing bounding box for structure in creative mod
+    ///     Enables showing bounding box for structure in creative mod
     /// </summary>
     /// <param name="show">Marker</param>
     /// <returns>This structure block state</returns>
@@ -137,7 +189,7 @@ public sealed class StructureBlockState : BlockState
     }
 
     /// <summary>
-    /// Sets size of this structure
+    ///     Sets size of this structure
     /// </summary>
     /// <param name="x">X size</param>
     /// <param name="y">Y size</param>
@@ -150,72 +202,25 @@ public sealed class StructureBlockState : BlockState
         Data["sizeZ"] = z;
         return this;
     }
-
-    /// <summary>
-    /// Represents rotation of the structure
-    /// </summary>
-    public enum Rotation
-    {
-        /// <summary>
-        /// No rotation
-        /// </summary>
-        [EnumData("NONE")] None,
-        /// <summary>
-        /// Clockwise 90 degree rotation
-        /// </summary>
-        [EnumData("CLOCKWISE_90")] Clockwise90,
-        /// <summary>
-        /// Clockwise 180 degree rotation
-        /// </summary>
-        [EnumData("CLOCKWISE_180")] Clockwise180,
-        /// <summary>
-        /// Counter clockwise 90 degree rotation
-        /// </summary>
-        [EnumData("COUNTER_CLOCKWISE_90")] CounterClockwise90
-    }
-    
-    /// <summary>
-    /// Represents mode of structure block
-    /// </summary>
-    public enum Mode
-    {
-        /// <summary>
-        /// SAVE
-        /// </summary>
-        Save,
-        /// <summary>
-        /// LOAD
-        /// </summary>
-        Load,
-        /// <summary>
-        /// CORNER
-        /// </summary>
-        Corner,
-        /// <summary>
-        /// DATA
-        /// </summary>
-        Data
-    }
 }
 
 /// <summary>
-/// Type of structure's mirroring
+///     Type of structure's mirroring
 /// </summary>
 public enum StructureMirror
 {
     /// <summary>
-    /// No mirroring
+    ///     No mirroring
     /// </summary>
-    [EnumData("NONE")]
-    None,
+    [EnumData("NONE")] None,
+
     /// <summary>
-    /// Left-right mirroring
+    ///     Left-right mirroring
     /// </summary>
-    [EnumData("LEFT_RIGHT")]
-    LeftRight,
+    [EnumData("LEFT_RIGHT")] LeftRight,
+
     /// <summary>
-    /// Front-back mirroring
+    ///     Front-back mirroring
     /// </summary>
-    [EnumData("FRONT_BACK")]
-    FrontBack
+    [EnumData("FRONT_BACK")] FrontBack
 }

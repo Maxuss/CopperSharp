@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents furnace's inventory
+///     Represents furnace's inventory
 /// </summary>
 public sealed class FurnaceInventory : Inventory
 {
@@ -11,7 +11,7 @@ public sealed class FurnaceInventory : Inventory
     protected override int MaxSize => 3;
 
     /// <summary>
-    /// Sets the item being smelted
+    ///     Sets the item being smelted
     /// </summary>
     /// <param name="smelted">Item to be set</param>
     /// <returns>This furnace inventory</returns>
@@ -22,7 +22,7 @@ public sealed class FurnaceInventory : Inventory
     }
 
     /// <summary>
-    /// Sets the fuel of this furnace
+    ///     Sets the fuel of this furnace
     /// </summary>
     /// <param name="fuel">Fuel to be set</param>
     /// <returns>This furnace inventory</returns>
@@ -33,7 +33,7 @@ public sealed class FurnaceInventory : Inventory
     }
 
     /// <summary>
-    /// Sets the smelting result of this furnace
+    ///     Sets the smelting result of this furnace
     /// </summary>
     /// <param name="result">Item to be set</param>
     /// <returns>This furnace inventory</returns>

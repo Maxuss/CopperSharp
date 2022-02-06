@@ -3,15 +3,15 @@ using Newtonsoft.Json;
 namespace CopperSharp.Text.Impl;
 
 /// <summary>
-/// An abstract container for components to be serialized into JSON strings
+///     An abstract container for components to be serialized into JSON strings
 /// </summary>
 [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public abstract class AbstractComponentContainer : IHoverEventContainer
 {
-    private static bool _jsonLoaded = false;
+    private static bool _jsonLoaded;
 
     /// <summary>
-    /// Loads the Json.NET library on background thread, allowing faster serialization on first run
+    ///     Loads the Json.NET library on background thread, allowing faster serialization on first run
     /// </summary>
     static AbstractComponentContainer()
     {
@@ -28,7 +28,7 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     }
 
     /// <summary>
-    /// Initializes basic fields in this component container
+    ///     Initializes basic fields in this component container
     /// </summary>
     /// <param name="parent">IComponent from which to take fields</param>
     protected AbstractComponentContainer(IComponent parent)
@@ -42,49 +42,49 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     }
 
     /// <summary>
-    /// Children of this component container
+    ///     Children of this component container
     /// </summary>
     [JsonProperty("extra")]
     public List<AbstractComponentContainer>? Children { get; protected set; }
 
     /// <summary>
-    /// Color of this component container
+    ///     Color of this component container
     /// </summary>
     [JsonProperty("color")]
     public string? Color { get; protected set; }
 
 
     /// <summary>
-    /// Insertion text to be inserted when this component is shift clicked
+    ///     Insertion text to be inserted when this component is shift clicked
     /// </summary>
     [JsonProperty("insertion")]
     public string? InsertionText { get; protected set; }
 
     /// <summary>
-    /// An event handler for component click event
+    ///     An event handler for component click event
     /// </summary>
     [JsonProperty("clickEvent")]
     public ComponentClickEvent? ClickEvent { get; protected set; }
 
     /// <summary>
-    /// An event handler for component hover event
+    ///     An event handler for component hover event
     /// </summary>
     [JsonProperty("hoverEvent")]
     public ComponentHoverEvent? HoverEvent { get; protected set; }
 
     /// <summary>
-    /// Formatting of this component
+    ///     Formatting of this component
     /// </summary>
     public Dictionary<FormattingType, bool> Formattings { get; protected set; }
 
     /// <summary>
-    /// Writes extra data to the json
+    ///     Writes extra data to the json
     /// </summary>
     /// <param name="w">Writer to which data should be written</param>
     protected abstract void WriteExtraData(JsonTextWriter w);
 
     /// <summary>
-    /// Serializes this component to JSON string
+    ///     Serializes this component to JSON string
     /// </summary>
     /// <returns>String, that can be parsed by minecraft as component</returns>
     public string Serialize()
@@ -97,10 +97,7 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
         {
             w.WritePropertyName("extra");
             w.WriteStartArray();
-            foreach (var child in Children)
-            {
-                w.WriteRawValue(child.Serialize());
-            }
+            foreach (var child in Children) w.WriteRawValue(child.Serialize());
 
             w.WriteEndArray();
         }

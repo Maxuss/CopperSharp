@@ -5,7 +5,7 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a thrown potion projectile0
+///     Represents a thrown potion projectile0
 /// </summary>
 public sealed class ThrownPotion : AbstractThrownItem
 {
@@ -13,10 +13,10 @@ public sealed class ThrownPotion : AbstractThrownItem
     {
     }
 
-    private PotionMeta? Meta { get; set; } = null;
+    private PotionMeta? Meta { get; set; }
 
     /// <summary>
-    /// Gets data from provided potion meta
+    ///     Gets data from provided potion meta
     /// </summary>
     /// <param name="meta">Meta from which to get potion data</param>
     /// <returns>This thrown potion</returns>
@@ -27,11 +27,11 @@ public sealed class ThrownPotion : AbstractThrownItem
     }
 
     /// <summary>
-    /// Gets data from provided potion meta
+    ///     Gets data from provided potion meta
     /// </summary>
     /// <param name="pot">Potion from which to get potion data</param>
     /// <returns>This thrown potion</returns>
-    /// <exception cref="Exception">If provided item does not have <see cref="PotionMeta"/></exception>
+    /// <exception cref="Exception">If provided item does not have <see cref="PotionMeta" /></exception>
     private ThrownPotion GetDataFrom(ItemStack pot)
     {
         var m = pot.Meta;

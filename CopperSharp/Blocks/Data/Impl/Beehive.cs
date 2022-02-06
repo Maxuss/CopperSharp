@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a beehive block 
+///     Represents a beehive block
 /// </summary>
 public sealed class Beehive : AbstractBlockData, IDirectional
 {
@@ -15,7 +15,7 @@ public sealed class Beehive : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Sets honey level inside this beehive
+    ///     Sets honey level inside this beehive
     /// </summary>
     /// <param name="level">New honey level</param>
     /// <returns>This beehive</returns>

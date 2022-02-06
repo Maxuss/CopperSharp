@@ -4,7 +4,7 @@ using CopperSharp.Text;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// Represents metadata of a firework item
+///     Represents metadata of a firework item
 /// </summary>
 public sealed class FireworkMeta : ItemMeta
 {
@@ -15,11 +15,11 @@ public sealed class FireworkMeta : ItemMeta
             throw new Exception("Invalid material provided");
     }
 
-    private List<FireworkExplosion> Explosions { get; set; } = new();
+    private List<FireworkExplosion> Explosions { get; } = new();
     private sbyte Flight { get; set; } = 1;
 
     /// <summary>
-    /// Adds explosions to this firework
+    ///     Adds explosions to this firework
     /// </summary>
     /// <param name="explosions">Explosions to be added</param>
     /// <returns>This firework meta</returns>
@@ -30,7 +30,7 @@ public sealed class FireworkMeta : ItemMeta
     }
 
     /// <summary>
-    /// Sets duration of the flight of this firework
+    ///     Sets duration of the flight of this firework
     /// </summary>
     /// <param name="duration">Duration to be used</param>
     /// <returns>This firework meta</returns>
@@ -49,10 +49,7 @@ public sealed class FireworkMeta : ItemMeta
         sw.WriteSByte(Flight);
         sw.WritePropertyName("Explosions");
         sw.WriteBeginArray();
-        foreach (var e in Explosions)
-        {
-            e.Serialize(sw);
-        }
+        foreach (var e in Explosions) e.Serialize(sw);
 
         sw.WriteEndArray();
         sw.WriteEndCompound();
@@ -60,18 +57,18 @@ public sealed class FireworkMeta : ItemMeta
 }
 
 /// <summary>
-/// Represents a firework explosion
+///     Represents a firework explosion
 /// </summary>
 public sealed class FireworkExplosion
 {
-    private List<int> Main { get; set; } = new();
-    private List<int> Fade { get; set; } = new();
-    private bool Flickering { get; set; } = false;
-    private bool Trailing { get; set; } = false;
-    private byte ExplosionType { get; set; } = 0;
+    private List<int> Main { get; } = new();
+    private List<int> Fade { get; } = new();
+    private bool Flickering { get; set; }
+    private bool Trailing { get; set; }
+    private byte ExplosionType { get; set; }
 
     /// <summary>
-    /// Adds main colors to this firework's explosion
+    ///     Adds main colors to this firework's explosion
     /// </summary>
     /// <param name="colors">Colors to be added</param>
     /// <returns>This firework explosion</returns>
@@ -82,7 +79,7 @@ public sealed class FireworkExplosion
     }
 
     /// <summary>
-    /// Adds fading colors to this firework's explosion
+    ///     Adds fading colors to this firework's explosion
     /// </summary>
     /// <param name="colors">Colors to be added</param>
     /// <returns>This firework explosion</returns>
@@ -93,7 +90,7 @@ public sealed class FireworkExplosion
     }
 
     /// <summary>
-    /// Adds twinkle effect to this explosion
+    ///     Adds twinkle effect to this explosion
     /// </summary>
     /// <param name="flicker">Whether to make this explosion flicker</param>
     /// <returns>This firework explosion</returns>
@@ -104,7 +101,7 @@ public sealed class FireworkExplosion
     }
 
     /// <summary>
-    /// Adds trailing effect to this explosion
+    ///     Adds trailing effect to this explosion
     /// </summary>
     /// <param name="trail">Whether to make this explosion leave trail</param>
     /// <returns>This firework explosion</returns>
@@ -115,7 +112,7 @@ public sealed class FireworkExplosion
     }
 
     /// <summary>
-    /// Sets type of this explosion
+    ///     Sets type of this explosion
     /// </summary>
     /// <param name="type">Explosion type to be set</param>
     /// <returns>This firework explosion</returns>
@@ -131,19 +128,13 @@ public sealed class FireworkExplosion
         sw.WritePropertyName("Colors");
         sw.WriteBeginArray();
         sw.WriteArrayIdentifier("I");
-        foreach (var color in Main)
-        {
-            sw.WriteInteger(color);
-        }
+        foreach (var color in Main) sw.WriteInteger(color);
 
         sw.WriteEndArray();
         sw.WritePropertyName("FadeColors");
         sw.WriteBeginArray();
         sw.WriteArrayIdentifier("I");
-        foreach (var color in Fade)
-        {
-            sw.WriteInteger(color);
-        }
+        foreach (var color in Fade) sw.WriteInteger(color);
 
         sw.WriteEndArray();
         sw.WriteBool("Flicker", Flickering);
@@ -154,32 +145,32 @@ public sealed class FireworkExplosion
 }
 
 /// <summary>
-/// Represents a firework explosion type
+///     Represents a firework explosion type
 /// </summary>
 public enum ExplosionType : byte
 {
     /// <summary>
-    /// Small ball explosion
+    ///     Small ball explosion
     /// </summary>
     SmallBall = 0,
 
     /// <summary>
-    /// Large ball explosion
+    ///     Large ball explosion
     /// </summary>
     LargeBall = 1,
 
     /// <summary>
-    /// Star-shaped explosion
+    ///     Star-shaped explosion
     /// </summary>
     Star = 2,
 
     /// <summary>
-    /// Creeper-shaped explosion
+    ///     Creeper-shaped explosion
     /// </summary>
     Creeper = 3,
 
     /// <summary>
-    /// Bursting explosion
+    ///     Bursting explosion
     /// </summary>
     Burst = 4
 }

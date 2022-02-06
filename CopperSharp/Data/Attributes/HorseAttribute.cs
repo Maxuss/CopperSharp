@@ -1,7 +1,7 @@
 namespace CopperSharp.Data.Attributes;
 
 /// <summary>
-/// Represents attributes, only applicable to horses
+///     Represents attributes, only applicable to horses
 /// </summary>
 public readonly struct HorseAttribute : IAttributeType
 {
@@ -22,7 +22,7 @@ public readonly struct HorseAttribute : IAttributeType
     public double Maximum { get; }
 
     /// <summary>
-    /// Horse jump strength in some unknown metric. 
+    ///     Horse jump strength in some unknown metric.
     /// </summary>
     public static HorseAttribute JumpStrength { get; } = new("horse.jump_strength", 0.7d, 2d);
 }

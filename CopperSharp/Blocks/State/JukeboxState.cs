@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a jukebox block state
+///     Represents a jukebox block state
 /// </summary>
 public sealed class JukeboxState : BlockState
 {
@@ -12,7 +12,7 @@ public sealed class JukeboxState : BlockState
     }
 
     /// <summary>
-    /// Sets the music record item inside this jukebox
+    ///     Sets the music record item inside this jukebox
     /// </summary>
     /// <param name="record">Item to be set</param>
     /// <returns>This jukebox state</returns>

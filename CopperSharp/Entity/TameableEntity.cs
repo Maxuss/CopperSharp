@@ -3,7 +3,7 @@ using CopperSharp.Data.SNbt;
 namespace CopperSharp.Entity;
 
 /// <summary>
-/// Represents an entity that can be tamed
+///     Represents an entity that can be tamed
 /// </summary>
 public abstract class TameableEntity : BreedableEntity
 {
@@ -15,7 +15,7 @@ public abstract class TameableEntity : BreedableEntity
     private Guid? Owner { get; set; }
 
     /// <summary>
-    /// Sets the owner of this entity
+    ///     Sets the owner of this entity
     /// </summary>
     /// <param name="owner">New owner of this entity</param>
     /// <returns>This tameable entity</returns>
@@ -26,7 +26,7 @@ public abstract class TameableEntity : BreedableEntity
     }
 
     /// <summary>
-    /// Makes this entity sit
+    ///     Makes this entity sit
     /// </summary>
     /// <param name="sitting">Whether the entity should be sitting</param>
     /// <returns>This tameable entity</returns>

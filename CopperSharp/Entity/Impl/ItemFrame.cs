@@ -3,7 +3,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents an item frame entity
+///     Represents an item frame entity
 /// </summary>
 public sealed class ItemFrame : AbstractEntity
 {
@@ -14,7 +14,7 @@ public sealed class ItemFrame : AbstractEntity
     private ItemStack? Item { get; set; }
 
     /// <summary>
-    /// Whether this item frame will not break if block, it is placed on breaks
+    ///     Whether this item frame will not break if block, it is placed on breaks
     /// </summary>
     /// <param name="fix">Whether to make it fixed</param>
     /// <returns>This item frame</returns>
@@ -25,7 +25,7 @@ public sealed class ItemFrame : AbstractEntity
     }
 
     /// <summary>
-    /// Whether this item frame is invisible
+    ///     Whether this item frame is invisible
     /// </summary>
     /// <param name="invis">Marker</param>
     /// <returns>This item frame</returns>
@@ -36,7 +36,7 @@ public sealed class ItemFrame : AbstractEntity
     }
 
     /// <summary>
-    /// Amount of times item inside this frame was rotated
+    ///     Amount of times item inside this frame was rotated
     /// </summary>
     /// <param name="times"></param>
     /// <returns>This item frame</returns>
@@ -47,7 +47,7 @@ public sealed class ItemFrame : AbstractEntity
     }
 
     /// <summary>
-    /// Drop chance of item when the frame breaks. 1.0 by default
+    ///     Drop chance of item when the frame breaks. 1.0 by default
     /// </summary>
     /// <param name="chance">Chance to drop item</param>
     /// <returns>This item frame</returns>
@@ -58,7 +58,7 @@ public sealed class ItemFrame : AbstractEntity
     }
 
     /// <summary>
-    /// Sets item stored inside this frame
+    ///     Sets item stored inside this frame
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This item frame</returns>

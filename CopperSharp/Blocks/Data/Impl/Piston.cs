@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a piston block
+///     Represents a piston block
 /// </summary>
 public sealed class Piston : AbstractBlockData, IDirectional
 {
@@ -16,7 +16,7 @@ public sealed class Piston : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Whether this piston's head is currently extended
+    ///     Whether this piston's head is currently extended
     /// </summary>
     /// <param name="extend">Whether this piston is extended</param>
     /// <returns>This piston</returns>

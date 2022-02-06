@@ -5,7 +5,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a chest minecart vehicle
+///     Represents a chest minecart vehicle
 /// </summary>
 public sealed class ChestMinecart : AbstractMinecart
 {
@@ -13,10 +13,10 @@ public sealed class ChestMinecart : AbstractMinecart
     {
     }
 
-    private List<ItemStack> Items { get; set; } = new();
+    private List<ItemStack> Items { get; } = new();
 
     /// <summary>
-    /// Adds provided items to this minecart's storage
+    ///     Adds provided items to this minecart's storage
     /// </summary>
     /// <param name="items">Items to be added</param>
     /// <returns>This chest minecart</returns>
@@ -27,7 +27,7 @@ public sealed class ChestMinecart : AbstractMinecart
     }
 
     /// <summary>
-    /// Sets loot table used to populate this minecart's contents
+    ///     Sets loot table used to populate this minecart's contents
     /// </summary>
     /// <param name="table">Loot table identifier</param>
     /// <returns>This chest minecart</returns>

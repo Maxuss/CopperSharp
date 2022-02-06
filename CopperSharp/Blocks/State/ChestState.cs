@@ -4,7 +4,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Blocks.State;
 
 /// <summary>
-/// Represents a chest block state
+///     Represents a chest block state
 /// </summary>
 public class ChestState : InventoryBlock<ChestInventory>, ILockable, ILootable
 {

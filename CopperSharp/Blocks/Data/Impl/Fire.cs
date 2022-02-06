@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a fire block
+///     Represents a fire block
 /// </summary>
 public sealed class Fire : AbstractBlockData, IAgeable, IMultipleFacing
 {

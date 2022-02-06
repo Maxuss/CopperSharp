@@ -1,47 +1,47 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a panda entity
+///     Represents a panda entity
 /// </summary>
 public sealed class Panda : BreedableEntity
 {
     /// <summary>
-    /// Represents gene of panda
+    ///     Represents gene of panda
     /// </summary>
     public enum Gene
     {
         /// <summary>
-        /// Normal
+        ///     Normal
         /// </summary>
         Normal,
 
         /// <summary>
-        /// Lazy
+        ///     Lazy
         /// </summary>
         Lazy,
 
         /// <summary>
-        /// Worried
+        ///     Worried
         /// </summary>
         Worried,
 
         /// <summary>
-        /// Playful
+        ///     Playful
         /// </summary>
         Playful,
 
         /// <summary>
-        /// Brown
+        ///     Brown
         /// </summary>
         Brown,
 
         /// <summary>
-        /// Weak
+        ///     Weak
         /// </summary>
         Weak,
 
         /// <summary>
-        /// Aggressive
+        ///     Aggressive
         /// </summary>
         Aggressive
     }
@@ -51,7 +51,7 @@ public sealed class Panda : BreedableEntity
     }
 
     /// <summary>
-    /// Sets secondary gene for this panda, that can transfer to the child
+    ///     Sets secondary gene for this panda, that can transfer to the child
     /// </summary>
     /// <param name="gene">Gene to be set</param>
     /// <returns>This panda</returns>
@@ -62,7 +62,7 @@ public sealed class Panda : BreedableEntity
     }
 
     /// <summary>
-    /// Sets primary gene, that this panda has and that can transfer to it's child
+    ///     Sets primary gene, that this panda has and that can transfer to it's child
     /// </summary>
     /// <param name="gene">Gene to be set</param>
     /// <returns>This panda</returns>

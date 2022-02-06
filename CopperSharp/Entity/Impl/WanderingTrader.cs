@@ -6,7 +6,7 @@ namespace CopperSharp.Entity.Impl;
 // kind of surprised this one is not actually a villager
 
 /// <summary>
-/// Represents a wandering trader entity
+///     Represents a wandering trader entity
 /// </summary>
 public class WanderingTrader : BreedableEntity
 {
@@ -14,11 +14,11 @@ public class WanderingTrader : BreedableEntity
     {
     }
 
-    private List<TradeOffer> Offers { get; set; } = new();
+    private List<TradeOffer> Offers { get; } = new();
     private Location? WanderTarget { get; set; }
 
     /// <summary>
-    /// Sets amount of time until this wandering trader despawns
+    ///     Sets amount of time until this wandering trader despawns
     /// </summary>
     /// <param name="ticks">Amount of time in ticks</param>
     /// <returns>This wandering trader</returns>
@@ -29,7 +29,7 @@ public class WanderingTrader : BreedableEntity
     }
 
     /// <summary>
-    /// Sets location to which this trader wanders
+    ///     Sets location to which this trader wanders
     /// </summary>
     /// <param name="to">Location to be set</param>
     /// <returns>This wandering trader</returns>
@@ -40,7 +40,7 @@ public class WanderingTrader : BreedableEntity
     }
 
     /// <summary>
-    /// Adds an offer to trades list of this trader
+    ///     Adds an offer to trades list of this trader
     /// </summary>
     /// <param name="buy">Item this trader buys</param>
     /// <param name="sell">Item this trader sells</param>

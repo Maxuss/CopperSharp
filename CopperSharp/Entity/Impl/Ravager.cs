@@ -1,7 +1,7 @@
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a ravager entity
+///     Represents a ravager entity
 /// </summary>
 public sealed class Ravager : RaidEntity
 {
@@ -10,7 +10,7 @@ public sealed class Ravager : RaidEntity
     }
 
     /// <summary>
-    /// Sets this ravager's attack cooldown
+    ///     Sets this ravager's attack cooldown
     /// </summary>
     /// <param name="tick">Amount of time in ticks</param>
     /// <returns>This ravager</returns>
@@ -21,7 +21,7 @@ public sealed class Ravager : RaidEntity
     }
 
     /// <summary>
-    /// Sets this ravager's roar attack cooldown
+    ///     Sets this ravager's roar attack cooldown
     /// </summary>
     /// <param name="tick">Amount of time in ticks</param>
     /// <returns>This ravager</returns>
@@ -32,7 +32,7 @@ public sealed class Ravager : RaidEntity
     }
 
     /// <summary>
-    /// Sets this ravager's stun attack cooldown
+    ///     Sets this ravager's stun attack cooldown
     /// </summary>
     /// <param name="tick">Amount of time in ticks</param>
     /// <returns>This ravager</returns>

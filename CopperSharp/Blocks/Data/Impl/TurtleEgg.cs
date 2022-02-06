@@ -1,12 +1,12 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a turtle egg block
+///     Represents a turtle egg block
 /// </summary>
 public sealed class TurtleEgg : AbstractBlockData
 {
     /// <summary>
-    /// Sets amount of eggs
+    ///     Sets amount of eggs
     /// </summary>
     /// <param name="eggs">Amount of eggs in range of 1 to 4</param>
     /// <returns>This turtle egg</returns>
@@ -17,7 +17,7 @@ public sealed class TurtleEgg : AbstractBlockData
     }
 
     /// <summary>
-    /// Sets state of egg's hatch.
+    ///     Sets state of egg's hatch.
     /// </summary>
     /// <param name="state">State in range of 0 to 2. Hatches when overpasses 2</param>
     /// <returns>This turtle egg</returns>

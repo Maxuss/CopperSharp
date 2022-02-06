@@ -1,12 +1,12 @@
 namespace CopperSharp.Blocks.Data;
 
 /// <summary>
-/// Represents a block entity that has different directions
+///     Represents a block entity that has different directions
 /// </summary>
 public interface IDirectional : IBlockData
 {
     /// <summary>
-    /// Sets facing rotation of this directional entity
+    ///     Sets facing rotation of this directional entity
     /// </summary>
     /// <param name="face">Face to be set</param>
     /// <returns>This directional entity</returns>
@@ -14,22 +14,22 @@ public interface IDirectional : IBlockData
 }
 
 /// <summary>
-/// Represents side the block is facing
+///     Represents side the block is facing
 /// </summary>
 public readonly struct BlockFace
 {
     /// <summary>
-    /// String representation of this block face
+    ///     String representation of this block face
     /// </summary>
     public readonly string Name;
 
     /// <summary>
-    /// Index of this block face
+    ///     Index of this block face
     /// </summary>
     public readonly int Mod;
 
     /// <summary>
-    /// Whether this block face is one of units in 3D Cartesian space
+    ///     Whether this block face is one of units in 3D Cartesian space
     /// </summary>
     public readonly bool Cartesian;
 
@@ -41,97 +41,97 @@ public readonly struct BlockFace
     }
 
     /// <summary>
-    /// Cartesian face down
+    ///     Cartesian face down
     /// </summary>
     public static readonly BlockFace Down = new(-1, true, "down");
 
     /// <summary>
-    /// Cartesian rotation east
+    ///     Cartesian rotation east
     /// </summary>
     public static readonly BlockFace East = new(12, true, "east");
 
     /// <summary>
-    /// Rotation east-north-east
+    ///     Rotation east-north-east
     /// </summary>
     public static readonly BlockFace EastNorthEast = new(11, false);
 
     /// <summary>
-    /// Rotation east-south-east
+    ///     Rotation east-south-east
     /// </summary>
     public static readonly BlockFace EastSouthEast = new(13, false);
 
     /// <summary>
-    /// Cartesian rotation north
+    ///     Cartesian rotation north
     /// </summary>
     public static readonly BlockFace North = new(8, true, "north");
 
     /// <summary>
-    /// Rotation north-east
+    ///     Rotation north-east
     /// </summary>
     public static readonly BlockFace NorthEast = new(10, false);
 
     /// <summary>
-    /// Rotation north-north-east
+    ///     Rotation north-north-east
     /// </summary>
     public static readonly BlockFace NorthNorthEast = new(9, false);
 
     /// <summary>
-    /// Rotation north-north-west
+    ///     Rotation north-north-west
     /// </summary>
     public static readonly BlockFace NorthNorthWest = new(7, false);
 
     /// <summary>
-    /// Rotation north-west
+    ///     Rotation north-west
     /// </summary>
     public static readonly BlockFace NorthWest = new(6, false);
 
     /// <summary>
-    /// Cartesian face self
+    ///     Cartesian face self
     /// </summary>
     public static readonly BlockFace Self = new(-1, true, "self");
 
     /// <summary>
-    /// Cartesian rotation south
+    ///     Cartesian rotation south
     /// </summary>
     public static readonly BlockFace South = new(0, true, "south");
 
     /// <summary>
-    /// Rotation south-east
+    ///     Rotation south-east
     /// </summary>
     public static readonly BlockFace SouthEast = new(14, false);
 
     /// <summary>
-    /// Rotation south-south-east
+    ///     Rotation south-south-east
     /// </summary>
     public static readonly BlockFace SouthSouthEast = new(15, false);
 
     /// <summary>
-    /// Rotation south-south-west
+    ///     Rotation south-south-west
     /// </summary>
     public static readonly BlockFace SouthSouthWest = new(1, false);
 
     /// <summary>
-    /// Rotation south-west
+    ///     Rotation south-west
     /// </summary>
     public static readonly BlockFace SouthWest = new(2, false);
 
     /// <summary>
-    /// Cartesian face up
+    ///     Cartesian face up
     /// </summary>
     public static readonly BlockFace Up = new(-1, true, "down");
 
     /// <summary>
-    /// Cartesian rotation west
+    ///     Cartesian rotation west
     /// </summary>
     public static readonly BlockFace West = new(4, true, "west");
 
     /// <summary>
-    /// Rotation west-north-west
+    ///     Rotation west-north-west
     /// </summary>
     public static readonly BlockFace WestNorthWest = new(5, false);
 
     /// <summary>
-    /// Rotation west-south-west
+    ///     Rotation west-south-west
     /// </summary>
     public static readonly BlockFace WestSouthWest = new(3, false);
 }

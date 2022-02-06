@@ -3,79 +3,79 @@ using CopperSharp.Item.Meta;
 namespace CopperSharp.Entity.Impl;
 
 /// <summary>
-/// Represents a tropical fish entity
+///     Represents a tropical fish entity
 /// </summary>
 public sealed class TropicalFish : LivingEntity
 {
     /// <summary>
-    /// Represents a fishes pattern
+    ///     Represents a fishes pattern
     /// </summary>
     public enum Pattern : byte
     {
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Kob = 0,
 
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Sunstreak = 1,
 
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Snooper = 2,
 
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Dasher = 3,
 
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Brinely = 4,
 
         /// <summary>
-        /// Small fish
+        ///     Small fish
         /// </summary>
         Spotty = 5,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Flopper = 10,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Stripey = 11,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Gitter = 12,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Blockfish = 13,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Betty = 14,
 
         /// <summary>
-        /// Big fish
+        ///     Big fish
         /// </summary>
         Clayfish = 15,
 
         /// <summary>
-        /// No pattern
+        ///     No pattern
         /// </summary>
-        None = 16,
+        None = 16
     }
 
     internal TropicalFish() : base(EntityType.TropicalFish)
@@ -83,7 +83,7 @@ public sealed class TropicalFish : LivingEntity
     }
 
     /// <summary>
-    /// Whether this fish was released from bucket
+    ///     Whether this fish was released from bucket
     /// </summary>
     /// <param name="from">Marker</param>
     /// <returns>This tropical fish</returns>
@@ -94,7 +94,7 @@ public sealed class TropicalFish : LivingEntity
     }
 
     /// <summary>
-    /// Sets variant of this tropical fish
+    ///     Sets variant of this tropical fish
     /// </summary>
     /// <param name="pattern">Pattern to be used</param>
     /// <param name="bodyColor">Color of the fishes body</param>
@@ -110,7 +110,7 @@ public sealed class TropicalFish : LivingEntity
         var pat = (byte) (isBig ? (byte) pattern - 10 : (byte) pattern);
         var bdc = (byte) bodyColor;
         var ptc = (byte) patternColor;
-        Ints["Variant"] = BitConverter.ToInt32(new byte[] {big, pat, bdc, ptc});
+        Ints["Variant"] = BitConverter.ToInt32(new[] {big, pat, bdc, ptc});
         return this;
     }
 }

@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a grindstone block
+///     Represents a grindstone block
 /// </summary>
 public sealed class Grindstone : AbstractBlockData, IDirectional, IFaceAttachable
 {

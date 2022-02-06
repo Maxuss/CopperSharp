@@ -1,7 +1,7 @@
 namespace CopperSharp.Blocks.Data.Impl;
 
 /// <summary>
-/// Represents a hopper block
+///     Represents a hopper block
 /// </summary>
 public sealed class Hopper : AbstractBlockData, IDirectional
 {
@@ -16,7 +16,7 @@ public sealed class Hopper : AbstractBlockData, IDirectional
     }
 
     /// <summary>
-    /// Sets whether this hopper is enabled
+    ///     Sets whether this hopper is enabled
     /// </summary>
     /// <param name="enabled">Marker</param>
     /// <returns>This hopper</returns>
