@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using CopperSharp.Functions;
 using CopperSharp.Text.Impl;
 using CopperSharp.Utils;
 
@@ -35,9 +34,9 @@ public readonly struct ClickEvent
     ///     Runs a provided command for user
     /// </summary>
     /// <param name="command">Command to be ran</param>
-    public static ClickEvent RunCommand(IAction command)
+    public static ClickEvent RunCommand(string command)
     {
-        return new(ClickEventType.RunCommand, command.ToAction());
+        return new(ClickEventType.RunCommand, command);
     }
 
     /// <summary>
