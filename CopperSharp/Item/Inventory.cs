@@ -15,6 +15,7 @@ public abstract class Inventory : IEnumerable<(ItemStack?, int)>
 
     private List<(ItemStack?, int)> Slots { get; } = new();
 
+    /// <inheritdoc />
     public IEnumerator<(ItemStack?, int)> GetEnumerator()
     {
         return Slots.GetEnumerator();

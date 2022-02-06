@@ -16,8 +16,9 @@ public abstract class InventoryBlock<TInventory> : BlockState where TInventory :
     /// <summary>
     ///     Inventory of this inventory block state
     /// </summary>
+    #nullable disable
     public TInventory Inventory { get; protected set; }
-
+    #nullable restore
     /// <summary>
     ///     Adds an item to this inventory container
     /// </summary>
