@@ -46,7 +46,9 @@ public abstract class TriggerCondition
     /// Extra entity slots to be used
     /// </summary>
     protected Dictionary<string, EntityPredicate> Entities { get; set; } = new();
-
+    /// <summary>
+    /// Player data inside this trigger
+    /// </summary>
     protected EntityPredicate? PlayerData { get; set; }
 
     /// <summary>
