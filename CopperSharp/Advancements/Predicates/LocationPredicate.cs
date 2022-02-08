@@ -1,5 +1,6 @@
 using CopperSharp.Registry;
 using CopperSharp.Utils;
+using CopperSharp.World;
 using Newtonsoft.Json;
 
 namespace CopperSharp.Advancements.Predicates;
@@ -32,9 +33,9 @@ public sealed class LocationPredicate
     /// </summary>
     /// <param name="dimension">Dimension to be set</param>
     /// <returns>This location predicate</returns>
-    public LocationPredicate Dimension(Identifier dimension)
+    public LocationPredicate Dimension(Dimension dimension)
     {
-        Data["dimension"] = dimension.Path;
+        Data["dimension"] = dimension.GetName().ToSnakeCase();
         return this;
     }
 

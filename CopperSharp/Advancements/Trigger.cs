@@ -1,4 +1,5 @@
 using CopperSharp.Advancements.Predicates;
+using CopperSharp.Utils;
 using Newtonsoft.Json;
 
 namespace CopperSharp.Advancements;
@@ -29,6 +30,10 @@ public readonly struct Trigger
 /// </summary>
 public abstract class TriggerCondition
 {
+    /// <summary>
+    /// Extra ranges to be stored
+    /// </summary>
+    protected Dictionary<string, StrictRange> Ranges { get; set; } = new();
     /// <summary>
     /// Extra data for this trigger condition
     /// </summary>
@@ -89,6 +94,11 @@ public abstract class TriggerCondition
             await w.WritePropertyNameAsync(key);
             await value.SerializeInto(w);
         }
+        
+        foreach (var (key, value) in Ranges)
+        {
+            await value.SerializeInto(w, key);
+        }
 
         if (PlayerData != null)
         {
@@ -96,6 +106,7 @@ public abstract class TriggerCondition
             await (PlayerData?.SerializeInto(w) ?? Task.CompletedTask);
         }
         
+
         await SerializeExtra(w);
     }
 }
