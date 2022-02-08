@@ -34,7 +34,7 @@ public abstract class EntityBlockState<TEntity> : BlockState where TEntity : Abs
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    internal override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);
 

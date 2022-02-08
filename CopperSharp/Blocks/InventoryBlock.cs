@@ -36,7 +36,7 @@ public abstract class InventoryBlock<TInventory> : BlockState where TInventory :
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    internal override void SerializeExtra(StringNbtWriter sw)
     {
         base.SerializeExtra(sw);
 

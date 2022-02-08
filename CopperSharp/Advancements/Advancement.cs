@@ -17,6 +17,7 @@ public sealed class Advancement
     private bool? AdvHidden { get; set; }
     private AdvancementGroup? AdvGroup { get; set; }
     private Advancement? AdvParent { get; set; }
+    private AdvancementReward? AdvRewards { get; set; }
 
     /// <summary>
     /// Marks this advancement as root of provided advancement group. Nullifies parent advancement
@@ -105,6 +106,17 @@ public sealed class Advancement
     public Advancement Hidden(bool hide = true)
     {
         AdvHidden = hide;
+        return this;
+    }
+
+    /// <summary>
+    /// Sets rewards for this advancement
+    /// </summary>
+    /// <param name="rewards">Reward to be set</param>
+    /// <returns>This advancement</returns>
+    public Advancement Reward(AdvancementReward rewards)
+    {
+        AdvRewards = rewards;
         return this;
     }
 }

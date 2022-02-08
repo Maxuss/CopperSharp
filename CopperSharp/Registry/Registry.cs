@@ -1,3 +1,6 @@
+using CopperSharp.Advancements;
+using CopperSharp.Functions;
+
 namespace CopperSharp.Registry;
 
 /// <summary>
@@ -25,6 +28,36 @@ public abstract class Registry<TElement>
     /// <returns>The provided element</returns>
     public abstract TElement Register(TElement element, Identifier id);
 
+    /// <summary>
+    /// Looks up provided element in this registry
+    /// </summary>
+    /// <param name="element">Element to be looked up</param>
+    /// <returns>Found identifier of element, or null</returns>
+    public Identifier? Seek(TElement element)
+    {
+        var filtered = Stack.Where(it => it.Item1?.Equals(element) == true);
+        var valueTuples = filtered.ToList();
+        if (!valueTuples.Any())
+            return null;
+        return valueTuples[0].Item2;
+    }
+}
+
+/// <summary>
+/// Class, containing all global registries
+/// </summary>
+public static class Registries
+{
+    /// <summary>
+    /// Global function registry
+    /// </summary>
+    public static Registry<IFunction> Functions { get; } = new FunctionRegistry();
+
+    /// <summary>
+    /// Global advancement registry
+    /// </summary>
+    public static Registry<Advancement> Advancements { get; } = new AdvancementRegistry();
+    
     /// <summary>
     /// Registers provided element in provided registry
     /// </summary>

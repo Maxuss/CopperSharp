@@ -3,6 +3,7 @@ using CopperSharp.Data.SNbt;
 using CopperSharp.Item;
 using CopperSharp.Registry;
 using CopperSharp.Text;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Blocks;
 
@@ -63,7 +64,7 @@ public abstract class BlockState : IState
     ///     Writes extra data of this block state
     /// </summary>
     /// <param name="sw">Writes extra data here</param>
-    protected virtual void SerializeExtra(StringNbtWriter sw)
+    internal virtual void SerializeExtra(StringNbtWriter sw)
     {
     }
 }
