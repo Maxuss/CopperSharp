@@ -1,4 +1,5 @@
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Data.SNbt.Impl;
 
@@ -40,6 +41,15 @@ public sealed class NbtArray : INbtValue, IEnumerable<INbtValue>
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteBeginArray();
+        foreach (var item in Values) item.SerializeInto(sw);
+
+        sw.WriteEndArray();
+    }
+
+    /// <inheritdoc />
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteStartArray();
         foreach (var item in Values) item.SerializeInto(sw);
 
         sw.WriteEndArray();

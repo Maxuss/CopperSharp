@@ -1,5 +1,6 @@
 using CopperSharp.Data.Locations;
 using CopperSharp.Item;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Data.SNbt.Impl;
 
@@ -16,6 +17,11 @@ internal readonly struct StringNbtValue : INbtValue
     {
         sw.WriteString(_v);
     }
+
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
+    }
 }
 
 internal readonly struct IntNbtValue : INbtValue
@@ -30,6 +36,11 @@ internal readonly struct IntNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteInteger(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
     }
 }
 
@@ -46,6 +57,11 @@ internal readonly struct DoubleNbtValue : INbtValue
     {
         sw.WriteDouble(_v);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
+    }
 }
 
 internal readonly struct FloatNbtValue : INbtValue
@@ -60,6 +76,11 @@ internal readonly struct FloatNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteFloat(_v);
+    }
+
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
     }
 }
 
@@ -76,6 +97,11 @@ internal readonly struct ByteNbtValue : INbtValue
     {
         sw.WriteByte(_v);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
+    }
 }
 
 internal readonly struct SByteNbtValue : INbtValue
@@ -90,6 +116,11 @@ internal readonly struct SByteNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteSByte(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
     }
 }
 
@@ -106,6 +137,11 @@ internal readonly struct ShortNbtValue : INbtValue
     {
         sw.WriteShort(_v);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
+    }
 }
 
 internal readonly struct LongNbtValue : INbtValue
@@ -120,6 +156,11 @@ internal readonly struct LongNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteLong(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
     }
 }
 
@@ -136,6 +177,11 @@ internal readonly struct BoolNbtValue : INbtValue
     {
         sw.WriteBool(_v);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
+    }
 }
 
 internal readonly struct GuidNbtValue : INbtValue
@@ -150,6 +196,11 @@ internal readonly struct GuidNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WriteUuidArray(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteValue(_v);
     }
 }
 
@@ -166,6 +217,17 @@ internal readonly struct CompoundNbtValue : INbtValue
     {
         _v.SerializeInto(sw);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        sw.WriteStartObject();
+        foreach (var e in _v)
+        {
+            sw.WritePropertyName(e.Key);
+            e.Value.SerializeInto(sw);
+        }
+        sw.WriteEndObject();
+    }
 }
 
 internal readonly struct RawNbtValue : INbtValue
@@ -178,6 +240,11 @@ internal readonly struct RawNbtValue : INbtValue
     }
 
     public void SerializeInto(StringNbtWriter sw)
+    {
+        sw.WriteRawValue(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
     {
         sw.WriteRawValue(_v);
     }
@@ -196,6 +263,11 @@ internal readonly struct ItemNbtValue : INbtValue
     {
         sw.WriteItem(_v);
     }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        throw new PlatformNotSupportedException("Items are not supposed to be serialized to JSON!");
+    }
 }
 
 internal readonly struct SlotItemNbtValue : INbtValue
@@ -211,6 +283,11 @@ internal readonly struct SlotItemNbtValue : INbtValue
     {
         sw.WriteItem(_v.Item1, _v.Item2);
     }
+
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        throw new PlatformNotSupportedException("Items are not supposed to be serialized to JSON!");
+    }
 }
 
 internal readonly struct LocationNbtValue : INbtValue
@@ -225,5 +302,10 @@ internal readonly struct LocationNbtValue : INbtValue
     public void SerializeInto(StringNbtWriter sw)
     {
         sw.WritePosition(_v);
+    }
+    
+    public void SerializeInto(JsonTextWriter sw)
+    {
+        throw new PlatformNotSupportedException("Locations are not supposed to be serialized to JSON!");
     }
 }

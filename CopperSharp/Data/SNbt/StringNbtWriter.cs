@@ -555,7 +555,8 @@ public class StringNbtWriter : IDisposable
 
     private void ValidateCanWriteValue()
     {
-        if (_state != State.Array && _state != State.InProperty)
+        // ReSharper disable once MergeIntoLogicalPattern
+        if (_state != State.Array || _state != State.InProperty)
             throw new Exception("Writing a value in current state would result in malformed SNBT!");
 
         ValidateArray();

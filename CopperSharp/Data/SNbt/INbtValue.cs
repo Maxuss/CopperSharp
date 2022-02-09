@@ -1,6 +1,7 @@
 using CopperSharp.Data.Locations;
 using CopperSharp.Data.SNbt.Impl;
 using CopperSharp.Item;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Data.SNbt;
 
@@ -15,6 +16,13 @@ public interface INbtValue
     /// <param name="sw">String writer to which data should be written</param>
     public void SerializeInto(StringNbtWriter sw); // ReSharper disable RedundantCast
 
+    /// <summary>
+    ///     Writes data to provided json string writer
+    /// </summary>
+    /// <param name="sw">String writer to which data should be written</param>
+    public void SerializeInto(JsonTextWriter sw); // ReSharper disable RedundantCast
+
+    
     /// <summary>
     ///     Wrap provided value inside an NBT tag
     /// </summary>
