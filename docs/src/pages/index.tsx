@@ -29,8 +29,8 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`Index Page | ${siteConfig.title}`}
+      description="CopperSharp is a minecraft datapack library for C#">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

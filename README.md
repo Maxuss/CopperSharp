@@ -1,0 +1,3 @@
+# CopperSharp
+
+README IN DEVELOPMENT
