@@ -207,12 +207,12 @@ public sealed class Advancement
         if (AdvParent != null)
         {
             await jw.WritePropertyNameAsync("parent");
-            await jw.WriteValueAsync(Registries.Advancements.Seek(AdvParent) ?? Identifier.Minecraft("null"));
+            await jw.WriteValueAsync((Registries.Advancements.Seek(AdvParent) ?? Identifier.Minecraft("null")).ToString());
         }
 
         await jw.WritePropertyNameAsync("criteria");
         await jw.WriteStartObjectAsync();
-        
+
         if (AdvCriteria.Count <= 0)
             throw new Exception("An advancement must contain at least 1 criterion!");
         

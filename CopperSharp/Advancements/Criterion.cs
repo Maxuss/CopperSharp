@@ -40,7 +40,7 @@ public sealed class Criterion
         await jw.WritePropertyNameAsync(Name);
         await jw.WriteStartObjectAsync();
         await jw.WritePropertyNameAsync("trigger");
-        await jw.WritePropertyNameAsync(triggerName);
+        await jw.WriteValueAsync(triggerName);
         await jw.WritePropertyNameAsync("conditions");
         await Trigger.SerializeInto(jw);
         await jw.WriteEndObjectAsync();

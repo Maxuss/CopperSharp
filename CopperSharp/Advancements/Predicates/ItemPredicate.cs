@@ -19,6 +19,13 @@ public struct ItemPredicate
     private List<Material> Types { get; } = new();
 
     /// <summary>
+    /// Constructs a new simple item predicate
+    /// </summary>
+    /// <param name="type">Types of this predicate</param>
+    /// <returns>New constructed predicate</returns>
+    public static ItemPredicate Simple(params Material[] type) => new ItemPredicate().OfTypes(type);
+
+    /// <summary>
     /// Sets possible counts of item
     /// </summary>
     /// <param name="count">Count to be set</param>
