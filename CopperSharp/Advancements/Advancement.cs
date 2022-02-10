@@ -18,6 +18,8 @@ public sealed class Advancement
     private AdvancementGroup? AdvGroup { get; set; }
     private Advancement? AdvParent { get; set; }
     private AdvancementReward? AdvRewards { get; set; }
+    private List<Criterion> AdvCriteria { get; set; } = new();
+    private List<string[]> AdvRequirements { get; set; } = new();
 
     /// <summary>
     /// Marks this advancement as root of provided advancement group. Nullifies parent advancement
@@ -117,6 +119,30 @@ public sealed class Advancement
     public Advancement Reward(AdvancementReward rewards)
     {
         AdvRewards = rewards;
+        return this;
+    }
+
+    /// <summary>
+    /// Adds provided criteria to this advancement
+    /// </summary>
+    /// <param name="crits">Criteria to be added</param>
+    /// <returns>This advancement</returns>
+    public Advancement Criteria(params Criterion[] crits)
+    {
+        AdvCriteria.AddRange(crits);
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a new requirement case to this advancement.
+    ///
+    /// Optional. By default all criteria must be completed
+    /// </summary>
+    /// <param name="reqs">A single requirements case</param>
+    /// <returns>This advancement</returns>
+    public Advancement AddRequirements(params string[] reqs)
+    {
+        AdvRequirements.Add(reqs);
         return this;
     }
 }

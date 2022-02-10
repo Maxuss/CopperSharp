@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player causes a raid.
 /// </summary>
+[CriterionName("voluntary_exile")]
 public sealed class VoluntaryExileTrigger : TriggerCondition
 {
     /// <summary>

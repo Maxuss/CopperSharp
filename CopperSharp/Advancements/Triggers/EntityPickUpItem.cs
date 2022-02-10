@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player throws an item
 /// and another entity picks it up.
 /// </summary>
+[CriterionName("thrown_item_picked_up_by_entity")]
 public sealed class EntityPickUpItem : TriggerCondition
 {
     /// <summary>

@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player slides down a block.
 /// </summary>
+[CriterionName("slid_down_block")]
 public sealed class SlideDownBlock : TriggerCondition
 {
     /// <summary>

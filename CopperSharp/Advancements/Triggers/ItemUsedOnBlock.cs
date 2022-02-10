@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player uses their hand or an item on a block
 /// </summary>
+[CriterionName("item_used_on_block")]
 public sealed class ItemUsedOnBlock : TriggerCondition
 {
     /// <summary>

@@ -9,6 +9,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player places a block.
 /// </summary>
+[CriterionName("placed_block")]
 public sealed class PlacedBlock : TriggerCondition
 {
     private NbtCompound? States { get; set; }

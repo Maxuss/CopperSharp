@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player hurts a mob or player.
 /// </summary>
+[CriterionName("player_hurt_entity")]
 public sealed class PlayerDamageEntity : TriggerCondition
 {
     private DamagePredicate? Dmg { get; set; }

@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player tames an animal.
 /// </summary>
+[CriterionName("tame_animal")]
 public sealed class TameAnimal : TriggerCondition
 {
     /// <summary>

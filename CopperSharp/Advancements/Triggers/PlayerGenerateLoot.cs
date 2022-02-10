@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// of a container with a loot table set.
 /// E.g. kills an entity or opens a dungeon chest.
 /// </summary>
+[CriterionName("player_generate_loot")]
 public sealed class PlayerGenerateLoot : TriggerCondition
 {
     /// <summary>

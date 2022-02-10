@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 ///
 /// Note, that all the vehicle data must be stored using the <see cref="TriggerCondition.RequirePlayer"/>
 /// </summary>
+[CriterionName("started_riding")]
 public sealed class StartedRiding : TriggerCondition
 {
 }

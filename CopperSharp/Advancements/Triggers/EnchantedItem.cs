@@ -8,6 +8,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// an enchanting table (does not get triggered through
 /// an anvil, or through commands).
 /// </summary>
+[CriterionName("enchanted_item")]
 public sealed class EnchantedItem : TriggerCondition
 {
     /// <summary>

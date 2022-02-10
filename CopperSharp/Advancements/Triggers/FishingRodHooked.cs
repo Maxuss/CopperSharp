@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// item with a fishing rod or pulls an entity with
 /// a fishing rod
 /// </summary>
+[CriterionName("fishing_rod_hooked")]
 public sealed class FishingRodHooked : TriggerCondition
 {
     /// <summary>

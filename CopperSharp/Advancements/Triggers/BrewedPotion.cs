@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player takes any item out of a brewing stand.
 /// </summary>
+[CriterionName("brewed_potion")]
 public sealed class BrewedPotion : TriggerCondition
 {
     /// <summary>

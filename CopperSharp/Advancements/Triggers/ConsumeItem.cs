@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player consumes an item
 /// </summary>
+[CriterionName("consume_item")]
 public sealed class ConsumeItem : TriggerCondition
 {
     /// <summary>

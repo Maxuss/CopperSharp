@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after a living entity kills a player
 /// </summary>
+[CriterionName("entity_killed_player")]
 public sealed class EntityKillPlayer : TriggerCondition
 {
     private DamagePredicate? Dmg { get; set; }

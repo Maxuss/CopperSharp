@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers every 20 ticks (1 second) and checks where the player is
 /// </summary>
+[CriterionName("location")]
 public sealed class LocationTrigger : TriggerCondition
 {
     /// <summary>

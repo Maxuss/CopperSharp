@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when a player lands after falling
 /// </summary>
+[CriterionName("fall_from_height")]
 public sealed class FallFromHeight : TriggerCondition
 {
     /// <summary>

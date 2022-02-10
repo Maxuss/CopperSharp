@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player travels between two dimensions
 /// </summary>
+[CriterionName("changed_dimension")]
 public sealed class ChangedDimension : TriggerCondition
 {
     /// <summary>

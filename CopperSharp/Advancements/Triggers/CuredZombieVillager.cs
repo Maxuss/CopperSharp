@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player cures a zombie villager
 /// </summary>
+[CriterionName("cured_zombie_villager")]
 public class CuredZombieVillager : TriggerCondition
 {
     /// <summary>

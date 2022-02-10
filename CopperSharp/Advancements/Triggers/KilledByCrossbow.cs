@@ -8,6 +8,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player kills
 /// a mob or player using a crossbow in ranged combat
 /// </summary>
+[CriterionName("killed_by_crossbow")]
 public sealed class KilledByCrossbow : TriggerCondition
 {
     private List<EntityPredicate> Vic { get; set; } = new();

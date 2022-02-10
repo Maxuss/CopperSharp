@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers when the player travels to the Nether
 /// and then <b>returns</b> to the Overworld
 /// </summary>
+[CriterionName("nether_travel")]
 public sealed class NetherTravel : TriggerCondition
 {
     /// <summary>

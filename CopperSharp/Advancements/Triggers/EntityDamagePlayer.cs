@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after a player gets hurt,
 /// even without a source entity (idk why it is named like that, ask mojang)
 /// </summary>
+[CriterionName("entity_hurt_player")]
 public sealed class EntityDamagePlayer : TriggerCondition
 {
     private DamagePredicate? Dmg { get; set; }

@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player unlocks a recipe
 /// (e.g. using a knowledge book).
 /// </summary>
+[CriterionName("recipe_unlocked")]
 public sealed class RecipeUnlocked : TriggerCondition
 {
     /// <summary>

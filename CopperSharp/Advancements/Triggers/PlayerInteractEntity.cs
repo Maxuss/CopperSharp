@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player interacts with an entity.
 /// </summary>
+[CriterionName("player_interacted_with_entity")]
 public sealed class PlayerInteractEntity : TriggerCondition
 {
     /// <summary>

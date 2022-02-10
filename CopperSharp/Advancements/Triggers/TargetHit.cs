@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player shoots a target block
 /// </summary>
+[CriterionName("target_hit")]
 public sealed class TargetHit : TriggerCondition
 {
     /// <summary>

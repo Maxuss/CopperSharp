@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player uses a totem.
 /// </summary>
+[CriterionName("used_totem")]
 public sealed class UsedTotem : TriggerCondition
 {
     /// <summary>

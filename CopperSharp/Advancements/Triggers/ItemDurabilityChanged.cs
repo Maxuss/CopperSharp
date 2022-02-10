@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after any item in the inventory has
 /// been damaged in any form. 
 /// </summary>
+[CriterionName("item_durability_changed")]
 public sealed class ItemDurabilityChanged : TriggerCondition
 {
     /// <summary>

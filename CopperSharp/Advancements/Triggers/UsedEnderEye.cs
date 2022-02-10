@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers when the player uses an eye of ender
 /// (in a world where strongholds generate).
 /// </summary>
+[CriterionName("used_ender_eye")]
 public sealed class UsedEnderEye : TriggerCondition
 {
     /// <summary>

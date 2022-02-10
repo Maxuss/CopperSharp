@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player changes the structure
 /// of a beacon. (When the beacon updates itself).
 /// </summary>
+[CriterionName("construct_beacon")]
 public sealed class ConstructBeacon : TriggerCondition
 {
     /// <summary>

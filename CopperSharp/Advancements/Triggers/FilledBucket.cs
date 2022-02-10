@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player fills a bucket
 /// </summary>
+[CriterionName("filled_bucket")]
 public sealed class FilledBucket : TriggerCondition
 {
     /// <summary>

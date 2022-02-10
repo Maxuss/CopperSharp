@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player successfully uses the
 /// Channeling enchantment on an entity or a lightning rod
 /// </summary>
+[CriterionName("channeled_lightning")]
 public sealed class ChanneledLightning : TriggerCondition
 {
     private List<EntityPredicate> Victim { get; } = new();

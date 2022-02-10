@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player defeats a raid.
 /// </summary>
+[CriterionName("hero_of_the_village")]
 public sealed class HeroOfTheVillage : TriggerCondition
 {
     /// <summary>

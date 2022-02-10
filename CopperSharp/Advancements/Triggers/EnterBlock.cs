@@ -13,6 +13,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// which only works if the advancement is revoked
 /// from within the advancement using a function reward
 /// </summary>
+[CriterionName("enter_block")]
 public sealed class EnterBlock : TriggerCondition
 {
     private NbtCompound? States { get; set; }

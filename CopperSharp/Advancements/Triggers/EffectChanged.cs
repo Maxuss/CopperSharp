@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player gets a status effect applied or taken from them
 /// </summary>
+[CriterionName("effects_changed")]
 public sealed class EffectChanged : TriggerCondition
 {
     private List<EffectPredicate> Predicates { get; set; } = new();

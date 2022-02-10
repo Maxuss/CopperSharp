@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after any changes happen to the player's inventory
 /// </summary>
+[CriterionName("inventory_changed")]
 public sealed class InventoryChanged : TriggerCondition
 {
     private List<ItemPredicate> Inv { get; set; } = new();

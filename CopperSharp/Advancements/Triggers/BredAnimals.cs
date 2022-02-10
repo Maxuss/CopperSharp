@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers after the player breeds 2 animals.
 /// </summary>
+[CriterionName("bred_animals")]
 public sealed class BredAnimals : TriggerCondition
 {
     /// <summary>

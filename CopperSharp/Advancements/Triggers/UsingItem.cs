@@ -12,6 +12,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// from a single click, such as fishing rods,
 /// do not affect this trigger.
 /// </summary>
+[CriterionName("using_item")]
 public sealed class UsingItem : TriggerCondition
 {
     /// <summary>

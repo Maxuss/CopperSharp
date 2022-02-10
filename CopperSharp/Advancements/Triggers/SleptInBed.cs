@@ -5,6 +5,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player enters a bed.
 /// </summary>
+[CriterionName("slept_in_bed")]
 public sealed class SleptInBed : TriggerCondition
 {
     /// <summary>

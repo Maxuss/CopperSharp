@@ -7,6 +7,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Triggers when the player has the levitation status effect
 /// </summary>
+[CriterionName("levitation")]
 public sealed class LevitationTrigger : TriggerCondition
 {
     /// <summary>

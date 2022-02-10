@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// Triggers after the player
 /// trades with a villager or a wandering trader.
 /// </summary>
+[CriterionName("villager_trade")]
 public sealed class VillagerTradeComplete : TriggerCondition
 {
     /// <summary>

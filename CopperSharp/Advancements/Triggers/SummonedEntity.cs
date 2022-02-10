@@ -14,6 +14,7 @@ namespace CopperSharp.Advancements.Triggers;
 ///
 /// Spawn eggs, commands and mob spawners will not work however.
 /// </summary>
+[CriterionName("summoned_entity")]
 public sealed class SummonedEntity : TriggerCondition
 {
     /// <summary>

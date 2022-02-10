@@ -6,6 +6,7 @@ namespace CopperSharp.Advancements.Triggers;
 /// <summary>
 /// Bee nest destroyed trigger condition
 /// </summary>
+[CriterionName("bee_nest_destroyed")]
 public sealed class BeeNestDestroyed : TriggerCondition
 {
     /// <summary>
