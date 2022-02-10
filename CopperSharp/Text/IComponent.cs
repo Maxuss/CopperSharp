@@ -108,10 +108,11 @@ public interface IComponent : ICloneable
     /// <summary>
     ///     Serializes this component to JSON string
     /// </summary>
+    /// <param name="indent">Whether to indent this component</param>
     /// <returns>String, that can be parsed by minecraft as component</returns>
-    public string Serialize()
+    public string Serialize(bool indent = false)
     {
-        return Contain().Serialize();
+        return Contain().Serialize(indent);
     }
 
     /// <summary>

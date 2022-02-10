@@ -13,7 +13,7 @@ public sealed class SleptInBed : TriggerCondition
     /// </summary>
     /// <param name="at">Location to be set</param>
     /// <returns>This trigger</returns>
-    public SleptInBed Location(LocationPredicate at)
+    public SleptInBed BedLocation(LocationPredicate at)
     {
         Locations["location"] = at;
         return this;

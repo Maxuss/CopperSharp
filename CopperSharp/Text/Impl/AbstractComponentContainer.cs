@@ -87,10 +87,11 @@ public abstract class AbstractComponentContainer : IHoverEventContainer
     ///     Serializes this component to JSON string
     /// </summary>
     /// <returns>String, that can be parsed by minecraft as component</returns>
-    public string Serialize()
+    public string Serialize(bool indent = false)
     {
         using var sw = new StringWriter();
         using var w = new JsonTextWriter(sw);
+        w.Formatting = indent ? Formatting.Indented : Formatting.None;
         w.WriteStartObject();
         WriteExtraData(w);
         if (Children != null)

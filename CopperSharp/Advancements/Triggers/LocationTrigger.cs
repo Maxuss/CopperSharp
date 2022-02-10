@@ -13,7 +13,7 @@ public sealed class LocationTrigger : TriggerCondition
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger condition</returns>
-    public LocationTrigger Location(LocationPredicate loc)
+    public LocationTrigger FoundLocation(LocationPredicate loc)
     {
         Locations["location"] = loc;
         return this;

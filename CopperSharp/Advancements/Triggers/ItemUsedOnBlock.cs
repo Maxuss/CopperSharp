@@ -13,7 +13,7 @@ public sealed class ItemUsedOnBlock : TriggerCondition
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger</returns>
-    public ItemUsedOnBlock Location(LocationPredicate loc)
+    public ItemUsedOnBlock BlockLocation(LocationPredicate loc)
     {
         Locations["location"] = loc;
         return this;

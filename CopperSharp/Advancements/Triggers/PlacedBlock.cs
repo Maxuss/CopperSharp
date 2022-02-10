@@ -30,7 +30,7 @@ public sealed class PlacedBlock : TriggerCondition
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger</returns>
-    public PlacedBlock Location(LocationPredicate loc)
+    public PlacedBlock BlockLocation(LocationPredicate loc)
     {
         Data["location"] = loc;
         return this;

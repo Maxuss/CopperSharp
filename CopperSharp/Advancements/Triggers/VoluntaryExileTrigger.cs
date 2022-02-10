@@ -13,7 +13,7 @@ public sealed class VoluntaryExileTrigger : TriggerCondition
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger</returns>
-    public VoluntaryExileTrigger Location(LocationPredicate loc)
+    public VoluntaryExileTrigger PlayerLocation(LocationPredicate loc)
     {
         Locations["location"] = loc;
         return this;

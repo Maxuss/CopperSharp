@@ -1,6 +1,8 @@
 using CopperSharp.Item;
 using CopperSharp.Registry;
 using CopperSharp.Text;
+using CopperSharp.Utils;
+using Newtonsoft.Json;
 
 namespace CopperSharp.Advancements;
 
@@ -11,7 +13,7 @@ public sealed class Advancement
 {
     private ItemStack AdvItemDisplay { get; set; } = new ItemStack(Material.Dirt);
     private IComponent AdvTitle { get; set; } = new TextComponent("undefined");
-    private AdvancementType? AdvType { get; set; }
+    private AdvancementType AdvType { get; set; } = AdvancementType.Task;
     private IComponent AdvDescription { get; set; } = new TextComponent("undefined");
     private bool? AdvAnnounce { get; set; }
     private bool? AdvHidden { get; set; }
@@ -144,6 +146,144 @@ public sealed class Advancement
     {
         AdvRequirements.Add(reqs);
         return this;
+    }
+
+    /// <summary>
+    /// Asynchronously serializes this advancement to string
+    /// </summary>
+    /// <returns>Serializes JSON string of this advancement</returns>
+    public async Task<string> Serialize(bool indent = true)
+    {
+        await using var sw = new StringWriter();
+        using var jw = new JsonTextWriter(sw);
+        jw.Formatting = indent ? Formatting.Indented : Formatting.None;
+        await jw.WriteStartObjectAsync();
+        
+        await jw.WritePropertyNameAsync("display");
+        await jw.WriteStartObjectAsync();
+        
+        await jw.WritePropertyNameAsync("icon");
+        await jw.WriteStartObjectAsync();
+
+        await jw.WritePropertyNameAsync("item");
+        await jw.WriteValueAsync(AdvItemDisplay.Material.Id.ToString());
+        if (AdvItemDisplay.Meta != null)
+        {
+            await jw.WritePropertyNameAsync("nbt");
+            await jw.WriteValueAsync(AdvItemDisplay.Meta!.Serialize());
+        }
+
+        await jw.WriteEndObjectAsync();
+
+        await jw.WritePropertyNameAsync("title");
+        await jw.WriteRawValueAsync(AdvTitle.Serialize(indent));
+
+        await jw.WritePropertyNameAsync("frame");
+        await jw.WriteValueAsync(AdvType.GetName().ToLower());
+
+        if (AdvGroup != null)
+        {
+            await jw.WritePropertyNameAsync("background");
+            await jw.WriteValueAsync(AdvGroup?.Background.ToString());
+        }
+
+        await jw.WritePropertyNameAsync("description");
+        await jw.WriteRawValueAsync(AdvDescription.Serialize(indent));
+
+        if (AdvAnnounce != null)
+        {
+            await jw.WritePropertyNameAsync("announce_to_chat");
+            await jw.WriteValueAsync(AdvAnnounce);
+        }
+
+        if (AdvHidden != null)
+        {
+            await jw.WritePropertyNameAsync("hidden");
+            await jw.WriteValueAsync(AdvHidden);
+        }
+        
+        await jw.WriteEndObjectAsync();
+
+        if (AdvParent != null)
+        {
+            await jw.WritePropertyNameAsync("parent");
+            await jw.WriteValueAsync(Registries.Advancements.Seek(AdvParent) ?? Identifier.Minecraft("null"));
+        }
+
+        await jw.WritePropertyNameAsync("criteria");
+        await jw.WriteStartObjectAsync();
+        
+        if (AdvCriteria.Count <= 0)
+            throw new Exception("An advancement must contain at least 1 criterion!");
+        
+        foreach (var crit in AdvCriteria)
+        {
+            await crit.SerializeInto(jw);
+        }
+        
+        await jw.WriteEndObjectAsync();
+
+        if (AdvRequirements.Any())
+        {
+            await jw.WritePropertyNameAsync("requirements");
+            await jw.WriteStartArrayAsync();
+
+            foreach (var list in AdvRequirements)
+            {
+                await jw.WriteStartArrayAsync();
+                
+                foreach (var element in list)
+                {
+                    await jw.WriteValueAsync(element);
+                }
+                
+                await jw.WriteEndArrayAsync();
+            }
+            
+            await jw.WriteEndArrayAsync();
+        }
+
+        if (AdvRewards != null)
+        {
+            await jw.WritePropertyNameAsync("rewards");
+            if (AdvRewards?.Exp != -1)
+            {
+                await jw.WritePropertyNameAsync("experience");
+                await jw.WriteValueAsync(AdvRewards?.Exp);
+            }
+
+            if (AdvRewards?.Items.Any() == true)
+            {
+                await jw.WritePropertyNameAsync("items");
+                await jw.WriteStartArrayAsync();
+                foreach (var item in AdvRewards?.Items!)
+                {
+                    await jw.WriteValueAsync(item);
+                }
+                await jw.WriteEndArrayAsync();
+            }
+            
+            if (AdvRewards?.Recipe.Any() == true)
+            {
+                await jw.WritePropertyNameAsync("recipes");
+                await jw.WriteStartArrayAsync();
+                foreach (var item in AdvRewards?.Recipe!)
+                {
+                    await jw.WriteValueAsync(item);
+                }
+                await jw.WriteEndArrayAsync();
+            }
+
+            if (AdvRewards?.Trigger != null)
+            {
+                await jw.WritePropertyNameAsync("function");
+                await jw.WriteValueAsync(AdvRewards?.Trigger);
+            }
+        }
+        
+        await jw.WriteEndObjectAsync();
+
+        return sw.ToString();
     }
 }
 
