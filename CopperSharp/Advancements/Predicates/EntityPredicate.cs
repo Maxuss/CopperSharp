@@ -1,4 +1,5 @@
 using CopperSharp.Data.SNbt;
+using CopperSharp.Entity;
 using Newtonsoft.Json;
 
 namespace CopperSharp.Advancements.Predicates;
@@ -6,9 +7,9 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents a trigger condition that also includes a player
 /// </summary>
-public class EntityPredicate
+public sealed class EntityPredicate
 {
-    private Dictionary<string, (float?, float?)> Distances { get; set; } = new();
+    private DistancePredicate? Distanced { get; set; }
     private List<EffectPredicate> Effects { get; set; } = new();
     private Dictionary<string, ItemPredicate> Items { get; set; } = new();
     private Dictionary<string, bool> Flags { get; set; } = new();
@@ -17,64 +18,15 @@ public class EntityPredicate
     private string? Nbt { get; set; }
     private EntityPredicate? Passenger { get; set; }
     private PlayerPredicate? PlayerData { get; set; }
-    
-    /// <summary>
-    /// Sets absolute distance of this entity predicate
-    /// </summary>
-    /// <param name="max">Max distance</param>
-    /// <param name="min">Min distance</param>
-    /// <returns>This entity predicate</returns>
-    public EntityPredicate AbsoluteDistance(float? max = null, float? min = null)
-    {
-        Distances["absolute"] = (max, min);
-        return this;
-    }
-    
-    /// <summary>
-    /// Sets horizontal distance of this entity predicate
-    /// </summary>
-    /// <param name="max">Max distance</param>
-    /// <param name="min">Min distance</param>
-    /// <returns>This entity predicate</returns>
-    public EntityPredicate HorizontalDistance(float? max = null, float? min = null)
-    {
-        Distances["horizontal"] = (max, min);
-        return this;
-    }
 
     /// <summary>
-    /// Sets X axis distance of this entity predicate
+    /// Sets the distance of this entity
     /// </summary>
-    /// <param name="max">Max distance</param>
-    /// <param name="min">Min distance</param>
-    /// <returns>This entity predicate</returns>
-    public EntityPredicate DistanceX(float? max = null, float? min = null)
+    /// <param name="dist">Distance to be set</param>
+    /// <returns></returns>
+    public EntityPredicate Distance(DistancePredicate dist)
     {
-        Distances["x"] = (max, min);
-        return this;
-    }
-    
-    /// <summary>
-    /// Sets Y axis distance of this entity predicate
-    /// </summary>
-    /// <param name="max">Max distance</param>
-    /// <param name="min">Min distance</param>
-    /// <returns>This entity predicate</returns>
-    public EntityPredicate DistanceY(float? max = null, float? min = null)
-    {
-        Distances["y"] = (max, min);
-        return this;
-    }
-    
-    /// <summary>
-    /// Sets Z axis distance of this entity predicate
-    /// </summary>
-    /// <param name="max">Max distance</param>
-    /// <param name="min">Min distance</param>
-    /// <returns>This entity predicate</returns>
-    public EntityPredicate DistanceZ(float? max = null, float? min = null)
-    {
-        Distances["z"] = (max, min);
+        Distanced = dist;
         return this;
     }
     
@@ -246,6 +198,17 @@ public class EntityPredicate
     }
 
     /// <summary>
+    /// Requires the entity to be a specific provided abstract entity
+    /// </summary>
+    /// <param name="entity">Required entity, that contains the data</param>
+    /// <returns>This entity predicate</returns>
+    public EntityPredicate RequireNbt(AbstractEntity entity)
+    {
+        Nbt = entity.Serialize();
+        return this;
+    }
+
+    /// <summary>
     /// Requires this entity to have a specific passenger
     /// </summary>
     /// <param name="passenger">Passenger required</param>
@@ -275,29 +238,11 @@ public class EntityPredicate
     public async Task SerializeInto(JsonTextWriter jw)
     {
         await jw.WriteStartObjectAsync();
-        
-        if(Distances.Any(it => it.Value.Item1 != null || it.Value.Item2 != null))
+
+        if (Distanced != null)
         {
             await jw.WritePropertyNameAsync("distance");
-            await jw.WriteStartObjectAsync();
-            foreach (var (key, (max, min)) in Distances)
-            {
-                await jw.WritePropertyNameAsync(key);
-                await jw.WriteStartObjectAsync();
-                if (max != null)
-                {
-                    await jw.WritePropertyNameAsync("max");
-                    await jw.WriteValueAsync(max);
-                }
-                if (min != null)
-                {
-                    await jw.WritePropertyNameAsync("min");
-                    await jw.WriteValueAsync(min);
-                }
-                await jw.WriteEndObjectAsync();
-            }
-
-            await jw.WriteEndObjectAsync();
+            await (Distanced?.SerializeInto(jw) ?? Task.CompletedTask);
         }
 
         if (Effects.Any())

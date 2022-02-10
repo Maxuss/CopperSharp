@@ -18,7 +18,7 @@ public readonly struct StrictRange
     /// <summary>
     /// Whether it is a strict single value, or a range
     /// </summary>
-    public bool Strict { get; } = false;
+    public bool IsStrict { get; } = false;
     /// <summary>
     /// Value if strict
     /// </summary>
@@ -30,7 +30,7 @@ public readonly struct StrictRange
     /// <param name="strict">Strict single value</param>
     public StrictRange(int strict)
     {
-        Strict = true;
+        IsStrict = true;
         StrictValue = strict;
     }
 
@@ -39,12 +39,31 @@ public readonly struct StrictRange
     /// </summary>
     /// <param name="min">Min value</param>
     /// <param name="max">Max value</param>
-    public StrictRange(int min, int max)
+    public StrictRange(int? min = null, int? max = null)
     {
         MinValue = min;
         MaxValue = max;
     }
-    
+
+    /// <summary>
+    /// Creates a new strict range only with min value
+    /// </summary>
+    /// <param name="min">Minimum value</param>
+    /// <returns>New range</returns>
+    public static StrictRange Min(int min) => new(min, null);
+    /// <summary>
+    /// Creates a new strict range only with max value
+    /// </summary>
+    /// <param name="max">Maximum value</param>
+    /// <returns>New range</returns>
+    public static StrictRange Max(int max) => new(null, max);
+    /// <summary>
+    /// Creates a new strict range only with a single value
+    /// </summary>
+    /// <param name="val">The value</param>
+    /// <returns>New range</returns>
+    public static StrictRange Strict(int val) => new(val);
+
     /// <summary>
     /// Serializes this range into provided text writer
     /// </summary>
@@ -53,18 +72,26 @@ public readonly struct StrictRange
     public async Task SerializeInto(JsonTextWriter w, string name)
     {
         await w.WritePropertyNameAsync(name);
-        if (Strict)
+        if (IsStrict)
         {
-            await w.WriteValueAsync(Strict);
+            await w.WriteValueAsync(IsStrict);
             return;
         }
 
         await w.WriteStartObjectAsync();
 
-        await w.WritePropertyNameAsync("max");
-        await w.WriteValueAsync(MaxValue);
-        await w.WritePropertyNameAsync("min");
-        await w.WriteValueAsync(MinValue);
+        if (MaxValue != null)
+        {
+            await w.WritePropertyNameAsync("max");
+            await w.WriteValueAsync(MaxValue);
+        }
+
+        if (MinValue != null)
+        {
+            await w.WritePropertyNameAsync("min");
+            await w.WriteValueAsync(MinValue);
+        }
+
         await w.WriteEndObjectAsync();
     }
 }

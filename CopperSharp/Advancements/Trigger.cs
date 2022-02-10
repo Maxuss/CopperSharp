@@ -47,6 +47,14 @@ public abstract class TriggerCondition
     /// </summary>
     protected Dictionary<string, EntityPredicate> Entities { get; set; } = new();
     /// <summary>
+    /// Extra location slots to be used
+    /// </summary>
+    protected Dictionary<string, LocationPredicate> Locations { get; set; } = new();
+    /// <summary>
+    /// Extra location slots to be used
+    /// </summary>
+    protected Dictionary<string, DistancePredicate> Distances { get; set; } = new();
+    /// <summary>
     /// Player data inside this trigger
     /// </summary>
     protected EntityPredicate? PlayerData { get; set; }
@@ -97,9 +105,21 @@ public abstract class TriggerCondition
             await value.SerializeInto(w);
         }
         
+        foreach (var (key, value) in Locations)
+        {
+            await w.WritePropertyNameAsync(key);
+            await value.SerializeInto(w);
+        }
+        
         foreach (var (key, value) in Ranges)
         {
             await value.SerializeInto(w, key);
+        }
+        
+        foreach (var (key, value) in Distances)
+        {
+            await w.WritePropertyNameAsync(key);
+            await value.SerializeInto(w);
         }
 
         if (PlayerData != null)

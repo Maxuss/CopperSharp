@@ -7,7 +7,7 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents an enchantment for use in conditions
 /// </summary>
-public sealed class EnchantmentPredicate
+public struct EnchantmentPredicate
 {
     /// <summary>
     /// Generates a new enchantment condition
@@ -16,6 +16,7 @@ public sealed class EnchantmentPredicate
     public EnchantmentPredicate(Identifier enchant)
     {
         Name = enchant.Path;
+        LevelRange = null;
     }
     
     private StrictRange? LevelRange { get; set; }

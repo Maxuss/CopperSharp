@@ -9,7 +9,7 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents an item for use in conditions
 /// </summary>
-public sealed class ItemPredicate
+public struct ItemPredicate
 {
     private StrictRange? CountRange { get; set; }
     private StrictRange? DurabilityRange { get; set; }

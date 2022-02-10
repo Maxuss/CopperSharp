@@ -7,7 +7,7 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents an effect for use in conditions
 /// </summary>
-public sealed class EffectPredicate
+public struct EffectPredicate
 {
     /// <summary>
     /// Constructs a new conditional effect
@@ -16,6 +16,8 @@ public sealed class EffectPredicate
     public EffectPredicate(StatusEffect type)
     {
         Type = type;
+        EAmplifier = null;
+        EDuration = null;
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents a block to be used in condition
 /// </summary>
-public sealed class BlockPredicate
+public struct BlockPredicate
 {
     private List<Material> Types { get; } = new();
     private string? Nbt { get; set; }

@@ -8,7 +8,7 @@ namespace CopperSharp.Advancements.Predicates;
 /// <summary>
 /// Represents a condition for a location
 /// </summary>
-public sealed class LocationPredicate
+public struct LocationPredicate
 {
     private Dictionary<string, string> Data { get; } = new();
     private StrictRange? LightRange { get; set; }
