@@ -1,5 +1,6 @@
 using CopperSharp.Advancements;
 using CopperSharp.Functions;
+using CopperSharp.Modules;
 
 namespace CopperSharp.Registry;
 
@@ -9,16 +10,14 @@ namespace CopperSharp.Registry;
 public abstract class Registry<TElement>
 {
     /// <summary>
+    /// Name of this registry port
+    /// </summary>
+    protected abstract string Name { get; } 
+    
+    /// <summary>
     /// Stack of elements inside this registry
     /// </summary>
     protected Stack<(TElement, Identifier)> Stack { get; set; } = new();
-
-    /// <summary>
-    /// Transforms provided element into it's string representation
-    /// </summary>
-    /// <param name="element">Element to be transformed</param>
-    /// <returns>String representation</returns>
-    protected abstract string Transform(TElement element);
 
     /// <summary>
     /// Registers provided element in current registry
@@ -41,6 +40,27 @@ public abstract class Registry<TElement>
             return null;
         return valueTuples[0].Item2;
     }
+
+    /// <summary>
+    /// Writes data to provided stream
+    /// </summary>
+    /// <param name="element">Element to be written</param>
+    /// <param name="stream">Stream to be used</param>
+    public abstract Task Write((TElement, Identifier) element, ModuleOutputStream stream); 
+
+    
+    /// <summary>
+    /// Asynchronously dumps this registry's contents
+    /// </summary>
+    /// <param name="mod">Module to be used</param>
+    public async Task Dump(Module mod)
+    {
+        var stream = mod.InitStream(Name);
+        foreach (var data in Stack)
+        {
+            await Write(data, stream);
+        }
+    }
 }
 
 /// <summary>
@@ -51,12 +71,12 @@ public static class Registries
     /// <summary>
     /// Global function registry
     /// </summary>
-    public static Registry<IFunction> Functions { get; } = new FunctionRegistry();
+    public static FunctionRegistry Functions { get; } = new();
 
     /// <summary>
     /// Global advancement registry
     /// </summary>
-    public static Registry<Advancement> Advancements { get; } = new AdvancementRegistry();
+    public static AdvancementRegistry Advancements { get; } = new();
     
     /// <summary>
     /// Registers provided element in provided registry

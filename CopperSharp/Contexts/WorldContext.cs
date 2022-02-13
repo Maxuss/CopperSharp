@@ -3,6 +3,7 @@ using CopperSharp.Blocks;
 using CopperSharp.Data.Locations;
 using CopperSharp.Entity;
 using CopperSharp.Item;
+using CopperSharp.Text;
 
 namespace CopperSharp.Contexts;
 
@@ -11,7 +12,7 @@ namespace CopperSharp.Contexts;
 /// </summary>
 public sealed class WorldContext
 {
-    private List<string> Cache { get; } = new();
+    internal List<string> Cache { get; } = new();
 
     /// <summary>
     ///     Releases lock on provided entity
@@ -79,6 +80,44 @@ public sealed class WorldContext
     }
 
     /// <summary>
+    /// Announces provided message to all players in chat
+    /// </summary>
+    /// <param name="message">Message to be announced</param>
+    public void Announce(IComponent message)
+    {
+        Cache.Add($"tellraw @a {message.Serialize()}");
+    }
+
+    /// <summary>
+    /// Writes a string to the chat for debugging purposes
+    /// </summary>
+    /// <param name="string">String to be written</param>
+    public void Write(string @string)
+    {
+        Cache.Add($"tellraw @a \"[CONSOLE]: {@string}\"");
+    }
+    /// <summary>
+    /// Writes an object to the chat for debugging purposes
+    /// </summary>
+    /// <param name="obj">Object to be written</param>
+
+    public void Write(object obj)
+    {
+        Cache.Add($"tellraw @a \"[CONSOLE]: {obj}\"");
+    }
+    
+    /// <summary>
+    /// Writes a component to the chat for debugging purposes.
+    ///
+    /// Note, for actual messaging it is recommended to use <see cref="Announce"/>.
+    /// </summary>
+    /// <param name="comp">Component to be written</param>
+    public void Write(IComponent comp)
+    {
+        Cache.Add($"tellraw @a {IComponent.Text("[CONSOLE]: ").Child(comp).Serialize()}");
+    }
+
+    /// <summary>
     ///     Flushes contents of this context into provided text writer
     /// </summary>
     /// <param name="w">TextWriter to which data should be written</param>
@@ -109,5 +148,21 @@ public sealed class WorldContext
     {
         using var writer = new StreamWriter(to);
         Flush(writer);
+    }
+
+    private TextWriter? StdOut { get; set; }
+    private TextWriter? StdErr { get; set; }
+    internal void EnableMinecraftTranslating()
+    {
+        StdOut = Console.Out;
+        StdErr = Console.Error;
+        Console.SetOut(new MinecraftChatWriter(this, false));
+        Console.SetError(new MinecraftChatWriter(this, true));
+    }
+
+    internal void DisableMinecraftTranslating()
+    {
+        Console.SetOut(StdOut ?? throw new Exception("Could not disable Console-Minecraft translating! Something deleted the cached standard output!"));
+        Console.SetError(StdErr ?? throw new Exception("Could not disable Console-Minecraft translating! Something deleted the cached standard error!"));
     }
 }

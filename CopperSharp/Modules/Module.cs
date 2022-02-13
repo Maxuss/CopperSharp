@@ -1,8 +1,8 @@
 // ReSharper disable MemberCanBePrivate.Global
 
+using System.Reflection;
 using CopperSharp.Datapack;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using CopperSharp.Registry;
 
 namespace CopperSharp.Modules;
 
@@ -15,37 +15,83 @@ namespace CopperSharp.Modules;
 ///     runtime.
 ///     It can also normally contain different functions, advancements, recipes, etc.
 /// </summary>
+[ModuleInfo("cs_stdlib", Description = "Standard library for CopperSharp", Version = PackFormat.v1_18)]
 public abstract class Module
 {
+    internal bool _locked = false;
     /// <summary>
     ///     Creates a new module, and initializes fields in it
     /// </summary>
     protected Module()
     {
-        var des = new DeserializerBuilder()
-            .WithNamingConvention(CamelCaseNamingConvention.Instance)
-            .Build();
-        Config = des.Deserialize<ModuleConfig>(File.ReadAllText(Path.Join(Directory.GetCurrentDirectory(), "Pack",
-            "module.yml")));
+        var info = GetType().GetCustomAttribute<ModuleInfoAttribute>();
+        if(info == null)
+            throw new Exception($"Failed to init module {GetType().FullName}. Does not have a ModuleInfoAttribute!");
 
-        Format = Config.MinecraftVersion switch
-        {
-            "1.13" or "1.14" => PackFormat.v1_13,
-            "1.15" or "1.16" or "1.16.1" => PackFormat.v1_15,
-            "1.16.2" or "1.16.4" or "1.16.5" => PackFormat.v1_16_2,
-            "1.17" or "1.17.1" => PackFormat.v1_17,
-            "1.18" or "1.18.1" => PackFormat.v1_18,
-            _ => PackFormat.v1_18
-        };
+        Name = info.Name;
+        Description = info.Description;
+        Format = info.Version;
+        Namespace = Name.ToLower().Replace(" ", "_");
+
+        var authors = GetType().GetCustomAttributes<ModuleAuthorAttribute>();
+        Authors = authors.Select(it => it.Author).ToList();
+        
     }
 
     /// <summary>
-    ///     Config of the module
+    /// Ran when module is loaded
     /// </summary>
-    public ModuleConfig Config { get; }
+    public virtual void Startup()
+    {
+        
+    }
+    
+    internal Dictionary<string, ModuleOutputStream> Streams { get; set; } = new();
+
+    /// <summary>
+    /// Creates a new identifier for this module
+    /// </summary>
+    /// <param name="path">The path part of the identifier</param>
+    /// <returns>Built identifier</returns>
+    public Identifier GetId(string path) => Identifier.Of(Namespace, path);
+
+    /// <summary>
+    /// Gets the full description of this module
+    /// </summary>
+    public string FullDescription =>
+        $"{Description}{(Authors.Count != 0 ? $". Authors: {string.Join(", ", Authors)}" : "")}";
+    
+    /// <summary>
+    /// Namespace of this module. Created from name
+    /// </summary>
+    public string Namespace { get; }
+    
+    /// <summary>
+    /// Name of this module
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    /// Authors of this module
+    /// </summary>
+    public List<string> Authors { get; } = new();
+
+    /// <summary>
+    /// Description of this module
+    /// </summary>
+    public string Description { get; }
 
     /// <summary>
     ///     Format of the pack, depends on minecraft version
     /// </summary>
     public PackFormat Format { get; }
+    
+    internal ModuleOutputStream InitStream(string stream)
+    {
+        if (Streams.ContainsKey(stream))
+            return Streams[stream];
+
+        Streams[stream] = new ModuleOutputStream(this, stream);
+        return Streams[stream];
+    }
 }

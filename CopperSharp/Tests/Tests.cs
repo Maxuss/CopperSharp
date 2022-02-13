@@ -11,14 +11,14 @@ namespace CopperSharp.Tests;
 /// </summary>
 public class Tests
 {
-    private readonly ITestOutputHelper _testOutputHelper;
+    private readonly ITestOutputHelper tout;
 
     /// <summary>
     /// </summary>
     /// <param name="testOutputHelper"></param>
     public Tests(ITestOutputHelper testOutputHelper)
     {
-        _testOutputHelper = testOutputHelper;
+        tout = testOutputHelper;
     }
 
     /// <summary>
@@ -41,8 +41,8 @@ public class Tests
                 new TranslatableComponent("item.minecraft.diamond_sword")
                     .Colored(ITextColor.Hex(0xbf4f4a))
                     .OnHover(IHoverEvent.Item(Identifier.Minecraft("diamond_ore"), 12)));
-        _testOutputHelper.WriteLine(JsonConvert.SerializeObject(component.Contain()));
+        tout.WriteLine(JsonConvert.SerializeObject(component.Contain()));
         var endTime = DateTime.Now - beginTime;
-        _testOutputHelper.WriteLine($"Finished in {endTime.TotalMilliseconds}ms");
+        tout.WriteLine($"Finished in {endTime.TotalMilliseconds}ms");
     }
 }

@@ -9,7 +9,7 @@ namespace CopperSharp.Text;
 /// <summary>
 ///     Represents a text component that can be sent to chat or attached to item etc.
 /// </summary>
-public interface IComponent : ICloneable
+public interface IComponent : ICloneable, IFormattable
 {
     private static readonly List<string> BlockIdentifiers = new() {"ore", "block", "banner", "glass", "head", "skull"};
 
@@ -148,4 +148,6 @@ public interface IComponent : ICloneable
     {
         return new TranslatableComponent(key) as IComponent;
     }
+
+    string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => Serialize();
 }

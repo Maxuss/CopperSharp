@@ -8,5 +8,5 @@ public static class CopperSharp
     /// <summary>
     ///     Current version of CopperSharp
     /// </summary>
-    public static Version Version { get; } = new(0, 0, 1);
+    public static Version Version { get; } = new(0, 2, 1);
 }
