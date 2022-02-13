@@ -19,6 +19,12 @@ public readonly struct Selector
     public static Selector AllEntities = new("@e");
 
     /// <summary>
+    ///     Current command executor
+    /// </summary>
+    public static Selector Executor = new("@s");
+
+    
+    /// <summary>
     ///     All players in the callers world
     /// </summary>
     public static Selector AllPlayers = new("@a");

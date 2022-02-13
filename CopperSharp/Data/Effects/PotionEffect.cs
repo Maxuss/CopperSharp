@@ -1,3 +1,5 @@
+using CopperSharp.Utils;
+
 namespace CopperSharp.Data.Effects;
 
 /// <summary>
@@ -5,6 +7,11 @@ namespace CopperSharp.Data.Effects;
 /// </summary>
 public readonly struct PotionEffect
 {
+    /// <summary>
+    /// Name of this effect
+    /// </summary>
+    public string EffectName { get; }
+    
     /// <summary>
     ///     Whether the effect is ambient
     /// </summary>
@@ -58,5 +65,6 @@ public readonly struct PotionEffect
         Duration = duration;
         Id = (byte) effect;
         Level = level;
+        EffectName = effect.GetData() ?? "speed";
     }
 }

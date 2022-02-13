@@ -118,6 +118,26 @@ public sealed class WorldContext
     }
 
     /// <summary>
+    /// Gets player by provided name
+    /// </summary>
+    /// <param name="name">Name of the player</param>
+    /// <returns>This world player</returns>
+    public WorldPlayer GetPlayer(string name)
+    {
+        return new WorldPlayer(this, name);
+    }
+
+    /// <summary>
+    /// Gets player by provided entity selector
+    /// </summary>
+    /// <param name="selector">Selector to test for the player</param>
+    /// <returns>This world player</returns>
+    public WorldPlayer GetPlayer(Selector selector)
+    {
+        return new WorldPlayer(this, selector.ToString());
+    }
+
+    /// <summary>
     ///     Flushes contents of this context into provided text writer
     /// </summary>
     /// <param name="w">TextWriter to which data should be written</param>
