@@ -30,11 +30,16 @@ public readonly struct PackMcMeta
 
         await jw.WriteStartObjectAsync();
 
+        await jw.WritePropertyNameAsync("pack");
+        await jw.WriteStartObjectAsync();
+
         await jw.WritePropertyNameAsync("pack_format");
         await jw.WriteValueAsync(PackFormat);
 
         await jw.WritePropertyNameAsync("description");
         await jw.WriteValueAsync(Description);
+        
+        await jw.WriteEndObjectAsync();
         
         await jw.WriteEndObjectAsync();
 

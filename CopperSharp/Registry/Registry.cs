@@ -1,6 +1,7 @@
 using CopperSharp.Advancements;
 using CopperSharp.Functions;
 using CopperSharp.Modules;
+using CopperSharp.Utils;
 
 namespace CopperSharp.Registry;
 
@@ -55,11 +56,20 @@ public abstract class Registry<TElement>
     /// <param name="mod">Module to be used</param>
     public async Task Dump(Module mod)
     {
-        var stream = mod.InitStream(Name);
-        foreach (var data in Stack)
+        Console.Write($"Dumping {Name}... ");
+        using (var bar = new ProgressBar())
         {
-            await Write(data, stream);
+            var stream = mod.InitStream(Name);
+            var l = Stack.Count;
+            var cur = 0;
+            foreach (var data in Stack)
+            {
+                await Write(data, stream);
+                bar.Report((double) cur / l);
+                cur++;
+            }
         }
+        Console.WriteLine("Done.");
     }
 }
 

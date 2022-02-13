@@ -16,7 +16,7 @@ public sealed class ModuleOutputStream
     /// <param name="port">Type of output. e.g. "functions"</param>
     public ModuleOutputStream(Module mod, string port)
     {
-        Directory = Path.Join(Dirs.GetCurrentDirectory(), "Build", "datapack", mod.Name, "data", mod.Namespace, port);
+        Directory = Path.Join(Dirs.GetCurrentDirectory(), "Build", "datapack", "data", mod.Namespace, port);
         if(Dirs.Exists(Directory))
             Dirs.Delete(Directory, true);
 

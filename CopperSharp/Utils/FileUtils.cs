@@ -31,7 +31,7 @@ public static class FileUtils
         }
         
     }
-    
+
     /// <summary>
     /// Copies all files recursively from one directory to another
     /// </summary>
@@ -39,15 +39,36 @@ public static class FileUtils
     /// <param name="targetPath">Output directory</param>
     public static async Task CopyFilesRecursively(string sourcePath, string targetPath)
     {
-        foreach (var dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+        var dirs = Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories);
+        var files = Directory.GetFiles(sourcePath, "*", SearchOption.AllDirectories);
+        var dL = dirs.Length;
+        var fL = files.Length;
+        
+        Console.Write("Copying directories... ");
+        using (var bar = new ProgressBar())
         {
-            Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            var cur = 0;
+            foreach (var dirPath in dirs)
+            {
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                bar.Report((double) cur / dL);
+                cur++;
+            }
         }
-        foreach (var newPath in Directory.GetFiles(sourcePath, "*", SearchOption.AllDirectories))
+        Console.WriteLine("Done.");
+
+        Console.Write("Copying files... ");
+        using (var bar = new ProgressBar())
         {
-            Console.WriteLine($"Copying file {newPath}...");
-            await CopyAsync(newPath, newPath.Replace(sourcePath, targetPath));
+            var cur = 0;
+            foreach (var newPath in files)
+            {
+                await CopyAsync(newPath, newPath.Replace(sourcePath, targetPath));
+                bar.Report((double) cur / fL);
+                cur++;
+            }
         }
+        Console.WriteLine("Done.");
     }
 
     /// <summary>
