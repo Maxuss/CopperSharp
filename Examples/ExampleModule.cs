@@ -31,7 +31,7 @@ public class ExampleModule : Module
 
     public override void WorldLoad(WorldContext ctx)
     {
-        ctx.Delegate(Handler.PlayerTest);
+        // ctx.RunUnsafe("function examplemodule:player_test");
     }
 }
 
@@ -48,7 +48,7 @@ public sealed class ExampleHandler : IFunction
     {
         ctx.Announce(IComponent.Text("Second function was called!").Colored(NamedTextColor.Gray));
     }
-
+    
     [FunctionHandler("player_test")]
     public void PlayerTest(WorldContext ctx)
     {

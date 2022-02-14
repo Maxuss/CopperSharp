@@ -51,6 +51,17 @@ public struct ItemStack : IStack
     }
 
     /// <summary>
+    ///     Constructs a new item stack from provided parameters
+    /// </summary>
+    /// <param name="material">Material to use</param>
+    /// <param name="meta">Meta operations</param>
+    /// <param name="amount">Amount of item in this stack</param>
+    public ItemStack(Material material, Func<ItemMeta?, ItemMeta?> meta, sbyte amount = 1) : this(material, amount)
+    {
+        Meta = meta(Meta);
+    }
+
+    /// <summary>
     ///     Serializes this item into minecraft-readable format
     /// </summary>
     /// <returns>Serialized item</returns>

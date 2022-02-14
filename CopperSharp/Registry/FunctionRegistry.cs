@@ -42,12 +42,12 @@ public sealed class FunctionRegistry : Registry<IFunction>
 
         foreach(var (mtd, handle) in handlers)
         {
-            var ctx = new WorldContext(); 
-            ctx.EnableMinecraftTranslating(); 
-            mtd.Invoke(fn, new object?[] { ctx }); 
-            ctx.DisableMinecraftTranslating(); 
-            ctx.Cache.Add($"\n# Built with CopperSharp v{CopperSharp.Version}"); 
+            var ctx = new WorldContext();
+            ctx.EnableMinecraftTranslating();
+            mtd.Invoke(fn, new object?[] {ctx});
+            ctx.DisableMinecraftTranslating();
+            ctx.Cache.Add($"\n# Built with CopperSharp v{CopperSharp.Version}");
             ctx.Flush(stream.Open($"{handle.FunctionName}.mcfunction"));
-        };
+        }
     }
 }
