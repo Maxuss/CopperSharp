@@ -1,9 +1,11 @@
+using System.Diagnostics;
 using CopperSharp.Contexts;
 using CopperSharp.Data.Effects;
 using CopperSharp.Data.Locations;
 using CopperSharp.Entity;
 using CopperSharp.Functions;
 using CopperSharp.Item;
+using CopperSharp.Item.Meta;
 using CopperSharp.Modules;
 using CopperSharp.Registry;
 using CopperSharp.Text;
@@ -26,12 +28,14 @@ public class ExampleModule : Module
 
     public override void OnTick(WorldContext ctx)
     {
-        ctx.Delegate(c => c.Announce(IComponent.Text("TEST")));
+        
     }
 
     public override void WorldLoad(WorldContext ctx)
     {
-        // ctx.RunUnsafe("function examplemodule:player_test");
+        var item = new ItemStack(Material.CarrotOnAStick);
+        item.Meta.CustomModelData = 120;
+        ctx.GetPlayer("Xtremum").Inventory.AddItem(item);
     }
 }
 

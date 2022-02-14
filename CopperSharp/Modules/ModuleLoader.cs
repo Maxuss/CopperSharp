@@ -11,6 +11,8 @@ public sealed class ModuleLoader
 {
     private int WarningCount { get; set; } = 0;
     private int ErrorCount { get; set; } = 0;
+    private string? OutputDirectory { get; set; } = null;
+    private string? BuildDirectory { get; set; } = null;
     private Dictionary<string, string> ResourceCache { get; } = new();
 
     private ModuleLoader()
@@ -22,6 +24,18 @@ public sealed class ModuleLoader
     /// A global module loader
     /// </summary>
     public static ModuleLoader GlobalLoader { get; } = new();
+
+    /// <summary>
+    /// Sets the .zip archive output directory. Can be set to minecraft datapack folder for debugging.
+    /// </summary>
+    /// <param name="dir">Directory to be set</param>
+    public void SetOutputDirectory(string dir) => OutputDirectory = dir;
+
+    /// <summary>
+    /// Sets the build .mcfunction and .json directory. Can be set to minecraft datapack folder for debugging.
+    /// </summary>
+    /// <param name="dir">Directory to be set</param>
+    public void SetBuildDirectory(string dir) => BuildDirectory = dir;
 
     /// <summary>
     /// Emits a warning that is displayed for user
@@ -88,7 +102,7 @@ public sealed class ModuleLoader
             var curdir = Directory.GetCurrentDirectory();
 
             Console.WriteLine("Creating build dir");
-            var build = Path.Join(curdir, "Build");
+            var build = BuildDirectory ?? Path.Join(curdir, "Build");
             var dpPath = Path.Join(build, "pack");
             var rpPath = Path.Join(build, "resources");
 
@@ -164,13 +178,25 @@ public sealed class ModuleLoader
 
             // building into zip files
             Console.WriteLine("Building zip file output.");
-            FileUtils.ForceCreateDir(Path.Join(Directory.GetCurrentDirectory(), "Output"));
-            var zipPath = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}.zip");
+            var outDir = OutputDirectory ?? Path.Join(Directory.GetCurrentDirectory(), "Output");
+            if(OutputDirectory == null)
+                FileUtils.ForceCreateDir(outDir);
+            else
+            {
+                // Safely creating directory to make sure we dont delete some valuable dir
+                if(!Directory.Exists(outDir))
+                    Directory.CreateDirectory(outDir);
+            }
+            var zipPath = Path.Join(outDir, $"{mod.Name}.zip");
 
+            if(File.Exists(zipPath))
+                File.Delete(zipPath);
             ZipFile.CreateFromDirectory(dpPath, zipPath, CompressionLevel.Fastest, false);
             if (Directory.Exists(rpPath))
             {
-                var rpZip = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}_resources.zip");
+                var rpZip = Path.Join(outDir, $"{mod.Name}_resources.zip");
+                if(File.Exists(rpZip))
+                    File.Delete(rpZip);
                 ZipFile.CreateFromDirectory(rpPath, rpZip, CompressionLevel.Fastest, false);
             }
 

@@ -19,7 +19,7 @@ public struct ItemStack : IStack
     public Material Material { get; }
 
     /// <inheritdoc />
-    public ItemMeta? Meta { get; set; }
+    public ItemMeta Meta { get; set; }
 
     /// <summary>
     ///     Constructs a new item stack from provided parameters
@@ -56,8 +56,29 @@ public struct ItemStack : IStack
     /// <param name="material">Material to use</param>
     /// <param name="meta">Meta operations</param>
     /// <param name="amount">Amount of item in this stack</param>
-    public ItemStack(Material material, Func<ItemMeta?, ItemMeta?> meta, sbyte amount = 1) : this(material, amount)
+    public ItemStack(Material material, Func<ItemMeta, ItemMeta> meta, sbyte amount = 1)
     {
+        Material = material;
+        Amount = amount;
+        if (material.Id.Path.Contains("banner"))
+        {
+            Meta = new BannerMeta(material);
+            return;
+        }
+
+        if (material.Id.Path.Contains("potion"))
+        {
+            Meta = new PotionMeta(material);
+            return;
+        }
+
+        Meta = material.Id.Path switch
+        {
+            "firework_rocket" => new FireworkMeta(material),
+            "player_head" => new SkullMeta(),
+            _ => new DefaultItemMeta(material)
+        };
+
         Meta = meta(Meta);
     }
 
@@ -67,6 +88,6 @@ public struct ItemStack : IStack
     /// <returns>Serialized item</returns>
     public string Serialize()
     {
-        return $"{Material.Id}{Meta?.Serialize()} {Amount}";
+        return $"{Material.Id}{Meta.Serialize()} {Amount}";
     }
 }

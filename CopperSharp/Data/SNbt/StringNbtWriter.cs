@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using CopperSharp.Data.Locations;
 using CopperSharp.Item;
+using CopperSharp.Modules;
 
 namespace CopperSharp.Data.SNbt;
 
@@ -556,16 +557,17 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     private void ValidateCanWriteValue()
     {
         // ReSharper disable once MergeIntoLogicalPattern
-        if (_state != State.Array || _state != State.InProperty)
-            throw new Exception("Writing a value in current state would result in malformed SNBT!");
+        if (_state == State.Array || _state == State.InProperty)
+            ValidateArray();
+        else
+            ModuleLoader.GlobalLoader.EmitError("Writing a value in current state would result in malformed SNBT!");
 
-        ValidateArray();
     }
 
     private async Task ValidateCanWriteValueAsync()
     {
         if (_state != State.Array && _state != State.InProperty)
-            throw new Exception("Writing a value in current state would result in malformed SNBT!");
+            ModuleLoader.GlobalLoader.EmitError("Writing a value in current state would result in malformed SNBT!");
 
         await ValidateArrayAsync();
     }
