@@ -8,7 +8,7 @@ namespace CopperSharp.Data.SNbt;
 /// <summary>
 ///     A writer, that can write string NBT objects to string.
 /// </summary>
-public class StringNbtWriter : IDisposable
+public class StringNbtWriter : IDisposable, IAsyncDisposable
 {
     private readonly StringWriter _sw;
     private int _arrayPosition;
@@ -592,5 +592,12 @@ public class StringNbtWriter : IDisposable
         Array = 4,
         PostProperty = 5,
         InProperty = 6
+    }
+
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        GC.SuppressFinalize(this);
+        await _sw.DisposeAsync();
     }
 }

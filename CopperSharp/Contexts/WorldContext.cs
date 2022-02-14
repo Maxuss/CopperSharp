@@ -2,7 +2,9 @@ using System.Reflection;
 using CopperSharp.Blocks;
 using CopperSharp.Data.Locations;
 using CopperSharp.Entity;
+using CopperSharp.Functions;
 using CopperSharp.Item;
+using CopperSharp.Registry;
 using CopperSharp.Text;
 
 namespace CopperSharp.Contexts;
@@ -135,6 +137,38 @@ public sealed class WorldContext
     public WorldPlayer GetPlayer(Selector selector)
     {
         return new WorldPlayer(this, selector.ToString());
+    }
+
+    /// <summary>
+    /// Runs a provided function
+    /// </summary>
+    /// <param name="fn">Function to be ran</param>
+    public void RunFunction(Identifier fn)
+    {
+        Cache.Add($"function {fn}");
+    }
+
+    /// <summary>
+    /// Unsafely runs provided command without doing external checks
+    /// </summary>
+    /// <param name="cmd">Command to be ran</param>
+    public void RunUnsafe(string cmd)
+    {
+        Cache.Add(cmd);
+    }
+
+    /// <summary>
+    /// Delegates execution of this world to provided function,
+    /// basically piping it's contents into this world.
+    ///
+    /// If you provided delegate is big and you want
+    /// to keep your function file small, you should
+    /// use <see cref="RunFunction"/> instead.
+    /// </summary>
+    /// <param name="delegate">Delegate to be ran</param>
+    public void Delegate(MinecraftDelegate @delegate)
+    {
+        @delegate.Invoke(this);
     }
 
     /// <summary>

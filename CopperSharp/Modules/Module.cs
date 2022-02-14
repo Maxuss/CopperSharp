@@ -1,8 +1,11 @@
 // ReSharper disable MemberCanBePrivate.Global
 
 using System.Reflection;
+using CopperSharp.Contexts;
 using CopperSharp.Datapack;
+using CopperSharp.Functions;
 using CopperSharp.Registry;
+using CopperSharp.Tags;
 
 namespace CopperSharp.Modules;
 
@@ -19,6 +22,7 @@ namespace CopperSharp.Modules;
 public abstract class Module
 {
     internal bool _locked = false;
+
     /// <summary>
     ///     Creates a new module, and initializes fields in it
     /// </summary>
@@ -45,7 +49,39 @@ public abstract class Module
     {
         
     }
-    
+
+    /// <summary>
+    /// Called each time a server is (re)loaded
+    /// </summary>
+    /// <param name="ctx">Current world</param>
+    public virtual void WorldLoad(WorldContext ctx)
+    {
+        
+    }
+
+    /// <summary>
+    /// Called each tick
+    /// </summary>
+    /// <param name="ctx">Current world</param>
+    public virtual void OnTick(WorldContext ctx)
+    {
+        
+    }
+
+    internal async Task InternalSetupMagicFns()
+    {
+        var tick = new Tag(Identifier.Of(Namespace, "tick")).ReplaceSimilar(false);
+        var load = new Tag(Identifier.Of(Namespace, "load")).ReplaceSimilar(false);
+        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "tick.json"), await tick.Serialize());
+        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "load.json"), await load.Serialize());
+    }
+
+    internal void InternalWorldLoad() 
+        => Registries.Functions.Register(new LoadFunction(WorldLoad), Identifier.Of(Namespace, "load"));
+
+    internal void InternalTick()
+        => Registries.Functions.Register(new TickFunction(OnTick), Identifier.Of(Namespace, "tick"));
+
     internal Dictionary<string, ModuleOutputStream> Streams { get; set; } = new();
 
     /// <summary>

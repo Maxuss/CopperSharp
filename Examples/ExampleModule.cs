@@ -15,11 +15,23 @@ namespace Examples;
 [ModuleInfo("ExampleModule", Description = "A cool example module")]
 public class ExampleModule : Module
 {
+    private ExampleHandler Handler { get; set; }
     public override void Startup()
     {
         Console.WriteLine("Module loaded!");
+        Handler = new ExampleHandler();
 
-        Registries.Functions.Register(new ExampleHandler());
+        Registries.Functions.Register(Handler);
+    }
+
+    public override void OnTick(WorldContext ctx)
+    {
+        ctx.Delegate(c => c.Announce(IComponent.Text("TEST")));
+    }
+
+    public override void WorldLoad(WorldContext ctx)
+    {
+        ctx.Delegate(Handler.PlayerTest);
     }
 }
 

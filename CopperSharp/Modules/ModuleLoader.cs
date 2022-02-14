@@ -9,6 +9,10 @@ namespace CopperSharp.Modules;
 /// </summary>
 public sealed class ModuleLoader
 {
+    private int WarningCount { get; set; } = 0;
+    private int ErrorCount { get; set; } = 0;
+    private Dictionary<string, string> ResourceCache { get; } = new();
+
     private ModuleLoader()
     {
         
@@ -20,6 +24,53 @@ public sealed class ModuleLoader
     public static ModuleLoader GlobalLoader { get; } = new();
 
     /// <summary>
+    /// Emits a warning that is displayed for user
+    /// </summary>
+    /// <param name="message">Message to be displayed</param>
+    public void EmitWarning(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine();
+        Console.WriteLine($"[WARN]: {message}");
+        Console.ForegroundColor = ConsoleColor.White;
+        WarningCount++;
+    }
+
+    /// <summary>
+    /// Emits an error that is displayed for user
+    /// </summary>
+    /// <param name="message">Message to be displayed</param>
+    public void EmitError(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine();
+        Console.WriteLine($"[ERROR]: {message}");
+        Console.ForegroundColor = ConsoleColor.White;
+        ErrorCount++;
+    }
+
+    /// <summary>
+    /// Caches provided resource by relative file name
+    /// </summary>
+    /// <param name="relativePath">Relative path from the build directory</param>
+    /// <param name="data">Data to be cached</param>
+    public void CacheResource(string relativePath, string data)
+    {
+        ResourceCache[relativePath] = data;
+    }
+    
+    /// <summary>
+    /// Caches provided resource by relative file name
+    /// </summary>
+    /// <param name="relativePath">Relative path from the data/minecraft directory</param>
+    /// <param name="data">Data to be cached</param>
+    public void InjectMinecraftResource(string relativePath, string data)
+    {
+        CacheResource(Path.Join("pack", "data", "minecraft", relativePath), data);
+    }
+
+    
+    /// <summary>
     /// Asynchronously loads a provided module
     /// </summary>
     /// <param name="mod">Module to be loaded</param>
@@ -27,62 +78,116 @@ public sealed class ModuleLoader
     {
         if (mod._locked)
             return;
-        
-        Console.WriteLine($"Starting module {mod.Name} of namespace {mod.Namespace}...");
-
-        mod.Startup();
-        
-        Console.WriteLine($"Initializing build hooks for module {mod.Name}");
-        var curdir = Directory.GetCurrentDirectory();
-
-        Console.WriteLine("Creating build dir");
-        var build = Path.Join(curdir, "Build");
-        var dpPath = Path.Join(build, "datapack");
-        var rpPath = Path.Join(build, "resourcepack");
-
-        var dataPath = Path.Join(dpPath, "data");
-        var nsPath = Path.Join(dataPath, mod.Namespace);
-        
-        FileUtils.ForceCreateDir(nsPath);
-        
-        if (Directory.Exists(Path.Join(curdir, "Assets")))
+        try
         {
-            Console.WriteLine("Assets directory exists, extracting it...");
-            FileUtils.ForceCreateDir(rpPath);
-            if (File.Exists(Path.Join(curdir, "Assets", "icon.png")))
+            Console.WriteLine($"Starting module {mod.Name} of namespace {mod.Namespace}...");
+
+            mod.Startup();
+
+            Console.WriteLine($"Initializing build hooks for module {mod.Name}");
+            var curdir = Directory.GetCurrentDirectory();
+
+            Console.WriteLine("Creating build dir");
+            var build = Path.Join(curdir, "Build");
+            var dpPath = Path.Join(build, "pack");
+            var rpPath = Path.Join(build, "resources");
+
+            var dataPath = Path.Join(dpPath, "data");
+            var nsPath = Path.Join(dataPath, mod.Namespace);
+
+            FileUtils.ForceCreateDir(nsPath);
+
+            Console.WriteLine("Setting up magic functions.");
+            await mod.InternalSetupMagicFns();
+
+            Console.WriteLine("Dumping load + tick functions.");
+            mod.InternalTick();
+            mod.InternalWorldLoad();
+
+            // Dumping registries
+            Console.WriteLine("Dumping registry contents");
+            await Registries.Advancements.Dump(mod);
+            await Registries.Functions.Dump(mod);
+            await Registries.Tags.Dump(mod);
+
+            if (Directory.Exists(Path.Join(curdir, "Assets")) || ResourceCache.Count > 0)
             {
-                await FileUtils.CopyAsync(Path.Join(curdir, "Assets", "icon.png"), Path.Join(dpPath, "pack.png"));
-                File.Delete(Path.Join(curdir, "Assets", "icon.png"));
+                if (ResourceCache.Count > 0)
+                {
+                    Console.WriteLine("Resource cache available, processing it...");
+
+                    Console.Write("Processing cache... ");
+                    
+                    // ReSharper disable once ConvertToUsingDeclaration
+                    using (var bar = new ProgressBar())
+                    {
+                        var l = ResourceCache.Count;
+                        var cur = 0;
+                        foreach (var (p, d) in ResourceCache)
+                        {
+                            var cds = p.Split(Path.DirectorySeparatorChar).SkipLast(1).ToList();
+                            if (cds.Any())
+                            {
+                                var cd = cds.Aggregate(Path.Join);
+                                Directory.CreateDirectory(Path.Join(build, cd));
+                            }
+                            await File.WriteAllTextAsync(Path.Join(build, p), d);
+                            bar.Report((double) cur / l);
+                            cur++;
+                        }
+                    }
+
+                    Console.WriteLine("Done.");
+                }
+
+                if (Directory.Exists(Path.Join(curdir, "Assets")))
+                {
+                    Console.WriteLine("Assets directory exists, extracting it...");
+
+                    if (File.Exists(Path.Join(curdir, "Assets", "icon.png")))
+                    {
+                        await FileUtils.CopyAsync(Path.Join(curdir, "Assets", "icon.png"),
+                            Path.Join(dpPath, "pack.png"));
+                        File.Delete(Path.Join(curdir, "Assets", "icon.png"));
+                    }
+
+                    await FileUtils.CopyFilesRecursively(Path.Join(curdir, "Assets"), rpPath);
+                }
             }
-            
-            await FileUtils.CopyFilesRecursively(Path.Join(curdir, "Assets"), rpPath);
+
+            // mcmeta file
+            Console.WriteLine("Creating meta file");
+            var meta = new PackMcMeta((int) mod.Format, mod.FullDescription);
+            var mcmeta = await meta.Serialize();
+
+            await File.WriteAllTextAsync(Path.Join(dpPath, "pack.mcmeta"), mcmeta);
+
+            // building into zip files
+            Console.WriteLine("Building zip file output.");
+            FileUtils.ForceCreateDir(Path.Join(Directory.GetCurrentDirectory(), "Output"));
+            var zipPath = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}.zip");
+
+            ZipFile.CreateFromDirectory(dpPath, zipPath, CompressionLevel.Fastest, false);
+            if (Directory.Exists(rpPath))
+            {
+                var rpZip = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}_resources.zip");
+                ZipFile.CreateFromDirectory(rpPath, rpZip, CompressionLevel.Fastest, false);
+            }
+
+            Console.WriteLine($"Finished building module {mod.Name}!");
+            Console.WriteLine($"{WarningCount} warnings emitted and {ErrorCount} errors emitted.");
+
+            mod._locked = true;
+
         }
-
-        // Dumping registries
-        Console.WriteLine("Dumping registry contents");
-        await Registries.Advancements.Dump(mod);
-        await Registries.Functions.Dump(mod);
-        
-        // mcmeta file
-        Console.WriteLine("Creating meta file");
-        var meta = new PackMcMeta((int) mod.Format, mod.FullDescription);
-        var mcmeta = await meta.Serialize();
-
-        await File.WriteAllTextAsync(Path.Join(dpPath, "pack.mcmeta"), mcmeta);
-        
-        // building into zip files
-        Console.WriteLine("Building zip file output.");
-        FileUtils.ForceCreateDir(Path.Join(Directory.GetCurrentDirectory(), "Output"));
-        var zipPath = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}.zip");
-        
-        ZipFile.CreateFromDirectory(dpPath, zipPath, CompressionLevel.Fastest, false);
-        if (Directory.Exists(rpPath))
+        catch (Exception
+               e) // it is recommended not to throw exceptions and instead to emit an error, but im too lazy to refactor whole codebase :P
         {
-            var rpZip = Path.Join(Directory.GetCurrentDirectory(), "Output", $"{mod.Name}_resources.zip");
-            ZipFile.CreateFromDirectory(rpPath, rpZip, CompressionLevel.Fastest, false);
+            EmitError($"Error building module: {e.Message}!");
+            
+            Console.WriteLine(
+                $"Failed building module {mod.Name} with {WarningCount} warnings and {ErrorCount} errors!");
+            return;
         }
-        Console.WriteLine($"Finished building module {mod.Name}!");
-
-        mod._locked = true;
     }
 }

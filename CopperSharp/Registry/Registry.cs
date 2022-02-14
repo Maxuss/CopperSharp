@@ -64,6 +64,13 @@ public abstract class Registry<TElement>
             var cur = 0;
             foreach (var data in Stack)
             {
+                var id = data.Item2;
+                if (id.Path.Contains('/'))
+                {
+                    var dirs = id.Path.Split('/');
+                    var cd = dirs.SkipLast(1).Aggregate(stream.Directory, Path.Join);
+                    Directory.CreateDirectory(cd);
+                }
                 await Write(data, stream);
                 bar.Report((double) cur / l);
                 cur++;
@@ -87,6 +94,11 @@ public static class Registries
     /// Global advancement registry
     /// </summary>
     public static AdvancementRegistry Advancements { get; } = new();
+
+    /// <summary>
+    /// Global tag registry
+    /// </summary>
+    public static TagRegistry Tags { get; } = new();
     
     /// <summary>
     /// Registers provided element in provided registry
