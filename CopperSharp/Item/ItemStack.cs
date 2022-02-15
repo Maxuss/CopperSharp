@@ -41,12 +41,13 @@ public struct ItemStack : IStack
             Meta = new PotionMeta(material);
             return;
         }
+        
 
         Meta = material.Id.Path switch
         {
             "firework_rocket" => new FireworkMeta(material),
             "player_head" => new SkullMeta(),
-            _ => new DefaultItemMeta(material)
+            _ => material.BlockType != null ? new BlockItemMeta(material) : new DefaultItemMeta(material)
         };
     }
 
