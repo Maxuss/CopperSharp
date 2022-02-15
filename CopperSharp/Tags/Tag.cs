@@ -5,19 +5,15 @@ namespace CopperSharp.Tags;
 
 public sealed class Tag
 {
-    private List<string> Values { get; set; } = new();
-    private bool ReplaceVals { get; set; } = true;
-
     /// <summary>
-    /// Constructs a new empty tag
+    ///     Constructs a new empty tag
     /// </summary>
     public Tag()
     {
-        
     }
 
     /// <summary>
-    /// Constructs a new tag with provided values
+    ///     Constructs a new tag with provided values
     /// </summary>
     /// <param name="ids">Values to be set</param>
     public Tag(params Identifier[] ids)
@@ -25,8 +21,11 @@ public sealed class Tag
         Values.AddRange(ids.Select(it => it.ToString()));
     }
 
+    private List<string> Values { get; } = new();
+    private bool ReplaceVals { get; set; } = true;
+
     /// <summary>
-    /// Adds provided values to this tag
+    ///     Adds provided values to this tag
     /// </summary>
     /// <param name="ids">Values to be added</param>
     /// <returns>This tag</returns>
@@ -37,7 +36,7 @@ public sealed class Tag
     }
 
     /// <summary>
-    /// Whether to suppress other datapack's tags with this tag
+    ///     Whether to suppress other datapack's tags with this tag
     /// </summary>
     /// <param name="replace">Marker</param>
     /// <returns>This tag</returns>
@@ -48,7 +47,7 @@ public sealed class Tag
     }
 
     /// <summary>
-    /// Asynchronously serializes this tag to json
+    ///     Asynchronously serializes this tag to json
     /// </summary>
     /// <returns>Serialized json string</returns>
     public async Task<string> Serialize()
@@ -63,12 +62,9 @@ public sealed class Tag
         await jw.WriteValueAsync(ReplaceVals);
         await jw.WritePropertyNameAsync("values");
         await jw.WriteStartArrayAsync();
-        foreach (var v in Values)
-        {
-            await jw.WriteValueAsync(v);
-        }
+        foreach (var v in Values) await jw.WriteValueAsync(v);
         await jw.WriteEndArrayAsync();
-        
+
         await jw.WriteEndObjectAsync();
 
         return sw.ToString();

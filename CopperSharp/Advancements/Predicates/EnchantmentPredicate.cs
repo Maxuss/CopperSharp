@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents an enchantment for use in conditions
+///     Represents an enchantment for use in conditions
 /// </summary>
 public struct EnchantmentPredicate
 {
     /// <summary>
-    /// Generates a new enchantment condition
+    ///     Generates a new enchantment condition
     /// </summary>
     /// <param name="enchant">ID of the enchantment</param>
     public EnchantmentPredicate(Identifier enchant)
@@ -18,11 +18,11 @@ public struct EnchantmentPredicate
         Name = enchant.Path;
         LevelRange = null;
     }
-    
+
     private StrictRange? LevelRange { get; set; }
 
     /// <summary>
-    /// Sets the range of levels for this enchantment
+    ///     Sets the range of levels for this enchantment
     /// </summary>
     /// <param name="range">Range to be set</param>
     /// <returns>This enchantment condition</returns>
@@ -35,7 +35,7 @@ public struct EnchantmentPredicate
     private string Name { get; }
 
     /// <summary>
-    /// Serializes this enchantment
+    ///     Serializes this enchantment
     /// </summary>
     /// <param name="w">Writer to use</param>
     public async Task SerializeInto(JsonTextWriter w)

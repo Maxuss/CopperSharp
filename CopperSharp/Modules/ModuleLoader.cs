@@ -5,40 +5,45 @@ using CopperSharp.Utils;
 namespace CopperSharp.Modules;
 
 /// <summary>
-/// A global module loader
+///     A global module loader
 /// </summary>
 public sealed class ModuleLoader
 {
-    private int WarningCount { get; set; } = 0;
-    private int ErrorCount { get; set; } = 0;
-    private string? OutputDirectory { get; set; } = null;
-    private string? BuildDirectory { get; set; } = null;
-    private Dictionary<string, string> ResourceCache { get; } = new();
-
     private ModuleLoader()
     {
-        
     }
 
+    private int WarningCount { get; set; }
+    private int ErrorCount { get; set; }
+    private string? OutputDirectory { get; set; }
+    private string? BuildDirectory { get; set; }
+    private Dictionary<string, string> ResourceCache { get; } = new();
+
     /// <summary>
-    /// A global module loader
+    ///     A global module loader
     /// </summary>
     public static ModuleLoader GlobalLoader { get; } = new();
 
     /// <summary>
-    /// Sets the .zip archive output directory. Can be set to minecraft datapack folder for debugging.
+    ///     Sets the .zip archive output directory. Can be set to minecraft datapack folder for debugging.
     /// </summary>
     /// <param name="dir">Directory to be set</param>
-    public void SetOutputDirectory(string dir) => OutputDirectory = dir;
+    public void SetOutputDirectory(string dir)
+    {
+        OutputDirectory = dir;
+    }
 
     /// <summary>
-    /// Sets the build .mcfunction and .json directory. Can be set to minecraft datapack folder for debugging.
+    ///     Sets the build .mcfunction and .json directory. Can be set to minecraft datapack folder for debugging.
     /// </summary>
     /// <param name="dir">Directory to be set</param>
-    public void SetBuildDirectory(string dir) => BuildDirectory = dir;
+    public void SetBuildDirectory(string dir)
+    {
+        BuildDirectory = dir;
+    }
 
     /// <summary>
-    /// Emits a warning that is displayed for user
+    ///     Emits a warning that is displayed for user
     /// </summary>
     /// <param name="message">Message to be displayed</param>
     public void EmitWarning(string message)
@@ -51,7 +56,7 @@ public sealed class ModuleLoader
     }
 
     /// <summary>
-    /// Emits an error that is displayed for user
+    ///     Emits an error that is displayed for user
     /// </summary>
     /// <param name="message">Message to be displayed</param>
     public void EmitError(string message)
@@ -64,7 +69,7 @@ public sealed class ModuleLoader
     }
 
     /// <summary>
-    /// Caches provided resource by relative file name
+    ///     Caches provided resource by relative file name
     /// </summary>
     /// <param name="relativePath">Relative path from the build directory</param>
     /// <param name="data">Data to be cached</param>
@@ -72,9 +77,9 @@ public sealed class ModuleLoader
     {
         ResourceCache[relativePath] = data;
     }
-    
+
     /// <summary>
-    /// Caches provided resource by relative file name
+    ///     Caches provided resource by relative file name
     /// </summary>
     /// <param name="relativePath">Relative path from the data/minecraft directory</param>
     /// <param name="data">Data to be cached</param>
@@ -83,9 +88,9 @@ public sealed class ModuleLoader
         CacheResource(Path.Join("pack", "data", "minecraft", relativePath), data);
     }
 
-    
+
     /// <summary>
-    /// Asynchronously loads a provided module
+    ///     Asynchronously loads a provided module
     /// </summary>
     /// <param name="mod">Module to be loaded</param>
     public async Task LoadAsync(Module mod)
@@ -131,7 +136,7 @@ public sealed class ModuleLoader
                     Console.WriteLine("Resource cache available, processing it...");
 
                     Console.Write("Processing cache... ");
-                    
+
                     // ReSharper disable once ConvertToUsingDeclaration
                     using (var bar = new ProgressBar())
                     {
@@ -145,6 +150,7 @@ public sealed class ModuleLoader
                                 var cd = cds.Aggregate(Path.Join);
                                 Directory.CreateDirectory(Path.Join(build, cd));
                             }
+
                             await File.WriteAllTextAsync(Path.Join(build, p), d);
                             bar.Report((double) cur / l);
                             cur++;
@@ -179,23 +185,26 @@ public sealed class ModuleLoader
             // building into zip files
             Console.WriteLine("Building zip file output.");
             var outDir = OutputDirectory ?? Path.Join(Directory.GetCurrentDirectory(), "Output");
-            if(OutputDirectory == null)
+            if (OutputDirectory == null)
+            {
                 FileUtils.ForceCreateDir(outDir);
+            }
             else
             {
                 // Safely creating directory to make sure we dont delete some valuable dir
-                if(!Directory.Exists(outDir))
+                if (!Directory.Exists(outDir))
                     Directory.CreateDirectory(outDir);
             }
+
             var zipPath = Path.Join(outDir, $"{mod.Name}.zip");
 
-            if(File.Exists(zipPath))
+            if (File.Exists(zipPath))
                 File.Delete(zipPath);
             ZipFile.CreateFromDirectory(dpPath, zipPath, CompressionLevel.Fastest, false);
             if (Directory.Exists(rpPath))
             {
                 var rpZip = Path.Join(outDir, $"{mod.Name}_resources.zip");
-                if(File.Exists(rpZip))
+                if (File.Exists(rpZip))
                     File.Delete(rpZip);
                 ZipFile.CreateFromDirectory(rpPath, rpZip, CompressionLevel.Fastest, false);
             }
@@ -204,16 +213,14 @@ public sealed class ModuleLoader
             Console.WriteLine($"{WarningCount} warnings emitted and {ErrorCount} errors emitted.");
 
             mod._locked = true;
-
         }
         catch (Exception
                e) // it is recommended not to throw exceptions and instead to emit an error, but im too lazy to refactor whole codebase :P
         {
             EmitError($"Error building module: {e.Message}!");
-            
+
             Console.WriteLine(
                 $"Failed building module {mod.Name} with {WarningCount} warnings and {ErrorCount} errors!");
-            return;
         }
     }
 }

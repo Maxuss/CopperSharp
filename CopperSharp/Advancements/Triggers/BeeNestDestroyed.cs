@@ -4,13 +4,13 @@ using CopperSharp.Item;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Bee nest destroyed trigger condition
+///     Bee nest destroyed trigger condition
 /// </summary>
 [CriterionName("bee_nest_destroyed")]
 public sealed class BeeNestDestroyed : TriggerCondition
 {
     /// <summary>
-    /// Sets destroyed block
+    ///     Sets destroyed block
     /// </summary>
     /// <param name="block">Type of bee nest destroyed</param>
     /// <returns>This trigger</returns>
@@ -19,9 +19,9 @@ public sealed class BeeNestDestroyed : TriggerCondition
         Data["block"] = block.Id.ToString();
         return this;
     }
-    
+
     /// <summary>
-    /// Sets item used
+    ///     Sets item used
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>
@@ -32,7 +32,7 @@ public sealed class BeeNestDestroyed : TriggerCondition
     }
 
     /// <summary>
-    /// Sets amount of bees inside
+    ///     Sets amount of bees inside
     /// </summary>
     /// <param name="bees">Amount of bees</param>
     /// <returns>This trigger</returns>

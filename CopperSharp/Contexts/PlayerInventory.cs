@@ -12,24 +12,24 @@ public sealed class PlayerInventory
 
     private string Name { get; }
     private WorldContext Lock { get; }
-    
-    private void InternalSetItem(int at, ItemStack item, string? slot = null)
-    {
-        var aslot = slot ?? $"container.{Math.Clamp(at, 0, 53)}";
-        Lock.Cache.Add($"item replace entity {Name} {aslot} with {item.Serialize()}");
-    }
-    
+
     /// <summary>
-    /// Sets item at certain position
+    ///     Sets item at certain position
     /// </summary>
     /// <param name="slot">Slot of item. Must be in range of 0 to 53</param>
     public ItemStack this[int slot]
     {
         set => InternalSetItem(slot, value);
     }
-    
+
+    private void InternalSetItem(int at, ItemStack item, string? slot = null)
+    {
+        var aslot = slot ?? $"container.{Math.Clamp(at, 0, 53)}";
+        Lock.Cache.Add($"item replace entity {Name} {aslot} with {item.Serialize()}");
+    }
+
     /// <summary>
-    /// Adds an item to this inventory
+    ///     Adds an item to this inventory
     /// </summary>
     /// <param name="item">Item to be added</param>
     public void AddItem(ItemStack item)
@@ -38,7 +38,7 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Sets item in inventory
+    ///     Sets item in inventory
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 26</param>
@@ -48,7 +48,7 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Sets item in hotbar
+    ///     Sets item in hotbar
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 8</param>
@@ -58,7 +58,7 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Sets item in ender chest
+    ///     Sets item in ender chest
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 26</param>
@@ -68,52 +68,52 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Sets helmet
+    ///     Sets helmet
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetHelmet(ItemStack item)
     {
         InternalSetItem(-1, item, "armor.head");
     }
-    
+
     /// <summary>
-    /// Sets chestplate
+    ///     Sets chestplate
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetChestplate(ItemStack item)
     {
         InternalSetItem(-1, item, "armor.chest");
     }
-    
+
     /// <summary>
-    /// Sets leggings
+    ///     Sets leggings
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetLeggings(ItemStack item)
     {
         InternalSetItem(-1, item, "armor.legs");
     }
-    
+
     /// <summary>
-    /// Sets boots
+    ///     Sets boots
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetBoots(ItemStack item)
     {
         InternalSetItem(-1, item, "armor.feet");
     }
-    
+
     /// <summary>
-    /// Sets item in main hand
+    ///     Sets item in main hand
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetMainhand(ItemStack item)
     {
         InternalSetItem(-1, item, "weapon.mainhand");
     }
-    
+
     /// <summary>
-    /// Sets item in off hand
+    ///     Sets item in off hand
     /// </summary>
     /// <param name="item">Item to be set</param>
     public void SetOffhand(ItemStack item)
@@ -122,7 +122,7 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Clears this inventory
+    ///     Clears this inventory
     /// </summary>
     public void Clear()
     {

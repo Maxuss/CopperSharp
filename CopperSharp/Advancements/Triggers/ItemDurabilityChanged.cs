@@ -4,14 +4,14 @@ using CopperSharp.Utils;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after any item in the inventory has
-/// been damaged in any form. 
+///     Triggers after any item in the inventory has
+///     been damaged in any form.
 /// </summary>
 [CriterionName("item_durability_changed")]
 public sealed class ItemDurabilityChanged : TriggerCondition
 {
     /// <summary>
-    /// Sets the change in durability
+    ///     Sets the change in durability
     /// </summary>
     /// <param name="delta">Delta durability change</param>
     /// <returns>This trigger</returns>
@@ -22,7 +22,7 @@ public sealed class ItemDurabilityChanged : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the remaining durability of item
+    ///     Sets the remaining durability of item
     /// </summary>
     /// <param name="durability">Remaining durability</param>
     /// <returns>This trigger</returns>
@@ -33,7 +33,7 @@ public sealed class ItemDurabilityChanged : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the item that lost the durability
+    ///     Sets the item that lost the durability
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>

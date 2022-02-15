@@ -7,15 +7,15 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player places a block.
+///     Triggers when the player places a block.
 /// </summary>
 [CriterionName("placed_block")]
 public sealed class PlacedBlock : TriggerCondition
 {
     private NbtCompound? States { get; set; }
-    
+
     /// <summary>
-    /// Sets the type of block placed
+    ///     Sets the type of block placed
     /// </summary>
     /// <param name="id">Type of block to be set</param>
     /// <returns>This trigger</returns>
@@ -26,7 +26,7 @@ public sealed class PlacedBlock : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the location of the placed block
+    ///     Sets the location of the placed block
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger</returns>
@@ -37,7 +37,7 @@ public sealed class PlacedBlock : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the item that was consumed and placed
+    ///     Sets the item that was consumed and placed
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>
@@ -48,7 +48,7 @@ public sealed class PlacedBlock : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the extra state of the block placed
+    ///     Sets the extra state of the block placed
     /// </summary>
     /// <param name="state">Block state to be set</param>
     /// <returns>This trigger</returns>

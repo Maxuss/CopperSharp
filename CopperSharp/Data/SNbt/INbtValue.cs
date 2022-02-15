@@ -22,7 +22,7 @@ public interface INbtValue
     /// <param name="sw">String writer to which data should be written</param>
     public void SerializeInto(JsonTextWriter sw); // ReSharper disable RedundantCast
 
-    
+
     /// <summary>
     ///     Wrap provided value inside an NBT tag
     /// </summary>

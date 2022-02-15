@@ -3,14 +3,14 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents a distance predicate
+///     Represents a distance predicate
 /// </summary>
 public struct DistancePredicate
 {
-    private Dictionary<string, (float?, float?)> Distances { get; set; } = new();
+    private Dictionary<string, (float?, float?)> Distances { get; } = new();
 
     /// <summary>
-    /// Sets absolute distance
+    ///     Sets absolute distance
     /// </summary>
     /// <param name="max">Max distance</param>
     /// <param name="min">Min distance</param>
@@ -20,9 +20,9 @@ public struct DistancePredicate
         Distances["absolute"] = (max, min);
         return this;
     }
-    
+
     /// <summary>
-    /// Sets horizontal distance
+    ///     Sets horizontal distance
     /// </summary>
     /// <param name="max">Max distance</param>
     /// <param name="min">Min distance</param>
@@ -34,7 +34,7 @@ public struct DistancePredicate
     }
 
     /// <summary>
-    /// Sets X axis distance 
+    ///     Sets X axis distance
     /// </summary>
     /// <param name="max">Max distance</param>
     /// <param name="min">Min distance</param>
@@ -44,9 +44,9 @@ public struct DistancePredicate
         Distances["x"] = (max, min);
         return this;
     }
-    
+
     /// <summary>
-    /// Sets Y axis distance
+    ///     Sets Y axis distance
     /// </summary>
     /// <param name="max">Max distance</param>
     /// <param name="min">Min distance</param>
@@ -56,9 +56,9 @@ public struct DistancePredicate
         Distances["y"] = (max, min);
         return this;
     }
-    
+
     /// <summary>
-    /// Sets Z axis distance
+    ///     Sets Z axis distance
     /// </summary>
     /// <param name="max">Max distance</param>
     /// <param name="min">Min distance</param>
@@ -70,7 +70,7 @@ public struct DistancePredicate
     }
 
     /// <summary>
-    /// Serializes this distance predicate into provided writer
+    ///     Serializes this distance predicate into provided writer
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter jw)
@@ -85,15 +85,16 @@ public struct DistancePredicate
                 await jw.WritePropertyNameAsync("max");
                 await jw.WriteValueAsync(max);
             }
+
             if (min != null)
             {
                 await jw.WritePropertyNameAsync("min");
                 await jw.WriteValueAsync(min);
             }
+
             await jw.WriteEndObjectAsync();
         }
 
         await jw.WriteEndObjectAsync();
-
     }
 }

@@ -3,13 +3,13 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player uses their hand or an item on a block
+///     Triggers when the player uses their hand or an item on a block
 /// </summary>
 [CriterionName("item_used_on_block")]
 public sealed class ItemUsedOnBlock : TriggerCondition
 {
     /// <summary>
-    /// Sets the center of block this item was used on
+    ///     Sets the center of block this item was used on
     /// </summary>
     /// <param name="loc">Location to be set</param>
     /// <returns>This trigger</returns>
@@ -20,7 +20,7 @@ public sealed class ItemUsedOnBlock : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the item used on block
+    ///     Sets the item used on block
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>

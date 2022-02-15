@@ -4,13 +4,12 @@ using CopperSharp.Modules;
 namespace CopperSharp.Registry;
 
 /// <summary>
-/// Represents an advancement registry
+///     Represents an advancement registry
 /// </summary>
 public sealed class AdvancementRegistry : Registry<Advancement>
 {
     internal AdvancementRegistry()
     {
-        
     }
 
     /// <inheritdoc />

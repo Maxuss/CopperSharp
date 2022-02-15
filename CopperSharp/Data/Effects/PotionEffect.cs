@@ -8,10 +8,10 @@ namespace CopperSharp.Data.Effects;
 public readonly struct PotionEffect
 {
     /// <summary>
-    /// Name of this effect
+    ///     Name of this effect
     /// </summary>
     public string EffectName { get; }
-    
+
     /// <summary>
     ///     Whether the effect is ambient
     /// </summary>

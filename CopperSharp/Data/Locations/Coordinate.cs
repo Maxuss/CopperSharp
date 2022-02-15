@@ -29,7 +29,7 @@ public readonly struct Coordinate
     /// <returns>A simple coordinate</returns>
     public static Coordinate Simple(double val)
     {
-        return new(val);
+        return new Coordinate(val);
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public readonly struct Coordinate
     /// <returns>A relative coordinate</returns>
     public static Coordinate Relative(double val)
     {
-        return new(val, '~');
+        return new Coordinate(val, '~');
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public readonly struct Coordinate
     /// <returns>A local coordinate</returns>
     public static Coordinate Local(double val)
     {
-        return new(val, '^');
+        return new Coordinate(val, '^');
     }
 
     /// <summary>

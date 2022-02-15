@@ -27,7 +27,7 @@ public readonly struct Identifier
     /// <param name="path">Path of the identifier</param>
     public static Identifier Minecraft(string path)
     {
-        return new("minecraft", path);
+        return new Identifier("minecraft", path);
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public readonly struct Identifier
     /// <param name="path">Path of the identifier</param>
     public static Identifier Of(string ns, string path)
     {
-        return new(ns, path);
+        return new Identifier(ns, path);
     }
 
     /// <summary>

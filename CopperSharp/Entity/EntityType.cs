@@ -34,7 +34,7 @@ public readonly struct EntityType
     /// <returns>New generated entity type</returns>
     public static EntityType Inject(Identifier id, Type @class)
     {
-        return new(id, @class);
+        return new EntityType(id, @class);
     }
 
     /// <summary>Represents entity of type minecraft:area_effect_cloud</summary>

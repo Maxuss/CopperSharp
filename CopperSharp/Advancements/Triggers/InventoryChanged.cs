@@ -5,16 +5,16 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after any changes happen to the player's inventory
+///     Triggers after any changes happen to the player's inventory
 /// </summary>
 [CriterionName("inventory_changed")]
 public sealed class InventoryChanged : TriggerCondition
 {
-    private List<ItemPredicate> Inv { get; set; } = new();
-    private Dictionary<string, StrictRange> Slots { get; set; } = new();
-    
+    private List<ItemPredicate> Inv { get; } = new();
+    private Dictionary<string, StrictRange> Slots { get; } = new();
+
     /// <summary>
-    /// Sets the items in player's inventory
+    ///     Sets the items in player's inventory
     /// </summary>
     /// <param name="items">Items to be set</param>
     /// <returns>This trigger</returns>
@@ -25,7 +25,7 @@ public sealed class InventoryChanged : TriggerCondition
     }
 
     /// <summary>
-    /// The amount of slots empty in the inventory.
+    ///     The amount of slots empty in the inventory.
     /// </summary>
     /// <param name="slots">Amount to be set</param>
     /// <returns>This trigger</returns>
@@ -34,9 +34,9 @@ public sealed class InventoryChanged : TriggerCondition
         Slots["empty"] = slots;
         return this;
     }
-    
+
     /// <summary>
-    /// The amount of slots completely filled in the inventory.
+    ///     The amount of slots completely filled in the inventory.
     /// </summary>
     /// <param name="slots">Amount to be set</param>
     /// <returns>This trigger</returns>
@@ -45,9 +45,9 @@ public sealed class InventoryChanged : TriggerCondition
         Slots["full"] = slots;
         return this;
     }
-    
+
     /// <summary>
-    /// The amount of slots occupied in the inventory.
+    ///     The amount of slots occupied in the inventory.
     /// </summary>
     /// <param name="slots">Amount to be set</param>
     /// <returns>This trigger</returns>
@@ -66,10 +66,7 @@ public sealed class InventoryChanged : TriggerCondition
         {
             await w.WritePropertyNameAsync("items");
             await w.WriteStartArrayAsync();
-            foreach (var item in Inv)
-            {
-                await item.SerializeInto(w);
-            }
+            foreach (var item in Inv) await item.SerializeInto(w);
             await w.WriteEndArrayAsync();
         }
 
@@ -77,10 +74,7 @@ public sealed class InventoryChanged : TriggerCondition
         {
             await w.WritePropertyNameAsync("slots");
             await w.WriteStartObjectAsync();
-            foreach (var (k, v) in Slots)
-            {
-                await v.SerializeInto(w, k);
-            }
+            foreach (var (k, v) in Slots) await v.SerializeInto(w, k);
             await w.WriteEndObjectAsync();
         }
     }

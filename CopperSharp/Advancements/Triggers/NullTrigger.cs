@@ -1,10 +1,9 @@
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Never triggers
+///     Never triggers
 /// </summary>
 [CriterionName("impossible")]
 public sealed class NullTrigger : TriggerCondition
 {
-    
 }

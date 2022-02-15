@@ -23,7 +23,7 @@ public readonly struct Selector
     /// </summary>
     public static Selector Executor = new("@s");
 
-    
+
     /// <summary>
     ///     All players in the callers world
     /// </summary>

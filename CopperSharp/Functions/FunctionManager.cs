@@ -1,17 +1,16 @@
 using System.Reflection;
-using CopperSharp.Contexts;
 
 namespace CopperSharp.Functions;
 
 /// <summary>
-/// A global function manager
+///     A global function manager
 /// </summary>
 public static class FunctionManager
 {
     private static Dictionary<Type, List<(MethodInfo, FunctionHandlerAttribute)>> Methods { get; } = new();
 
     /// <summary>
-    /// Looks up provided function and gets all methods
+    ///     Looks up provided function and gets all methods
     /// </summary>
     /// <param name="fn">Function to be looked up</param>
     /// <returns>Null if function not registered, otherwise list of methods that can be called</returns>
@@ -22,7 +21,7 @@ public static class FunctionManager
     }
 
     /// <summary>
-    /// Registers provided function as well as all it's handlers
+    ///     Registers provided function as well as all it's handlers
     /// </summary>
     /// <param name="fn">Function to be registered</param>
     public static void Register(IFunction fn)

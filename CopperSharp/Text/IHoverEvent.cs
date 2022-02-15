@@ -75,7 +75,7 @@ public readonly struct DisplayTextHover : IHoverEvent
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
     {
-        return new("show_text", _component.Contain());
+        return new ComponentHoverEvent("show_text", _component.Contain());
     }
 }
 
@@ -104,7 +104,7 @@ public readonly struct DisplayItemHover : IHoverEvent
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
     {
-        return new("show_item", new ShowItemHoverEvent(_id.ToString(), _count, _tag?.ToString()));
+        return new ComponentHoverEvent("show_item", new ShowItemHoverEvent(_id.ToString(), _count, _tag?.ToString()));
     }
 }
 
@@ -133,6 +133,7 @@ public readonly struct DisplayEntityHover : IHoverEvent
     /// <inheritdoc />
     public ComponentHoverEvent Contain()
     {
-        return new("show_entity", new ShowEntityHoverEvent(_id.ToString(), _uuid.ToString(), _name?.Contain()));
+        return new ComponentHoverEvent("show_entity",
+            new ShowEntityHoverEvent(_id.ToString(), _uuid.ToString(), _name?.Contain()));
     }
 }

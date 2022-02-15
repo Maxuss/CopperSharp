@@ -3,14 +3,14 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player
-/// trades with a villager or a wandering trader.
+///     Triggers after the player
+///     trades with a villager or a wandering trader.
 /// </summary>
 [CriterionName("villager_trade")]
 public sealed class VillagerTradeComplete : TriggerCondition
 {
     /// <summary>
-    /// Sets the item purchased.
+    ///     Sets the item purchased.
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>
@@ -21,7 +21,7 @@ public sealed class VillagerTradeComplete : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the villager with which was trade.
+    ///     Sets the villager with which was trade.
     /// </summary>
     /// <param name="entity">Entity to be set</param>
     /// <returns>This trigger</returns>

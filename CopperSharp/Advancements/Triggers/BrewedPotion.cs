@@ -4,200 +4,241 @@ using CopperSharp.Utils;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player takes any item out of a brewing stand.
+///     Triggers after the player takes any item out of a brewing stand.
 /// </summary>
 [CriterionName("brewed_potion")]
 public sealed class BrewedPotion : TriggerCondition
 {
     /// <summary>
-    /// Sets type of potion to be displayed
+    ///     Sets type of potion to be displayed
     /// </summary>
     /// <param name="type">Type of potion</param>
     /// <returns>This trigger</returns>
     public BrewedPotion PotionType(NamedPotion type)
-    { 
+    {
         Data["potion"] = type.GetName().ToSnakeCase();
         return this;
     }
 }
 
 /// <summary>
-/// Represents a type of potion name.
-///
-/// Not to be confused with <see cref="StatusEffect"/>
+///     Represents a type of potion name.
+///     Not to be confused with <see cref="StatusEffect" />
 /// </summary>
 public enum NamedPotion
 {
     /// <summary>
-    /// Uncraftable
+    ///     Uncraftable
     /// </summary>
     Uncraftable,
+
     /// <summary>
-    /// Water bottle
+    ///     Water bottle
     /// </summary>
     Water,
+
     /// <summary>
-    /// Mundane
+    ///     Mundane
     /// </summary>
     Mundane,
+
     /// <summary>
-    /// Thick
+    ///     Thick
     /// </summary>
     Thick,
+
     /// <summary>
-    /// Awkward
+    ///     Awkward
     /// </summary>
     Awkward,
+
     /// <summary>
-    /// Night Vision
+    ///     Night Vision
     /// </summary>
     NightVision,
+
     /// <summary>
-    /// Invisibility
+    ///     Invisibility
     /// </summary>
     Invisibility,
+
     /// <summary>
-    /// Leaping
+    ///     Leaping
     /// </summary>
     Leaping,
+
     /// <summary>
-    /// Fire Resistance
+    ///     Fire Resistance
     /// </summary>
     FireResistance,
+
     /// <summary>
-    /// Swiftness
+    ///     Swiftness
     /// </summary>
     Swiftness,
+
     /// <summary>
-    /// Slowness
+    ///     Slowness
     /// </summary>
     Slowness,
+
     /// <summary>
-    /// Water Breathing
+    ///     Water Breathing
     /// </summary>
     WaterBreathing,
+
     /// <summary>
-    /// Healing
+    ///     Healing
     /// </summary>
     Healing,
+
     /// <summary>
-    /// Harming
+    ///     Harming
     /// </summary>
     Harming,
+
     /// <summary>
-    /// Poison
+    ///     Poison
     /// </summary>
     Poison,
+
     /// <summary>
-    /// Regeneration
+    ///     Regeneration
     /// </summary>
     Regeneration,
+
     /// <summary>
-    /// Strength
+    ///     Strength
     /// </summary>
     Strength,
+
     /// <summary>
-    /// Weakness
+    ///     Weakness
     /// </summary>
     Weakness,
+
     /// <summary>
-    /// Luck
+    ///     Luck
     /// </summary>
     Luck,
+
     /// <summary>
-    /// Turtle Master
+    ///     Turtle Master
     /// </summary>
     TurtleMaster,
+
     /// <summary>
-    /// Slow Falling
+    ///     Slow Falling
     /// </summary>
     SlowFalling,
+
     /// <summary>
-    /// Strong Leaping
+    ///     Strong Leaping
     /// </summary>
     StrongLeaping,
+
     /// <summary>
-    /// Strong Swiftness
+    ///     Strong Swiftness
     /// </summary>
     StrongSwiftness,
+
     /// <summary>
-    /// Strong Slowness
+    ///     Strong Slowness
     /// </summary>
     StrongSlowness,
+
     /// <summary>
-    /// Strong Healing
+    ///     Strong Healing
     /// </summary>
     StrongHealing,
+
     /// <summary>
-    /// Strong Harming
+    ///     Strong Harming
     /// </summary>
     StrongHarming,
+
     /// <summary>
-    /// Strong Poison
+    ///     Strong Poison
     /// </summary>
     StrongPoison,
+
     /// <summary>
-    /// Strong regeneration
+    ///     Strong regeneration
     /// </summary>
     StrongRegeneration,
+
     /// <summary>
-    /// Strong Strength
+    ///     Strong Strength
     /// </summary>
     StrongStrength,
+
     /// <summary>
-    /// Strong Turtle Master
+    ///     Strong Turtle Master
     /// </summary>
     StrongTurtleMaster,
+
     /// <summary>
-    /// Long Night Vision
+    ///     Long Night Vision
     /// </summary>
     LongNightVision,
+
     /// <summary>
-    /// Long Invisibility
+    ///     Long Invisibility
     /// </summary>
     LongInvisibility,
+
     /// <summary>
-    /// Long Leaping
+    ///     Long Leaping
     /// </summary>
     LongLeaping,
+
     /// <summary>
-    /// Long Fire Resistance
+    ///     Long Fire Resistance
     /// </summary>
     LongFireResistance,
+
     /// <summary>
-    /// Long Swiftness
+    ///     Long Swiftness
     /// </summary>
     LongSwiftness,
+
     /// <summary>
-    /// Long Slowness
+    ///     Long Slowness
     /// </summary>
     LongSlowness,
+
     /// <summary>
-    /// Long Water Breathing
+    ///     Long Water Breathing
     /// </summary>
     LongWaterBreathing,
+
     /// <summary>
-    /// Long Poison
+    ///     Long Poison
     /// </summary>
     LongPoison,
+
     /// <summary>
-    /// Long Regeneration
+    ///     Long Regeneration
     /// </summary>
     LongRegeneration,
+
     /// <summary>
-    /// Long Strength
+    ///     Long Strength
     /// </summary>
     LongStrength,
+
     /// <summary>
-    /// Long Weakness
+    ///     Long Weakness
     /// </summary>
     LongWeakness,
+
     /// <summary>
-    /// Long Turtle Master
+    ///     Long Turtle Master
     /// </summary>
     LongTurtleMaster,
+
     /// <summary>
-    /// Long Slow Falling
+    ///     Long Slow Falling
     /// </summary>
     LongSlowFalling
 }

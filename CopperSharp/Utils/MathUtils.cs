@@ -20,13 +20,13 @@ public static class MathUtils
         if (mode)
         {
             var a = (to - from) / (max * max);
-            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + @from;
+            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + from;
         }
         else
         {
             var a = (from - to) / (max * max);
             var b = -2 * a * max;
-            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + b * i + @from;
+            for (var i = 0; i < results.Length; i++) results[i] = a * i * i + b * i + from;
         }
 
         return results;
@@ -42,7 +42,7 @@ public static class MathUtils
     public static double[] LinearInterpolation(double from, double to, int max)
     {
         var res = new double[max];
-        for (var i = 0; i < max; i++) res[i] = @from + i * ((to - @from) / (max - 1));
+        for (var i = 0; i < max; i++) res[i] = from + i * ((to - from) / (max - 1));
 
         return res;
     }

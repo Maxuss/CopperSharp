@@ -4,7 +4,7 @@ using CopperSharp.Tags;
 namespace CopperSharp.Registry;
 
 /// <summary>
-/// Represents a registry for tags
+///     Represents a registry for tags
 /// </summary>
 public sealed class TagRegistry : Registry<Tag>
 {

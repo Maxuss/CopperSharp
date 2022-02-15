@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents an effect for use in conditions
+///     Represents an effect for use in conditions
 /// </summary>
 public struct EffectPredicate
 {
     /// <summary>
-    /// Constructs a new conditional effect
+    ///     Constructs a new conditional effect
     /// </summary>
     /// <param name="type">Type of effect</param>
     public EffectPredicate(StatusEffect type)
@@ -21,7 +21,7 @@ public struct EffectPredicate
     }
 
     /// <summary>
-    /// Type of this effect
+    ///     Type of this effect
     /// </summary>
     public StatusEffect Type { get; }
 
@@ -30,7 +30,7 @@ public struct EffectPredicate
     private StrictRange? EDuration { get; set; }
 
     /// <summary>
-    /// Marks that the effect should be ambient
+    ///     Marks that the effect should be ambient
     /// </summary>
     /// <returns>This effect condition</returns>
     public EffectPredicate Ambient(bool ambient = true)
@@ -40,7 +40,7 @@ public struct EffectPredicate
     }
 
     /// <summary>
-    /// Marks that the effect should be visible
+    ///     Marks that the effect should be visible
     /// </summary>
     /// <returns>This effect condition</returns>
     public EffectPredicate Visible(bool visible = true)
@@ -50,7 +50,7 @@ public struct EffectPredicate
     }
 
     /// <summary>
-    /// Marks that the effect should have a certain level
+    ///     Marks that the effect should have a certain level
     /// </summary>
     /// <param name="value">Level the effect should have</param>
     /// <returns>This effect condition</returns>
@@ -59,9 +59,9 @@ public struct EffectPredicate
         EAmplifier = value;
         return this;
     }
-    
+
     /// <summary>
-    /// Marks that the effect should have a certain duration
+    ///     Marks that the effect should have a certain duration
     /// </summary>
     /// <param name="value">Duration the effect should have</param>
     /// <returns>This effect condition</returns>
@@ -70,9 +70,9 @@ public struct EffectPredicate
         EDuration = value;
         return this;
     }
-    
+
     /// <summary>
-    /// Serializes this effect into provided text writer
+    ///     Serializes this effect into provided text writer
     /// </summary>
     /// <param name="w">Writer to be used for serialization</param>
     public async Task SerializeInto(JsonTextWriter w)

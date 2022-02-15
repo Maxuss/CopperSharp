@@ -3,13 +3,13 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player interacts with an entity.
+///     Triggers when the player interacts with an entity.
 /// </summary>
 [CriterionName("player_interacted_with_entity")]
 public sealed class PlayerInteractEntity : TriggerCondition
 {
     /// <summary>
-    /// Sets the item that was in the player's hand during interaction
+    ///     Sets the item that was in the player's hand during interaction
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>
@@ -20,7 +20,7 @@ public sealed class PlayerInteractEntity : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the entity which was interacted with.
+    ///     Sets the entity which was interacted with.
     /// </summary>
     /// <param name="entity">Entity to be set</param>
     /// <returns>This trigger</returns>

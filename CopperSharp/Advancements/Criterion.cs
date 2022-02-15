@@ -4,22 +4,13 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements;
 
 /// <summary>
-/// Represents a criterion that must be
-/// completed to grant advancement.
+///     Represents a criterion that must be
+///     completed to grant advancement.
 /// </summary>
 public sealed class Criterion
 {
     /// <summary>
-    /// Trigger to be used
-    /// </summary>
-    public TriggerCondition Trigger { get; }
-    /// <summary>
-    /// Name of this criterion to be used
-    /// </summary>
-    public string Name { get; }
-
-    /// <summary>
-    /// Creates a new criterion for the advancement
+    ///     Creates a new criterion for the advancement
     /// </summary>
     /// <param name="name">Name of the criterion</param>
     /// <param name="trigger">Trigger to be used</param>
@@ -30,7 +21,17 @@ public sealed class Criterion
     }
 
     /// <summary>
-    /// Serializes this criterion to provided json writer
+    ///     Trigger to be used
+    /// </summary>
+    public TriggerCondition Trigger { get; }
+
+    /// <summary>
+    ///     Name of this criterion to be used
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    ///     Serializes this criterion to provided json writer
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter jw)

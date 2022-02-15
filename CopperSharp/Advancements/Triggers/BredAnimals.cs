@@ -3,13 +3,13 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player breeds 2 animals.
+///     Triggers after the player breeds 2 animals.
 /// </summary>
 [CriterionName("bred_animals")]
 public sealed class BredAnimals : TriggerCondition
 {
     /// <summary>
-    /// Sets the child
+    ///     Sets the child
     /// </summary>
     /// <param name="entity">Child to be set</param>
     /// <returns>This trigger</returns>
@@ -18,9 +18,9 @@ public sealed class BredAnimals : TriggerCondition
         Entities["child"] = entity;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets the parent
+    ///     Sets the parent
     /// </summary>
     /// <param name="entity">Parent to be set</param>
     /// <returns>This trigger</returns>
@@ -29,9 +29,9 @@ public sealed class BredAnimals : TriggerCondition
         Entities["parent"] = entity;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets the second parent, or partner
+    ///     Sets the second parent, or partner
     /// </summary>
     /// <param name="entity">Partner to be set</param>
     /// <returns>This trigger</returns>

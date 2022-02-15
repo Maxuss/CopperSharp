@@ -1,27 +1,25 @@
-using CopperSharp.Advancements;
-using CopperSharp.Functions;
 using CopperSharp.Modules;
 using CopperSharp.Utils;
 
 namespace CopperSharp.Registry;
 
 /// <summary>
-/// An abstract super class for registries
+///     An abstract super class for registries
 /// </summary>
 public abstract class Registry<TElement>
 {
     /// <summary>
-    /// Name of this registry port
+    ///     Name of this registry port
     /// </summary>
-    protected abstract string Name { get; } 
-    
+    protected abstract string Name { get; }
+
     /// <summary>
-    /// Stack of elements inside this registry
+    ///     Stack of elements inside this registry
     /// </summary>
     protected Stack<(TElement, Identifier)> Stack { get; set; } = new();
 
     /// <summary>
-    /// Registers provided element in current registry
+    ///     Registers provided element in current registry
     /// </summary>
     /// <param name="element">Element to be registered</param>
     /// <param name="id">ID of element to be registered</param>
@@ -29,7 +27,7 @@ public abstract class Registry<TElement>
     public abstract TElement Register(TElement element, Identifier id);
 
     /// <summary>
-    /// Looks up provided element in this registry
+    ///     Looks up provided element in this registry
     /// </summary>
     /// <param name="element">Element to be looked up</param>
     /// <returns>Found identifier of element, or null</returns>
@@ -43,15 +41,15 @@ public abstract class Registry<TElement>
     }
 
     /// <summary>
-    /// Writes data to provided stream
+    ///     Writes data to provided stream
     /// </summary>
     /// <param name="element">Element to be written</param>
     /// <param name="stream">Stream to be used</param>
-    public abstract Task Write((TElement, Identifier) element, ModuleOutputStream stream); 
+    public abstract Task Write((TElement, Identifier) element, ModuleOutputStream stream);
 
-    
+
     /// <summary>
-    /// Asynchronously dumps this registry's contents
+    ///     Asynchronously dumps this registry's contents
     /// </summary>
     /// <param name="mod">Module to be used</param>
     public async Task Dump(Module mod)
@@ -71,43 +69,48 @@ public abstract class Registry<TElement>
                     var cd = dirs.SkipLast(1).Aggregate(stream.Directory, Path.Join);
                     Directory.CreateDirectory(cd);
                 }
+
                 await Write(data, stream);
                 bar.Report((double) cur / l);
                 cur++;
             }
         }
+
         Console.WriteLine("Done.");
     }
 }
 
 /// <summary>
-/// Class, containing all global registries
+///     Class, containing all global registries
 /// </summary>
 public static class Registries
 {
     /// <summary>
-    /// Global function registry
+    ///     Global function registry
     /// </summary>
     public static FunctionRegistry Functions { get; } = new();
 
     /// <summary>
-    /// Global advancement registry
+    ///     Global advancement registry
     /// </summary>
     public static AdvancementRegistry Advancements { get; } = new();
 
     /// <summary>
-    /// Global tag registry
+    ///     Global tag registry
     /// </summary>
     public static TagRegistry Tags { get; } = new();
-    
+
     /// <summary>
-    /// Registers provided element in provided registry
+    ///     Registers provided element in provided registry
     /// </summary>
     /// <param name="registry">Registry in which to register the element</param>
     /// <param name="element">Element to be registered</param>
     /// <param name="id">ID of element. Not recommended to have minecraft's namespace.</param>
     /// <typeparam name="TRegistrable">Type of registrable element</typeparam>
     /// <returns>The provided element</returns>
-    public static TRegistrable Register<TRegistrable>(Registry<TRegistrable> registry, TRegistrable element, Identifier id)
-        => registry.Register(element, id);
+    public static TRegistrable Register<TRegistrable>(Registry<TRegistrable> registry, TRegistrable element,
+        Identifier id)
+    {
+        return registry.Register(element, id);
+    }
 }

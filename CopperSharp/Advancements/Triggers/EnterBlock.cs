@@ -6,20 +6,20 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player stands in a block.
-/// Checks every tick and will try to trigger
-/// for each successful match (up to 8 times,
-/// the maximum amount of blocks a player can stand in),
-/// which only works if the advancement is revoked
-/// from within the advancement using a function reward
+///     Triggers when the player stands in a block.
+///     Checks every tick and will try to trigger
+///     for each successful match (up to 8 times,
+///     the maximum amount of blocks a player can stand in),
+///     which only works if the advancement is revoked
+///     from within the advancement using a function reward
 /// </summary>
 [CriterionName("enter_block")]
 public sealed class EnterBlock : TriggerCondition
 {
     private NbtCompound? States { get; set; }
-    
+
     /// <summary>
-    /// Sets the type of block
+    ///     Sets the type of block
     /// </summary>
     /// <param name="block">Block to be set</param>
     /// <returns>This trigger</returns>
@@ -30,7 +30,7 @@ public sealed class EnterBlock : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the extra block state of this block
+    ///     Sets the extra block state of this block
     /// </summary>
     /// <param name="state">State to be set</param>
     /// <returns>This block data</returns>

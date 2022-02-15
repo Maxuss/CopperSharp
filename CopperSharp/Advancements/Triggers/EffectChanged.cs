@@ -4,15 +4,15 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player gets a status effect applied or taken from them
+///     Triggers after the player gets a status effect applied or taken from them
 /// </summary>
 [CriterionName("effects_changed")]
 public sealed class EffectChanged : TriggerCondition
 {
-    private List<EffectPredicate> Predicates { get; set; } = new();
+    private List<EffectPredicate> Predicates { get; } = new();
 
     /// <summary>
-    /// Adds provided effects to this condition
+    ///     Adds provided effects to this condition
     /// </summary>
     /// <param name="effects">Predicates to be added</param>
     /// <returns>This trigger condition</returns>
@@ -23,7 +23,7 @@ public sealed class EffectChanged : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the source of this effect change
+    ///     Sets the source of this effect change
     /// </summary>
     /// <param name="entity">Entity to be used</param>
     /// <returns>This trigger</returns>
@@ -42,10 +42,7 @@ public sealed class EffectChanged : TriggerCondition
         {
             await w.WritePropertyNameAsync("effects");
             await w.WriteStartObjectAsync();
-            foreach (var pred in Predicates)
-            {
-                await pred.SerializeInto(w);
-            }
+            foreach (var pred in Predicates) await pred.SerializeInto(w);
 
             await w.WriteEndObjectAsync();
         }

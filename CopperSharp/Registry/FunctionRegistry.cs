@@ -5,23 +5,25 @@ using CopperSharp.Modules;
 namespace CopperSharp.Registry;
 
 /// <summary>
-/// Represents a global function registry
+///     Represents a global function registry
 /// </summary>
 public sealed class FunctionRegistry : Registry<IFunction>
 {
     internal FunctionRegistry()
     {
-        
     }
 
     /// <inheritdoc />
     protected override string Name => "functions";
 
     /// <summary>
-    /// Registers a new function
+    ///     Registers a new function
     /// </summary>
     /// <param name="element">Function to be registered</param>
-    public void Register(IFunction element) => Register(element, Identifier.Of("null", "null"));
+    public void Register(IFunction element)
+    {
+        Register(element, Identifier.Of("null", "null"));
+    }
 
     /// <inheritdoc />
     public override IFunction Register(IFunction element, Identifier id)
@@ -40,7 +42,7 @@ public sealed class FunctionRegistry : Registry<IFunction>
         if (handlers == null)
             return;
 
-        foreach(var (mtd, handle) in handlers)
+        foreach (var (mtd, handle) in handlers)
         {
             var ctx = new WorldContext();
             ctx.EnableMinecraftTranslating();

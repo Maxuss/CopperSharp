@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace CopperSharp.Modules;
 
 /// <summary>
-/// MC meta info for datapack
+///     MC meta info for datapack
 /// </summary>
 public readonly struct PackMcMeta
 {
@@ -14,11 +14,12 @@ public readonly struct PackMcMeta
     }
 
     /// <summary>
-    /// Format of this pack
+    ///     Format of this pack
     /// </summary>
     public int PackFormat { get; }
+
     /// <summary>
-    /// Description of this pack
+    ///     Description of this pack
     /// </summary>
     public string Description { get; }
 
@@ -38,9 +39,9 @@ public readonly struct PackMcMeta
 
         await jw.WritePropertyNameAsync("description");
         await jw.WriteValueAsync(Description);
-        
+
         await jw.WriteEndObjectAsync();
-        
+
         await jw.WriteEndObjectAsync();
 
         return sw.ToString();

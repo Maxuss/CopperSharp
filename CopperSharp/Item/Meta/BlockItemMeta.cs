@@ -6,7 +6,7 @@ using CopperSharp.Registry;
 namespace CopperSharp.Item.Meta;
 
 /// <summary>
-/// Represents a block-item meta
+///     Represents a block-item meta
 /// </summary>
 public class BlockItemMeta : ItemMeta, IBlockItemMeta
 {
@@ -15,16 +15,22 @@ public class BlockItemMeta : ItemMeta, IBlockItemMeta
     {
     }
 
+    /// <inheritdoc />
+    public List<Identifier> CanPlaceOn { get; set; } = new();
+
+    /// <inheritdoc />
+    public IState? BlockStateTag { get; set; }
+
+    /// <inheritdoc />
+    public IBlockData? BlockEntityTag { get; set; }
+
     internal override void WriteExternalMetaData(StringNbtWriter w)
     {
         if (CanPlaceOn.Any())
         {
             w.WritePropertyName("CanPlaceOn");
             w.WriteBeginArray();
-            foreach (var v in CanPlaceOn)
-            {
-                w.WriteString(v.ToString());
-            }
+            foreach (var v in CanPlaceOn) w.WriteString(v.ToString());
             w.WriteEndArray();
         }
 
@@ -38,13 +44,4 @@ public class BlockItemMeta : ItemMeta, IBlockItemMeta
         w.WritePropertyName("BlockEntityTag");
         w.WriteRawValue(BlockEntityTag.Serialize());
     }
-
-    /// <inheritdoc />
-    public List<Identifier> CanPlaceOn { get; set; } = new();
-
-    /// <inheritdoc />
-    public IState? BlockStateTag { get; set; }
-
-    /// <inheritdoc />
-    public IBlockData? BlockEntityTag { get; set; }
 }

@@ -4,13 +4,13 @@ using CopperSharp.World;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player travels between two dimensions
+///     Triggers after the player travels between two dimensions
 /// </summary>
 [CriterionName("changed_dimension")]
 public sealed class ChangedDimension : TriggerCondition
 {
     /// <summary>
-    /// Sets the dimension travelled from
+    ///     Sets the dimension travelled from
     /// </summary>
     /// <param name="from">Dimension to be set</param>
     /// <returns>This trigger</returns>
@@ -21,7 +21,7 @@ public sealed class ChangedDimension : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the dimension travelled to
+    ///     Sets the dimension travelled to
     /// </summary>
     /// <param name="to">Dimension to be set</param>
     /// <returns>This trigger</returns>

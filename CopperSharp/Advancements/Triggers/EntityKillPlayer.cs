@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after a living entity kills a player
+///     Triggers after a living entity kills a player
 /// </summary>
 [CriterionName("entity_killed_player")]
 public sealed class EntityKillPlayer : TriggerCondition
@@ -12,7 +12,7 @@ public sealed class EntityKillPlayer : TriggerCondition
     private DamagePredicate? Dmg { get; set; }
 
     /// <summary>
-    /// Sets the killer of player
+    ///     Sets the killer of player
     /// </summary>
     /// <param name="killer">Predicate to be set</param>
     /// <returns>This trigger</returns>
@@ -21,9 +21,9 @@ public sealed class EntityKillPlayer : TriggerCondition
         Entities["entity"] = killer;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets the type of damage taken before death
+    ///     Sets the type of damage taken before death
     /// </summary>
     /// <param name="dmg">Damage predicate</param>
     /// <returns>This trigger</returns>
@@ -44,5 +44,4 @@ public sealed class EntityKillPlayer : TriggerCondition
             await Dmg.SerializeInto(w);
         }
     }
-
 }

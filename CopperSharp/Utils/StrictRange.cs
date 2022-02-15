@@ -3,39 +3,44 @@ using Newtonsoft.Json;
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Represents a range of two values that can also a strict single value
+///     Represents a range of two values that can also a strict single value
 /// </summary>
 public readonly struct StrictRange
 {
     /// <summary>
-    /// Max value of this range
+    ///     Max value of this range
     /// </summary>
-    public int? MaxValue { get; } = null;
+    public int? MaxValue { get; }
+
     /// <summary>
-    /// Min value of this range
+    ///     Min value of this range
     /// </summary>
-    public int? MinValue { get; } = null;
+    public int? MinValue { get; }
+
     /// <summary>
-    /// Whether it is a strict single value, or a range
+    ///     Whether it is a strict single value, or a range
     /// </summary>
-    public bool IsStrict { get; } = false;
+    public bool IsStrict { get; }
+
     /// <summary>
-    /// Value if strict
+    ///     Value if strict
     /// </summary>
-    public int? StrictValue { get; } = null;
-    
+    public int? StrictValue { get; }
+
     /// <summary>
-    /// Constructs a new range with one single value
+    ///     Constructs a new range with one single value
     /// </summary>
     /// <param name="strict">Strict single value</param>
     public StrictRange(int strict)
     {
         IsStrict = true;
         StrictValue = strict;
+        MaxValue = null;
+        MinValue = null;
     }
 
     /// <summary>
-    /// Constructs a new range with two different values
+    ///     Constructs a new range with two different values
     /// </summary>
     /// <param name="min">Min value</param>
     /// <param name="max">Max value</param>
@@ -43,29 +48,42 @@ public readonly struct StrictRange
     {
         MinValue = min;
         MaxValue = max;
+        IsStrict = false;
+        StrictValue = null;
     }
 
     /// <summary>
-    /// Creates a new strict range only with min value
+    ///     Creates a new strict range only with min value
     /// </summary>
     /// <param name="min">Minimum value</param>
     /// <returns>New range</returns>
-    public static StrictRange Min(int min) => new(min, null);
+    public static StrictRange Min(int min)
+    {
+        return new(min, null);
+    }
+
     /// <summary>
-    /// Creates a new strict range only with max value
+    ///     Creates a new strict range only with max value
     /// </summary>
     /// <param name="max">Maximum value</param>
     /// <returns>New range</returns>
-    public static StrictRange Max(int max) => new(null, max);
+    public static StrictRange Max(int max)
+    {
+        return new(null, max);
+    }
+
     /// <summary>
-    /// Creates a new strict range only with a single value
+    ///     Creates a new strict range only with a single value
     /// </summary>
     /// <param name="val">The value</param>
     /// <returns>New range</returns>
-    public static StrictRange Strict(int val) => new(val);
+    public static StrictRange Strict(int val)
+    {
+        return new(val);
+    }
 
     /// <summary>
-    /// Serializes this range into provided text writer
+    ///     Serializes this range into provided text writer
     /// </summary>
     /// <param name="w">Writer to be used</param>
     /// <param name="name">Name of this value</param>

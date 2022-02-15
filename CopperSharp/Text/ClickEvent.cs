@@ -15,7 +15,7 @@ public readonly struct ClickEvent
     /// <param name="url">Url to be opened</param>
     public static ClickEvent OpenUrl(string url)
     {
-        return new(ClickEventType.OpenUrl, url);
+        return new ClickEvent(ClickEventType.OpenUrl, url);
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public readonly struct ClickEvent
     /// </param>
     public static ClickEvent OpenFile(string path)
     {
-        return new(ClickEventType.OpenFile, path);
+        return new ClickEvent(ClickEventType.OpenFile, path);
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public readonly struct ClickEvent
     /// <param name="command">Command to be ran</param>
     public static ClickEvent RunCommand(string command)
     {
-        return new(ClickEventType.RunCommand, command);
+        return new ClickEvent(ClickEventType.RunCommand, command);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public readonly struct ClickEvent
     /// <param name="selection">String selection to be pasted</param>
     public static ClickEvent PasteToChat(string selection)
     {
-        return new(ClickEventType.SuggestCommand, selection);
+        return new ClickEvent(ClickEventType.SuggestCommand, selection);
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ public readonly struct ClickEvent
     /// <param name="page">Page to be set</param>
     public static ClickEvent ChangePage(int page)
     {
-        return new(ClickEventType.ChangePage, page.ToString());
+        return new ClickEvent(ClickEventType.ChangePage, page.ToString());
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public readonly struct ClickEvent
     /// <param name="selection">String selection to be copied</param>
     public static ClickEvent CopyToClipboard(string selection)
     {
-        return new(ClickEventType.CopyToClipboard, selection);
+        return new ClickEvent(ClickEventType.CopyToClipboard, selection);
     }
 
     private ClickEvent(ClickEventType eventType, string value)
@@ -78,7 +78,7 @@ public readonly struct ClickEvent
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public ComponentClickEvent Contain()
     {
-        return new(EventType.GetData() ?? "null", Value);
+        return new ComponentClickEvent(EventType.GetData() ?? "null", Value);
     }
 
     /// <summary>

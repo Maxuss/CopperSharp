@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents an item for use in conditions
+///     Represents an item for use in conditions
 /// </summary>
 public struct ItemPredicate
 {
@@ -19,14 +19,17 @@ public struct ItemPredicate
     private List<Material> Types { get; } = new();
 
     /// <summary>
-    /// Constructs a new simple item predicate
+    ///     Constructs a new simple item predicate
     /// </summary>
     /// <param name="type">Types of this predicate</param>
     /// <returns>New constructed predicate</returns>
-    public static ItemPredicate Simple(params Material[] type) => new ItemPredicate().OfTypes(type);
+    public static ItemPredicate Simple(params Material[] type)
+    {
+        return new ItemPredicate().OfTypes(type);
+    }
 
     /// <summary>
-    /// Sets possible counts of item
+    ///     Sets possible counts of item
     /// </summary>
     /// <param name="count">Count to be set</param>
     /// <returns>This item condition</returns>
@@ -37,7 +40,7 @@ public struct ItemPredicate
     }
 
     /// <summary>
-    /// Sets possible durabilities of item
+    ///     Sets possible durabilities of item
     /// </summary>
     /// <param name="durability">Durability to be set</param>
     /// <returns>This item condition</returns>
@@ -48,7 +51,7 @@ public struct ItemPredicate
     }
 
     /// <summary>
-    /// Adds an NBT string to this item
+    ///     Adds an NBT string to this item
     /// </summary>
     /// <param name="comp">NBT to be added</param>
     /// <returns>This item condition</returns>
@@ -57,9 +60,9 @@ public struct ItemPredicate
         Nbt = comp.Serialize();
         return this;
     }
-    
+
     /// <summary>
-    /// Adds a required item meta to this item condition
+    ///     Adds a required item meta to this item condition
     /// </summary>
     /// <param name="meta">Meta to be added</param>
     /// <returns>This item condition</returns>
@@ -70,7 +73,7 @@ public struct ItemPredicate
     }
 
     /// <summary>
-    /// Adds required enchantments to this item condition
+    ///     Adds required enchantments to this item condition
     /// </summary>
     /// <param name="enchants">Enchantments to be added</param>
     /// <returns>This item condition</returns>
@@ -79,9 +82,9 @@ public struct ItemPredicate
         Enchantments.AddRange(enchants);
         return this;
     }
-    
+
     /// <summary>
-    /// Adds stored required enchantments to this item condition
+    ///     Adds stored required enchantments to this item condition
     /// </summary>
     /// <param name="enchants">Enchantments to be added</param>
     /// <returns>This item condition</returns>
@@ -92,7 +95,7 @@ public struct ItemPredicate
     }
 
     /// <summary>
-    /// Requires the item to be of provided types
+    ///     Requires the item to be of provided types
     /// </summary>
     /// <param name="types">Types of item</param>
     /// <returns>This item condition</returns>
@@ -103,7 +106,7 @@ public struct ItemPredicate
     }
 
     /// <summary>
-    /// Serializes this item condition
+    ///     Serializes this item condition
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter jw)
@@ -113,10 +116,7 @@ public struct ItemPredicate
         {
             await jw.WritePropertyNameAsync("items");
             await jw.WriteStartArrayAsync();
-            foreach (var type in Types)
-            {
-                await jw.WriteValueAsync(type.Id.ToString());
-            }
+            foreach (var type in Types) await jw.WriteValueAsync(type.Id.ToString());
             await jw.WriteEndArrayAsync();
         }
 
@@ -130,21 +130,15 @@ public struct ItemPredicate
         {
             await jw.WritePropertyNameAsync("enchantments");
             await jw.WriteStartArrayAsync();
-            foreach (var enchant in Enchantments)
-            {
-                await enchant.SerializeInto(jw);
-            }
+            foreach (var enchant in Enchantments) await enchant.SerializeInto(jw);
             await jw.WriteEndArrayAsync();
         }
-        
+
         if (StoredEnchantments.Any())
         {
             await jw.WritePropertyNameAsync("stored_enchantments");
             await jw.WriteStartArrayAsync();
-            foreach (var enchant in StoredEnchantments)
-            {
-                await enchant.SerializeInto(jw);
-            }
+            foreach (var enchant in StoredEnchantments) await enchant.SerializeInto(jw);
             await jw.WriteEndArrayAsync();
         }
 

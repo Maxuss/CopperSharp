@@ -5,14 +5,14 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents a trigger condition that also includes a player
+///     Represents a trigger condition that also includes a player
 /// </summary>
 public sealed class EntityPredicate
 {
     private DistancePredicate? Distanced { get; set; }
-    private List<EffectPredicate> Effects { get; set; } = new();
-    private Dictionary<string, ItemPredicate> Items { get; set; } = new();
-    private Dictionary<string, bool> Flags { get; set; } = new();
+    private List<EffectPredicate> Effects { get; } = new();
+    private Dictionary<string, ItemPredicate> Items { get; } = new();
+    private Dictionary<string, bool> Flags { get; } = new();
     private (int?, EntityPredicate?)? LightningProperties { get; set; }
     private LocationPredicate? Location { get; set; }
     private string? Nbt { get; set; }
@@ -20,7 +20,7 @@ public sealed class EntityPredicate
     private PlayerPredicate? PlayerData { get; set; }
 
     /// <summary>
-    /// Sets the distance of this entity
+    ///     Sets the distance of this entity
     /// </summary>
     /// <param name="dist">Distance to be set</param>
     /// <returns></returns>
@@ -29,9 +29,9 @@ public sealed class EntityPredicate
         Distanced = dist;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires this entity to have provided effects
+    ///     Requires this entity to have provided effects
     /// </summary>
     /// <param name="effects">Effects to be required</param>
     /// <returns>This entity predicate</returns>
@@ -42,7 +42,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires a specific item in main hand
+    ///     Requires a specific item in main hand
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -51,9 +51,9 @@ public sealed class EntityPredicate
         Items["mainhand"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires a specific item in off hand
+    ///     Requires a specific item in off hand
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -62,9 +62,9 @@ public sealed class EntityPredicate
         Items["offhand"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires a specific item in helmet slot
+    ///     Requires a specific item in helmet slot
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -73,9 +73,9 @@ public sealed class EntityPredicate
         Items["head"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires a specific item in chestplate slot
+    ///     Requires a specific item in chestplate slot
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -84,9 +84,9 @@ public sealed class EntityPredicate
         Items["chest"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires a specific item in legs slot
+    ///     Requires a specific item in legs slot
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -95,9 +95,9 @@ public sealed class EntityPredicate
         Items["legs"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires a specific item in feet slot
+    ///     Requires a specific item in feet slot
     /// </summary>
     /// <param name="item">Item to be required</param>
     /// <returns>This entity predicate</returns>
@@ -106,9 +106,9 @@ public sealed class EntityPredicate
         Items["feet"] = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires this entity to be on fire
+    ///     Requires this entity to be on fire
     /// </summary>
     /// <param name="marker">Whether to require</param>
     /// <returns>This entity predicate</returns>
@@ -117,9 +117,9 @@ public sealed class EntityPredicate
         Flags["is_on_fire"] = marker;
         return this;
     }
-    
+
     /// <summary>
-    /// Requires this entity to be sneaking
+    ///     Requires this entity to be sneaking
     /// </summary>
     /// <param name="marker">Whether to require</param>
     /// <returns>This entity predicate</returns>
@@ -130,7 +130,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to be sprinting
+    ///     Requires this entity to be sprinting
     /// </summary>
     /// <param name="marker">Whether to require</param>
     /// <returns>This entity predicate</returns>
@@ -141,7 +141,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to be swimming
+    ///     Requires this entity to be swimming
     /// </summary>
     /// <param name="marker">Whether to require</param>
     /// <returns>This entity predicate</returns>
@@ -152,7 +152,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to be a baby
+    ///     Requires this entity to be a baby
     /// </summary>
     /// <param name="marker">Whether to require</param>
     /// <returns>This entity predicate</returns>
@@ -163,8 +163,8 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Marks this entity as lightning.
-    /// <b>WILL FAIL FOR ANY ENTITY THAT IS NOT A LIGHTNING!</b>
+    ///     Marks this entity as lightning.
+    ///     <b>WILL FAIL FOR ANY ENTITY THAT IS NOT A LIGHTNING!</b>
     /// </summary>
     /// <param name="blocksOnFire">Amount of blocks set on fire</param>
     /// <param name="struck">Entity struck</param>
@@ -176,7 +176,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to be at specific location
+    ///     Requires this entity to be at specific location
     /// </summary>
     /// <param name="loc">Location required</param>
     /// <returns>This entity predicate</returns>
@@ -187,7 +187,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to have specific nbt
+    ///     Requires this entity to have specific nbt
     /// </summary>
     /// <param name="nbt">NBT required</param>
     /// <returns>This entity predicate</returns>
@@ -198,7 +198,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires the entity to be a specific provided abstract entity
+    ///     Requires the entity to be a specific provided abstract entity
     /// </summary>
     /// <param name="entity">Required entity, that contains the data</param>
     /// <returns>This entity predicate</returns>
@@ -209,7 +209,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to have a specific passenger
+    ///     Requires this entity to have a specific passenger
     /// </summary>
     /// <param name="passenger">Passenger required</param>
     /// <returns>This entity predicate</returns>
@@ -220,8 +220,8 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Requires this entity to have specific player data.
-    /// <b>WILL FAIL FOR ANY ENTITY THAT IS NOT A PLAYER!</b>
+    ///     Requires this entity to have specific player data.
+    ///     <b>WILL FAIL FOR ANY ENTITY THAT IS NOT A PLAYER!</b>
     /// </summary>
     /// <param name="player">Required player data</param>
     /// <returns>This entity predicaet</returns>
@@ -232,7 +232,7 @@ public sealed class EntityPredicate
     }
 
     /// <summary>
-    /// Serializes this entity predicate into provided json writer
+    ///     Serializes this entity predicate into provided json writer
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter jw)
@@ -249,10 +249,7 @@ public sealed class EntityPredicate
         {
             await jw.WritePropertyNameAsync("effects");
             await jw.WriteStartObjectAsync();
-            foreach (var effect in Effects)
-            {
-                await effect.SerializeInto(jw);
-            }
+            foreach (var effect in Effects) await effect.SerializeInto(jw);
             await jw.WriteEndObjectAsync();
         }
 
@@ -278,6 +275,7 @@ public sealed class EntityPredicate
                 await jw.WritePropertyNameAsync(flag);
                 await jw.WriteValueAsync(ind);
             }
+
             await jw.WriteEndObjectAsync();
         }
 
@@ -296,7 +294,7 @@ public sealed class EntityPredicate
                 await jw.WritePropertyNameAsync("entity_struck");
                 await jw.WriteValueAsync(LightningProperties?.Item2);
             }
-            
+
             await jw.WriteEndObjectAsync();
         }
 
@@ -323,7 +321,7 @@ public sealed class EntityPredicate
             await jw.WritePropertyNameAsync("player");
             await (PlayerData?.SerializeInto(jw) ?? Task.CompletedTask);
         }
-        
+
         await jw.WriteEndObjectAsync();
     }
 }

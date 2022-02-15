@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements;
 
 /// <summary>
-/// Represents an advancement
+///     Represents an advancement
 /// </summary>
 public sealed class Advancement
 {
-    private ItemStack AdvItemDisplay { get; set; } = new ItemStack(Material.Dirt);
+    private ItemStack AdvItemDisplay { get; set; } = new(Material.Dirt);
     private IComponent AdvTitle { get; set; } = new TextComponent("undefined");
     private AdvancementType AdvType { get; set; } = AdvancementType.Task;
     private IComponent AdvDescription { get; set; } = new TextComponent("undefined");
@@ -20,11 +20,11 @@ public sealed class Advancement
     private AdvancementGroup? AdvGroup { get; set; }
     private Advancement? AdvParent { get; set; }
     private AdvancementReward? AdvRewards { get; set; }
-    private List<Criterion> AdvCriteria { get; set; } = new();
-    private List<string[]> AdvRequirements { get; set; } = new();
+    private List<Criterion> AdvCriteria { get; } = new();
+    private List<string[]> AdvRequirements { get; } = new();
 
     /// <summary>
-    /// Marks this advancement as root of provided advancement group. Nullifies parent advancement
+    ///     Marks this advancement as root of provided advancement group. Nullifies parent advancement
     /// </summary>
     /// <param name="group">Advancement group to be set</param>
     /// <returns>This advancement</returns>
@@ -36,7 +36,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets parent of this advancement.
+    ///     Sets parent of this advancement.
     /// </summary>
     /// <param name="parent">Parent of this advancement to be set</param>
     /// <returns>This advancement</returns>
@@ -48,7 +48,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets display item, that is shown on this advancement
+    ///     Sets display item, that is shown on this advancement
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This advancement</returns>
@@ -57,9 +57,9 @@ public sealed class Advancement
         AdvItemDisplay = item;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets name of this advancement, when it is shown
+    ///     Sets name of this advancement, when it is shown
     /// </summary>
     /// <param name="title">Name to be set</param>
     /// <returns>This advancement</returns>
@@ -70,7 +70,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets type of this advancement
+    ///     Sets type of this advancement
     /// </summary>
     /// <param name="type">Type to be set</param>
     /// <returns>This advancement</returns>
@@ -81,7 +81,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets description of this advancement
+    ///     Sets description of this advancement
     /// </summary>
     /// <param name="description">Description to be set</param>
     /// <returns>This advancement</returns>
@@ -92,7 +92,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets this advancement to be announced in chat
+    ///     Sets this advancement to be announced in chat
     /// </summary>
     /// <param name="announce">Whether to announce this advancement in chat</param>
     /// <returns>This advancement</returns>
@@ -103,7 +103,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Makes this advancement hidden
+    ///     Makes this advancement hidden
     /// </summary>
     /// <param name="hide">Whether to hide this advancement</param>
     /// <returns>This advancement</returns>
@@ -114,7 +114,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Sets rewards for this advancement
+    ///     Sets rewards for this advancement
     /// </summary>
     /// <param name="rewards">Reward to be set</param>
     /// <returns>This advancement</returns>
@@ -125,7 +125,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Adds provided criteria to this advancement
+    ///     Adds provided criteria to this advancement
     /// </summary>
     /// <param name="crits">Criteria to be added</param>
     /// <returns>This advancement</returns>
@@ -136,9 +136,8 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Adds a new requirement case to this advancement.
-    ///
-    /// Optional. By default all criteria must be completed
+    ///     Adds a new requirement case to this advancement.
+    ///     Optional. By default all criteria must be completed
     /// </summary>
     /// <param name="reqs">A single requirements case</param>
     /// <returns>This advancement</returns>
@@ -149,7 +148,7 @@ public sealed class Advancement
     }
 
     /// <summary>
-    /// Asynchronously serializes this advancement to string
+    ///     Asynchronously serializes this advancement to string
     /// </summary>
     /// <returns>Serializes JSON string of this advancement</returns>
     public async Task<string> Serialize(bool indent = true)
@@ -158,10 +157,10 @@ public sealed class Advancement
         using var jw = new JsonTextWriter(sw);
         jw.Formatting = indent ? Formatting.Indented : Formatting.None;
         await jw.WriteStartObjectAsync();
-        
+
         await jw.WritePropertyNameAsync("display");
         await jw.WriteStartObjectAsync();
-        
+
         await jw.WritePropertyNameAsync("icon");
         await jw.WriteStartObjectAsync();
 
@@ -201,13 +200,14 @@ public sealed class Advancement
             await jw.WritePropertyNameAsync("hidden");
             await jw.WriteValueAsync(AdvHidden);
         }
-        
+
         await jw.WriteEndObjectAsync();
 
         if (AdvParent != null)
         {
             await jw.WritePropertyNameAsync("parent");
-            await jw.WriteValueAsync((Registries.Advancements.Seek(AdvParent) ?? Identifier.Minecraft("null")).ToString());
+            await jw.WriteValueAsync(
+                (Registries.Advancements.Seek(AdvParent) ?? Identifier.Minecraft("null")).ToString());
         }
 
         await jw.WritePropertyNameAsync("criteria");
@@ -215,12 +215,9 @@ public sealed class Advancement
 
         if (AdvCriteria.Count <= 0)
             throw new Exception("An advancement must contain at least 1 criterion!");
-        
-        foreach (var crit in AdvCriteria)
-        {
-            await crit.SerializeInto(jw);
-        }
-        
+
+        foreach (var crit in AdvCriteria) await crit.SerializeInto(jw);
+
         await jw.WriteEndObjectAsync();
 
         if (AdvRequirements.Any())
@@ -231,15 +228,12 @@ public sealed class Advancement
             foreach (var list in AdvRequirements)
             {
                 await jw.WriteStartArrayAsync();
-                
-                foreach (var element in list)
-                {
-                    await jw.WriteValueAsync(element);
-                }
-                
+
+                foreach (var element in list) await jw.WriteValueAsync(element);
+
                 await jw.WriteEndArrayAsync();
             }
-            
+
             await jw.WriteEndArrayAsync();
         }
 
@@ -256,21 +250,15 @@ public sealed class Advancement
             {
                 await jw.WritePropertyNameAsync("items");
                 await jw.WriteStartArrayAsync();
-                foreach (var item in AdvRewards?.Items!)
-                {
-                    await jw.WriteValueAsync(item);
-                }
+                foreach (var item in AdvRewards?.Items!) await jw.WriteValueAsync(item);
                 await jw.WriteEndArrayAsync();
             }
-            
+
             if (AdvRewards?.Recipe.Any() == true)
             {
                 await jw.WritePropertyNameAsync("recipes");
                 await jw.WriteStartArrayAsync();
-                foreach (var item in AdvRewards?.Recipe!)
-                {
-                    await jw.WriteValueAsync(item);
-                }
+                foreach (var item in AdvRewards?.Recipe!) await jw.WriteValueAsync(item);
                 await jw.WriteEndArrayAsync();
             }
 
@@ -280,7 +268,7 @@ public sealed class Advancement
                 await jw.WriteValueAsync(AdvRewards?.Trigger);
             }
         }
-        
+
         await jw.WriteEndObjectAsync();
 
         return sw.ToString();
@@ -288,20 +276,22 @@ public sealed class Advancement
 }
 
 /// <summary>
-/// Represents type of advancement frame
+///     Represents type of advancement frame
 /// </summary>
 public enum AdvancementType
 {
     /// <summary>
-    /// Simple task advancement
+    ///     Simple task advancement
     /// </summary>
     Task,
+
     /// <summary>
-    /// A goal advancement, usually harder to achieve
+    ///     A goal advancement, usually harder to achieve
     /// </summary>
     Goal,
+
     /// <summary>
-    /// A challenge advancement, usually the hardest
+    ///     A challenge advancement, usually the hardest
     /// </summary>
     Challenge
 }

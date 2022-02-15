@@ -3,14 +3,14 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player travels to the Nether
-/// and then <b>returns</b> to the Overworld
+///     Triggers when the player travels to the Nether
+///     and then <b>returns</b> to the Overworld
 /// </summary>
 [CriterionName("nether_travel")]
 public sealed class NetherTravel : TriggerCondition
 {
     /// <summary>
-    /// Sets the location where the player entered the Nether
+    ///     Sets the location where the player entered the Nether
     /// </summary>
     /// <param name="entered">Location to be set</param>
     /// <returns>This trigger</returns>
@@ -21,7 +21,7 @@ public sealed class NetherTravel : TriggerCondition
     }
 
     /// <summary>
-    /// The location where the player exited the Nether
+    ///     The location where the player exited the Nether
     /// </summary>
     /// <param name="exit">Location to be set</param>
     /// <returns>This trigger</returns>
@@ -32,8 +32,8 @@ public sealed class NetherTravel : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the <b>overworld-based</b> distance travelled
-    /// between the entrance and the exit
+    ///     Sets the <b>overworld-based</b> distance travelled
+    ///     between the entrance and the exit
     /// </summary>
     /// <param name="dist">Distance to be set</param>
     /// <returns>This trigger</returns>

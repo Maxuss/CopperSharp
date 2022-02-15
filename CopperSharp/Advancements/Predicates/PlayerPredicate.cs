@@ -5,22 +5,22 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents specific conditions to be checked for player
+///     Represents specific conditions to be checked for player
 /// </summary>
 public sealed class PlayerPredicate
 {
-    private Dictionary<string, string> Strings { get; set; } = new();
-    private Dictionary<string, EntityPredicate> Entities { get; set; } = new();
+    private Dictionary<string, string> Strings { get; } = new();
+    private Dictionary<string, EntityPredicate> Entities { get; } = new();
     private EntityPredicate? LookingAt { get; set; }
-    private List<string> Advancements { get; set; } = new();
+    private List<string> Advancements { get; } = new();
     private StrictRange? ExpLevel { get; set; }
-    private List<string> Recipes { get; set; } = new();
-    private Dictionary<string, StrictRange> Statistics { get; set; } = new();
+    private List<string> Recipes { get; } = new();
+    private Dictionary<string, StrictRange> Statistics { get; } = new();
     private LocationPredicate? SteppingOn { get; set; }
     private bool? HookInWater { get; set; }
-    
+
     /// <summary>
-    /// Sets the entity this player is looking at
+    ///     Sets the entity this player is looking at
     /// </summary>
     /// <param name="at">Entity to be set</param>
     /// <returns>This player predicate</returns>
@@ -31,7 +31,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Sets required advancements for this player
+    ///     Sets required advancements for this player
     /// </summary>
     /// <param name="advancements">Advancements to be required</param>
     /// <returns>This player predicate</returns>
@@ -42,7 +42,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires provided game mode for this player
+    ///     Requires provided game mode for this player
     /// </summary>
     /// <param name="gm">Required game mode</param>
     /// <returns>This player predicate</returns>
@@ -53,7 +53,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires certain experience level from this player
+    ///     Requires certain experience level from this player
     /// </summary>
     /// <param name="level">Required level</param>
     /// <returns>This player predicate</returns>
@@ -64,7 +64,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires certain recipes from this player
+    ///     Requires certain recipes from this player
     /// </summary>
     /// <param name="recipes">Required recipes</param>
     /// <returns>This player predicate</returns>
@@ -75,7 +75,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires certain statistic to be of a certain amount for this player
+    ///     Requires certain statistic to be of a certain amount for this player
     /// </summary>
     /// <param name="statistic">Required statistic</param>
     /// <param name="value">Required value for the statistic</param>
@@ -87,7 +87,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires a location for player to stand on
+    ///     Requires a location for player to stand on
     /// </summary>
     /// <param name="block">Required location</param>
     /// <returns>This player predicate</returns>
@@ -98,7 +98,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires a certain team from this player
+    ///     Requires a certain team from this player
     /// </summary>
     /// <param name="team">Required team</param>
     /// <returns>This player predicate</returns>
@@ -109,7 +109,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires this player to target a certain entity in combat
+    ///     Requires this player to target a certain entity in combat
     /// </summary>
     /// <param name="target">Required entity</param>
     /// <returns>This player predicate</returns>
@@ -120,7 +120,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires this player to ride a specific vehicle
+    ///     Requires this player to ride a specific vehicle
     /// </summary>
     /// <param name="entity">Required vehicle</param>
     /// <returns>This player predicate</returns>
@@ -131,7 +131,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Requires this player to have a fishing hook in open water
+    ///     Requires this player to have a fishing hook in open water
     /// </summary>
     /// <param name="open">Marker</param>
     /// <returns>This player predicate</returns>
@@ -142,7 +142,7 @@ public sealed class PlayerPredicate
     }
 
     /// <summary>
-    /// Serializes this player to provided json writer
+    ///     Serializes this player to provided json writer
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter jw)
@@ -163,31 +163,25 @@ public sealed class PlayerPredicate
                 await jw.WritePropertyNameAsync(adv);
                 await jw.WriteValueAsync(true);
             }
+
             await jw.WriteEndObjectAsync();
         }
 
         if (Strings.Any())
-        {
             foreach (var (k, v) in Strings)
             {
                 await jw.WritePropertyNameAsync(k);
                 await jw.WriteValueAsync(v);
             }
-        }
 
         if (Entities.Any())
-        {
             foreach (var (k, v) in Entities)
             {
                 await jw.WritePropertyNameAsync(k);
                 await v.SerializeInto(jw);
             }
-        }
 
-        if (ExpLevel != null)
-        {
-            await (ExpLevel?.SerializeInto(jw, "level") ?? Task.CompletedTask);
-        }
+        if (ExpLevel != null) await (ExpLevel?.SerializeInto(jw, "level") ?? Task.CompletedTask);
 
         if (Recipes.Any())
         {
@@ -198,6 +192,7 @@ public sealed class PlayerPredicate
                 await jw.WritePropertyNameAsync(recipe);
                 await jw.WriteValueAsync(true);
             }
+
             await jw.WriteEndObjectAsync();
         }
 
@@ -213,6 +208,7 @@ public sealed class PlayerPredicate
                 await value.SerializeInto(jw, "value");
                 await jw.WriteEndObjectAsync();
             }
+
             await jw.WriteEndArrayAsync();
         }
 
@@ -230,7 +226,7 @@ public sealed class PlayerPredicate
             await jw.WriteValueAsync(HookInWater);
             await jw.WriteEndObjectAsync();
         }
-        
+
         await jw.WriteEndObjectAsync();
     }
 }

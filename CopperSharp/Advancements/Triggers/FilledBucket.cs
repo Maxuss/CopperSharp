@@ -4,14 +4,14 @@ using CopperSharp.Item;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers after the player fills a bucket
+///     Triggers after the player fills a bucket
 /// </summary>
 [CriterionName("filled_bucket")]
 public sealed class FilledBucket : TriggerCondition
 {
     /// <summary>
-    /// Sets the item got from the filling of bucket.
-    /// E.g. <see cref="Material.CodBucket"/> or <see cref="Material.WaterBucket"/>
+    ///     Sets the item got from the filling of bucket.
+    ///     E.g. <see cref="Material.CodBucket" /> or <see cref="Material.WaterBucket" />
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <returns>This trigger</returns>

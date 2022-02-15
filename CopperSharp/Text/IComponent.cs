@@ -48,6 +48,11 @@ public interface IComponent : ICloneable, IFormattable
     /// </summary>
     public ITextColor? Color { get; }
 
+    string IFormattable.ToString(string? format, IFormatProvider? formatProvider)
+    {
+        return Serialize();
+    }
+
     /// <summary>
     ///     Applies a coloring to this component and returns its copy
     /// </summary>
@@ -148,6 +153,4 @@ public interface IComponent : ICloneable, IFormattable
     {
         return new TranslatableComponent(key) as IComponent;
     }
-
-    string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => Serialize();
 }

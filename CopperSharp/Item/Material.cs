@@ -33,7 +33,7 @@ public readonly struct Material
     /// <returns>A material with provided identifier</returns>
     public static Material Inject(Identifier custom)
     {
-        return new(custom);
+        return new Material(custom);
     }
 
     /// <summary>Represents item by ID of minecraft:air.</summary>

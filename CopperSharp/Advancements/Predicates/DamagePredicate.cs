@@ -4,18 +4,18 @@ using Newtonsoft.Json;
 namespace CopperSharp.Advancements.Predicates;
 
 /// <summary>
-/// Represents a damage done predicate
+///     Represents a damage done predicate
 /// </summary>
 public sealed class DamagePredicate
 {
-    private Dictionary<string, StrictRange> Ranges { get; set; } = new();
+    private Dictionary<string, StrictRange> Ranges { get; } = new();
     private EntityPredicate? Source { get; set; }
     private EntityPredicate? Direct { get; set; }
-    private Dictionary<string, bool> Flags { get; set; } = new();
+    private Dictionary<string, bool> Flags { get; } = new();
     private bool? Blocked { get; set; }
 
     /// <summary>
-    /// Requires this damage to be blocked
+    ///     Requires this damage to be blocked
     /// </summary>
     /// <param name="block">Marker</param>
     /// <returns>This predicate</returns>
@@ -26,7 +26,7 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Require certain amount of damage dealt before applying different calculations
+    ///     Require certain amount of damage dealt before applying different calculations
     /// </summary>
     /// <param name="amount">Amount to be set</param>
     /// <returns>This predicate</returns>
@@ -37,7 +37,7 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Require certain amount of damage dealt after applying different calculations
+    ///     Require certain amount of damage dealt after applying different calculations
     /// </summary>
     /// <param name="taken">Amount to be set</param>
     /// <returns>This predicate</returns>
@@ -48,7 +48,7 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Sets the direct cause of damage, e.g. <b>arrow</b> that the skeleton shot
+    ///     Sets the direct cause of damage, e.g. <b>arrow</b> that the skeleton shot
     /// </summary>
     /// <param name="direct">Entity to be set</param>
     /// <returns>This damage predicate</returns>
@@ -59,7 +59,7 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Sets the source cause of damage, e.g. <b>skeleton</b> that shot the arrow
+    ///     Sets the source cause of damage, e.g. <b>skeleton</b> that shot the arrow
     /// </summary>
     /// <param name="source">Entity to be set</param>
     /// <returns>This damage predicate</returns>
@@ -70,7 +70,7 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Requires this damage to bypass armor
+    ///     Requires this damage to bypass armor
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -79,8 +79,10 @@ public sealed class DamagePredicate
         Flags["bypasses_armor"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to bypass invulnerability </summary>
+    ///     Requires this damage to bypass invulnerability
+    /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
     public DamagePredicate BypassedInvulnerability(bool req = true)
@@ -88,8 +90,9 @@ public sealed class DamagePredicate
         Flags["bypasses_invulnerability"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to bypass magic damage
+    ///     Requires this damage to bypass magic damage
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -98,8 +101,9 @@ public sealed class DamagePredicate
         Flags["bypasses_magic"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to be explosion
+    ///     Requires this damage to be explosion
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -108,8 +112,9 @@ public sealed class DamagePredicate
         Flags["is_explosion"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to be fire
+    ///     Requires this damage to be fire
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -118,8 +123,9 @@ public sealed class DamagePredicate
         Flags["is_fire"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to be magic
+    ///     Requires this damage to be magic
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -128,8 +134,9 @@ public sealed class DamagePredicate
         Flags["is_magic"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to be projectile damage
+    ///     Requires this damage to be projectile damage
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -138,8 +145,9 @@ public sealed class DamagePredicate
         Flags["is_projectile"] = req;
         return this;
     }
+
     /// <summary>
-    /// Requires this damage to be lightning
+    ///     Requires this damage to be lightning
     /// </summary>
     /// <param name="req">Marker</param>
     /// <returns>This predicate</returns>
@@ -150,16 +158,13 @@ public sealed class DamagePredicate
     }
 
     /// <summary>
-    /// Serializes this predicate into provided writer
+    ///     Serializes this predicate into provided writer
     /// </summary>
     /// <param name="w">Writer to be used</param>
     public async Task SerializeInto(JsonTextWriter w)
     {
         await w.WriteStartObjectAsync();
-        foreach (var (k, v) in Ranges)
-        {
-            await v.SerializeInto(w, k);
-        }
+        foreach (var (k, v) in Ranges) await v.SerializeInto(w, k);
 
         if (Blocked != null)
         {

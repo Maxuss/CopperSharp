@@ -4,13 +4,13 @@ using CopperSharp.Registry;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player shoots a target block
+///     Triggers when the player shoots a target block
 /// </summary>
 [CriterionName("target_hit")]
 public sealed class TargetHit : TriggerCondition
 {
     /// <summary>
-    /// Sets the redstone signal that will come out of the block
+    ///     Sets the redstone signal that will come out of the block
     /// </summary>
     /// <param name="strength">Strength to be set</param>
     /// <returns>This trigger</returns>
@@ -21,7 +21,7 @@ public sealed class TargetHit : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the type of projectile to hit the block
+    ///     Sets the type of projectile to hit the block
     /// </summary>
     /// <param name="type">Type of projectile to be set</param>
     /// <returns>This trigger</returns>
@@ -32,7 +32,7 @@ public sealed class TargetHit : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the player who shot or threw the projectile
+    ///     Sets the player who shot or threw the projectile
     /// </summary>
     /// <param name="shooter">Entity to be set</param>
     /// <returns>This trigger</returns>

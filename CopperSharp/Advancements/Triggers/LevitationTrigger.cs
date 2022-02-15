@@ -1,17 +1,16 @@
 using CopperSharp.Advancements.Predicates;
 using CopperSharp.Utils;
-using Newtonsoft.Json;
 
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player has the levitation status effect
+///     Triggers when the player has the levitation status effect
 /// </summary>
 [CriterionName("levitation")]
 public sealed class LevitationTrigger : TriggerCondition
 {
     /// <summary>
-    /// Sets the distance levitated
+    ///     Sets the distance levitated
     /// </summary>
     /// <param name="dist">Distance to be set</param>
     /// <returns>This trigger</returns>
@@ -22,7 +21,7 @@ public sealed class LevitationTrigger : TriggerCondition
     }
 
     /// <summary>
-    /// Sets the duration of levitation in ticks
+    ///     Sets the duration of levitation in ticks
     /// </summary>
     /// <param name="dur">Duration to be set</param>
     /// <returns>This trigger</returns>

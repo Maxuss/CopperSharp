@@ -3,13 +3,13 @@ using CopperSharp.Advancements.Predicates;
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player cures a zombie villager
+///     Triggers when the player cures a zombie villager
 /// </summary>
 [CriterionName("cured_zombie_villager")]
 public class CuredZombieVillager : TriggerCondition
 {
     /// <summary>
-    /// Sets the villager that was converted from zombie
+    ///     Sets the villager that was converted from zombie
     /// </summary>
     /// <param name="entity">Villager to be set</param>
     /// <returns>This trigger</returns>
@@ -18,9 +18,9 @@ public class CuredZombieVillager : TriggerCondition
         Entities["villager"] = entity;
         return this;
     }
-    
+
     /// <summary>
-    /// Sets the zombie that was cured
+    ///     Sets the zombie that was cured
     /// </summary>
     /// <param name="entity">Zombie to be set</param>
     /// <returns>This trigger</returns>

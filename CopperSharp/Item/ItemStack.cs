@@ -41,7 +41,7 @@ public struct ItemStack : IStack
             Meta = new PotionMeta(material);
             return;
         }
-        
+
 
         Meta = material.Id.Path switch
         {

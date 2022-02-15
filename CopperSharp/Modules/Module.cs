@@ -29,7 +29,7 @@ public abstract class Module
     protected Module()
     {
         var info = GetType().GetCustomAttribute<ModuleInfoAttribute>();
-        if(info == null)
+        if (info == null)
             throw new Exception($"Failed to init module {GetType().FullName}. Does not have a ModuleInfoAttribute!");
 
         Name = info.Name;
@@ -39,81 +39,33 @@ public abstract class Module
 
         var authors = GetType().GetCustomAttributes<ModuleAuthorAttribute>();
         Authors = authors.Select(it => it.Author).ToList();
-        
     }
-
-    /// <summary>
-    /// Ran when module is loaded
-    /// </summary>
-    public virtual void Startup()
-    {
-        
-    }
-
-    /// <summary>
-    /// Called each time a server is (re)loaded
-    /// </summary>
-    /// <param name="ctx">Current world</param>
-    public virtual void WorldLoad(WorldContext ctx)
-    {
-        
-    }
-
-    /// <summary>
-    /// Called each tick
-    /// </summary>
-    /// <param name="ctx">Current world</param>
-    public virtual void OnTick(WorldContext ctx)
-    {
-        
-    }
-
-    internal async Task InternalSetupMagicFns()
-    {
-        var tick = new Tag(Identifier.Of(Namespace, "tick")).ReplaceSimilar(false);
-        var load = new Tag(Identifier.Of(Namespace, "load")).ReplaceSimilar(false);
-        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "tick.json"), await tick.Serialize());
-        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "load.json"), await load.Serialize());
-    }
-
-    internal void InternalWorldLoad() 
-        => Registries.Functions.Register(new LoadFunction(WorldLoad), Identifier.Of(Namespace, "load"));
-
-    internal void InternalTick()
-        => Registries.Functions.Register(new TickFunction(OnTick), Identifier.Of(Namespace, "tick"));
 
     internal Dictionary<string, ModuleOutputStream> Streams { get; set; } = new();
 
     /// <summary>
-    /// Creates a new identifier for this module
-    /// </summary>
-    /// <param name="path">The path part of the identifier</param>
-    /// <returns>Built identifier</returns>
-    public Identifier GetId(string path) => Identifier.Of(Namespace, path);
-
-    /// <summary>
-    /// Gets the full description of this module
+    ///     Gets the full description of this module
     /// </summary>
     public string FullDescription =>
         $"{Description}{(Authors.Count != 0 ? $". Authors: {string.Join(", ", Authors)}" : "")}";
-    
+
     /// <summary>
-    /// Namespace of this module. Created from name
+    ///     Namespace of this module. Created from name
     /// </summary>
     public string Namespace { get; }
-    
+
     /// <summary>
-    /// Name of this module
+    ///     Name of this module
     /// </summary>
     public string Name { get; }
 
     /// <summary>
-    /// Authors of this module
+    ///     Authors of this module
     /// </summary>
     public List<string> Authors { get; } = new();
 
     /// <summary>
-    /// Description of this module
+    ///     Description of this module
     /// </summary>
     public string Description { get; }
 
@@ -121,7 +73,60 @@ public abstract class Module
     ///     Format of the pack, depends on minecraft version
     /// </summary>
     public PackFormat Format { get; }
-    
+
+    /// <summary>
+    ///     Ran when module is loaded
+    /// </summary>
+    public virtual void Startup()
+    {
+    }
+
+    /// <summary>
+    ///     Called each time a server is (re)loaded
+    /// </summary>
+    /// <param name="ctx">Current world</param>
+    public virtual void WorldLoad(WorldContext ctx)
+    {
+    }
+
+    /// <summary>
+    ///     Called each tick
+    /// </summary>
+    /// <param name="ctx">Current world</param>
+    public virtual void OnTick(WorldContext ctx)
+    {
+    }
+
+    internal async Task InternalSetupMagicFns()
+    {
+        var tick = new Tag(Identifier.Of(Namespace, "tick")).ReplaceSimilar(false);
+        var load = new Tag(Identifier.Of(Namespace, "load")).ReplaceSimilar(false);
+        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "tick.json"),
+            await tick.Serialize());
+        ModuleLoader.GlobalLoader.InjectMinecraftResource(Path.Join("tags", "functions", "load.json"),
+            await load.Serialize());
+    }
+
+    internal void InternalWorldLoad()
+    {
+        Registries.Functions.Register(new LoadFunction(WorldLoad), Identifier.Of(Namespace, "load"));
+    }
+
+    internal void InternalTick()
+    {
+        Registries.Functions.Register(new TickFunction(OnTick), Identifier.Of(Namespace, "tick"));
+    }
+
+    /// <summary>
+    ///     Creates a new identifier for this module
+    /// </summary>
+    /// <param name="path">The path part of the identifier</param>
+    /// <returns>Built identifier</returns>
+    public Identifier GetId(string path)
+    {
+        return Identifier.Of(Namespace, path);
+    }
+
     internal ModuleOutputStream InitStream(string stream)
     {
         if (Streams.ContainsKey(stream))

@@ -1,16 +1,15 @@
 using CopperSharp.Item;
-using CopperSharp.Registry;
 
 namespace CopperSharp.Advancements.Triggers;
 
 /// <summary>
-/// Triggers when the player slides down a block.
+///     Triggers when the player slides down a block.
 /// </summary>
 [CriterionName("slid_down_block")]
 public sealed class SlideDownBlock : TriggerCondition
 {
     /// <summary>
-    /// Sets the block that the player slid on
+    ///     Sets the block that the player slid on
     /// </summary>
     /// <param name="id">Block to be set</param>
     /// <returns>This trigger</returns>

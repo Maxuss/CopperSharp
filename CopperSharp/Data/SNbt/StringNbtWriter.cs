@@ -27,6 +27,13 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     }
 
     /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        GC.SuppressFinalize(this);
+        await _sw.DisposeAsync();
+    }
+
+    /// <inheritdoc />
     public void Dispose()
     {
         GC.SuppressFinalize(this);
@@ -561,7 +568,6 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
             ValidateArray();
         else
             ModuleLoader.GlobalLoader.EmitError("Writing a value in current state would result in malformed SNBT!");
-
     }
 
     private async Task ValidateCanWriteValueAsync()
@@ -594,12 +600,5 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         Array = 4,
         PostProperty = 5,
         InProperty = 6
-    }
-
-    /// <inheritdoc />
-    public async ValueTask DisposeAsync()
-    {
-        GC.SuppressFinalize(this);
-        await _sw.DisposeAsync();
     }
 }

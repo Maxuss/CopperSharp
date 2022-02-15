@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using CopperSharp.Data.Attributes;
 using CopperSharp.Data.SNbt;
 using CopperSharp.Registry;
@@ -72,7 +71,7 @@ public abstract class ItemMeta
     public int? Age { get; set; } = null;
 
     /// <summary>
-    /// Custom model data of this item
+    ///     Custom model data of this item
     /// </summary>
     public int? CustomModelData { get; set; } = null;
 
@@ -150,7 +149,7 @@ public abstract class ItemMeta
     {
         using var sw = new StringWriter();
         using var w = new StringNbtWriter(sw);
-        
+
         w.WriteBeginCompound();
         // begin display tag
         if (slot != null)
@@ -275,7 +274,7 @@ public abstract class ItemMeta
             w.WriteInteger(Age ?? 0);
         }
         // end Age tag
-        
+
         // begin CustomModelData tag
         if (CustomModelData != null)
         {

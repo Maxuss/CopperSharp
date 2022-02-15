@@ -16,6 +16,9 @@ public sealed class WorldContext
 {
     internal List<string> Cache { get; } = new();
 
+    private TextWriter? StdOut { get; set; }
+    private TextWriter? StdErr { get; set; }
+
     /// <summary>
     ///     Releases lock on provided entity
     /// </summary>
@@ -82,7 +85,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Announces provided message to all players in chat
+    ///     Announces provided message to all players in chat
     /// </summary>
     /// <param name="message">Message to be announced</param>
     public void Announce(IComponent message)
@@ -91,27 +94,26 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Writes a string to the chat for debugging purposes
+    ///     Writes a string to the chat for debugging purposes
     /// </summary>
     /// <param name="string">String to be written</param>
     public void Write(string @string)
     {
         Cache.Add($"tellraw @a \"[CONSOLE]: {@string}\"");
     }
+
     /// <summary>
-    /// Writes an object to the chat for debugging purposes
+    ///     Writes an object to the chat for debugging purposes
     /// </summary>
     /// <param name="obj">Object to be written</param>
-
     public void Write(object obj)
     {
         Cache.Add($"tellraw @a \"[CONSOLE]: {obj}\"");
     }
-    
+
     /// <summary>
-    /// Writes a component to the chat for debugging purposes.
-    ///
-    /// Note, for actual messaging it is recommended to use <see cref="Announce"/>.
+    ///     Writes a component to the chat for debugging purposes.
+    ///     Note, for actual messaging it is recommended to use <see cref="Announce" />.
     /// </summary>
     /// <param name="comp">Component to be written</param>
     public void Write(IComponent comp)
@@ -120,7 +122,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Gets player by provided name
+    ///     Gets player by provided name
     /// </summary>
     /// <param name="name">Name of the player</param>
     /// <returns>This world player</returns>
@@ -130,7 +132,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Gets player by provided entity selector
+    ///     Gets player by provided entity selector
     /// </summary>
     /// <param name="selector">Selector to test for the player</param>
     /// <returns>This world player</returns>
@@ -140,7 +142,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Runs a provided function
+    ///     Runs a provided function
     /// </summary>
     /// <param name="fn">Function to be ran</param>
     public void RunFunction(Identifier fn)
@@ -149,7 +151,7 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Unsafely runs provided command without doing external checks
+    ///     Unsafely runs provided command without doing external checks
     /// </summary>
     /// <param name="cmd">Command to be ran</param>
     public void RunUnsafe(string cmd)
@@ -158,12 +160,11 @@ public sealed class WorldContext
     }
 
     /// <summary>
-    /// Delegates execution of this world to provided function,
-    /// basically piping it's contents into this world.
-    ///
-    /// If you provided delegate is big and you want
-    /// to keep your function file small, you should
-    /// use <see cref="RunFunction"/> instead.
+    ///     Delegates execution of this world to provided function,
+    ///     basically piping it's contents into this world.
+    ///     If you provided delegate is big and you want
+    ///     to keep your function file small, you should
+    ///     use <see cref="RunFunction" /> instead.
     /// </summary>
     /// <param name="delegate">Delegate to be ran</param>
     public void Delegate(MinecraftDelegate @delegate)
@@ -204,8 +205,6 @@ public sealed class WorldContext
         Flush(writer);
     }
 
-    private TextWriter? StdOut { get; set; }
-    private TextWriter? StdErr { get; set; }
     internal void EnableMinecraftTranslating()
     {
         StdOut = Console.Out;
@@ -216,7 +215,11 @@ public sealed class WorldContext
 
     internal void DisableMinecraftTranslating()
     {
-        Console.SetOut(StdOut ?? throw new Exception("Could not disable Console-Minecraft translating! Something deleted the cached standard output!"));
-        Console.SetError(StdErr ?? throw new Exception("Could not disable Console-Minecraft translating! Something deleted the cached standard error!"));
+        Console.SetOut(StdOut ??
+                       throw new Exception(
+                           "Could not disable Console-Minecraft translating! Something deleted the cached standard output!"));
+        Console.SetError(StdErr ??
+                         throw new Exception(
+                             "Could not disable Console-Minecraft translating! Something deleted the cached standard error!"));
     }
 }
