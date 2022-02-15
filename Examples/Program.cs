@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 JsonConvert.SerializeObject("");
 var startTime = DateTime.UtcNow;
-ModuleLoader.GlobalLoader.SetOutputDirectory("/home/maxus/.local/share/multimc/instances/Fabulously Optimized/minecraft/saves/New World/datapacks");
+ModuleLoader.GlobalLoader.SetOutputDirectory("/home/maxus/.local/share/multimc/instances/Fabulously Optimized/minecraft/saves/CopperSharp Testing/datapacks");
 await ModuleLoader.GlobalLoader.LoadAsync(new ExampleModule());
 
 var diff = DateTime.UtcNow - startTime;

@@ -23,6 +23,10 @@ public abstract class Module
 {
     internal bool _locked = false;
 
+    internal TickFunction GlobalTick { get; set; } = new();
+
+    internal LoadFunction GlobalLoad { get; set; } = new();
+
     /// <summary>
     ///     Creates a new module, and initializes fields in it
     /// </summary>
@@ -109,12 +113,14 @@ public abstract class Module
 
     internal void InternalWorldLoad()
     {
-        Registries.Functions.Register(new LoadFunction(WorldLoad), Identifier.Of(Namespace, "load"));
+        GlobalLoad.AddDelegate(WorldLoad);
+        Registries.Functions.Register(GlobalLoad, Identifier.Of(Namespace, "load"));
     }
 
     internal void InternalTick()
     {
-        Registries.Functions.Register(new TickFunction(OnTick), Identifier.Of(Namespace, "tick"));
+        GlobalTick.AddDelegate(OnTick);
+        Registries.Functions.Register(GlobalTick, Identifier.Of(Namespace, "tick"));
     }
 
     /// <summary>

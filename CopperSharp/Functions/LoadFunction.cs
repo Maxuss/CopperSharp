@@ -2,18 +2,31 @@ using CopperSharp.Contexts;
 
 namespace CopperSharp.Functions;
 
-internal readonly struct LoadFunction : IFunction
+internal struct LoadFunction : IFunction
 {
-    private MinecraftDelegate Load { get; }
+    private List<MinecraftDelegate> Load { get; }
 
-    public LoadFunction(MinecraftDelegate load)
+    public void AddDelegate(MinecraftDelegate del)
     {
-        Load = load;
+        Load?.Add(del);
+    }
+
+    public LoadFunction()
+    {
+        Load = new List<MinecraftDelegate>();
+    }
+    
+    public LoadFunction(MinecraftDelegate del)
+    {
+        Load = new List<MinecraftDelegate> {del};
     }
 
     [FunctionHandler("load")]
     public void OnTick(WorldContext ctx)
     {
-        Load.Invoke(ctx);
+        foreach (var fn in Load)
+        {
+            fn(ctx);
+        }
     }
 }

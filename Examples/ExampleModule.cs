@@ -1,11 +1,9 @@
-using System.Diagnostics;
 using CopperSharp.Contexts;
 using CopperSharp.Data.Effects;
 using CopperSharp.Data.Locations;
-using CopperSharp.Entity;
 using CopperSharp.Functions;
+using CopperSharp.Hooks;
 using CopperSharp.Item;
-using CopperSharp.Item.Meta;
 using CopperSharp.Modules;
 using CopperSharp.Registry;
 using CopperSharp.Text;
@@ -24,6 +22,7 @@ public class ExampleModule : Module
         Handler = new ExampleHandler();
 
         Registries.Functions.Register(Handler);
+        ModuleLoader.Hooks.Register(new ExampleHookHandler());
     }
 
     public override void OnTick(WorldContext ctx)
@@ -78,5 +77,14 @@ public sealed class ExampleHandler : IFunction
         inv.AddItem(new ItemStack(Material.DiamondSword));
         inv.SetHelmet(new ItemStack(Material.DiamondBlock));
         inv.SetHotbarItem(new ItemStack(Material.NetherStar), 5);
+    }
+}
+
+public sealed class ExampleHookHandler : IHookHandler
+{
+    [Hook(typeof(RightClickHook))]
+    public void OnRightClick(WorldContext ctx)
+    {
+        ctx.Announce(IComponent.Text("Someone just clicked!"));
     }
 }

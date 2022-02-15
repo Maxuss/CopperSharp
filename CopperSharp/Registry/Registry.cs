@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using CopperSharp.Modules;
 using CopperSharp.Utils;
 
@@ -74,9 +75,9 @@ public abstract class Registry<TElement>
                 bar.Report((double) cur / l);
                 cur++;
             }
-        }
 
-        Console.WriteLine("Done.");
+            Console.WriteLine("Done.");
+        }
     }
 }
 

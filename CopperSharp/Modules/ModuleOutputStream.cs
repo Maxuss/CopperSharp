@@ -42,6 +42,8 @@ public sealed class ModuleOutputStream
     /// <param name="data">Data to be written</param>
     public void Write(string file, byte[] data)
     {
+        CheckDirectory(file);
+
         var f = Path.Join(Directory, file);
         if (File.Exists(f))
             File.Delete(f);
@@ -67,6 +69,8 @@ public sealed class ModuleOutputStream
     /// <param name="data">Data to be written</param>
     public async Task WriteAsync(string file, byte[] data)
     {
+        CheckDirectory(file);
+
         var f = Path.Join(Directory, file);
         if (File.Exists(f))
             File.Delete(f);
@@ -82,10 +86,19 @@ public sealed class ModuleOutputStream
     /// <returns>Opened stream</returns>
     public Stream Open(string file)
     {
+        CheckDirectory(file);
+
         var f = Path.Join(Directory, file);
         if (File.Exists(f))
             File.Delete(f);
 
         return File.Create(f);
+    }
+
+    private void CheckDirectory(string file)
+    {
+        var cd = Path.Join(Directory, file).Split(Path.DirectorySeparatorChar).SkipLast(1).Aggregate(Path.Join);
+        if (!Dirs.Exists(cd))
+            Dirs.CreateDirectory(cd);
     }
 }

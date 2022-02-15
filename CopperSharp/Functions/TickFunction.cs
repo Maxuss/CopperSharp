@@ -4,16 +4,29 @@ namespace CopperSharp.Functions;
 
 internal readonly struct TickFunction : IFunction
 {
-    private MinecraftDelegate Tick { get; }
+    private List<MinecraftDelegate> Load { get; } = new();
 
-    public TickFunction(MinecraftDelegate tick)
+    public void AddDelegate(MinecraftDelegate del)
     {
-        Tick = tick;
+        Load.Add(del);
+    }
+
+    public TickFunction()
+    {
+        Load = new List<MinecraftDelegate>();
+    }
+
+    public TickFunction(MinecraftDelegate del)
+    {
+        Load.Add(del);
     }
 
     [FunctionHandler("tick")]
     public void OnTick(WorldContext ctx)
     {
-        Tick.Invoke(ctx);
+        foreach (var fn in Load)
+        {
+            fn(ctx);
+        }
     }
 }

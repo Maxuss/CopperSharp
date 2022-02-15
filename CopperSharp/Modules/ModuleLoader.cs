@@ -1,4 +1,5 @@
 using System.IO.Compression;
+using CopperSharp.Hooks;
 using CopperSharp.Registry;
 using CopperSharp.Utils;
 
@@ -19,6 +20,16 @@ public sealed class ModuleLoader
     private string? BuildDirectory { get; set; }
     private Dictionary<string, string> ResourceCache { get; } = new();
 
+    /// <summary>
+    /// A global hook handler
+    /// </summary>
+    public static HookHandler Hooks { get; set; } = new();
+    
+    /// <summary>
+    /// Module that is currently processed. May be null
+    /// </summary>
+    public static Module? ProcessingModule { get; set; }
+    
     /// <summary>
     ///     A global module loader
     /// </summary>
@@ -95,6 +106,8 @@ public sealed class ModuleLoader
     /// <param name="mod">Module to be loaded</param>
     public async Task LoadAsync(Module mod)
     {
+        ProcessingModule = mod;
+        
         if (mod._locked)
             return;
         try
@@ -118,7 +131,10 @@ public sealed class ModuleLoader
 
             Console.WriteLine("Setting up magic functions.");
             await mod.InternalSetupMagicFns();
-
+            
+            Console.Write("Building hooks...");
+            await Hooks.Dump();
+            
             Console.WriteLine("Dumping load + tick functions.");
             mod.InternalTick();
             mod.InternalWorldLoad();
@@ -128,7 +144,7 @@ public sealed class ModuleLoader
             await Registries.Advancements.Dump(mod);
             await Registries.Functions.Dump(mod);
             await Registries.Tags.Dump(mod);
-
+            
             if (Directory.Exists(Path.Join(curdir, "Assets")) || ResourceCache.Count > 0)
             {
                 if (ResourceCache.Count > 0)
@@ -222,5 +238,7 @@ public sealed class ModuleLoader
             Console.WriteLine(
                 $"Failed building module {mod.Name} with {WarningCount} warnings and {ErrorCount} errors!");
         }
+
+        ProcessingModule = null;
     }
 }
