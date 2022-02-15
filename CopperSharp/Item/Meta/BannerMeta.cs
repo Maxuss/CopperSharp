@@ -6,7 +6,7 @@ namespace CopperSharp.Item.Meta;
 /// <summary>
 ///     Metadata container for banners
 /// </summary>
-public sealed class BannerMeta : ItemMeta
+public sealed class BannerMeta : BlockItemMeta
 {
     internal bool WriteBlockEntityTag = true;
 

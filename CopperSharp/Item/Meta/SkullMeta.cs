@@ -7,7 +7,7 @@ namespace CopperSharp.Item.Meta;
 /// <summary>
 ///     Metadata container for player skulls
 /// </summary>
-public sealed class SkullMeta : ItemMeta
+public sealed class SkullMeta : BlockItemMeta
 {
     private bool _complexOwner;
 
