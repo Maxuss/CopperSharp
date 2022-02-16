@@ -4,6 +4,7 @@ using CopperSharp.Data.Locations;
 using CopperSharp.Functions;
 using CopperSharp.Hooks;
 using CopperSharp.Item;
+using CopperSharp.Models;
 using CopperSharp.Modules;
 using CopperSharp.Registry;
 using CopperSharp.Text;
@@ -15,6 +16,7 @@ namespace Examples;
 [ModuleInfo("ExampleModule", Description = "A cool example module")]
 public class ExampleModule : Module
 {
+    private Disguise IronGold { get; set; }
     private ExampleHandler Handler { get; set; }
     public override void Startup()
     {
@@ -22,7 +24,9 @@ public class ExampleModule : Module
         Handler = new ExampleHandler();
 
         Registries.Functions.Register(Handler);
-        ModuleLoader.Hooks.Register(new ExampleHookHandler());
+        IronGold = new Disguise(Material.IronIngot, Material.GoldIngot);
+
+        Registries.Disguises.Register(IronGold);
     }
 
     public override void OnTick(WorldContext ctx)
@@ -32,9 +36,7 @@ public class ExampleModule : Module
 
     public override void WorldLoad(WorldContext ctx)
     {
-        var item = new ItemStack(Material.CarrotOnAStick);
-        item.Meta.CustomModelData = 120;
-        ctx.GetPlayer("Xtremum").Inventory.AddItem(item);
+        ctx.GetPlayer("Xtremum").Inventory.AddDisguise(IronGold);
     }
 }
 
@@ -51,7 +53,7 @@ public sealed class ExampleHandler : IFunction
     {
         ctx.Announce(IComponent.Text("Second function was called!").Colored(NamedTextColor.Gray));
     }
-    
+
     [FunctionHandler("player_test")]
     public void PlayerTest(WorldContext ctx)
     {
@@ -66,25 +68,16 @@ public sealed class ExampleHandler : IFunction
         player.GrantAdvancement(Identifier.Minecraft("adventure/adventuring_time"));
         player.PlaySound("entity.axolotl.attack", location: Location.FromString("~ ~ ~"));
         player.AddEffect(new PotionEffect(StatusEffect.Glowing, 200));
-        player.DisplayParticle("dust", 
-            Location.FromString("~ ~ ~"), 
+        player.DisplayParticle("dust",
+            Location.FromString("~ ~ ~"),
             new Vec3(1, 0, 1),
             1.0f,
             50,
             options: new DustOptions(ITextColor.Hex(0xFFAAFF)));
-        
+
         var inv = player.Inventory;
         inv.AddItem(new ItemStack(Material.DiamondSword));
         inv.SetHelmet(new ItemStack(Material.DiamondBlock));
         inv.SetHotbarItem(new ItemStack(Material.NetherStar), 5);
-    }
-}
-
-public sealed class ExampleHookHandler : IHookHandler
-{
-    [Hook(typeof(RightClickHook))]
-    public void OnRightClick(WorldContext ctx)
-    {
-        ctx.Announce(IComponent.Text("Someone just clicked!"));
     }
 }

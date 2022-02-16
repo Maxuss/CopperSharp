@@ -1,4 +1,6 @@
 using CopperSharp.Item;
+using CopperSharp.Models;
+using CopperSharp.Modules;
 
 namespace CopperSharp.Contexts;
 
@@ -35,6 +37,23 @@ public sealed class PlayerInventory
     public void AddItem(ItemStack item)
     {
         Lock.Cache.Add($"give {Name} {item.Serialize()}");
+    }
+
+    /// <summary>
+    /// Adds a disguised item to this inventory
+    /// </summary>
+    /// <param name="dis">Disguised item to be added</param>
+    public void AddDisguise(Disguise dis)
+    {
+        var id = ModuleLoader.ModelManager.Lookup(dis);
+        var item = new ItemStack(Material.Inject(dis.Base))
+        {
+            Meta =
+            {
+                CustomModelData = id
+            }
+        };
+        AddItem(item);
     }
 
     /// <summary>

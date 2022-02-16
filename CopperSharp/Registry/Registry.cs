@@ -53,31 +53,29 @@ public abstract class Registry<TElement>
     ///     Asynchronously dumps this registry's contents
     /// </summary>
     /// <param name="mod">Module to be used</param>
-    public async Task Dump(Module mod)
+    public virtual async Task Dump(Module mod)
     {
         Console.Write($"Dumping {Name}... ");
-        using (var bar = new ProgressBar())
+        using var bar = new ProgressBar();
+        var stream = mod.InitStream(Name);
+        var l = Stack.Count;
+        var cur = 0;
+        foreach (var data in Stack)
         {
-            var stream = mod.InitStream(Name);
-            var l = Stack.Count;
-            var cur = 0;
-            foreach (var data in Stack)
+            var id = data.Item2;
+            if (id.Path.Contains('/'))
             {
-                var id = data.Item2;
-                if (id.Path.Contains('/'))
-                {
-                    var dirs = id.Path.Split('/');
-                    var cd = dirs.SkipLast(1).Aggregate(stream.Directory, Path.Join);
-                    Directory.CreateDirectory(cd);
-                }
-
-                await Write(data, stream);
-                bar.Report((double) cur / l);
-                cur++;
+                var dirs = id.Path.Split('/');
+                var cd = dirs.SkipLast(1).Aggregate(stream.Directory, Path.Join);
+                Directory.CreateDirectory(cd);
             }
 
-            Console.WriteLine("Done.");
+            await Write(data, stream);
+            bar.Report((double) cur / l);
+            cur++;
         }
+
+        Console.WriteLine("Done.");
     }
 }
 
@@ -100,6 +98,11 @@ public static class Registries
     ///     Global tag registry
     /// </summary>
     public static TagRegistry Tags { get; } = new();
+
+    /// <summary>
+    /// Global disguise registry
+    /// </summary>
+    public static DisguiseRegistry Disguises { get; } = new();
 
     /// <summary>
     ///     Registers provided element in provided registry

@@ -1,5 +1,6 @@
 using System.IO.Compression;
 using CopperSharp.Hooks;
+using CopperSharp.Models;
 using CopperSharp.Registry;
 using CopperSharp.Utils;
 
@@ -14,26 +15,41 @@ public sealed class ModuleLoader
     {
     }
 
+    /// <summary>
+    /// Name of the resourcepack directory from the build folder
+    /// </summary>
+    public static readonly string ResourcesDir = "resources";
+    /// <summary>
+    /// Name of the datapack directory from the build folder
+    /// </summary>
+    public static readonly string DatapackDir = "pack";
     private int WarningCount { get; set; }
     private int ErrorCount { get; set; }
     private string? OutputDirectory { get; set; }
     private string? BuildDirectory { get; set; }
+    private string? ResourcesDirectory { get; set; }
+    private bool InitRp { get; set; } = false;
     private Dictionary<string, string> ResourceCache { get; } = new();
 
     /// <summary>
     /// A global hook handler
     /// </summary>
-    public static HookHandler Hooks { get; set; } = new();
+    public static HookHandler HookHandler { get; set; } = new();
     
     /// <summary>
     /// Module that is currently processed. May be null
     /// </summary>
-    public static Module? ProcessingModule { get; set; }
+    public static Module? CurrentModule { get; set; }
     
     /// <summary>
     ///     A global module loader
     /// </summary>
     public static ModuleLoader GlobalLoader { get; } = new();
+
+    /// <summary>
+    /// A global model manager
+    /// </summary>
+    public static ModelManager ModelManager { get; } = new();
 
     /// <summary>
     ///     Sets the .zip archive output directory. Can be set to minecraft datapack folder for debugging.
@@ -42,6 +58,24 @@ public sealed class ModuleLoader
     public void SetOutputDirectory(string dir)
     {
         OutputDirectory = dir;
+    }
+
+    /// <summary>
+    /// Sets the directory to which the resource pack will be outputted
+    /// </summary>
+    /// <param name="dir">Directory to be set</param>
+    public void SetResourcepackDirectory(string dir)
+    {
+        ResourcesDirectory = dir;
+    }
+
+    /// <summary>
+    /// Toggles the generation of resourcepack's pack.mcmeta file
+    /// </summary>
+    /// <param name="enable">Whether to enable the resourcepack</param>
+    public void ToggleResourcepack(bool enable = true)
+    {
+        InitRp = enable;
     }
 
     /// <summary>
@@ -106,7 +140,7 @@ public sealed class ModuleLoader
     /// <param name="mod">Module to be loaded</param>
     public async Task LoadAsync(Module mod)
     {
-        ProcessingModule = mod;
+        CurrentModule = mod;
         
         if (mod._locked)
             return;
@@ -121,8 +155,8 @@ public sealed class ModuleLoader
 
             Console.WriteLine("Creating build dir");
             var build = BuildDirectory ?? Path.Join(curdir, "Build");
-            var dpPath = Path.Join(build, "pack");
-            var rpPath = Path.Join(build, "resources");
+            var dpPath = Path.Join(build, DatapackDir);
+            var rpPath = Path.Join(build, ResourcesDir);
 
             var dataPath = Path.Join(dpPath, "data");
             var nsPath = Path.Join(dataPath, mod.Namespace);
@@ -133,7 +167,7 @@ public sealed class ModuleLoader
             await mod.InternalSetupMagicFns();
             
             Console.Write("Building hooks...");
-            await Hooks.Dump();
+            await HookHandler.Dump();
             
             Console.WriteLine("Dumping load + tick functions.");
             mod.InternalTick();
@@ -144,9 +178,13 @@ public sealed class ModuleLoader
             await Registries.Advancements.Dump(mod);
             await Registries.Functions.Dump(mod);
             await Registries.Tags.Dump(mod);
+            await Registries.Disguises.Dump(mod);
             
-            if (Directory.Exists(Path.Join(curdir, "Assets")) || ResourceCache.Count > 0)
+            if (Directory.Exists(Path.Join(curdir, "Assets")) || ResourceCache.Count > 0 || InitRp)
             {
+                InitRp = true;
+                Console.WriteLine("Generating resourcepack...");
+                
                 if (ResourceCache.Count > 0)
                 {
                     Console.WriteLine("Resource cache available, processing it...");
@@ -197,7 +235,9 @@ public sealed class ModuleLoader
             var mcmeta = await meta.Serialize();
 
             await File.WriteAllTextAsync(Path.Join(dpPath, "pack.mcmeta"), mcmeta);
-
+            if (InitRp)
+                File.WriteAllTextAsync(Path.Join(rpPath, "pack.mcmeta"), mcmeta);
+            
             // building into zip files
             Console.WriteLine("Building zip file output.");
             var outDir = OutputDirectory ?? Path.Join(Directory.GetCurrentDirectory(), "Output");
@@ -219,7 +259,7 @@ public sealed class ModuleLoader
             ZipFile.CreateFromDirectory(dpPath, zipPath, CompressionLevel.Fastest, false);
             if (Directory.Exists(rpPath))
             {
-                var rpZip = Path.Join(outDir, $"{mod.Name}_resources.zip");
+                var rpZip = Path.Join(ResourcesDirectory ?? outDir, $"{mod.Name}_resources.zip");
                 if (File.Exists(rpZip))
                     File.Delete(rpZip);
                 ZipFile.CreateFromDirectory(rpPath, rpZip, CompressionLevel.Fastest, false);
@@ -239,6 +279,6 @@ public sealed class ModuleLoader
                 $"Failed building module {mod.Name} with {WarningCount} warnings and {ErrorCount} errors!");
         }
 
-        ProcessingModule = null;
+        CurrentModule = null;
     }
 }

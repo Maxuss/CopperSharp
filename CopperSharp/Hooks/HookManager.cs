@@ -17,7 +17,7 @@ internal static class HookManager
             {
                 mtd.Invoke(obj, new object?[] {ctx});
             };
-            actualHook.Configure(ModuleLoader.ProcessingModule!);
+            actualHook.Configure(ModuleLoader.CurrentModule!);
         }
     }
 }
