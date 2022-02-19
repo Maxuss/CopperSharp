@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace CopperSharp.Functions;
@@ -7,14 +8,14 @@ namespace CopperSharp.Functions;
 /// </summary>
 public static class FunctionManager
 {
-    private static Dictionary<Type, List<(AsyncMinecraftDelegate, FunctionHandlerAttribute)>> AsyncMethods { get; } =
+    private static ConcurrentDictionary<Type, List<(AsyncMinecraftDelegate, FunctionHandlerAttribute)>> AsyncMethods { get; } =
         new();
 
-    private static Dictionary<int, List<(AsyncMinecraftDelegate, FunctionHandlerAttribute)>>
+    private static ConcurrentDictionary<int, List<(AsyncMinecraftDelegate, FunctionHandlerAttribute)>>
         AsyncMethodsByHash { get; } = new();
 
-    private static Dictionary<Type, List<(MinecraftDelegate, FunctionHandlerAttribute)>> Methods { get; } = new();
-    private static Dictionary<int, List<(MinecraftDelegate, FunctionHandlerAttribute)>> MethodsByHash { get; } = new();
+    private static ConcurrentDictionary<Type, List<(MinecraftDelegate, FunctionHandlerAttribute)>> Methods { get; } = new();
+    private static ConcurrentDictionary<int, List<(MinecraftDelegate, FunctionHandlerAttribute)>> MethodsByHash { get; } = new();
 
     /// <summary>
     ///     Looks up provided function and gets all methods

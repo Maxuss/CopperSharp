@@ -265,25 +265,17 @@ public sealed class ModuleLoader
 
         RegisterTask("Set up magic functions", async mod =>
         {
-            var time = Stopwatch.StartNew();
             await mod.InternalSetupMagicFns();
-            time.Stop();
-            return time;
         }, 0);
         RegisterTask("Build hooks", async _ =>
         {
-            var time = Stopwatch.StartNew();
             await HookHandler.Dump();
-            time.Stop();
-            return time;
         }, 1);
         RegisterTask("Load+Tick functions", mod =>
         {
-            var time = Stopwatch.StartNew();
             mod.InternalTick();
             mod.InternalWorldLoad();
-            time.Stop();
-            return Task.FromResult(time);
+            return Task.CompletedTask;
         }, 2);
         RegisterTask("Load advancements", async mod => await Registries.Advancements.Dump(mod), 3);
         RegisterTask("Load functions", async mod => await Registries.Functions.Dump(mod), 4);
@@ -291,15 +283,12 @@ public sealed class ModuleLoader
         RegisterTask("Load disguises", async mod => await Registries.Disguises.Dump(mod), 6);
         RegisterTask("Generate meta file", async mod =>
         {
-            var time = Stopwatch.StartNew();
             var meta = new PackMcMeta((int) mod.Format, mod.FullDescription);
             var mcmeta = await meta.Serialize();
 
             await File.WriteAllTextAsync(Path.Join(dpPath, "pack.mcmeta"), mcmeta);
             if (InitRp)
                 await File.WriteAllTextAsync(Path.Join(rpPath, "pack.mcmeta"), mcmeta);
-            time.Stop();
-            return time;
         }, 8);
     }
 
@@ -351,7 +340,9 @@ public sealed class ModuleLoader
                 {
                     try
                     {
-                        var time = await deq.Item2.Item2(mod);
+                        var time = Stopwatch.StartNew();
+                        await deq.Item2.Item2(mod);
+                        time.Stop();
                         results[deq.Item1] = time;
                     }
                     catch (Exception e)
