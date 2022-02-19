@@ -256,7 +256,7 @@ public sealed class ModuleLoader
         Errors.Clear();
     }
 
-    private void NecessaryLoadTasks()
+    private void LoadNecessaryTasks()
     {
         var curdir = Directory.GetCurrentDirectory();
         var build = BuildDirectory ?? Path.Join(curdir, "Build");
@@ -310,7 +310,7 @@ public sealed class ModuleLoader
     public async Task LoadModule(Module mod)
     {
         // init necessary load tasks
-        NecessaryLoadTasks();
+        LoadNecessaryTasks();
         DisableRegistration();
 
         var total = Stopwatch.StartNew();

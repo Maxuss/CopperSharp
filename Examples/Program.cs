@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CopperSharp.Modules;
+﻿using CopperSharp.Modules;
 using Examples;
 using Newtonsoft.Json;
 
