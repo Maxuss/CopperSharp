@@ -48,7 +48,7 @@ public abstract class Component
     ///     Color of this component
     /// </summary>
     protected ITextColor? Color { get; set; }
-    
+
     /// <summary>
     ///     Applies a coloring to this component
     /// </summary>
@@ -115,7 +115,7 @@ public abstract class Component
         InsertionText = insertion;
         return this;
     }
-    
+
     /// <summary>
     ///     Removes italic formatting from this component
     /// </summary>
@@ -126,16 +126,16 @@ public abstract class Component
     }
 
     /// <summary>
-    /// Serializes this component into provided writer
+    ///     Serializes this component into provided writer
     /// </summary>
     /// <param name="jw">Writer to be used</param>
     /// <param name="indent">Whether to indent the component</param>
     public async Task SerializeInto(JsonTextWriter jw, bool indent = false)
     {
         jw.Formatting = indent ? Newtonsoft.Json.Formatting.Indented : Newtonsoft.Json.Formatting.None;
-        
+
         await jw.WriteStartObjectAsync();
-        
+
         await SerializeExtra(jw);
         if (Children.Any())
         {
@@ -143,7 +143,7 @@ public abstract class Component
             await jw.WriteStartArrayAsync();
             foreach (var child in Children)
                 await child.SerializeInto(jw);
-            
+
             await jw.WriteEndArrayAsync();
         }
 
@@ -176,14 +176,11 @@ public abstract class Component
             await jw.WriteEndObjectAsync();
         }
 
-        if (HoverEvent != null)
-        {
-            await HoverEvent.SerializeInto(jw);
-        }
+        if (HoverEvent != null) await HoverEvent.SerializeInto(jw);
 
         await jw.WriteEndObjectAsync();
     }
-    
+
     /// <summary>
     ///     Serializes this component to JSON string
     /// </summary>
@@ -193,9 +190,9 @@ public abstract class Component
     {
         await using var sw = new StringWriter();
         using var jw = new JsonTextWriter(sw);
-        
+
         await SerializeInto(jw);
-        
+
         return sw.ToString();
     }
 
@@ -228,7 +225,7 @@ public abstract class Component
 
 
     /// <summary>
-    /// Serializes extra data for this component
+    ///     Serializes extra data for this component
     /// </summary>
     /// <param name="jw">Writer to be used for serializing</param>
     protected virtual Task SerializeExtra(JsonTextWriter jw)
@@ -237,69 +234,86 @@ public abstract class Component
     }
 
     /// <summary>
-    /// Constructs a new text component
+    ///     Constructs a new text component
     /// </summary>
     /// <param name="text">Text to be displayed</param>
     /// <returns>New text component</returns>
-    public static TextComponent Text(string text) 
-        => new(text);
-    
+    public static TextComponent Text(string text)
+    {
+        return new(text);
+    }
+
     /// <summary>
-    /// Constructs a new entity component
+    ///     Constructs a new entity component
     /// </summary>
     /// <param name="entity">Entity to be displayed</param>
     /// <returns>New entity component</returns>
-    public static EntityComponent Entity(Selector entity) 
-        => new(entity);
+    public static EntityComponent Entity(Selector entity)
+    {
+        return new(entity);
+    }
 
     /// <summary>
-    /// Constructs a new keybind component
+    ///     Constructs a new keybind component
     /// </summary>
     /// <param name="key">Keybind to be displayed</param>
     /// <returns>New keybind component</returns>
-    public static KeybindComponent Keybind(Keybind key) 
-        => new(key);
+    public static KeybindComponent Keybind(Keybind key)
+    {
+        return new(key);
+    }
 
     /// <summary>
-    /// Constructs a new scoreboard component
+    ///     Constructs a new scoreboard component
     /// </summary>
     /// <param name="obj">Name of the objective</param>
     /// <param name="holder">Holder of the objective to be displayed. By default displays data for each receiver individually.</param>
     /// <returns>New scoreboard component</returns>
-    public static ScoreboardComponent Score(string obj, Selector? holder = null) =>
-        new(obj, holder ?? new Selector("*"));
+    public static ScoreboardComponent Score(string obj, Selector? holder = null)
+    {
+        return new(obj, holder ?? new Selector("*"));
+    }
 
     /// <summary>
-    /// Constructs a new block-based nbt component
+    ///     Constructs a new block-based nbt component
     /// </summary>
     /// <param name="path">NBT path</param>
     /// <param name="loc">Location of the block</param>
     /// <returns>New nbt component</returns>
-    public static NbtComponent Nbt(string path, Location loc) 
-        => new(path, loc);
-    
+    public static NbtComponent Nbt(string path, Location loc)
+    {
+        return new(path, loc);
+    }
+
     /// <summary>
-    /// Constructs a new entity-based nbt component
+    ///     Constructs a new entity-based nbt component
     /// </summary>
     /// <param name="path">NBT path</param>
     /// <param name="sel">Selector for the entity</param>
     /// <returns>New nbt component</returns>
-    public static NbtComponent Nbt(string path, Selector sel) 
-        => new(path, sel);
-    
+    public static NbtComponent Nbt(string path, Selector sel)
+    {
+        return new(path, sel);
+    }
+
     /// <summary>
-    /// Constructs a new storage-based nbt component
+    ///     Constructs a new storage-based nbt component
     /// </summary>
     /// <param name="path">NBT path</param>
     /// <param name="id">ID of the command storage</param>
     /// <returns>New nbt component</returns>
-    public static NbtComponent Nbt(string path, Identifier id) 
-        => new(path, id);
+    public static NbtComponent Nbt(string path, Identifier id)
+    {
+        return new(path, id);
+    }
 
     /// <summary>
     ///     Creates a new <see cref="TranslatableComponent" />
     /// </summary>
     /// <param name="key">Key to be stored as localizable string inside component</param>
     /// <returns>A new instance of translatable component</returns>
-    public static TranslatableComponent Translatable(string key) => new(key);
+    public static TranslatableComponent Translatable(string key)
+    {
+        return new(key);
+    }
 }

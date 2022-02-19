@@ -1,144 +1,177 @@
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Represents an in-game keybind
+///     Represents an in-game keybind
 /// </summary>
 public enum Keybind
 {
     /// <summary>
-    /// Space
+    ///     Space
     /// </summary>
     [EnumData("key.jump")] Jump,
+
     /// <summary>
-    /// Shift
+    ///     Shift
     /// </summary>
     [EnumData("key.sneak")] Sneak,
+
     /// <summary>
-    /// Ctrl
+    ///     Ctrl
     /// </summary>
     [EnumData("key.sprint")] Sprint,
+
     /// <summary>
-    /// A
+    ///     A
     /// </summary>
     [EnumData("key.left")] StrafeLeft,
+
     /// <summary>
-    /// D
+    ///     D
     /// </summary>
     [EnumData("key.right")] StrafeRight,
+
     /// <summary>
-    /// S
+    ///     S
     /// </summary>
     [EnumData("key.back")] WalkBackward,
+
     /// <summary>
-    /// W
+    ///     W
     /// </summary>
     [EnumData("key.forward")] WalkForward,
+
     /// <summary>
-    /// LMB
+    ///     LMB
     /// </summary>
     [EnumData("key.attack")] Attack,
+
     /// <summary>
-    /// MMB
+    ///     MMB
     /// </summary>
     [EnumData("key.pickItem")] PickBlock,
+
     /// <summary>
-    /// RMB
+    ///     RMB
     /// </summary>
     [EnumData("key.use")] Use,
+
     /// <summary>
-    /// Q
+    ///     Q
     /// </summary>
     [EnumData("key.drop")] Drop,
+
     /// <summary>
-    /// 1
+    ///     1
     /// </summary>
     [EnumData("key.hotbar.1")] Hotbar1,
+
     /// <summary>
-    /// 2
+    ///     2
     /// </summary>
     [EnumData("key.hotbar.2")] Hotbar2,
+
     /// <summary>
-    /// 3
+    ///     3
     /// </summary>
     [EnumData("key.hotbar.3")] Hotbar3,
+
     /// <summary>
-    /// 4
+    ///     4
     /// </summary>
     [EnumData("key.hotbar.4")] Hotbar4,
+
     /// <summary>
-    /// 5
+    ///     5
     /// </summary>
     [EnumData("key.hotbar.5")] Hotbar5,
+
     /// <summary>
-    /// 6
+    ///     6
     /// </summary>
     [EnumData("key.hotbar.6")] Hotbar6,
+
     /// <summary>
-    /// 7
+    ///     7
     /// </summary>
     [EnumData("key.hotbar.7")] Hotbar7,
+
     /// <summary>
-    /// 8
+    ///     8
     /// </summary>
     [EnumData("key.hotbar.8")] Hotbar8,
+
     /// <summary>
-    /// 9
+    ///     9
     /// </summary>
     [EnumData("key.hotbar.9")] Hotbar9,
+
     /// <summary>
-    /// E
+    ///     E
     /// </summary>
     [EnumData("key.inventory")] Inventory,
+
     /// <summary>
-    /// F
+    ///     F
     /// </summary>
     [EnumData("key.swapOffhand")] SwapOffHand,
+
     /// <summary>
-    /// X
+    ///     X
     /// </summary>
     [EnumData("key.loadToolbarActivator")] LoadToolbar,
+
     /// <summary>
-    /// C
+    ///     C
     /// </summary>
     [EnumData("key.saveToolbarActivator")] SaveToolbar,
+
     /// <summary>
-    /// TAB
+    ///     TAB
     /// </summary>
     [EnumData("key.playerlist")] PlayerList,
+
     /// <summary>
-    /// T
+    ///     T
     /// </summary>
     [EnumData("key.chat")] OpenChat,
+
     /// <summary>
-    /// /
+    ///     /
     /// </summary>
     [EnumData("key.command")] Command,
+
     /// <summary>
-    /// P
+    ///     P
     /// </summary>
     [EnumData("key.socialInteractions")] OpenSocialInteractions,
+
     /// <summary>
-    /// L
+    ///     L
     /// </summary>
     [EnumData("key.advancements")] OpenAdvancements,
+
     /// <summary>
-    /// None by default
+    ///     None by default
     /// </summary>
     [EnumData("key.spectatorOutlines")] HighlightSpectators,
+
     /// <summary>
-    /// F2
+    ///     F2
     /// </summary>
     [EnumData("key.screenshot")] Screenshot,
+
     /// <summary>
-    /// None by default
+    ///     None by default
     /// </summary>
     [EnumData("key.smoothCamera")] SmoothCamera,
+
     /// <summary>
-    /// F11
+    ///     F11
     /// </summary>
     [EnumData("key.fullscreen")] Fullscreen,
+
     /// <summary>
-    /// F5
+    ///     F5
     /// </summary>
-    [EnumData("key.togglePerspective")] ChangePerspective,
+    [EnumData("key.togglePerspective")] ChangePerspective
 }

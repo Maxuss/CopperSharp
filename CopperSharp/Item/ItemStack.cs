@@ -1,4 +1,3 @@
-using CopperSharp.Data.SNbt;
 using CopperSharp.Item.Meta;
 
 namespace CopperSharp.Item;

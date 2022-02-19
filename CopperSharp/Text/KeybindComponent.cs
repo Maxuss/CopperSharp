@@ -4,23 +4,23 @@ using Newtonsoft.Json;
 namespace CopperSharp.Text;
 
 /// <summary>
-/// A component, which contains a keybind
+///     A component, which contains a keybind
 /// </summary>
 public sealed class KeybindComponent : Component
 {
-    /// <inheritdoc />
-    public override ComponentType ComponentType => ComponentType.Keybind;
+    private readonly Keybind Key;
 
-    private Keybind Key;
-    
     /// <summary>
-    /// Constructs a new keybind component
+    ///     Constructs a new keybind component
     /// </summary>
     /// <param name="key">Key to be set</param>
     public KeybindComponent(Keybind key)
     {
         Key = key;
     }
+
+    /// <inheritdoc />
+    public override ComponentType ComponentType => ComponentType.Keybind;
 
     /// <inheritdoc />
     protected override async Task SerializeExtra(JsonTextWriter jw)

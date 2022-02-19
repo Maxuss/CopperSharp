@@ -231,7 +231,7 @@ public abstract class AbstractEntity
     }
 
     /// <summary>
-    /// Serializes this entity into provided writer
+    ///     Serializes this entity into provided writer
     /// </summary>
     /// <param name="w">Writer to be used</param>
     /// <param name="includeType">Whether to include entity type</param>
@@ -303,7 +303,6 @@ public abstract class AbstractEntity
         await w.WriteStringAsync($"CID{EntityUid}");
         await w.WriteEndArrayAsync();
         await w.WriteEndCompoundAsync();
-
     }
 
     /// <summary>

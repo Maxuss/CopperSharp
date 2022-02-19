@@ -51,7 +51,7 @@ public sealed class StringNbtWriter : INbtWriter
         _sw.Write('{');
         PushDepth(State.Compound);
     }
-    
+
     /// <summary>
     ///     Writes the component begin tag asynchronously
     /// </summary>
@@ -81,7 +81,7 @@ public sealed class StringNbtWriter : INbtWriter
         await _sw.WriteAsync('}');
         PullDepth();
     }
-    
+
     /// <summary>
     ///     Writes an identifier for array, e.g. I, or D
     /// </summary>
@@ -90,7 +90,7 @@ public sealed class StringNbtWriter : INbtWriter
     {
         _sw.Write($"{id};");
     }
-    
+
     /// <summary>
     ///     Writes an identifier for array, e.g. I, or D asynchronously
     /// </summary>
@@ -123,7 +123,6 @@ public sealed class StringNbtWriter : INbtWriter
         await ValidateArrayAsync();
         await _sw.WriteAsync('[');
         PushDepth(State.Array);
-
     }
 
     /// <summary>
@@ -135,7 +134,7 @@ public sealed class StringNbtWriter : INbtWriter
         PullDepth();
         _arrayPosition = 0;
     }
-    
+
     /// <summary>
     ///     Writes the array end tag asynchronously
     /// </summary>
@@ -214,7 +213,7 @@ public sealed class StringNbtWriter : INbtWriter
         _sw.Write($"{b}b");
         FinalizeProperty();
     }
-    
+
     /// <summary>
     ///     Writes a signed byte tag asynchronously
     /// </summary>
@@ -287,7 +286,7 @@ public sealed class StringNbtWriter : INbtWriter
         _sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
         FinalizeProperty();
     }
-    
+
     /// <summary>
     ///     Writes an int asynchronously
     /// </summary>
@@ -323,7 +322,7 @@ public sealed class StringNbtWriter : INbtWriter
         WriteInteger("Z", (int) loc.Z.Value);
         WriteEndCompound();
     }
-    
+
     /// <summary>
     ///     Writes a position asynchronously
     /// </summary>
@@ -347,7 +346,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WritePosition(loc);
     }
-    
+
     /// <summary>
     ///     Writes a position asynchronously
     /// </summary>
@@ -424,7 +423,7 @@ public sealed class StringNbtWriter : INbtWriter
         _sw.Write($"{l}L");
         FinalizeProperty();
     }
-    
+
     /// <summary>
     ///     Writes a long asynchronously
     /// </summary>
@@ -435,7 +434,7 @@ public sealed class StringNbtWriter : INbtWriter
         await _sw.WriteAsync($"{l}L");
         FinalizeProperty();
     }
-    
+
     /// <summary>
     ///     Writes a provided UUID
     /// </summary>
@@ -457,7 +456,7 @@ public sealed class StringNbtWriter : INbtWriter
 
         WriteRawValue($"[I; {ints[0]}, {ints[1]}, {ints[2]}, {ints[3]}]");
     }
-    
+
     /// <summary>
     ///     Writes a provided UUID as an array of integers asynchronously
     /// </summary>
@@ -535,7 +534,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WriteString(str);
     }
-    
+
     /// <summary>
     ///     Writes and escapes a string asynchronously
     /// </summary>
@@ -546,7 +545,7 @@ public sealed class StringNbtWriter : INbtWriter
         await WritePropertyNameAsync(property);
         await WriteStringAsync(str);
     }
-    
+
     /// <summary>
     ///     Writes a byte tag
     /// </summary>
@@ -568,7 +567,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WriteBool(b);
     }
-    
+
     /// <summary>
     ///     Writes a byte tag asynchronously
     /// </summary>
@@ -602,7 +601,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WriteInteger(i);
     }
-    
+
     /// <summary>
     ///     Writes an int asynchronously
     /// </summary>
@@ -680,7 +679,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WriteUuidArray(id);
     }
-    
+
     /// <summary>
     ///     Writes a double asynchronously
     /// </summary>
@@ -736,7 +735,7 @@ public sealed class StringNbtWriter : INbtWriter
         WritePropertyName(property);
         WriteRawValue(raw);
     }
-    
+
     /// <summary>
     ///     Writes a raw value, represented by string asynchronously
     /// </summary>
@@ -747,7 +746,7 @@ public sealed class StringNbtWriter : INbtWriter
         await WritePropertyNameAsync(property);
         await WriteRawValueAsync(raw);
     }
-    
+
     private void ValidateArray()
     {
         if (_state != State.Array) return;

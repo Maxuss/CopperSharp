@@ -57,7 +57,7 @@ public class Mule : HorseEntity
 
         await sw.WritePropertyNameAsync("Inventory");
         await sw.WriteBeginArrayAsync();
-        foreach (var item in Inventory.Where(it => it != null)) 
+        foreach (var item in Inventory.Where(it => it != null))
             await sw.WriteItem(item);
 
         await sw.WriteEndArrayAsync();

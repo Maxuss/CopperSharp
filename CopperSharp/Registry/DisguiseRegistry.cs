@@ -1,29 +1,30 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using CopperSharp.Item;
 using CopperSharp.Models;
 using CopperSharp.Modules;
-using CopperSharp.Utils;
 using Newtonsoft.Json;
 
 namespace CopperSharp.Registry;
 
 /// <summary>
-/// A global registry for disguises
+///     A global registry for disguises
 /// </summary>
 public sealed class DisguiseRegistry : Registry<Disguise>
 {
     /// <inheritdoc />
     protected override string Name => "disguises";
 
-    private ConcurrentDictionary<Identifier, List<DisguisePredicate>> Predicates { get; set; }= new();
+    private ConcurrentDictionary<Identifier, List<DisguisePredicate>> Predicates { get; } = new();
 
     /// <summary>
-    /// Registers a provided disguise
+    ///     Registers a provided disguise
     /// </summary>
     /// <param name="element">Disguise to be registered</param>
     /// <returns>Provided disguise</returns>
-    public Disguise Register(Disguise element) => Register(element, Identifier.Of("null", "null"));
+    public Disguise Register(Disguise element)
+    {
+        return Register(element, Identifier.Of("null", "null"));
+    }
 
     /// <inheritdoc />
     public override Disguise Register(Disguise element, Identifier id)
@@ -68,22 +69,21 @@ public sealed class DisguiseRegistry : Registry<Disguise>
             await w.WritePropertyNameAsync("layer0");
             await w.WriteValueAsync($"item/{id.Path}");
             await w.WriteEndObjectAsync();
-                
+
             await w.WritePropertyNameAsync("overrides");
             await w.WriteStartArrayAsync();
 
-            foreach (var dis in disguises)
-            {
-                await dis.Serialize(w);
-            }
-            
+            foreach (var dis in disguises) await dis.Serialize(w);
+
             await w.WriteEndArrayAsync();
-                
+
             await w.WriteEndObjectAsync();
 
-            ModuleLoader.GlobalLoader.CacheResource(Path.Join(ModuleLoader.ResourcesDir, "assets", "minecraft", "models", "item",
+            ModuleLoader.GlobalLoader.CacheResource(Path.Join(ModuleLoader.ResourcesDir, "assets", "minecraft",
+                "models", "item",
                 $"{id.Path}.json"), sw.ToString());
         }
+
         time.Stop();
         return time;
     }
@@ -96,10 +96,10 @@ internal readonly struct DisguisePredicate
 
     public DisguisePredicate(Identifier from, int data)
     {
-        _from = @from;
+        _from = from;
         _data = data;
     }
-    
+
     public async Task Serialize(JsonTextWriter w)
     {
         await w.WriteStartObjectAsync();
@@ -112,7 +112,7 @@ internal readonly struct DisguisePredicate
 
         await w.WritePropertyNameAsync("model");
         await w.WriteValueAsync(_from.Path);
-        
+
         await w.WriteEndObjectAsync();
     }
 }

@@ -45,7 +45,7 @@ public sealed class ThrownPotion : AbstractThrownItem
     protected override async Task SerializeExtra(INbtWriter sw)
     {
         await base.SerializeExtra(sw);
-        if(Meta != null)
+        if (Meta != null)
             await Meta.WriteExternalMetaData(sw);
     }
 }

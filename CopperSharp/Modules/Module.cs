@@ -24,10 +24,6 @@ public abstract class Module
 {
     internal bool Locked = false;
 
-    internal TickFunction GlobalTick { get; set; } = new();
-
-    internal LoadFunction GlobalLoad { get; set; } = new();
-
     /// <summary>
     ///     Creates a new module, and initializes fields in it
     /// </summary>
@@ -45,6 +41,10 @@ public abstract class Module
         var authors = GetType().GetCustomAttributes<ModuleAuthorAttribute>();
         Authors = authors.Select(it => it.Author).ToList();
     }
+
+    internal TickFunction GlobalTick { get; set; } = new();
+
+    internal LoadFunction GlobalLoad { get; set; } = new();
 
     internal ConcurrentDictionary<string, ModuleOutputStream> Streams { get; set; } = new();
 

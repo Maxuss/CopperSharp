@@ -182,7 +182,7 @@ public sealed class Llama : BreedableEntity
             {
                 if (item?.Meta == null)
                     await sw.WriteRawValueAsync("{}");
-                else 
+                else
                     await sw.WriteRawValueAsync(await item?.Meta.Serialize(slot)!);
                 slot++;
             }

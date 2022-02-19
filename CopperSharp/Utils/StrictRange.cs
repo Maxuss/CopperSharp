@@ -59,7 +59,7 @@ public readonly struct StrictRange
     /// <returns>New range</returns>
     public static StrictRange Min(int min)
     {
-        return new(min, null);
+        return new StrictRange(min, null);
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public readonly struct StrictRange
     /// <returns>New range</returns>
     public static StrictRange Max(int max)
     {
-        return new(null, max);
+        return new StrictRange(null, max);
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public readonly struct StrictRange
     /// <returns>New range</returns>
     public static StrictRange Strict(int val)
     {
-        return new(val);
+        return new StrictRange(val);
     }
 
     /// <summary>

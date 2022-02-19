@@ -24,9 +24,9 @@ public enum ComponentType
     ///     Entity selector component
     /// </summary>
     Entity,
-    
+
     /// <summary>
-    /// A keybind component
+    ///     A keybind component
     /// </summary>
     Keybind,
 

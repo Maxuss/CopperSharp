@@ -74,6 +74,7 @@ public abstract class Registry<TElement>
             bar.Report((double) cur / l);
             cur++;
         }
+
         time.Stop();
         return time;
     }
@@ -100,7 +101,7 @@ public static class Registries
     public static TagRegistry Tags { get; } = new();
 
     /// <summary>
-    /// Global disguise registry
+    ///     Global disguise registry
     /// </summary>
     public static DisguiseRegistry Disguises { get; } = new();
 

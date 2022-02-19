@@ -166,7 +166,7 @@ public sealed class Advancement
 
         await jw.WritePropertyNameAsync("item");
         await jw.WriteValueAsync(AdvItemDisplay.Material.Id.ToString());
-        
+
         await jw.WritePropertyNameAsync("nbt");
         await jw.WriteValueAsync(await AdvItemDisplay.Meta.Serialize());
 

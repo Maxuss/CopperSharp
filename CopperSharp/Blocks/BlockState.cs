@@ -40,10 +40,7 @@ public abstract class BlockState : IState
 
         await w.WriteBeginCompoundAsync();
         await w.WriteStringAsync("Name", Id.ToString());
-        if (BlockData != null)
-        {
-            await w.WriteRawValueAsync("Properties", await BlockData.Serialize());
-        }
+        if (BlockData != null) await w.WriteRawValueAsync("Properties", await BlockData.Serialize());
 
         await Data.SerializeInto(w, false);
         await SerializeExtra(w);
@@ -68,5 +65,7 @@ public abstract class BlockState : IState
     /// </summary>
     /// <param name="sw">Writes extra data here</param>
     internal virtual Task SerializeExtra(INbtWriter sw)
-        => Task.CompletedTask;
+    {
+        return Task.CompletedTask;
+    }
 }

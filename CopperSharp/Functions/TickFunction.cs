@@ -24,9 +24,6 @@ internal readonly struct TickFunction : IFunction
     [FunctionHandler("tick")]
     public async Task OnTick(WorldContext ctx)
     {
-        foreach (var fn in Load)
-        {
-            await fn(ctx);
-        }
+        foreach (var fn in Load) await fn(ctx);
     }
 }

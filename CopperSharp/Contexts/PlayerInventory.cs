@@ -5,7 +5,7 @@ using CopperSharp.Modules;
 namespace CopperSharp.Contexts;
 
 /// <summary>
-/// An inventory for player
+///     An inventory for player
 /// </summary>
 public sealed class PlayerInventory
 {
@@ -43,13 +43,13 @@ public sealed class PlayerInventory
     }
 
     /// <summary>
-    /// Adds a disguised item to this inventory
+    ///     Adds a disguised item to this inventory
     /// </summary>
     /// <param name="dis">Disguised item to be added</param>
     public async Task AddDisguise(Disguise dis)
     {
         var id = ModuleLoader.ModelManager.Lookup(dis);
-        
+
         var item = new ItemStack(Material.Inject(dis.Base));
         item.Meta.CustomModelData = id;
         await AddItem(item);

@@ -10,19 +10,6 @@ namespace CopperSharp.Text;
 public sealed class TranslatableComponent : Component
 {
     /// <summary>
-    ///     Translation key for this component
-    /// </summary>
-    private string Key { get; }
-
-    /// <summary>
-    ///     Extra slots to fit into formatting
-    /// </summary>
-    private List<Component> ExtraSlots { get; } = new();
-
-    /// <inheritdoc />
-    public override ComponentType ComponentType => ComponentType.Translatable;
-    
-    /// <summary>
     ///     Creates a new translatable component from provided text
     /// </summary>
     /// <param name="key">Localization key to be put in component</param>
@@ -34,7 +21,20 @@ public sealed class TranslatableComponent : Component
         InsertionText = null;
         Color = null;
     }
-    
+
+    /// <summary>
+    ///     Translation key for this component
+    /// </summary>
+    private string Key { get; }
+
+    /// <summary>
+    ///     Extra slots to fit into formatting
+    /// </summary>
+    private List<Component> ExtraSlots { get; } = new();
+
+    /// <inheritdoc />
+    public override ComponentType ComponentType => ComponentType.Translatable;
+
     /// <summary>
     ///     Adds an extra formatting slot, to fit into the component formatting
     /// </summary>
@@ -54,11 +54,7 @@ public sealed class TranslatableComponent : Component
         if (!ExtraSlots.Any()) return;
         await jw.WritePropertyNameAsync("with");
         await jw.WriteStartArrayAsync();
-        foreach (var c in ExtraSlots)
-        {
-            await c.SerializeInto(jw);
-        }
+        foreach (var c in ExtraSlots) await c.SerializeInto(jw);
         await jw.WriteEndArrayAsync();
     }
-    
 }

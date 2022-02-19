@@ -3,20 +3,20 @@ using System.Collections.Concurrent;
 namespace CopperSharp.Models;
 
 /// <summary>
-/// A model manager, which can allocate values for model data
+///     A model manager, which can allocate values for model data
 /// </summary>
 public sealed class ModelManager
 {
-    private const int SECTION_BEGIN  =    0x124F80;
-    private const int SECTION_END    =    0x7704C0;
-    private const int JUMP_SIZE      =    0x000001;
-
-    private ConcurrentDictionary<IModel, int> LookupTable { get; } = new();
+    private const int SECTION_BEGIN = 0x124F80;
+    private const int SECTION_END = 0x7704C0;
+    private const int JUMP_SIZE = 0x000001;
 
     private int PTR = SECTION_BEGIN - JUMP_SIZE;
 
+    private ConcurrentDictionary<IModel, int> LookupTable { get; } = new();
+
     /// <summary>
-    /// Gets a provided model from this model manager's registered models
+    ///     Gets a provided model from this model manager's registered models
     /// </summary>
     /// <param name="model">Model to be fetched</param>
     /// <returns>Model ID or null, if not registered</returns>
@@ -24,9 +24,9 @@ public sealed class ModelManager
     {
         return LookupTable.ContainsKey(model) ? LookupTable[model] : null;
     }
-    
+
     /// <summary>
-    /// Safely allocates a model value
+    ///     Safely allocates a model value
     /// </summary>
     /// <returns>Allocated position for model</returns>
     [Obsolete("Use Allocate(IModel) instead, it has more functionality")]
@@ -39,7 +39,7 @@ public sealed class ModelManager
     }
 
     /// <summary>
-    /// Safely allocates a model value and binds it to the provided model, for further lookups.
+    ///     Safely allocates a model value and binds it to the provided model, for further lookups.
     /// </summary>
     /// <param name="model">Model to which to bind the model id</param>
     /// <returns>Allocated position for model</returns>

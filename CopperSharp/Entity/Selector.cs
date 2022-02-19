@@ -22,7 +22,7 @@ public readonly struct Selector
     ///     Current command executor
     /// </summary>
     public static Selector CurrentEntity = new("@s");
-    
+
     /// <summary>
     ///     All players in the callers world
     /// </summary>

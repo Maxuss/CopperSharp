@@ -15,7 +15,7 @@ internal struct LoadFunction : IFunction
     {
         Load = new List<AsyncMinecraftDelegate>();
     }
-    
+
     public LoadFunction(AsyncMinecraftDelegate del)
     {
         Load = new List<AsyncMinecraftDelegate> {del};
@@ -24,9 +24,6 @@ internal struct LoadFunction : IFunction
     [FunctionHandler("load")]
     public async Task OnTick(WorldContext ctx)
     {
-        foreach (var fn in Load)
-        {
-            await fn(ctx);
-        }
+        foreach (var fn in Load) await fn(ctx);
     }
 }

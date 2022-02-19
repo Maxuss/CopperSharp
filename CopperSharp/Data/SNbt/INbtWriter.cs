@@ -4,7 +4,7 @@ using CopperSharp.Item;
 namespace CopperSharp.Data.SNbt;
 
 /// <summary>
-/// A global interface for nbt writers
+///     A global interface for nbt writers
 /// </summary>
 public interface INbtWriter : IDisposable, IAsyncDisposable
 {

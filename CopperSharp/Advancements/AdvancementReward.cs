@@ -35,7 +35,7 @@ public struct AdvancementReward
     /// <returns>New advancement reward</returns>
     public static AdvancementReward Recipes(params Identifier[] recipes)
     {
-        return new()
+        return new AdvancementReward
         {
             Recipe = recipes.ToList()
         };
@@ -48,7 +48,7 @@ public struct AdvancementReward
     /// <returns>New advancement reward</returns>
     public static AdvancementReward Loot(params Identifier[] lootTables)
     {
-        return new()
+        return new AdvancementReward
         {
             Items = lootTables.ToList()
         };
@@ -61,7 +61,7 @@ public struct AdvancementReward
     /// <returns>New advancement reward</returns>
     public static AdvancementReward Experience(int exp)
     {
-        return new()
+        return new AdvancementReward
         {
             Exp = exp
         };
@@ -74,7 +74,7 @@ public struct AdvancementReward
     /// <returns>This advancement reward</returns>
     public static AdvancementReward RunFunction(Identifier fn)
     {
-        return new()
+        return new AdvancementReward
         {
             Trigger = fn
         };
@@ -87,7 +87,7 @@ public struct AdvancementReward
     /// <returns>This advancement reward</returns>
     public static AdvancementReward RunFunction(IFunction fn)
     {
-        return new()
+        return new AdvancementReward
         {
             Trigger = Registries.Functions.Seek(fn)
         };

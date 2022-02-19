@@ -5,25 +5,27 @@ using CopperSharp.Registry;
 namespace CopperSharp.Models;
 
 /// <summary>
-/// Represents an item, visually disguised as another item
+///     Represents an item, visually disguised as another item
 /// </summary>
 public readonly struct Disguise : IModel
 {
     /// <summary>
-    /// The base item to be hidden
+    ///     The base item to be hidden
     /// </summary>
     public Identifier Base { get; }
+
     /// <summary>
-    /// A model data value to hide
+    ///     A model data value to hide
     /// </summary>
     public int ModelData { get; }
+
     /// <summary>
-    /// The disguise of this item
+    ///     The disguise of this item
     /// </summary>
     public Identifier Cloak { get; }
 
     /// <summary>
-    /// Constructs a new disguise
+    ///     Constructs a new disguise
     /// </summary>
     /// <param name="item">Item to be disguised</param>
     /// <param name="hide">The new visual of the item</param>
@@ -36,7 +38,7 @@ public readonly struct Disguise : IModel
     }
 
     /// <summary>
-    /// Constructs a new disguise
+    ///     Constructs a new disguise
     /// </summary>
     /// <param name="item">Item to be disguised</param>
     /// <param name="hide">The new visual of the item</param>

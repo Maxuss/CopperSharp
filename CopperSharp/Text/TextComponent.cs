@@ -11,21 +11,21 @@ namespace CopperSharp.Text;
 public sealed class TextComponent : Component
 {
     /// <summary>
+    ///     Creates a new text component from provided text
+    /// </summary>
+    /// <param name="text">Text to be put in component</param>
+    public TextComponent(string text)
+    {
+        TextD = text;
+    }
+
+    /// <summary>
     ///     Text stored inside this component
     /// </summary>
     private string TextD { get; }
 
     /// <inheritdoc />
     public override ComponentType ComponentType => ComponentType.Text;
-    
-    /// <summary>
-    ///     Creates a new text component from provided text
-    /// </summary>
-    /// <param name="text">Text to be put in component</param>
-    public TextComponent(string text)
-    {
-        TextD = text; 
-    }
 
     /// <inheritdoc />
     public override Component QuadraticGradient(ITextColor from, ITextColor to, bool fast = true)

@@ -1,12 +1,12 @@
 namespace CopperSharp.Utils;
 
 /// <summary>
-/// Contains several utilities for async methods
+///     Contains several utilities for async methods
 /// </summary>
 public static class AsyncUtils
 {
     /// <summary>
-    /// An empty compound task
+    ///     An empty compound task
     /// </summary>
-    public static Task<string> EmptyCompoundTask => new Task<string>(() => "{}");
+    public static Task<string> EmptyCompoundTask => new(() => "{}");
 }

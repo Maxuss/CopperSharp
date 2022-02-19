@@ -21,7 +21,7 @@ public interface IBlockData
     public IBlockData IsInvalidated(bool inv = true);
 
     /// <summary>
-    /// Serializes this block data into provided writer
+    ///     Serializes this block data into provided writer
     /// </summary>
     /// <param name="w">Writer to be used</param>
     public Task SerializeInto(INbtWriter w);

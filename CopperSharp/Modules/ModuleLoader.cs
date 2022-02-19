@@ -13,26 +13,29 @@ namespace CopperSharp.Modules;
 /// </summary>
 public sealed class ModuleLoader
 {
+    /// <summary>
+    ///     Name of the resourcepack directory from the build folder
+    /// </summary>
+    public static readonly string ResourcesDir = "resources";
+
+    /// <summary>
+    ///     Name of the datapack directory from the build folder
+    /// </summary>
+    public static readonly string DatapackDir = "pack";
+
+    private bool _acceptingTasks = true;
+    private int _currentPriority = -1;
+
     private ModuleLoader()
     {
     }
 
     /// <summary>
-    /// Name of the resourcepack directory from the build folder
-    /// </summary>
-    public static readonly string ResourcesDir = "resources";
-
-    /// <summary>
-    /// Name of the datapack directory from the build folder
-    /// </summary>
-    public static readonly string DatapackDir = "pack";
-
-    /// <summary>
-    /// Whether to show the time it took to compile several modules after the end of the build
+    ///     Whether to show the time it took to compile several modules after the end of the build
     /// </summary>
     public bool ShowCompilationTimes { get; set; } = false;
 
-    private ConcurrentQueue<(string, (int, ModuleTask))> Tasks { get; set; } = new();
+    private ConcurrentQueue<(string, (int, ModuleTask))> Tasks { get; } = new();
     private ConcurrentList<string> Warnings { get; } = new();
     private ConcurrentList<string> Errors { get; } = new();
     private string? OutputDirectory { get; set; }
@@ -40,26 +43,24 @@ public sealed class ModuleLoader
     private string? ResourcesDirectory { get; set; }
     private bool InitRp { get; set; }
     private ConcurrentDictionary<string, string> ResourceCache { get; } = new();
-    private bool _acceptingTasks = true;
-    private int _currentPriority = -1;
 
     /// <summary>
-    /// A global hook handler
+    ///     A global hook handler
     /// </summary>
     public static HookHandler HookHandler { get; set; } = new();
-    
+
     /// <summary>
-    /// Module that is currently processed. May be null
+    ///     Module that is currently processed. May be null
     /// </summary>
     public static Module? CurrentModule { get; set; }
-    
+
     /// <summary>
     ///     A global module loader
     /// </summary>
     public static ModuleLoader GlobalLoader { get; } = new();
 
     /// <summary>
-    /// A global model manager
+    ///     A global model manager
     /// </summary>
     public static ModelManager ModelManager { get; } = new();
 
@@ -73,7 +74,7 @@ public sealed class ModuleLoader
     }
 
     /// <summary>
-    /// Sets the directory to which the resource pack will be outputted
+    ///     Sets the directory to which the resource pack will be outputted
     /// </summary>
     /// <param name="dir">Directory to be set</param>
     public void SetResourcepackDirectory(string dir)
@@ -82,7 +83,7 @@ public sealed class ModuleLoader
     }
 
     /// <summary>
-    /// Toggles the generation of resourcepack's pack.mcmeta file
+    ///     Toggles the generation of resourcepack's pack.mcmeta file
     /// </summary>
     /// <param name="enable">Whether to enable the resourcepack</param>
     public void ToggleResourcepack(bool enable = true)
@@ -100,7 +101,7 @@ public sealed class ModuleLoader
     }
 
     /// <summary>
-    /// Registers a provided task if task registration is allowed
+    ///     Registers a provided task if task registration is allowed
     /// </summary>
     /// <param name="name">Name of the task</param>
     /// <param name="priority">Priority of the task. By default next available priority.</param>
@@ -179,8 +180,8 @@ public sealed class ModuleLoader
         DisplayErrors(warns, errs);
 
         DisplayTaskProgress(results, total);
-        
-        
+
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine();
         Console.WriteLine($"Built with CopperSharp v{CopperSharp.Version}");
@@ -189,16 +190,15 @@ public sealed class ModuleLoader
 
     private void DisplayFailure(ConcurrentDictionary<string, Stopwatch?> results, Stopwatch total)
     {
-
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.Red;
         var warns = Warnings.Count;
         var errs = Errors.Count;
 
-        Console.WriteLine($"=========== BUILD FAILED ===========");
+        Console.WriteLine("=========== BUILD FAILED ===========");
         Console.WriteLine($"Failed to build module {CurrentModule?.Name}!");
         Console.WriteLine($"{warns} warnings and {errs} errors emitted.");
-        
+
         Console.WriteLine();
         DisplayErrors(warns, errs);
 
@@ -236,23 +236,17 @@ public sealed class ModuleLoader
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[ERRORS]");
-            for (var i = 0; i < errs; i++)
-            {
-                Console.WriteLine($"[{i+1}]: {Errors[i]}");
-            }
+            for (var i = 0; i < errs; i++) Console.WriteLine($"[{i + 1}]: {Errors[i]}");
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
-        
+
         if (warns > 0)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[WARNINGS]");
-            for (var i = 0; i < warns; i++)
-            {
-                Console.WriteLine($"[{i+1}]: {Warnings[i]}");
-            }
+            for (var i = 0; i < warns; i++) Console.WriteLine($"[{i + 1}]: {Warnings[i]}");
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
@@ -268,20 +262,20 @@ public sealed class ModuleLoader
         var build = BuildDirectory ?? Path.Join(curdir, "Build");
         var dpPath = Path.Join(build, DatapackDir);
         var rpPath = Path.Join(build, ResourcesDir);
-        
+
         RegisterTask("Set up magic functions", async mod =>
         {
             var time = Stopwatch.StartNew();
             await mod.InternalSetupMagicFns();
             time.Stop();
-            return (time);
+            return time;
         }, 0);
         RegisterTask("Build hooks", async _ =>
         {
             var time = Stopwatch.StartNew();
             await HookHandler.Dump();
             time.Stop();
-            return (time);
+            return time;
         }, 1);
         RegisterTask("Load+Tick functions", mod =>
         {
@@ -306,7 +300,7 @@ public sealed class ModuleLoader
                 await File.WriteAllTextAsync(Path.Join(rpPath, "pack.mcmeta"), mcmeta);
             time.Stop();
             return time;
-        }, 8); 
+        }, 8);
     }
 
     /// <summary>
@@ -318,7 +312,7 @@ public sealed class ModuleLoader
         // init necessary load tasks
         NecessaryLoadTasks();
         DisableRegistration();
-        
+
         var total = Stopwatch.StartNew();
 
         CurrentModule = mod;
@@ -341,9 +335,9 @@ public sealed class ModuleLoader
             Console.WriteLine($"Starting module {mod.Name} of namespace {mod.Namespace}...");
 
             mod.Startup();
-            
+
             Console.WriteLine($"Loading tasks for module {mod.Name}...");
-            
+
             // create important directories
             FileUtils.ForceCreateDir(Path.Join(dataPath, mod.Namespace));
 
@@ -369,32 +363,30 @@ public sealed class ModuleLoader
             }
 
             await Task.WhenAll(required);
-            
+
             #region safe cache + file manipulations
-            
+
             #region dumping cache
-            
+
             var time = Stopwatch.StartNew();
             if (Directory.Exists(Path.Join(curdir, "Assets")) || ResourceCache.Count > 0 || InitRp)
             {
                 InitRp = true;
 
                 if (ResourceCache.Count > 0)
-                {
                     foreach (var (p, d) in ResourceCache)
                     {
                         var cds = p.Split(Path.DirectorySeparatorChar).SkipLast(1).ToList();
                         if (cds.Any())
                         {
                             var cd = cds.Aggregate(Path.Join);
-                            if(!Directory.Exists(Path.Join(build, cd)))
+                            if (!Directory.Exists(Path.Join(build, cd)))
                                 Directory.CreateDirectory(Path.Join(build, cd));
                         }
 
                         await File.WriteAllTextAsync(Path.Join(build, p), d);
                     }
 
-                }
                 if (Directory.Exists(Path.Join(curdir, "Assets")))
                 {
                     if (File.Exists(Path.Join(curdir, "Assets", "icon.png")))
@@ -407,11 +399,12 @@ public sealed class ModuleLoader
                     await FileUtils.CopyFilesRecursively(Path.Join(curdir, "Assets"), rpPath);
                 }
             }
+
             time.Stop();
             results["Generate resources"] = time;
 
             #endregion
-            
+
             #region zip
 
             var zipTime = Stopwatch.StartNew();
@@ -442,9 +435,9 @@ public sealed class ModuleLoader
 
             zipTime.Stop();
             results["Build zip artifacts"] = zipTime;
-            
+
             #endregion
-            
+
             #endregion
 
             total.Stop();
@@ -457,6 +450,7 @@ public sealed class ModuleLoader
                 CurrentModule = null;
                 return;
             }
+
             Console.WriteLine($"Finished building module {mod.Name}!");
             Console.Clear();
 

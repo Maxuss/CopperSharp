@@ -35,7 +35,7 @@ public abstract class AbstractBlockData : IBlockData
         await using var w = new StringNbtWriter(sw);
 
         await SerializeInto(w);
-        
+
         return sw.ToString();
     }
 
@@ -44,5 +44,7 @@ public abstract class AbstractBlockData : IBlockData
     /// </summary>
     /// <param name="sw">Writer into which to write data</param>
     internal virtual Task SerializeExtra(INbtWriter sw)
-        => Task.CompletedTask;
+    {
+        return Task.CompletedTask;
+    }
 }

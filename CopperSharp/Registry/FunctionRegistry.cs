@@ -40,7 +40,7 @@ public sealed class FunctionRegistry : Registry<IFunction>
     }
 
     /// <summary>
-    /// Registers a raw handler
+    ///     Registers a raw handler
     /// </summary>
     /// <param name="del">Handler to be registered</param>
     /// <param name="path">Name of the function</param>
@@ -50,9 +50,9 @@ public sealed class FunctionRegistry : Registry<IFunction>
         Stack.Push((hash, Identifier.Of("null", path)));
         FunctionManager.RegisterHashed(del, hash, path);
     }
-    
+
     /// <summary>
-    /// Registers a raw async handler
+    ///     Registers a raw async handler
     /// </summary>
     /// <param name="del">Handler to be registered</param>
     /// <param name="path">Name of the function</param>
@@ -74,7 +74,6 @@ public sealed class FunctionRegistry : Registry<IFunction>
         var asyncHandlers = FunctionManager.LookupAsyncs(fn);
 
         if (asyncHandlers != null)
-        {
             foreach (var (mtd, handle) in asyncHandlers)
             {
                 var ctx = new WorldContext();
@@ -92,7 +91,6 @@ public sealed class FunctionRegistry : Registry<IFunction>
                 ctx.Cache.Add($"\n# Built with CopperSharp v{CopperSharp.Version}");
                 ctx.Flush(stream.Open($"{handle.FunctionName}.mcfunction"));
             }
-        }
 
         if (handlers == null)
             return;

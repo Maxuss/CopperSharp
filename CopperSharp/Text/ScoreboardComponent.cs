@@ -4,18 +4,12 @@ using Newtonsoft.Json;
 namespace CopperSharp.Text;
 
 /// <summary>
-/// Represents a scoreboard text component
+///     Represents a scoreboard text component
 /// </summary>
 public sealed class ScoreboardComponent : Component
 {
-    /// <inheritdoc />
-    public override ComponentType ComponentType => ComponentType.Scoreboard;
-
-    private Selector Holder { get; }
-    private string Scoreboard { get; }
-    
     /// <summary>
-    /// Constructs a new scoreboard component
+    ///     Constructs a new scoreboard component
     /// </summary>
     /// <param name="sb">The scoreboard name to be displayed</param>
     /// <param name="holder">The holder of scoreboard</param>
@@ -24,6 +18,12 @@ public sealed class ScoreboardComponent : Component
         Holder = holder;
         Scoreboard = sb;
     }
+
+    /// <inheritdoc />
+    public override ComponentType ComponentType => ComponentType.Scoreboard;
+
+    private Selector Holder { get; }
+    private string Scoreboard { get; }
 
     /// <inheritdoc />
     protected override async Task SerializeExtra(JsonTextWriter jw)

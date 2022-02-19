@@ -16,6 +16,8 @@ public sealed class DefaultItemMeta : ItemMeta
     }
 
     /// <inheritdoc />
-    internal override Task WriteExternalMetaData(INbtWriter w) 
-        => Task.CompletedTask;
+    internal override Task WriteExternalMetaData(INbtWriter w)
+    {
+        return Task.CompletedTask;
+    }
 }

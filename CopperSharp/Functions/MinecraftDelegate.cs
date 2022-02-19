@@ -8,6 +8,6 @@ namespace CopperSharp.Functions;
 public delegate void MinecraftDelegate(WorldContext ctx);
 
 /// <summary>
-/// Represents an asynchronous minecraft function delegate that can be executed
+///     Represents an asynchronous minecraft function delegate that can be executed
 /// </summary>
 public delegate Task AsyncMinecraftDelegate(WorldContext ctx);

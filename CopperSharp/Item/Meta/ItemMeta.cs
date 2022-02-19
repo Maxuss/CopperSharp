@@ -154,7 +154,7 @@ public abstract class ItemMeta
         // begin display tag
         if (slot != null)
             await w.WriteIntegerAsync("Slot", slot ?? -1);
-        
+
         if (Name != null || Lore.Any())
         {
             await w.WritePropertyNameAsync("display");
