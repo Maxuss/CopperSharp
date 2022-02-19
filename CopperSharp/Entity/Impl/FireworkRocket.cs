@@ -66,23 +66,23 @@ public sealed class FireworkRocket : Projectile
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        sw.WritePropertyName("FireworksItem");
-        sw.WriteBeginCompound();
-        sw.WriteByte("Count", 1);
-        sw.WriteString("id", "minecraft:firework_rocket");
-        sw.WritePropertyName("tag");
+        await sw.WritePropertyNameAsync("FireworksItem");
+        await sw.WriteBeginCompoundAsync();
+        await sw.WriteByteAsync("Count", 1);
+        await sw.WriteStringAsync("id", "minecraft:firework_rocket");
+        await sw.WritePropertyNameAsync("tag");
         if (Meta != null)
         {
-            Meta.WriteExternalMetaData(sw);
+            await Meta.WriteExternalMetaData(sw);
         }
         else
         {
-            sw.WriteBeginCompound();
-            sw.WriteEndCompound();
+            await sw.WriteBeginCompoundAsync();
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WriteEndCompound();
+        await sw.WriteEndCompoundAsync();
     }
 }

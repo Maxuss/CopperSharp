@@ -108,65 +108,65 @@ public sealed class Villager : BreedableEntity, IVillagerEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Gossips.Any())
         {
-            sw.WritePropertyName("Gossips");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("Gossips");
+            await sw.WriteBeginArrayAsync();
             foreach (var g in Gossips)
             {
-                sw.WriteBeginCompound();
-                sw.WriteInteger("Value", g.Weight);
-                sw.WriteUuidArray("Target", g.On);
-                sw.WriteString("Type", g.Type.GetData() ?? "null");
-                sw.WriteEndCompound();
+                await sw.WriteBeginCompoundAsync();
+                await sw.WriteIntegerAsync("Value", g.Weight);
+                await sw.WriteUuidArrayAsync("Target", g.On);
+                await sw.WriteStringAsync("Type", g.Type.GetData() ?? "null");
+                await sw.WriteEndCompoundAsync();
             }
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (Offers.Any())
         {
-            sw.WritePropertyName("Offers");
-            sw.WriteBeginCompound();
-            sw.WritePropertyName("Recipes");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("Offers");
+            await sw.WriteBeginCompoundAsync();
+            await sw.WritePropertyNameAsync("Recipes");
+            await sw.WriteBeginArrayAsync();
             foreach (var o in Offers)
             {
-                sw.WriteBeginCompound();
-                sw.WritePropertyName("buy");
-                sw.WriteItem(o.Buy);
+                await sw.WriteBeginCompoundAsync();
+                await sw.WritePropertyNameAsync("buy");
+                await sw.WriteItem(o.Buy);
                 if (o.BuyB != null)
                 {
-                    sw.WritePropertyName("buyB");
-                    sw.WriteItem(o.BuyB);
+                    await sw.WritePropertyNameAsync("buyB");
+                    await sw.WriteItem(o.BuyB);
                 }
 
-                sw.WriteInteger("demand", o.Demand);
-                sw.WriteInteger("maxUses", o.MaxUses);
+                await sw.WriteIntegerAsync("demand", o.Demand);
+                await sw.WriteIntegerAsync("maxUses", o.MaxUses);
                 sw.WriteFloat("priceMultiplier", o.PriceMultiplier);
-                sw.WriteBool("rewardExp", o.RewardExp);
-                sw.WritePropertyName("sell");
-                sw.WriteItem(o.Sell);
-                sw.WriteInteger("xp", o.VillagerExp);
-                sw.WriteEndCompound();
+                await sw.WriteBoolAsync("rewardExp", o.RewardExp);
+                await sw.WritePropertyNameAsync("sell");
+                await sw.WriteItem(o.Sell);
+                await sw.WriteIntegerAsync("xp", o.VillagerExp);
+                await sw.WriteEndCompoundAsync();
             }
 
-            sw.WriteEndArray();
-            sw.WriteEndCompound();
+            await sw.WriteEndArrayAsync();
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WritePropertyName("VillagerData");
-        sw.WriteBeginCompound();
-        sw.WriteInteger("level", VLevel);
+        await sw.WritePropertyNameAsync("VillagerData");
+        await sw.WriteBeginCompoundAsync();
+        await sw.WriteIntegerAsync("level", VLevel);
         if (VProf != null)
-            sw.WriteString("profession", VProf);
+            await sw.WriteStringAsync("profession", VProf);
         if (VSkin != null)
-            sw.WriteString("type", VSkin);
-        sw.WriteEndCompound();
+            await sw.WriteStringAsync("type", VSkin);
+        await sw.WriteEndCompoundAsync();
     }
 }
 

@@ -17,7 +17,7 @@ public sealed class BannerMeta : BlockItemMeta
             throw new Exception($"Material of type {type.Id} can not be used as a banner!");
     }
 
-    private IComponent? BannerName { get; set; }
+    private Component? BannerName { get; set; }
     private List<BannerPattern> Patterns { get; } = new();
 
     /// <summary>
@@ -27,7 +27,7 @@ public sealed class BannerMeta : BlockItemMeta
     /// </summary>
     /// <param name="comp">New custom name</param>
     /// <returns>This banner meta</returns>
-    public BannerMeta CustomBannerName(IComponent comp)
+    public BannerMeta CustomBannerName(Component comp)
     {
         BannerName = comp;
         return this;
@@ -57,41 +57,41 @@ public sealed class BannerMeta : BlockItemMeta
     }
 
     /// <inheritdoc />
-    internal override void WriteExternalMetaData(StringNbtWriter w)
+    internal override async Task WriteExternalMetaData(INbtWriter w)
     {
         if (WriteBlockEntityTag)
         {
-            w.WritePropertyName("BlockEntityTag");
-            w.WriteBeginCompound();
+            await w.WritePropertyNameAsync("BlockEntityTag");
+            await w.WriteBeginCompoundAsync();
         }
 
         if (BannerName != null)
         {
-            w.WritePropertyName("CustomName");
-            w.WriteString(BannerName.Serialize());
+            await w.WritePropertyNameAsync("CustomName");
+            await w.WriteStringAsync(await BannerName.Serialize());
         }
 
         if (!Patterns.Any())
         {
-            w.WriteEndCompound();
+            await w.WriteEndCompoundAsync();
             return;
         }
 
-        w.WritePropertyName("Patterns");
-        w.WriteBeginArray();
+        await w.WritePropertyNameAsync("Patterns");
+        await w.WriteBeginArrayAsync();
         foreach (var pat in Patterns)
         {
-            w.WriteBeginCompound();
-            w.WritePropertyName("Color");
-            w.WriteInteger((int) pat.Color);
-            w.WritePropertyName("Pattern");
-            w.WriteString(pat.Pattern.Name);
-            w.WriteEndCompound();
+            await w.WriteBeginCompoundAsync();
+            await w.WritePropertyNameAsync("Color");
+            await w.WriteIntegerAsync((int) pat.Color);
+            await w.WritePropertyNameAsync("Pattern");
+            await w.WriteStringAsync(pat.Pattern.Name);
+            await w.WriteEndCompoundAsync();
         }
 
-        w.WriteEndArray();
+        await w.WriteEndArrayAsync();
         if (WriteBlockEntityTag)
-            w.WriteEndCompound();
+            await w.WriteEndCompoundAsync();
     }
 }
 

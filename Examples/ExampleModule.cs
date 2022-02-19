@@ -2,7 +2,6 @@ using CopperSharp.Contexts;
 using CopperSharp.Data.Effects;
 using CopperSharp.Data.Locations;
 using CopperSharp.Functions;
-using CopperSharp.Hooks;
 using CopperSharp.Item;
 using CopperSharp.Models;
 using CopperSharp.Modules;
@@ -17,7 +16,7 @@ namespace Examples;
 public class ExampleModule : Module
 {
     private Disguise IronGold { get; set; }
-    private ExampleHandler Handler { get; set; }
+    private ExampleHandler? Handler { get; set; }
     public override void Startup()
     {
         Console.WriteLine("Module loaded!");
@@ -25,46 +24,40 @@ public class ExampleModule : Module
 
         Registries.Functions.Register(Handler);
         IronGold = new Disguise(Material.IronIngot, Material.GoldIngot);
-
         Registries.Disguises.Register(IronGold);
     }
 
-    public override void OnTick(WorldContext ctx)
+    public override async Task WorldLoad(WorldContext ctx)
     {
-        
-    }
-
-    public override void WorldLoad(WorldContext ctx)
-    {
-        ctx.GetPlayer("Xtremum").Inventory.AddDisguise(IronGold);
+        await ctx.GetPlayer("Xtremum").Inventory.AddDisguise(IronGold);
     }
 }
 
 public sealed class ExampleHandler : IFunction
 {
     [FunctionHandler("first")]
-    public void First(WorldContext ctx)
+    public async Task First(WorldContext ctx)
     {
-        ctx.Announce(IComponent.Text("First function was called!").Colored(NamedTextColor.Gray));
+        await ctx.Announce(Component.Text("First function was called!").Colored(NamedTextColor.Gray));
     }
 
     [FunctionHandler("second")]
-    public void Second(WorldContext ctx)
+    public async Task Second(WorldContext ctx)
     {
-        ctx.Announce(IComponent.Text("Second function was called!").Colored(NamedTextColor.Gray));
+        await ctx.Announce(Component.Text("Second function was called!").Colored(NamedTextColor.Gray));
     }
 
     [FunctionHandler("player_test")]
-    public void PlayerTest(WorldContext ctx)
+    public async Task PlayerTest(WorldContext ctx)
     {
         var player = ctx.GetPlayer("Xtremum");
-        player.SendMessage(
-            IComponent
+        await player.SendMessage(
+            Component
                 .Text("Hello!")
                 .Colored(NamedTextColor.Gold)
                 .Formatted(FormattingType.Bold));
-        player.SendTitle(IComponent.Text("Title"), IComponent.Text("Subtitle"));
-        player.SendActionBar(IComponent.Text("Actionbar"));
+        await player.SendTitle(Component.Text("Title"), Component.Text("Subtitle"));
+        await player.SendActionBar(Component.Text("Actionbar"));
         player.GrantAdvancement(Identifier.Minecraft("adventure/adventuring_time"));
         player.PlaySound("entity.axolotl.attack", location: Location.FromString("~ ~ ~"));
         player.AddEffect(new PotionEffect(StatusEffect.Glowing, 200));
@@ -76,8 +69,8 @@ public sealed class ExampleHandler : IFunction
             options: new DustOptions(ITextColor.Hex(0xFFAAFF)));
 
         var inv = player.Inventory;
-        inv.AddItem(new ItemStack(Material.DiamondSword));
-        inv.SetHelmet(new ItemStack(Material.DiamondBlock));
-        inv.SetHotbarItem(new ItemStack(Material.NetherStar), 5);
+        await inv.AddItem(new ItemStack(Material.DiamondSword));
+        await inv.SetHelmet(new ItemStack(Material.DiamondBlock));
+        await inv.SetHotbarItem(new ItemStack(Material.NetherStar), 5);
     }
 }

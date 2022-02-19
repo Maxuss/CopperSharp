@@ -19,9 +19,9 @@ public abstract class AbstractMinecart : AbstractEntity
     /// </summary>
     /// <param name="state">Block state to be used</param>
     /// <returns>This abstract minecart</returns>
-    public AbstractMinecart CustomBlock(BlockState state)
+    public async Task<AbstractMinecart> CustomBlock(BlockState state)
     {
-        BlockState = state.Serialize();
+        BlockState = await state.Serialize();
         Bools["CustomDisplayTile"] = true;
         return this;
     }
@@ -39,13 +39,13 @@ public abstract class AbstractMinecart : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (BlockState == null)
             return;
 
-        sw.WriteRawValue("DisplayState", BlockState);
+        await sw.WriteRawValueAsync("DisplayState", BlockState);
     }
 }

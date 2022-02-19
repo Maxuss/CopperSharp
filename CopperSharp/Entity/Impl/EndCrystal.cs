@@ -37,13 +37,13 @@ public sealed class EndCrystal : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (BeamTarget == null)
             return;
 
-        sw.WritePosition("BeamTarget", BeamTarget ?? default);
+        await sw.WritePositionAsync("BeamTarget", BeamTarget ?? default);
     }
 }

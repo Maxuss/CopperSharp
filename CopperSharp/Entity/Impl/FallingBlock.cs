@@ -59,13 +59,13 @@ public sealed class FallingBlock : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (State == null)
             return;
 
-        sw.WriteRawValue("BlockState", State.Serialize());
+        await sw.WriteRawValueAsync("BlockState", await State.Serialize());
     }
 }

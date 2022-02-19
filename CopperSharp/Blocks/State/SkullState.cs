@@ -38,10 +38,10 @@ public sealed class SkullState : BlockState
     }
 
     /// <inheritdoc />
-    internal override void SerializeExtra(StringNbtWriter sw)
+    internal override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
-        Meta?.WriteExternalMetaData(sw);
+        await (Meta?.WriteExternalMetaData(sw) ?? Task.CompletedTask);
     }
 }

@@ -29,9 +29,9 @@ public struct BlockPredicate
     /// </summary>
     /// <param name="data">Data to be set</param>
     /// <returns>This block condition</returns>
-    public BlockPredicate WithNbt(NbtCompound data)
+    public async Task<BlockPredicate> WithNbt(NbtCompound data)
     {
-        Nbt = data.Serialize();
+        Nbt = await data.Serialize();
         return this;
     }
 
@@ -41,9 +41,9 @@ public struct BlockPredicate
     /// </summary>
     /// <param name="state">State to be set</param>
     /// <returns>This block condition</returns>
-    public BlockPredicate WithState(BlockState state)
+    public async Task<BlockPredicate> WithState(BlockState state)
     {
-        Nbt = state.Serialize();
+        Nbt = await state.Serialize();
         return this;
     }
 

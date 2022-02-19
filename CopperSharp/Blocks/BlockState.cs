@@ -33,17 +33,21 @@ public abstract class BlockState : IState
     public virtual IBlockData? BlockData { get; set; }
 
     /// <inheritdoc />
-    public string Serialize()
+    public async Task<string> Serialize()
     {
-        using var sw = new StringWriter();
-        using var w = new StringNbtWriter(sw);
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
 
-        w.WriteBeginCompound();
-        w.WriteString("Name", Id.ToString());
-        w.WriteRawValue("Properties", BlockData?.Serialize() ?? "{}");
-        Data.SerializeInto(w, false);
-        SerializeExtra(w);
-        w.WriteEndCompound();
+        await w.WriteBeginCompoundAsync();
+        await w.WriteStringAsync("Name", Id.ToString());
+        if (BlockData != null)
+        {
+            await w.WriteRawValueAsync("Properties", await BlockData.Serialize());
+        }
+
+        await Data.SerializeInto(w, false);
+        await SerializeExtra(w);
+        await w.WriteEndCompoundAsync();
 
         return sw.ToString();
     }
@@ -53,9 +57,9 @@ public abstract class BlockState : IState
     /// </summary>
     /// <param name="name">Name to be set</param>
     /// <returns>This block state</returns>
-    public BlockState CustomName(IComponent name)
+    public async Task<BlockState> CustomName(Component name)
     {
-        Data["CustomName"] = name.Serialize();
+        Data["CustomName"] = await name.Serialize();
         return this;
     }
 
@@ -63,7 +67,6 @@ public abstract class BlockState : IState
     ///     Writes extra data of this block state
     /// </summary>
     /// <param name="sw">Writes extra data here</param>
-    internal virtual void SerializeExtra(StringNbtWriter sw)
-    {
-    }
+    internal virtual Task SerializeExtra(INbtWriter sw)
+        => Task.CompletedTask;
 }

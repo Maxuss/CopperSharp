@@ -24,24 +24,24 @@ public class BlockItemMeta : ItemMeta, IBlockItemMeta
     /// <inheritdoc />
     public IBlockData? BlockEntityTag { get; set; }
 
-    internal override void WriteExternalMetaData(StringNbtWriter w)
+    internal override async Task WriteExternalMetaData(INbtWriter w)
     {
         if (CanPlaceOn.Any())
         {
-            w.WritePropertyName("CanPlaceOn");
-            w.WriteBeginArray();
-            foreach (var v in CanPlaceOn) w.WriteString(v.ToString());
-            w.WriteEndArray();
+            await w.WritePropertyNameAsync("CanPlaceOn");
+            await w.WriteBeginArrayAsync();
+            foreach (var v in CanPlaceOn) await w.WriteStringAsync(v.ToString());
+            await w.WriteEndArrayAsync();
         }
 
         if (BlockStateTag != null)
         {
-            w.WritePropertyName("BlockStateTag");
-            w.WriteRawValue(BlockStateTag.Serialize());
+            await w.WritePropertyNameAsync("BlockStateTag");
+            await w.WriteRawValueAsync(await BlockStateTag.Serialize());
         }
 
         if (BlockEntityTag == null) return;
-        w.WritePropertyName("BlockEntityTag");
-        w.WriteRawValue(BlockEntityTag.Serialize());
+        await w.WritePropertyNameAsync("BlockEntityTag");
+        await w.WriteRawValueAsync(await BlockEntityTag.Serialize());
     }
 }

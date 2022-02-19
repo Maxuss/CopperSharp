@@ -41,18 +41,18 @@ public sealed class FireworkMeta : ItemMeta
     }
 
     /// <inheritdoc />
-    internal override void WriteExternalMetaData(StringNbtWriter sw)
+    internal override async Task WriteExternalMetaData(INbtWriter sw)
     {
-        sw.WritePropertyName("Fireworks");
-        sw.WriteBeginCompound();
-        sw.WritePropertyName("Flight");
-        sw.WriteSByte(Flight);
-        sw.WritePropertyName("Explosions");
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync("Fireworks");
+        await sw.WriteBeginCompoundAsync();
+        await sw.WritePropertyNameAsync("Flight");
+        await sw.WriteSByteAsync(Flight);
+        await sw.WritePropertyNameAsync("Explosions");
+        await sw.WriteBeginArrayAsync();
         foreach (var e in Explosions) e.Serialize(sw);
 
-        sw.WriteEndArray();
-        sw.WriteEndCompound();
+        await sw.WriteEndArrayAsync();
+        await sw.WriteEndCompoundAsync();
     }
 }
 
@@ -122,7 +122,7 @@ public sealed class FireworkExplosion
         return this;
     }
 
-    internal void Serialize(StringNbtWriter sw)
+    internal void Serialize(INbtWriter sw)
     {
         sw.WriteBeginCompound();
         sw.WritePropertyName("Colors");

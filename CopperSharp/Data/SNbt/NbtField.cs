@@ -19,10 +19,10 @@ public interface INbtField<out T> where T : INbtValue
     ///     Serializes data of this field into string writer
     /// </summary>
     /// <param name="sw">String writer into which the data should be written</param>
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WritePropertyName(Key);
-        Value.SerializeInto(sw);
+        await sw.WritePropertyNameAsync(Key);
+        await Value.SerializeInto(sw);
     }
 }
 

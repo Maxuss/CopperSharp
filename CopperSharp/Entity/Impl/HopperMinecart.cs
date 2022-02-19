@@ -62,22 +62,22 @@ public class HopperMinecart : AbstractMinecart
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (!Items.Any())
             return;
 
-        sw.WritePropertyName("Items");
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync("Items");
+        await sw.WriteBeginArrayAsync();
         foreach (var item in Items)
         {
             var ind = Items.IndexOf(item);
 
-            sw.WriteItem(item, ind);
+            await sw.WriteItem(item, ind);
         }
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

@@ -4,29 +4,29 @@ namespace CopperSharp.Functions;
 
 internal struct LoadFunction : IFunction
 {
-    private List<MinecraftDelegate> Load { get; }
+    private List<AsyncMinecraftDelegate> Load { get; }
 
-    public void AddDelegate(MinecraftDelegate del)
+    public void AddDelegate(AsyncMinecraftDelegate del)
     {
         Load?.Add(del);
     }
 
     public LoadFunction()
     {
-        Load = new List<MinecraftDelegate>();
+        Load = new List<AsyncMinecraftDelegate>();
     }
     
-    public LoadFunction(MinecraftDelegate del)
+    public LoadFunction(AsyncMinecraftDelegate del)
     {
-        Load = new List<MinecraftDelegate> {del};
+        Load = new List<AsyncMinecraftDelegate> {del};
     }
 
     [FunctionHandler("load")]
-    public void OnTick(WorldContext ctx)
+    public async Task OnTick(WorldContext ctx)
     {
         foreach (var fn in Load)
         {
-            fn(ctx);
+            await fn(ctx);
         }
     }
 }

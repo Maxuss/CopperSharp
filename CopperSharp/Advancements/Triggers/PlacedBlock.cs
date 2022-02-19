@@ -70,7 +70,7 @@ public sealed class PlacedBlock : TriggerCondition
             foreach (var entry in States)
             {
                 await w.WritePropertyNameAsync(entry.Key);
-                entry.Value.SerializeInto(w);
+                await entry.Value.SerializeInto(w);
             }
 
             await w.WriteEndObjectAsync();

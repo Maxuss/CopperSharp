@@ -44,6 +44,8 @@ public readonly struct Disguise : IModel
     {
         Base = item.Id;
         Cloak = Identifier.Minecraft($"item/{hide.Id.Path}");
+#pragma warning disable CS0618
         ModelData = ModuleLoader.ModelManager.Allocate();
+#pragma warning restore CS0618
     }
 }

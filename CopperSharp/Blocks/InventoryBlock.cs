@@ -36,11 +36,11 @@ public abstract class InventoryBlock<TInventory> : BlockState where TInventory :
     }
 
     /// <inheritdoc />
-    internal override void SerializeExtra(StringNbtWriter sw)
+    internal override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Inventory.Any(it => it.Item1 != null))
-            Inventory.SerializeInto(sw, false);
+            await Inventory.SerializeInto(sw, false);
     }
 }

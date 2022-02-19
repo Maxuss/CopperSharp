@@ -13,14 +13,14 @@ internal readonly struct StringNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteString(_v);
+        await sw.WriteStringAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -33,14 +33,14 @@ internal readonly struct IntNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteInteger(_v);
+        await sw.WriteIntegerAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -53,14 +53,14 @@ internal readonly struct DoubleNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteDouble(_v);
+        await sw.WriteDoubleAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -73,14 +73,14 @@ internal readonly struct FloatNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteFloat(_v);
+        await sw.WriteFloatAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -93,14 +93,14 @@ internal readonly struct ByteNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteByte(_v);
+        await sw.WriteByteAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -113,14 +113,14 @@ internal readonly struct SByteNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteSByte(_v);
+        await sw.WriteSByteAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -133,14 +133,14 @@ internal readonly struct ShortNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteShort(_v);
+        await sw.WriteShortAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -153,14 +153,14 @@ internal readonly struct LongNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteLong(_v);
+        await sw.WriteLongAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -173,14 +173,14 @@ internal readonly struct BoolNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteBool(_v);
+        await sw.WriteBoolAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -193,14 +193,14 @@ internal readonly struct GuidNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteUuidArray(_v);
+        await sw.WriteUuidArrayAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteValue(_v);
+        await sw.WriteValueAsync(_v);
     }
 }
 
@@ -213,21 +213,21 @@ internal readonly struct CompoundNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        _v.SerializeInto(sw);
+        await _v.SerializeInto(sw);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteStartObject();
+        await sw.WriteStartObjectAsync();
         foreach (var e in _v)
         {
-            sw.WritePropertyName(e.Key);
-            e.Value.SerializeInto(sw);
+            await sw.WritePropertyNameAsync(e.Key);
+            await e.Value.SerializeInto(sw);
         }
 
-        sw.WriteEndObject();
+        await sw.WriteEndObjectAsync();
     }
 }
 
@@ -240,14 +240,14 @@ internal readonly struct RawNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteRawValue(_v);
+        await sw.WriteRawValueAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteRawValue(_v);
+        await sw.WriteRawValueAsync(_v);
     }
 }
 
@@ -260,14 +260,14 @@ internal readonly struct ItemNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteItem(_v);
+        await sw.WriteItem(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public Task SerializeInto(JsonTextWriter sw)
     {
-        throw new PlatformNotSupportedException("Items are not supposed to be serialized to JSON!");
+        throw new NotSupportedException("Items are not supposed to be serialized to JSON!");
     }
 }
 
@@ -280,14 +280,14 @@ internal readonly struct SlotItemNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteItem(_v.Item1, _v.Item2);
+        await sw.WriteItem(_v.Item1, _v.Item2);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public Task SerializeInto(JsonTextWriter sw)
     {
-        throw new PlatformNotSupportedException("Items are not supposed to be serialized to JSON!");
+        throw new NotSupportedException("Items are not supposed to be serialized to JSON!");
     }
 }
 
@@ -300,13 +300,13 @@ internal readonly struct LocationNbtValue : INbtValue
         _v = v;
     }
 
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WritePosition(_v);
+        await sw.WritePositionAsync(_v);
     }
 
-    public void SerializeInto(JsonTextWriter sw)
+    public Task SerializeInto(JsonTextWriter sw)
     {
-        throw new PlatformNotSupportedException("Locations are not supposed to be serialized to JSON!");
+        throw new NotSupportedException("Locations are not supposed to be serialized to JSON!");
     }
 }

@@ -16,5 +16,5 @@ public interface IState
     ///     Serializes this block state into stringified NBT
     /// </summary>
     /// <returns>Stringified NBT of this block state</returns>
-    public string Serialize();
+    public Task<string> Serialize();
 }

@@ -23,6 +23,9 @@ public readonly struct PackMcMeta
     /// </summary>
     public string Description { get; }
 
+    /// <summary>
+    /// Asynchronously serializes this pack meta
+    /// </summary>
     public async Task<string> Serialize()
     {
         await using var sw = new StringWriter();

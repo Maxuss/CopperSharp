@@ -82,27 +82,27 @@ public sealed class AreaEffectCloud : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (!Effects.Any())
             return;
 
-        sw.WritePropertyName("Effects");
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync("Effects");
+        await sw.WriteBeginArrayAsync();
         foreach (var eff in Effects)
         {
-            sw.WriteBeginCompound();
-            sw.WriteByte("Id", eff.Id);
-            sw.WriteByte("Amplifier", eff.Level);
-            sw.WriteInteger("Duration", eff.Duration);
-            sw.WriteBool("Ambient", eff.Ambient);
-            sw.WriteBool("ShowParticles", eff.ShowParticles);
-            sw.WriteBool("ShowIcon", eff.ShowIcon);
-            sw.WriteEndCompound();
+            await sw.WriteBeginCompoundAsync();
+            await sw.WriteByteAsync("Id", eff.Id);
+            await sw.WriteByteAsync("Amplifier", eff.Level);
+            await sw.WriteIntegerAsync("Duration", eff.Duration);
+            await sw.WriteBoolAsync("Ambient", eff.Ambient);
+            await sw.WriteBoolAsync("ShowParticles", eff.ShowParticles);
+            await sw.WriteBoolAsync("ShowIcon", eff.ShowIcon);
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

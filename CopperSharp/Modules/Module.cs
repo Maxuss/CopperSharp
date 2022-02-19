@@ -1,5 +1,6 @@
 // ReSharper disable MemberCanBePrivate.Global
 
+using System.Collections.Concurrent;
 using System.Reflection;
 using CopperSharp.Contexts;
 using CopperSharp.Datapack;
@@ -21,7 +22,7 @@ namespace CopperSharp.Modules;
 [ModuleInfo("cs_stdlib", Description = "Standard library for CopperSharp", Version = PackFormat.v1_18)]
 public abstract class Module
 {
-    internal bool _locked = false;
+    internal bool Locked = false;
 
     internal TickFunction GlobalTick { get; set; } = new();
 
@@ -45,7 +46,7 @@ public abstract class Module
         Authors = authors.Select(it => it.Author).ToList();
     }
 
-    internal Dictionary<string, ModuleOutputStream> Streams { get; set; } = new();
+    internal ConcurrentDictionary<string, ModuleOutputStream> Streams { get; set; } = new();
 
     /// <summary>
     ///     Gets the full description of this module
@@ -66,7 +67,7 @@ public abstract class Module
     /// <summary>
     ///     Authors of this module
     /// </summary>
-    public List<string> Authors { get; } = new();
+    public List<string> Authors { get; }
 
     /// <summary>
     ///     Description of this module
@@ -89,16 +90,18 @@ public abstract class Module
     ///     Called each time a server is (re)loaded
     /// </summary>
     /// <param name="ctx">Current world</param>
-    public virtual void WorldLoad(WorldContext ctx)
+    public virtual Task WorldLoad(WorldContext ctx)
     {
+        return Task.CompletedTask;
     }
 
     /// <summary>
     ///     Called each tick
     /// </summary>
     /// <param name="ctx">Current world</param>
-    public virtual void OnTick(WorldContext ctx)
+    public virtual Task OnTick(WorldContext ctx)
     {
+        return Task.CompletedTask;
     }
 
     internal async Task InternalSetupMagicFns()
@@ -138,7 +141,8 @@ public abstract class Module
         if (Streams.ContainsKey(stream))
             return Streams[stream];
 
-        Streams[stream] = new ModuleOutputStream(this, stream);
-        return Streams[stream];
+        var s = new ModuleOutputStream(this, stream);
+        Streams[stream] = s;
+        return s;
     }
 }

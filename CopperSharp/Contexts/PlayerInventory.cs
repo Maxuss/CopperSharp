@@ -4,6 +4,9 @@ using CopperSharp.Modules;
 
 namespace CopperSharp.Contexts;
 
+/// <summary>
+/// An inventory for player
+/// </summary>
 public sealed class PlayerInventory
 {
     internal PlayerInventory(WorldContext @lock, string name)
@@ -21,39 +24,35 @@ public sealed class PlayerInventory
     /// <param name="slot">Slot of item. Must be in range of 0 to 53</param>
     public ItemStack this[int slot]
     {
-        set => InternalSetItem(slot, value);
+        set => InternalSetItem(slot, value).Wait();
     }
 
-    private void InternalSetItem(int at, ItemStack item, string? slot = null)
+    private async Task InternalSetItem(int at, ItemStack item, string? slot = null)
     {
         var aslot = slot ?? $"container.{Math.Clamp(at, 0, 53)}";
-        Lock.Cache.Add($"item replace entity {Name} {aslot} with {item.Serialize()}");
+        Lock.Cache.Add($"item replace entity {Name} {aslot} with {await item.Serialize()}");
     }
 
     /// <summary>
     ///     Adds an item to this inventory
     /// </summary>
     /// <param name="item">Item to be added</param>
-    public void AddItem(ItemStack item)
+    public async Task AddItem(ItemStack item)
     {
-        Lock.Cache.Add($"give {Name} {item.Serialize()}");
+        Lock.Cache.Add($"give {Name} {await item.Serialize()}");
     }
 
     /// <summary>
     /// Adds a disguised item to this inventory
     /// </summary>
     /// <param name="dis">Disguised item to be added</param>
-    public void AddDisguise(Disguise dis)
+    public async Task AddDisguise(Disguise dis)
     {
         var id = ModuleLoader.ModelManager.Lookup(dis);
-        var item = new ItemStack(Material.Inject(dis.Base))
-        {
-            Meta =
-            {
-                CustomModelData = id
-            }
-        };
-        AddItem(item);
+        
+        var item = new ItemStack(Material.Inject(dis.Base));
+        item.Meta.CustomModelData = id;
+        await AddItem(item);
     }
 
     /// <summary>
@@ -61,9 +60,9 @@ public sealed class PlayerInventory
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 26</param>
-    public void SetInventoryItem(ItemStack item, int at)
+    public async Task SetInventoryItem(ItemStack item, int at)
     {
-        InternalSetItem(at, item, $"inventory.{Math.Clamp(at, 0, 26)}");
+        await InternalSetItem(at, item, $"inventory.{Math.Clamp(at, 0, 26)}");
     }
 
     /// <summary>
@@ -71,9 +70,9 @@ public sealed class PlayerInventory
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 8</param>
-    public void SetHotbarItem(ItemStack item, int at)
+    public async Task SetHotbarItem(ItemStack item, int at)
     {
-        InternalSetItem(at, item, $"hotbar.{Math.Clamp(at, 0, 8)}");
+        await InternalSetItem(at, item, $"hotbar.{Math.Clamp(at, 0, 8)}");
     }
 
     /// <summary>
@@ -81,63 +80,63 @@ public sealed class PlayerInventory
     /// </summary>
     /// <param name="item">Item to be set</param>
     /// <param name="at">Item index. Must be in range of 0 to 26</param>
-    public void SetEnderItem(ItemStack item, int at)
+    public async Task SetEnderItem(ItemStack item, int at)
     {
-        InternalSetItem(at, item, $"enderchest.{Math.Clamp(at, 0, 26)}");
+        await InternalSetItem(at, item, $"enderchest.{Math.Clamp(at, 0, 26)}");
     }
 
     /// <summary>
     ///     Sets helmet
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetHelmet(ItemStack item)
+    public async Task SetHelmet(ItemStack item)
     {
-        InternalSetItem(-1, item, "armor.head");
+        await InternalSetItem(-1, item, "armor.head");
     }
 
     /// <summary>
     ///     Sets chestplate
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetChestplate(ItemStack item)
+    public async Task SetChestplate(ItemStack item)
     {
-        InternalSetItem(-1, item, "armor.chest");
+        await InternalSetItem(-1, item, "armor.chest");
     }
 
     /// <summary>
     ///     Sets leggings
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetLeggings(ItemStack item)
+    public async Task SetLeggings(ItemStack item)
     {
-        InternalSetItem(-1, item, "armor.legs");
+        await InternalSetItem(-1, item, "armor.legs");
     }
 
     /// <summary>
     ///     Sets boots
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetBoots(ItemStack item)
+    public async Task SetBoots(ItemStack item)
     {
-        InternalSetItem(-1, item, "armor.feet");
+        await InternalSetItem(-1, item, "armor.feet");
     }
 
     /// <summary>
     ///     Sets item in main hand
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetMainhand(ItemStack item)
+    public async Task SetMainhand(ItemStack item)
     {
-        InternalSetItem(-1, item, "weapon.mainhand");
+        await InternalSetItem(-1, item, "weapon.mainhand");
     }
 
     /// <summary>
     ///     Sets item in off hand
     /// </summary>
     /// <param name="item">Item to be set</param>
-    public void SetOffhand(ItemStack item)
+    public async Task SetOffhand(ItemStack item)
     {
-        InternalSetItem(-1, item, "weapon.offhand");
+        await InternalSetItem(-1, item, "weapon.offhand");
     }
 
     /// <summary>

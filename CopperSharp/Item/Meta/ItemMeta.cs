@@ -48,12 +48,12 @@ public abstract class ItemMeta
     /// <summary>
     ///     Name of this item's display
     /// </summary>
-    private IComponent? Name { get; set; }
+    private Component? Name { get; set; }
 
     /// <summary>
     ///     Lore of this item's display
     /// </summary>
-    private List<IComponent> Lore { get; } = new();
+    private List<Component> Lore { get; } = new();
 
     /// <summary>
     ///     Represents blocks this item can/can not destroy
@@ -91,7 +91,7 @@ public abstract class ItemMeta
     /// </summary>
     /// <param name="lore">Lines to be appended to item lore</param>
     /// <returns>This item meta</returns>
-    public ItemMeta AppendLore(params IComponent[] lore)
+    public ItemMeta AppendLore(params Component[] lore)
     {
         Lore.AddRange(lore);
         return this;
@@ -102,7 +102,7 @@ public abstract class ItemMeta
     /// </summary>
     /// <param name="name">New custom name of the item</param>
     /// <returns>This item meta</returns>
-    public ItemMeta CustomName(IComponent name)
+    public ItemMeta CustomName(Component name)
     {
         Name = name;
         return this;
@@ -145,148 +145,149 @@ public abstract class ItemMeta
     ///     Converts this item meta to Stringified NBT
     /// </summary>
     /// <returns>Serialized StringNBT</returns>
-    public string Serialize(int? slot = null)
+    public async Task<string> Serialize(int? slot = null, Identifier? id = null)
     {
-        using var sw = new StringWriter();
-        using var w = new StringNbtWriter(sw);
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
 
-        w.WriteBeginCompound();
+        await w.WriteBeginCompoundAsync();
         // begin display tag
         if (slot != null)
-            w.WriteInteger("Slot", slot ?? -1);
-
+            await w.WriteIntegerAsync("Slot", slot ?? -1);
+        
         if (Name != null || Lore.Any())
         {
-            w.WritePropertyName("display");
-            w.WriteBeginCompound();
+            await w.WritePropertyNameAsync("display");
+            await w.WriteBeginCompoundAsync();
 
             if (Name != null)
             {
-                w.WritePropertyName("Name");
-                w.WriteString(Name.Serialize());
+                await w.WritePropertyNameAsync("Name");
+                await w.WriteStringAsync(await Name.Serialize());
             }
 
             if (Lore.Any())
             {
-                w.WritePropertyName("Lore");
-                w.WriteBeginArray();
-                foreach (var component in Lore) w.WriteString(component.Serialize());
+                await w.WritePropertyNameAsync("Lore");
+                await w.WriteBeginArrayAsync();
+                foreach (var component in Lore)
+                    await w.WriteStringAsync(await component.Serialize());
 
-                w.WriteEndArray();
+                await w.WriteEndArrayAsync();
             }
 
-            w.WriteEndCompound();
+            await w.WriteEndCompoundAsync();
         }
         // end display tag
 
         // begin enchantments tag
         if (Enchantments.Any())
         {
-            w.WritePropertyName("Enchantments");
-            w.WriteBeginArray();
+            await w.WritePropertyNameAsync("Enchantments");
+            await w.WriteBeginArrayAsync();
             foreach (var enchant in Enchantments)
             {
                 var edata = enchant.Enchant.GetEnchantData() ??
                             throw new Exception("Invalid enchantment data provided!");
                 var lvl = enchant.Level;
-                w.WriteBeginCompound();
-                w.WritePropertyName("id");
-                w.WriteString($"minecraft:{edata.Id}");
-                w.WritePropertyName("lvl");
-                w.WriteInteger(lvl);
-                w.WriteEndCompound();
+                await w.WriteBeginCompoundAsync();
+                await w.WritePropertyNameAsync("id");
+                await w.WriteStringAsync($"minecraft:{edata.Id}");
+                await w.WritePropertyNameAsync("lvl");
+                await w.WriteIntegerAsync(lvl);
+                await w.WriteEndCompoundAsync();
             }
 
-            w.WriteEndArray();
+            await w.WriteEndArrayAsync();
         }
         // end enchantments tag
 
         // begin CanDestroy tag
         if (Destroyable.Any())
         {
-            w.WritePropertyName("CanDestroy");
-            w.WriteBeginArray();
-            foreach (var dest in Destroyable) w.WriteString(dest);
+            await w.WritePropertyNameAsync("CanDestroy");
+            await w.WriteBeginArrayAsync();
+            foreach (var dest in Destroyable) await w.WriteStringAsync(dest);
 
-            w.WriteEndArray();
+            await w.WriteEndArrayAsync();
         }
         // end CanDestroy tag
 
         // begin HideFlags tag
         if (HiddenFlags.Any())
         {
-            w.WritePropertyName("HideFlags");
-            w.WriteInteger(HiddenFlags.Sum(it => (int) it));
+            await w.WritePropertyNameAsync("HideFlags");
+            await w.WriteIntegerAsync(HiddenFlags.Sum(it => (int) it));
         }
         // end HideFlags tag
 
         // begin AttributeModifiers tag
         if (AttributeModifiers.Any())
         {
-            w.WritePropertyName("AttributeModifiers");
-            w.WriteBeginArray();
+            await w.WritePropertyNameAsync("AttributeModifiers");
+            await w.WriteBeginArrayAsync();
             foreach (var attr in AttributeModifiers)
             {
-                w.WriteBeginCompound();
-                w.WritePropertyName("AttributeName");
-                w.WriteString(attr.Type);
-                w.WritePropertyName("Name");
-                w.WriteString(attr.Name);
-                w.WritePropertyName("Amount");
-                w.WriteFloat(attr.Amount);
-                w.WritePropertyName("Operation");
-                w.WriteInteger((int) attr.Action);
+                await w.WriteBeginCompoundAsync();
+                await w.WritePropertyNameAsync("AttributeName");
+                await w.WriteStringAsync(attr.Type);
+                await w.WritePropertyNameAsync("Name");
+                await w.WriteStringAsync(attr.Name);
+                await w.WritePropertyNameAsync("Amount");
+                await w.WriteFloatAsync(attr.Amount);
+                await w.WritePropertyNameAsync("Operation");
+                await w.WriteIntegerAsync((int) attr.Action);
                 if (attr.Slot != null)
                 {
-                    w.WritePropertyName("Slot");
-                    w.WriteString(attr.Slot ?? "mainhand");
+                    await w.WritePropertyNameAsync("Slot");
+                    await w.WriteStringAsync(attr.Slot ?? "mainhand");
                 }
 
-                w.WritePropertyName("UUID");
-                w.WriteUuidArray(Guid.NewGuid());
-                w.WriteEndCompound();
+                await w.WritePropertyNameAsync("UUID");
+                await w.WriteUuidArrayAsync(Guid.NewGuid());
+                await w.WriteEndCompoundAsync();
             }
 
-            w.WriteEndArray();
+            await w.WriteEndArrayAsync();
         }
         // end AttributeModifiers tag
 
         // begin unbreakable tag
         if (Unbreakable != null)
         {
-            w.WritePropertyName("Unbreakable");
-            w.WriteBool(Unbreakable.Value);
+            await w.WritePropertyNameAsync("Unbreakable");
+            await w.WriteBoolAsync(Unbreakable.Value);
         }
         // end unbreakable tag
 
         // begin PickupDelay tag
         if (PickupDelay != null)
         {
-            w.WritePropertyName("PickupDelay");
-            w.WriteInteger(PickupDelay ?? 0);
+            await w.WritePropertyNameAsync("PickupDelay");
+            await w.WriteIntegerAsync(PickupDelay ?? 0);
         }
         // end PickupDelay tag
 
         // begin Age tag
         if (Age != null)
         {
-            w.WritePropertyName("Age");
-            w.WriteInteger(Age ?? 0);
+            await w.WritePropertyNameAsync("Age");
+            await w.WriteIntegerAsync(Age ?? 0);
         }
         // end Age tag
 
         // begin CustomModelData tag
         if (CustomModelData != null)
         {
-            w.WritePropertyName("CustomModelData");
-            w.WriteInteger(CustomModelData ?? 0x00000);
+            await w.WritePropertyNameAsync("CustomModelData");
+            await w.WriteIntegerAsync(CustomModelData ?? 0x00000);
         }
         // end CustomModelData tag
 
         // external meta
-        WriteExternalMetaData(w);
+        await WriteExternalMetaData(w);
 
-        w.WriteEndCompound();
+        await w.WriteEndCompoundAsync();
         return sw.ToString();
     }
 
@@ -294,5 +295,5 @@ public abstract class ItemMeta
     ///     Writes external meta data to the writer as nbt
     /// </summary>
     /// <param name="w">Writer to which external meta data should be written</param>
-    internal abstract void WriteExternalMetaData(StringNbtWriter w);
+    internal abstract Task WriteExternalMetaData(INbtWriter w);
 }

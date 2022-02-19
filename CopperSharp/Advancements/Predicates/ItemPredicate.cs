@@ -55,9 +55,9 @@ public struct ItemPredicate
     /// </summary>
     /// <param name="comp">NBT to be added</param>
     /// <returns>This item condition</returns>
-    public ItemPredicate WithNbt(NbtCompound comp)
+    public async Task<ItemPredicate> WithNbt(NbtCompound comp)
     {
-        Nbt = comp.Serialize();
+        Nbt = await comp.Serialize();
         return this;
     }
 
@@ -66,9 +66,9 @@ public struct ItemPredicate
     /// </summary>
     /// <param name="meta">Meta to be added</param>
     /// <returns>This item condition</returns>
-    public ItemPredicate WithMeta(ItemMeta meta)
+    public async Task<ItemPredicate> WithMeta(ItemMeta meta)
     {
-        Nbt = meta.Serialize();
+        Nbt = await meta.Serialize();
         return this;
     }
 

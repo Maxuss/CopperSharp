@@ -33,8 +33,8 @@ public sealed class Block
     /// </summary>
     public BlockState? State { get; set; }
 
-    private bool _locked { get; set; }
-    private WorldContext? _binding { get; set; }
+    private bool Locked { get; set; }
+    private WorldContext? Binding { get; set; }
 
     /// <summary>
     ///     Locks this block to provided world context
@@ -42,8 +42,8 @@ public sealed class Block
     /// <param name="lk">World context to which this block should be locked</param>
     public void Lock(WorldContext lk)
     {
-        _binding = lk;
-        _locked = true;
+        Binding = lk;
+        Locked = true;
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public sealed class Block
     /// </summary>
     public void GenerateState()
     {
-        if (!_locked)
+        if (!Locked)
             throw new Exception("The block was not locked! Lock the block first, then generate new block state!");
         var path = Type.Id.Path;
         if (path.Contains("banner"))
@@ -106,12 +106,12 @@ public sealed class Block
     ///     flushes all data to the context
     /// </summary>
     /// <returns>This block</returns>
-    public Block Release()
+    public async Task<Block> Release()
     {
-        if (!_locked) return this;
+        if (!Locked) return this;
 
-        _locked = false;
-        _binding?.Release(this, _firstLock);
+        Locked = false;
+        await (Binding?.Release(this, _firstLock) ?? Task.CompletedTask);
         _firstLock = false;
         return this;
     }

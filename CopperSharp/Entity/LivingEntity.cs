@@ -277,61 +277,61 @@ public abstract class LivingEntity : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
         if (AbsorptionAmount != null)
             sw.WriteFloat("AbsorptionAmount", AbsorptionAmount ?? 0);
 
         if (Effects.Any())
         {
-            sw.WritePropertyName("ActiveEffects");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("ActiveEffects");
+            await sw.WriteBeginArrayAsync();
             foreach (var eff in Effects)
             {
-                sw.WriteBeginCompound();
-                sw.WriteBool("Ambient", eff.Ambient);
-                sw.WriteByte("Amplifier", eff.Level);
-                sw.WriteInteger("Duration", eff.Duration);
-                sw.WriteByte("Id", eff.Id);
-                sw.WriteBool("ShowIcon", eff.ShowIcon);
-                sw.WriteBool("ShowParticles", eff.ShowParticles);
-                sw.WriteEndCompound();
+                await sw.WriteBeginCompoundAsync();
+                await sw.WriteBoolAsync("Ambient", eff.Ambient);
+                await sw.WriteByteAsync("Amplifier", eff.Level);
+                await sw.WriteIntegerAsync("Duration", eff.Duration);
+                await sw.WriteByteAsync("Id", eff.Id);
+                await sw.WriteBoolAsync("ShowIcon", eff.ShowIcon);
+                await sw.WriteBoolAsync("ShowParticles", eff.ShowParticles);
+                await sw.WriteEndCompoundAsync();
             }
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (HandItems.Any(it => it != null))
         {
-            sw.WritePropertyName("HandItems");
-            sw.WriteBeginArray();
-            foreach (var item in HandItems) sw.WriteItem(item);
+            await sw.WritePropertyNameAsync("HandItems");
+            await sw.WriteBeginArrayAsync();
+            foreach (var item in HandItems) await sw.WriteItem(item);
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (ArmorItems.Any(it => it != null))
         {
-            sw.WritePropertyName("ArmorItems");
-            sw.WriteBeginArray();
-            foreach (var item in ArmorItems) sw.WriteItem(item);
+            await sw.WritePropertyNameAsync("ArmorItems");
+            await sw.WriteBeginArrayAsync();
+            foreach (var item in ArmorItems) await sw.WriteItem(item);
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (Modifiers.Any())
         {
-            sw.WritePropertyName("Attributes");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("Attributes");
+            await sw.WriteBeginArrayAsync();
             foreach (var (mod, val) in Modifiers)
             {
-                sw.WriteBeginCompound();
-                sw.WriteDouble("Base", val);
-                sw.WriteRawValue("Name", mod.Name);
-                sw.WriteEndCompound();
+                await sw.WriteBeginCompoundAsync();
+                await sw.WriteDoubleAsync("Base", val);
+                await sw.WriteRawValueAsync("Name", mod.Name);
+                await sw.WriteEndCompoundAsync();
             }
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (HealthAmount != null)
@@ -339,18 +339,18 @@ public abstract class LivingEntity : AbstractEntity
 
         if (ArmorDropChance != null)
         {
-            sw.WritePropertyName("ArmorDropChances");
-            sw.WriteBeginArray();
-            foreach (var chance in ArmorDropChance) sw.WriteFloat(chance);
+            await sw.WritePropertyNameAsync("ArmorDropChances");
+            await sw.WriteBeginArrayAsync();
+            foreach (var chance in ArmorDropChance) await sw.WriteFloatAsync(chance);
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
 
         if (HandDropChance == null) return;
-        sw.WritePropertyName("HandDropChances");
-        sw.WriteBeginArray();
-        foreach (var chance in HandDropChance) sw.WriteFloat(chance);
+        await sw.WritePropertyNameAsync("HandDropChances");
+        await sw.WriteBeginArrayAsync();
+        foreach (var chance in HandDropChance) await sw.WriteFloatAsync(chance);
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

@@ -38,9 +38,9 @@ public sealed class Arrow : AbstractArrow
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
         Meta?.WriteExternalMetaData(sw);
     }
 }

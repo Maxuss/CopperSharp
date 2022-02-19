@@ -18,18 +18,24 @@ public abstract class AbstractBlockData : IBlockData
     }
 
     /// <inheritdoc />
-    public string Serialize()
+    public async Task SerializeInto(INbtWriter w)
     {
-        using var sw = new StringWriter();
-        using var w = new StringNbtWriter(sw);
+        await w.WriteBeginCompoundAsync();
 
-        w.WriteBeginCompound();
+        await Data.SerializeInto(w, false);
 
-        Data.SerializeInto(w, false);
+        await SerializeExtra(w);
+        await w.WriteEndCompoundAsync();
+    }
 
-        SerializeExtra(w);
-        w.WriteEndCompound();
+    /// <inheritdoc />
+    public async Task<string> Serialize()
+    {
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
 
+        await SerializeInto(w);
+        
         return sw.ToString();
     }
 
@@ -37,7 +43,6 @@ public abstract class AbstractBlockData : IBlockData
     ///     Serializes extra data into provided string nbt writer
     /// </summary>
     /// <param name="sw">Writer into which to write data</param>
-    internal virtual void SerializeExtra(StringNbtWriter sw)
-    {
-    }
+    internal virtual Task SerializeExtra(INbtWriter sw)
+        => Task.CompletedTask;
 }

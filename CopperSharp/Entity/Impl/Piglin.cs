@@ -70,22 +70,22 @@ public class Piglin : LivingEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Items.Any(it => it != null))
         {
-            sw.WritePropertyName("Inventory");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("Inventory");
+            await sw.WriteBeginArrayAsync();
             var slot = 0;
             foreach (var item in Items)
             {
-                sw.WriteItem(item, slot);
+                await sw.WriteItem(item, slot);
                 slot++;
             }
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
     }
 }

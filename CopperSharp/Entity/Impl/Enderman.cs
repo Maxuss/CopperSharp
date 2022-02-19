@@ -29,11 +29,11 @@ public sealed class Enderman : LivingEntity, IAngerableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Anger != null)
-            sw.WriteUuidArray("AngryAt", Anger ?? Guid.Empty);
+            await sw.WriteUuidArrayAsync("AngryAt", Anger ?? Guid.Empty);
     }
 }

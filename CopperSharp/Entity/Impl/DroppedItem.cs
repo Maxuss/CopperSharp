@@ -77,14 +77,14 @@ public sealed class DroppedItem : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Container == null)
             return;
 
-        sw.WritePropertyName("Item");
-        sw.WriteItem(Container);
+        await sw.WritePropertyNameAsync("Item");
+        await sw.WriteItem(Container);
     }
 }

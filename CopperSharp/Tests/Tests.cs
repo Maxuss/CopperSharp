@@ -1,6 +1,5 @@
-using CopperSharp.Registry;
+using CopperSharp.Item;
 using CopperSharp.Text;
-using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,7 +23,7 @@ public class Tests
     /// <summary>
     /// </summary>
     [Fact]
-    public void RawComponentSerialization()
+    public async Task RawComponentSerialization()
     {
         var beginTime = DateTime.Now;
         var component = new TextComponent("Hello, World!")
@@ -33,15 +32,15 @@ public class Tests
             .Insertion("Hello, Insertion!")
             .OnClick(ClickEvent.OpenUrl("https://copper.maxus.space"))
             .OnHover(
-                IHoverEvent.Text(
+                HoverEvent.Text(
                     new TextComponent("Hello, Hover!")
                         .Formatted(FormattingType.Italic)
                         .Colored(NamedTextColor.Gold)))
             .Child(
                 new TranslatableComponent("item.minecraft.diamond_sword")
                     .Colored(ITextColor.Hex(0xbf4f4a))
-                    .OnHover(IHoverEvent.Item(Identifier.Minecraft("diamond_ore"), 12)));
-        tout.WriteLine(JsonConvert.SerializeObject(component.Contain()));
+                    .OnHover(HoverEvent.Item(new ItemStack(Material.DiamondOre))));
+        tout.WriteLine(await component.Serialize());
         var endTime = DateTime.Now - beginTime;
         tout.WriteLine($"Finished in {endTime.TotalMilliseconds}ms");
     }

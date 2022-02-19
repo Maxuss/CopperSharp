@@ -69,17 +69,17 @@ public sealed class Fox : BreedableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Trusted.Any())
         {
-            sw.WritePropertyName("Trusted");
-            sw.WriteBeginArray();
-            foreach (var id in Trusted) sw.WriteUuidArray(id);
+            await sw.WritePropertyNameAsync("Trusted");
+            await sw.WriteBeginArrayAsync();
+            foreach (var id in Trusted) await sw.WriteUuidArrayAsync(id);
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
     }
 }

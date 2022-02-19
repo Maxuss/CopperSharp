@@ -9,7 +9,7 @@ namespace CopperSharp.Data.SNbt;
 /// <summary>
 ///     A writer, that can write string NBT objects to string.
 /// </summary>
-public class StringNbtWriter : IDisposable, IAsyncDisposable
+public sealed class StringNbtWriter : INbtWriter
 {
     private readonly StringWriter _sw;
     private int _arrayPosition;
@@ -51,6 +51,18 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         _sw.Write('{');
         PushDepth(State.Compound);
     }
+    
+    /// <summary>
+    ///     Writes the component begin tag asynchronously
+    /// </summary>
+    public async Task WriteBeginCompoundAsync()
+    {
+        if (_state == State.PostProperty) await _sw.WriteAsync(',');
+
+        await ValidateArrayAsync();
+        await _sw.WriteAsync('{');
+        PushDepth(State.Compound);
+    }
 
     /// <summary>
     ///     Writes the component end tag
@@ -62,6 +74,15 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
+    ///     Writes the component end tag asynchronously
+    /// </summary>
+    public async Task WriteEndCompoundAsync()
+    {
+        await _sw.WriteAsync('}');
+        PullDepth();
+    }
+    
+    /// <summary>
     ///     Writes an identifier for array, e.g. I, or D
     /// </summary>
     /// <param name="id">Identifier to be written</param>
@@ -69,6 +90,16 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     {
         _sw.Write($"{id};");
     }
+    
+    /// <summary>
+    ///     Writes an identifier for array, e.g. I, or D asynchronously
+    /// </summary>
+    /// <param name="id">Identifier to be written</param>
+    public async Task WriteArrayIdentifierAsync(string id)
+    {
+        await _sw.WriteAsync($"{id};");
+    }
+
 
     /// <summary>
     ///     Writes the array begin tag
@@ -83,6 +114,19 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
+    ///     Writes the array begin tag asynchronously
+    /// </summary>
+    public async Task WriteBeginArrayAsync()
+    {
+        if (_state == State.PostProperty) await _sw.WriteAsync(',');
+
+        await ValidateArrayAsync();
+        await _sw.WriteAsync('[');
+        PushDepth(State.Array);
+
+    }
+
+    /// <summary>
     ///     Writes the array end tag
     /// </summary>
     public void WriteEndArray()
@@ -91,6 +135,17 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         PullDepth();
         _arrayPosition = 0;
     }
+    
+    /// <summary>
+    ///     Writes the array end tag asynchronously
+    /// </summary>
+    public async Task WriteEndArrayAsync()
+    {
+        await _sw.WriteAsync(']');
+        PullDepth();
+        _arrayPosition = 0;
+    }
+
 
     /// <summary>
     ///     Writes the property name and allows writing value
@@ -159,6 +214,17 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         _sw.Write($"{b}b");
         FinalizeProperty();
     }
+    
+    /// <summary>
+    ///     Writes a signed byte tag asynchronously
+    /// </summary>
+    /// <param name="b">Signed byte to be written</param>
+    public async Task WriteSByteAsync(sbyte b)
+    {
+        await ValidateCanWriteValueAsync();
+        await _sw.WriteAsync($"{b}b");
+        FinalizeProperty();
+    }
 
     /// <summary>
     ///     Writes a byte tag
@@ -221,6 +287,29 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         _sw.Write($"{d.ToString(CultureInfo.InvariantCulture)}");
         FinalizeProperty();
     }
+    
+    /// <summary>
+    ///     Writes an int asynchronously
+    /// </summary>
+    /// <param name="i">Integer to be written</param>
+    public async Task WriteIntegerAsync(int i)
+    {
+        await ValidateCanWriteValueAsync();
+        await _sw.WriteAsync(i.ToString());
+        FinalizeProperty();
+    }
+
+    /// <summary>
+    ///     Writes a double asynchronously
+    /// </summary>
+    /// <param name="d">Double to be written</param>
+    public async Task WriteDoubleAsync(double d)
+    {
+        await ValidateCanWriteValueAsync();
+        await _sw.WriteAsync($"{d.ToString(CultureInfo.InvariantCulture)}");
+        FinalizeProperty();
+    }
+
 
     /// <summary>
     ///     Writes a position
@@ -234,6 +323,19 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         WriteInteger("Z", (int) loc.Z.Value);
         WriteEndCompound();
     }
+    
+    /// <summary>
+    ///     Writes a position asynchronously
+    /// </summary>
+    /// <param name="loc">Location to be written</param>
+    public async Task WritePositionAsync(Location loc)
+    {
+        await WriteBeginCompoundAsync();
+        await WriteIntegerAsync("X", (int) loc.X.Value);
+        await WriteIntegerAsync("Y", (int) loc.Y.Value);
+        await WriteIntegerAsync("Z", (int) loc.Z.Value);
+        await WriteEndCompoundAsync();
+    }
 
     /// <summary>
     ///     Writes a position
@@ -244,6 +346,17 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     {
         WritePropertyName(property);
         WritePosition(loc);
+    }
+    
+    /// <summary>
+    ///     Writes a position asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="loc">Location to be written</param>
+    public async Task WritePositionAsync(string property, Location loc)
+    {
+        await WritePropertyNameAsync(property);
+        await WritePositionAsync(loc);
     }
 
     /// <summary>
@@ -311,7 +424,18 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         _sw.Write($"{l}L");
         FinalizeProperty();
     }
-
+    
+    /// <summary>
+    ///     Writes a long asynchronously
+    /// </summary>
+    /// <param name="l">Long to be written</param>
+    public async Task WriteLongAsync(long l)
+    {
+        await ValidateCanWriteValueAsync();
+        await _sw.WriteAsync($"{l}L");
+        FinalizeProperty();
+    }
+    
     /// <summary>
     ///     Writes a provided UUID
     /// </summary>
@@ -333,6 +457,20 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
 
         WriteRawValue($"[I; {ints[0]}, {ints[1]}, {ints[2]}, {ints[3]}]");
     }
+    
+    /// <summary>
+    ///     Writes a provided UUID as an array of integers asynchronously
+    /// </summary>
+    /// <param name="id">Id to be written</param>
+    public async Task WriteUuidArrayAsync(Guid id)
+    {
+        var bytes = id.ToByteArray();
+        var ints = new int[4];
+        for (var i = 0; i < 4; i++) ints[i] = BitConverter.ToInt32(bytes, i * 4);
+
+        await WriteRawValueAsync($"[I; {ints[0]}, {ints[1]}, {ints[2]}, {ints[3]}]");
+    }
+
 
     /// <summary>
     ///     Writes a raw value, represented by string
@@ -363,27 +501,27 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     /// <param name="item">Item to be written</param>
     /// <param name="slot">Slot data of this item. Optional</param>
     [SuppressMessage("ReSharper", "ConstantConditionalAccessQualifier")]
-    public void WriteItem(ItemStack? item, int? slot = null)
+    public async Task WriteItem(ItemStack? item, int? slot = null)
     {
         if (item == null)
         {
-            WriteBeginCompound();
-            WriteEndCompound();
+            await WriteBeginCompoundAsync();
+            await WriteEndCompoundAsync();
             return;
         }
 
-        WriteBeginCompound();
+        await WriteBeginCompoundAsync();
         if (slot != null)
-            WriteInteger("Slot", slot ?? 0);
-        WriteInteger("Count", item?.Amount ?? 0);
-        WriteString("id", item?.Material.Id.ToString() ?? "minecraft:null");
+            await WriteIntegerAsync("Slot", (int) slot);
+        await WriteIntegerAsync("Count", item?.Amount ?? 0);
+        await WriteStringAsync("id", item?.Material.Id.ToString() ?? "minecraft:null");
         if (item?.Meta != null)
         {
-            WritePropertyName("tag");
-            WriteRawValue(item?.Meta?.Serialize() ?? "{}");
+            await WritePropertyNameAsync("tag");
+            await WriteRawValueAsync(await item?.Meta?.Serialize()!);
         }
 
-        WriteEndCompound();
+        await WriteEndCompoundAsync();
     }
 
 
@@ -397,7 +535,18 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         WritePropertyName(property);
         WriteString(str);
     }
-
+    
+    /// <summary>
+    ///     Writes and escapes a string asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="str">String to be written</param>
+    public async Task WriteStringAsync(string property, string str)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteStringAsync(str);
+    }
+    
     /// <summary>
     ///     Writes a byte tag
     /// </summary>
@@ -419,6 +568,29 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         WritePropertyName(property);
         WriteBool(b);
     }
+    
+    /// <summary>
+    ///     Writes a byte tag asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="b">Byte to be written</param>
+    public async Task WriteByteAsync(string property, byte b)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteByteAsync(b);
+    }
+
+    /// <summary>
+    ///     Writes a boolean asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="b">Boolean to be written</param>
+    public async Task WriteBoolAsync(string property, bool b)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteBoolAsync(b);
+    }
+
 
     /// <summary>
     ///     Writes an int
@@ -428,6 +600,17 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     public void WriteInteger(string property, int i)
     {
         WritePropertyName(property);
+        WriteInteger(i);
+    }
+    
+    /// <summary>
+    ///     Writes an int asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="i">Integer to be written</param>
+    public async Task WriteIntegerAsync(string property, int i)
+    {
+        await WritePropertyNameAsync(property);
         WriteInteger(i);
     }
 
@@ -488,17 +671,6 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
-    ///     Writes a provided UUID
-    /// </summary>
-    /// <param name="property">Property name</param>
-    /// <param name="id"></param>
-    public void WriteUuid(string property, Guid id)
-    {
-        WritePropertyName(property);
-        WriteUuid(id);
-    }
-
-    /// <summary>
     ///     Writes a provided UUID as an array of integers
     /// </summary>
     /// <param name="property">Property name</param>
@@ -507,6 +679,51 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
     {
         WritePropertyName(property);
         WriteUuidArray(id);
+    }
+    
+    /// <summary>
+    ///     Writes a double asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="d">Double to be written</param>
+    public async Task WriteDoubleAsync(string property, double d)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteDoubleAsync(d);
+    }
+
+
+    /// <summary>
+    ///     Writes a short asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="s">Short to be written</param>
+    public async Task WriteShortAsync(string property, short s)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteShortAsync(s);
+    }
+
+    /// <summary>
+    ///     Writes a long asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="l">Long to be written</param>
+    public async Task WriteLongAsync(string property, long l)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteLongAsync(l);
+    }
+
+    /// <summary>
+    ///     Writes a provided UUID as an array of integers asynchronously
+    /// </summary>
+    /// <param name="property">Property name</param>
+    /// <param name="id">Id to be written</param>
+    public async Task WriteUuidArrayAsync(string property, Guid id)
+    {
+        await WritePropertyNameAsync(property);
+        await WriteUuidArrayAsync(id);
     }
 
     /// <summary>
@@ -519,15 +736,18 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
         WritePropertyName(property);
         WriteRawValue(raw);
     }
-
+    
     /// <summary>
-    ///     Explicitly writes a comma to the writer
+    ///     Writes a raw value, represented by string asynchronously
     /// </summary>
-    public void WriteComma()
+    /// <param name="property">Property name</param>
+    /// <param name="raw">Value to be written</param>
+    public async Task WriteRawValueAsync(string property, string raw)
     {
-        _sw.Write(',');
+        await WritePropertyNameAsync(property);
+        await WriteRawValueAsync(raw);
     }
-
+    
     private void ValidateArray()
     {
         if (_state != State.Array) return;
@@ -572,10 +792,11 @@ public class StringNbtWriter : IDisposable, IAsyncDisposable
 
     private async Task ValidateCanWriteValueAsync()
     {
-        if (_state != State.Array && _state != State.InProperty)
+        // ReSharper disable once MergeIntoLogicalPattern
+        if (_state == State.Array || _state == State.InProperty)
+            await ValidateArrayAsync();
+        else
             ModuleLoader.GlobalLoader.EmitError("Writing a value in current state would result in malformed SNBT!");
-
-        await ValidateArrayAsync();
     }
 
     private void PullDepth()

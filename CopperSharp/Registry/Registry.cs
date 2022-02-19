@@ -53,9 +53,9 @@ public abstract class Registry<TElement>
     ///     Asynchronously dumps this registry's contents
     /// </summary>
     /// <param name="mod">Module to be used</param>
-    public virtual async Task Dump(Module mod)
+    public virtual async Task<Stopwatch> Dump(Module mod)
     {
-        Console.Write($"Dumping {Name}... ");
+        var time = Stopwatch.StartNew();
         using var bar = new ProgressBar();
         var stream = mod.InitStream(Name);
         var l = Stack.Count;
@@ -74,8 +74,8 @@ public abstract class Registry<TElement>
             bar.Report((double) cur / l);
             cur++;
         }
-
-        Console.WriteLine("Done.");
+        time.Stop();
+        return time;
     }
 }
 

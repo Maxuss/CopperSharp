@@ -1,6 +1,4 @@
 using System.Runtime.CompilerServices;
-using CopperSharp.Text.Impl;
-using CopperSharp.Utils;
 
 namespace CopperSharp.Text;
 
@@ -25,6 +23,7 @@ public readonly struct ClickEvent
     ///     Path to file. Note that user might use both Unix and Windows filesystem, so file separators might be
     ///     different
     /// </param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ClickEvent OpenFile(string path)
     {
         return new ClickEvent(ClickEventType.OpenFile, path);
@@ -34,6 +33,7 @@ public readonly struct ClickEvent
     ///     Runs a provided command for user
     /// </summary>
     /// <param name="command">Command to be ran</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ClickEvent RunCommand(string command)
     {
         return new ClickEvent(ClickEventType.RunCommand, command);
@@ -43,6 +43,7 @@ public readonly struct ClickEvent
     ///     Pastes provided selection to chat
     /// </summary>
     /// <param name="selection">String selection to be pasted</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ClickEvent PasteToChat(string selection)
     {
         return new ClickEvent(ClickEventType.SuggestCommand, selection);
@@ -52,6 +53,7 @@ public readonly struct ClickEvent
     ///     Changes book's page to provided page
     /// </summary>
     /// <param name="page">Page to be set</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ClickEvent ChangePage(int page)
     {
         return new ClickEvent(ClickEventType.ChangePage, page.ToString());
@@ -61,6 +63,7 @@ public readonly struct ClickEvent
     ///     Copies provided selection to user's clipboard
     /// </summary>
     /// <param name="selection">String selection to be copied</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ClickEvent CopyToClipboard(string selection)
     {
         return new ClickEvent(ClickEventType.CopyToClipboard, selection);
@@ -70,15 +73,6 @@ public readonly struct ClickEvent
     {
         EventType = eventType;
         Value = value;
-    }
-
-    /// <summary>
-    ///     Converts this event to parseable container
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public ComponentClickEvent Contain()
-    {
-        return new ComponentClickEvent(EventType.GetData() ?? "null", Value);
     }
 
     /// <summary>

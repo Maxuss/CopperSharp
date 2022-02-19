@@ -78,7 +78,7 @@ public abstract class AbstractEntity
     public EntityType Type { get; }
 
     private short Air { get; set; } = -1;
-    private IComponent? CustomName { get; set; }
+    private Component? CustomName { get; set; }
     private Vec3? Motion { get; set; }
     private Vec2? Rotation { get; set; }
     private List<AbstractEntity> Passengers { get; } = new();
@@ -152,7 +152,7 @@ public abstract class AbstractEntity
     /// <param name="name">New name of this entity</param>
     /// <param name="alwaysVisible">Whether the name should be always visible</param>
     /// <returns>This entity</returns>
-    public AbstractEntity Name(IComponent name, bool alwaysVisible = false)
+    public AbstractEntity Name(Component name, bool alwaysVisible = false)
     {
         CustomName = name;
         _bools["CustomNameVisible"] = alwaysVisible;
@@ -225,83 +225,98 @@ public abstract class AbstractEntity
     ///     Serializes extra data from this inheritor
     /// </summary>
     /// <param name="sw">Writer to which the data should be written</param>
-    protected virtual void SerializeExtra(StringNbtWriter sw)
+    protected virtual Task SerializeExtra(INbtWriter sw)
     {
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Serializes this entity into provided writer
+    /// </summary>
+    /// <param name="w">Writer to be used</param>
+    /// <param name="includeType">Whether to include entity type</param>
+    public async Task SerializeInto(INbtWriter w, bool includeType = true)
+    {
+        await w.WriteBeginCompoundAsync();
+
+        foreach (var (key, value) in _bools)
+        {
+            await w.WritePropertyNameAsync(key);
+            await w.WriteBoolAsync(value);
+        }
+
+        if (Air != -1) await w.WriteShortAsync("Air", Air);
+
+        if (CustomName != null)
+            await w.WriteStringAsync("CustomName", await CustomName.Serialize());
+
+        if (Motion != null)
+        {
+            await w.WritePropertyNameAsync("Motion");
+            await w.WriteBeginArrayAsync();
+            await w.WriteFloatAsync(Motion?.DX ?? 0);
+            await w.WriteFloatAsync(Motion?.DY ?? 0);
+            await w.WriteFloatAsync(Motion?.DZ ?? 0);
+            await w.WriteEndArrayAsync();
+        }
+
+        if (Rotation != null)
+        {
+            await w.WritePropertyNameAsync("Rotation");
+            await w.WriteBeginArrayAsync();
+            await w.WriteFloatAsync(Rotation?.Yaw ?? 0);
+            await w.WriteFloatAsync(Rotation?.Pitch ?? 0);
+            await w.WriteEndArrayAsync();
+        }
+
+        if (Passengers.Any())
+        {
+            await w.WritePropertyNameAsync("Passengers");
+            await w.WriteBeginArrayAsync();
+            foreach (var passenger in Passengers)
+                await passenger.SerializeInto(w);
+
+            await w.WriteEndArrayAsync();
+        }
+
+        foreach (var (key, val) in Bools) await w.WriteBoolAsync(key, val);
+
+        foreach (var (key, val) in Bytes) await w.WriteByteAsync(key, val);
+
+        foreach (var (key, val) in Strings) await w.WriteStringAsync(key, val);
+
+        foreach (var (key, val) in Ids) await w.WriteUuidArrayAsync(key, val);
+
+        foreach (var (key, val) in Ints) await w.WriteIntegerAsync(key, val);
+
+        foreach (var (key, val) in Doubles) await w.WriteDoubleAsync(key, val);
+
+        await SerializeExtra(w);
+
+        if (!includeType)
+            await w.WriteStringAsync("id", Type.Id.ToString());
+
+        await ExtraData.SerializeInto(w, false);
+
+        await w.WritePropertyNameAsync("Tags");
+        await w.WriteBeginArrayAsync();
+        await w.WriteStringAsync($"CID{EntityUid}");
+        await w.WriteEndArrayAsync();
+        await w.WriteEndCompoundAsync();
+
     }
 
     /// <summary>
     ///     Serializes this entity into SNBT
     /// </summary>
     /// <returns>Serialized entity</returns>
-    public string Serialize(bool includeType = true)
+    public async Task<string> Serialize(bool includeType = true)
     {
-        using var sw = new StringWriter();
-        using var w = new StringNbtWriter(sw);
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
 
-        w.WriteBeginCompound();
+        await SerializeInto(w);
 
-        foreach (var (key, value) in _bools)
-        {
-            w.WritePropertyName(key);
-            w.WriteBool(value);
-        }
-
-        if (Air != -1) w.WriteShort("Air", Air);
-
-        if (CustomName != null) w.WriteString("CustomName", CustomName.Serialize());
-
-        if (Motion != null)
-        {
-            w.WritePropertyName("Motion");
-            w.WriteBeginArray();
-            w.WriteFloat(Motion?.DX ?? 0);
-            w.WriteFloat(Motion?.DY ?? 0);
-            w.WriteFloat(Motion?.DZ ?? 0);
-            w.WriteEndArray();
-        }
-
-        if (Rotation != null)
-        {
-            w.WritePropertyName("Rotation");
-            w.WriteBeginArray();
-            w.WriteFloat(Rotation?.Yaw ?? 0);
-            w.WriteFloat(Rotation?.Pitch ?? 0);
-            w.WriteEndArray();
-        }
-
-        if (Passengers.Any())
-        {
-            w.WritePropertyName("Passengers");
-            w.WriteBeginArray();
-            foreach (var passenger in Passengers) w.WriteRawValue(passenger.Serialize(false));
-
-            w.WriteEndArray();
-        }
-
-        foreach (var (key, val) in Bools) w.WriteBool(key, val);
-
-        foreach (var (key, val) in Bytes) w.WriteByte(key, val);
-
-        foreach (var (key, val) in Strings) w.WriteString(key, val);
-
-        foreach (var (key, val) in Ids) w.WriteUuidArray(key, val);
-
-        foreach (var (key, val) in Ints) w.WriteInteger(key, val);
-
-        foreach (var (key, val) in Doubles) w.WriteDouble(key, val);
-
-        SerializeExtra(w);
-
-        if (!includeType)
-            w.WriteString("id", Type.Id.ToString());
-
-        ExtraData.SerializeInto(w, false);
-
-        w.WritePropertyName("Tags");
-        w.WriteBeginArray();
-        w.WriteString($"CID{EntityUid}");
-        w.WriteEndArray();
-        w.WriteEndCompound();
         return $"{sw}";
     }
 
@@ -320,12 +335,12 @@ public abstract class AbstractEntity
     ///     all changes to current context
     /// </summary>
     /// <returns>This abstract entity</returns>
-    public AbstractEntity Release()
+    public async Task<AbstractEntity> Release()
     {
         if (!_locked) return this;
 
         _locked = false;
-        _binding?.Release(this, _firstLock);
+        await (_binding?.Release(this, _firstLock) ?? Task.CompletedTask);
         _firstLock = false;
         return this;
     }

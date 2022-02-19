@@ -108,17 +108,17 @@ public sealed class Bee : BreedableEntity, IAngerableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (AngryAt != null)
-            sw.WriteUuidArray("AngryAt", AngryAt ?? default);
+            await sw.WriteUuidArrayAsync("AngryAt", AngryAt ?? default);
 
         if (FlowerPos != null)
-            sw.WritePosition("FlowerPos", FlowerPos ?? default);
+            await sw.WritePositionAsync("FlowerPos", FlowerPos ?? default);
 
         if (HivePos != null)
-            sw.WritePosition("HivePos", HivePos ?? default);
+            await sw.WritePositionAsync("HivePos", HivePos ?? default);
     }
 }

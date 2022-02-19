@@ -60,28 +60,28 @@ public sealed class PotionMeta : ItemMeta
         return this;
     }
 
-    internal override void WriteExternalMetaData(StringNbtWriter sw)
+    internal override async Task WriteExternalMetaData(INbtWriter sw)
     {
         if (CustomPotionColor != null)
-            sw.WriteInteger("CustomPotionColor", CustomPotionColor ?? 0);
+            await sw.WriteIntegerAsync("CustomPotionColor", CustomPotionColor ?? 0);
 
         if (!Effects.Any())
             return;
 
-        sw.WritePropertyName("CustomPotionEffects");
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync("CustomPotionEffects");
+        await sw.WriteBeginArrayAsync();
         foreach (var eff in Effects)
         {
-            sw.WriteBeginCompound();
-            sw.WriteByte("Id", eff.Id);
-            sw.WriteByte("Amplifier", eff.Level);
-            sw.WriteInteger("Duration", eff.Duration);
-            sw.WriteBool("Ambient", eff.Ambient);
-            sw.WriteBool("ShowParticles", eff.ShowParticles);
-            sw.WriteBool("ShowIcon", eff.ShowIcon);
-            sw.WriteEndCompound();
+            await sw.WriteBeginCompoundAsync();
+            await sw.WriteByteAsync("Id", eff.Id);
+            await sw.WriteByteAsync("Amplifier", eff.Level);
+            await sw.WriteIntegerAsync("Duration", eff.Duration);
+            await sw.WriteBoolAsync("Ambient", eff.Ambient);
+            await sw.WriteBoolAsync("ShowParticles", eff.ShowParticles);
+            await sw.WriteBoolAsync("ShowIcon", eff.ShowIcon);
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

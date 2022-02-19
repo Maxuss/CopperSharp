@@ -165,26 +165,26 @@ public sealed class ArmorStand : AbstractEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (!Poses.Any())
             return;
 
-        sw.WritePropertyName("Pose");
-        sw.WriteBeginCompound();
+        await sw.WritePropertyNameAsync("Pose");
+        await sw.WriteBeginCompoundAsync();
         foreach (var (name, (x, y, z)) in Poses)
         {
-            sw.WritePropertyName(name);
-            sw.WriteBeginArray();
-            sw.WriteFloat(x);
-            sw.WriteFloat(y);
-            sw.WriteFloat(z);
-            sw.WriteEndArray();
+            await sw.WritePropertyNameAsync(name);
+            await sw.WriteBeginArrayAsync();
+            await sw.WriteFloatAsync(x);
+            await sw.WriteFloatAsync(y);
+            await sw.WriteFloatAsync(z);
+            await sw.WriteEndArrayAsync();
         }
 
-        sw.WriteEndCompound();
+        await sw.WriteEndCompoundAsync();
     }
 }
 

@@ -50,17 +50,53 @@ public sealed class FunctionRegistry : Registry<IFunction>
         Stack.Push((hash, Identifier.Of("null", path)));
         FunctionManager.RegisterHashed(del, hash, path);
     }
+    
+    /// <summary>
+    /// Registers a raw async handler
+    /// </summary>
+    /// <param name="del">Handler to be registered</param>
+    /// <param name="path">Name of the function</param>
+    public void RegisterRawAsyncHandler(string path, AsyncMinecraftDelegate del)
+    {
+        var hash = new EmptyFunction();
+        Stack.Push((hash, Identifier.Of("null", path)));
+        FunctionManager.RegisterAsyncHashed(del, hash, path);
+    }
+
 
     /// <inheritdoc />
-    public override Task Write((IFunction, Identifier) element, ModuleOutputStream stream)
+    public override async Task Write((IFunction, Identifier) element, ModuleOutputStream stream)
     {
         var (fn, id) = element;
         if (fn is NullFunction)
-            return Task.CompletedTask;
+            return;
         var handlers = FunctionManager.Lookup(fn);
+        var asyncHandlers = FunctionManager.LookupAsyncs(fn);
+
+        if (asyncHandlers != null)
+        {
+            foreach (var (mtd, handle) in asyncHandlers)
+            {
+                var ctx = new WorldContext();
+                ctx.EnableMinecraftTranslating();
+                try
+                {
+                    await mtd(ctx);
+                }
+                catch (Exception e)
+                {
+                    ModuleLoader.GlobalLoader.EmitWarning($"Could not execute minecraft delegate! {e.Message}");
+                }
+
+                ctx.DisableMinecraftTranslating();
+                ctx.Cache.Add($"\n# Built with CopperSharp v{CopperSharp.Version}");
+                ctx.Flush(stream.Open($"{handle.FunctionName}.mcfunction"));
+            }
+        }
+
         if (handlers == null)
-            return Task.CompletedTask;
-        
+            return;
+
         foreach (var (mtd, handle) in handlers)
         {
             var ctx = new WorldContext();
@@ -70,7 +106,5 @@ public sealed class FunctionRegistry : Registry<IFunction>
             ctx.Cache.Add($"\n# Built with CopperSharp v{CopperSharp.Version}");
             ctx.Flush(stream.Open($"{handle.FunctionName}.mcfunction"));
         }
-
-        return Task.CompletedTask;
     }
 }

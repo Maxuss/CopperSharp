@@ -80,15 +80,15 @@ public abstract class Inventory : IEnumerable<(ItemStack?, int)>
     /// </summary>
     /// <param name="sw">String nbt writer into which data should be serialized</param>
     /// <param name="enclosed">Whether to enclose the compound in braces</param>
-    public void SerializeInto(StringNbtWriter sw, bool enclosed = true)
+    public async Task SerializeInto(INbtWriter sw, bool enclosed = true)
     {
-        if (enclosed) sw.WriteBeginCompound();
+        if (enclosed) await sw.WriteBeginCompoundAsync();
 
-        sw.WritePropertyName("Items");
+        await sw.WritePropertyNameAsync("Items");
 
-        sw.WriteBeginArray();
-        foreach (var (item, index) in Slots.Where(it => it.Item1 != null)) sw.WriteItem(item, index);
-        sw.WriteEndArray();
-        if (enclosed) sw.WriteEndCompound();
+        await sw.WriteBeginArrayAsync();
+        foreach (var (item, index) in Slots.Where(it => it.Item1 != null)) await sw.WriteItem(item, index);
+        await sw.WriteEndArrayAsync();
+        if (enclosed) await sw.WriteEndCompoundAsync();
     }
 }

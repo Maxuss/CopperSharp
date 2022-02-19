@@ -50,11 +50,11 @@ public abstract class BreedableEntity : LivingEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (LoveCause != null)
-            sw.WriteUuidArray("LoveCause", LoveCause ?? Guid.Empty);
+            await sw.WriteUuidArrayAsync("LoveCause", LoveCause ?? Guid.Empty);
     }
 }

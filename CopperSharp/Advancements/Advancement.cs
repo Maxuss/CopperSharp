@@ -12,9 +12,9 @@ namespace CopperSharp.Advancements;
 public sealed class Advancement
 {
     private ItemStack AdvItemDisplay { get; set; } = new(Material.Dirt);
-    private IComponent AdvTitle { get; set; } = new TextComponent("undefined");
+    private Component AdvTitle { get; set; } = new TextComponent("undefined");
     private AdvancementType AdvType { get; set; } = AdvancementType.Task;
-    private IComponent AdvDescription { get; set; } = new TextComponent("undefined");
+    private Component AdvDescription { get; set; } = new TextComponent("undefined");
     private bool? AdvAnnounce { get; set; }
     private bool? AdvHidden { get; set; }
     private AdvancementGroup? AdvGroup { get; set; }
@@ -63,7 +63,7 @@ public sealed class Advancement
     /// </summary>
     /// <param name="title">Name to be set</param>
     /// <returns>This advancement</returns>
-    public Advancement Title(IComponent title)
+    public Advancement Title(Component title)
     {
         AdvTitle = title;
         return this;
@@ -85,7 +85,7 @@ public sealed class Advancement
     /// </summary>
     /// <param name="description">Description to be set</param>
     /// <returns>This advancement</returns>
-    public Advancement Description(IComponent description)
+    public Advancement Description(Component description)
     {
         AdvDescription = description;
         return this;
@@ -166,16 +166,14 @@ public sealed class Advancement
 
         await jw.WritePropertyNameAsync("item");
         await jw.WriteValueAsync(AdvItemDisplay.Material.Id.ToString());
-        if (AdvItemDisplay.Meta != null)
-        {
-            await jw.WritePropertyNameAsync("nbt");
-            await jw.WriteValueAsync(AdvItemDisplay.Meta!.Serialize());
-        }
+        
+        await jw.WritePropertyNameAsync("nbt");
+        await jw.WriteValueAsync(await AdvItemDisplay.Meta.Serialize());
 
         await jw.WriteEndObjectAsync();
 
         await jw.WritePropertyNameAsync("title");
-        await jw.WriteRawValueAsync(AdvTitle.Serialize(indent));
+        await AdvTitle.SerializeInto(jw, indent);
 
         await jw.WritePropertyNameAsync("frame");
         await jw.WriteValueAsync(AdvType.GetName().ToLower());
@@ -187,7 +185,7 @@ public sealed class Advancement
         }
 
         await jw.WritePropertyNameAsync("description");
-        await jw.WriteRawValueAsync(AdvDescription.Serialize(indent));
+        await AdvDescription.SerializeInto(jw, indent);
 
         if (AdvAnnounce != null)
         {

@@ -46,23 +46,23 @@ public sealed class NbtCompound : IEnumerable<INbtField<INbtValue>>
     /// </summary>
     /// <param name="w">Writer, into which to serialize</param>
     /// <param name="enclosed">Whether to enclose this compound with parenthesis</param>
-    public void SerializeInto(StringNbtWriter w, bool enclosed = true)
+    public async Task SerializeInto(INbtWriter w, bool enclosed = true)
     {
-        if (enclosed) w.WriteBeginCompound();
-        foreach (var field in Fields) field.SerializeInto(w);
+        if (enclosed) await w.WriteBeginCompoundAsync();
+        foreach (var field in Fields) await field.SerializeInto(w);
 
-        if (enclosed) w.WriteEndCompound();
+        if (enclosed) await w.WriteEndCompoundAsync();
     }
 
     /// <summary>
     ///     Serializes this NBT compound into SNBT string
     /// </summary>
     /// <returns>Serialized string</returns>
-    public string Serialize()
+    public async Task<string> Serialize()
     {
-        using var sw = new StringWriter();
-        using var w = new StringNbtWriter(sw);
-        SerializeInto(w);
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
+        await SerializeInto(w);
 
         return sw.ToString();
     }

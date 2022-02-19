@@ -37,14 +37,14 @@ public sealed class ThrownTrident : AbstractArrow
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (TridentItem == null)
             return;
 
-        sw.WritePropertyName("Trident");
-        sw.WriteItem(TridentItem);
+        await sw.WritePropertyNameAsync("Trident");
+        await sw.WriteItem(TridentItem);
     }
 }

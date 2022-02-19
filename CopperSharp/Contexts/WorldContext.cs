@@ -6,6 +6,7 @@ using CopperSharp.Functions;
 using CopperSharp.Item;
 using CopperSharp.Registry;
 using CopperSharp.Text;
+using CopperSharp.Utils;
 
 namespace CopperSharp.Contexts;
 
@@ -14,7 +15,7 @@ namespace CopperSharp.Contexts;
 /// </summary>
 public sealed class WorldContext
 {
-    internal List<string> Cache { get; } = new();
+    internal ConcurrentList<string> Cache { get; } = new();
 
     private TextWriter? StdOut { get; set; }
     private TextWriter? StdErr { get; set; }
@@ -24,11 +25,12 @@ public sealed class WorldContext
     /// </summary>
     /// <param name="entity">Entity to be unlocked</param>
     /// <param name="summon">Whether to summon a new entity or modify it's data</param>
-    public void Release(AbstractEntity entity, bool summon)
+    public async Task Release(AbstractEntity entity, bool summon)
     {
+        var serEntity = await entity.Serialize();
         var cmd = summon
-            ? $"summon {entity.Type.Id} {entity.Position} {entity.Serialize()}"
-            : $"data merge entity @e[tag=CID{entity.EntityUid},limit=1] {entity.Serialize()}";
+            ? $"summon {entity.Type.Id} {entity.Position} {serEntity}"
+            : $"data merge entity @e[tag=CID{entity.EntityUid},limit=1] {serEntity}";
         Cache.Add(cmd);
     }
 
@@ -37,11 +39,12 @@ public sealed class WorldContext
     /// </summary>
     /// <param name="block">Block to be unlocked</param>
     /// <param name="place">Whether to place a new block, or modify existing</param>
-    public void Release(Block block, bool place)
+    public async Task Release(Block block, bool place)
     {
+        var serBlock = await (block.State?.Serialize() ?? AsyncUtils.EmptyCompoundTask);
         var cmd = place
-            ? $"setblock {block.Location} {block.Type.Id}{block.State?.Serialize() ?? "{}"}"
-            : $"data merge block {block.Location} {block.State?.Serialize() ?? "{}"}";
+            ? $"setblock {block.Location} {block.Type.Id}{serBlock}"
+            : $"data merge block {block.Location} {serBlock}";
         Cache.Add(cmd);
     }
 
@@ -88,9 +91,9 @@ public sealed class WorldContext
     ///     Announces provided message to all players in chat
     /// </summary>
     /// <param name="message">Message to be announced</param>
-    public void Announce(IComponent message)
+    public async Task Announce(Component message)
     {
-        Cache.Add($"tellraw @a {message.Serialize()}");
+        Cache.Add($"tellraw @a {await message.Serialize()}");
     }
 
     /// <summary>
@@ -116,9 +119,9 @@ public sealed class WorldContext
     ///     Note, for actual messaging it is recommended to use <see cref="Announce" />.
     /// </summary>
     /// <param name="comp">Component to be written</param>
-    public void Write(IComponent comp)
+    public async Task Write(Component comp)
     {
-        Cache.Add($"tellraw @a {IComponent.Text("[CONSOLE]: ").Child(comp).Serialize()}");
+        Cache.Add($"tellraw @a {await new TextComponent("[CONSOLE]: ").Child(comp).Serialize()}");
     }
 
     /// <summary>

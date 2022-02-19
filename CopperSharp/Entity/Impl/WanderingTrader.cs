@@ -56,37 +56,37 @@ public class WanderingTrader : BreedableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (WanderTarget != null)
-            sw.WritePosition(WanderTarget ?? default);
+            await sw.WritePositionAsync(WanderTarget ?? default);
 
         if (!Offers.Any()) return;
-        sw.WritePropertyName("Offers");
-        sw.WriteBeginCompound();
-        sw.WritePropertyName("Recipes");
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync("Offers");
+        await sw.WriteBeginCompoundAsync();
+        await sw.WritePropertyNameAsync("Recipes");
+        await sw.WriteBeginArrayAsync();
         foreach (var of in Offers)
         {
-            sw.WriteBeginCompound();
-            sw.WritePropertyName("buy");
-            sw.WriteItem(of.Buy);
-            sw.WritePropertyName("sell");
-            sw.WriteItem(of.Sell);
+            await sw.WriteBeginCompoundAsync();
+            await sw.WritePropertyNameAsync("buy");
+            await sw.WriteItem(of.Buy);
+            await sw.WritePropertyNameAsync("sell");
+            await sw.WriteItem(of.Sell);
             if (of.BuyB != null)
             {
-                sw.WritePropertyName("buyB");
-                sw.WriteItem(of.BuyB ?? default);
+                await sw.WritePropertyNameAsync("buyB");
+                await sw.WriteItem(of.BuyB ?? default);
             }
 
-            sw.WriteInteger("uses", of.MaxUses);
-            sw.WriteBool("rewardExp", of.RewardExp);
-            sw.WriteEndCompound();
+            await sw.WriteIntegerAsync("uses", of.MaxUses);
+            await sw.WriteBoolAsync("rewardExp", of.RewardExp);
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WriteEndArray();
-        sw.WriteEndCompound();
+        await sw.WriteEndArrayAsync();
+        await sw.WriteEndCompoundAsync();
     }
 }

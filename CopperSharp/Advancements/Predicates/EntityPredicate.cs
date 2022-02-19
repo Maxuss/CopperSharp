@@ -191,9 +191,9 @@ public sealed class EntityPredicate
     /// </summary>
     /// <param name="nbt">NBT required</param>
     /// <returns>This entity predicate</returns>
-    public EntityPredicate RequireNbt(NbtCompound nbt)
+    public async Task<EntityPredicate> RequireNbt(NbtCompound nbt)
     {
-        Nbt = nbt.Serialize();
+        Nbt = await nbt.Serialize();
         return this;
     }
 
@@ -202,9 +202,9 @@ public sealed class EntityPredicate
     /// </summary>
     /// <param name="entity">Required entity, that contains the data</param>
     /// <returns>This entity predicate</returns>
-    public EntityPredicate RequireNbt(AbstractEntity entity)
+    public async Task<EntityPredicate> RequireNbt(AbstractEntity entity)
     {
-        Nbt = entity.Serialize();
+        Nbt = await entity.Serialize();
         return this;
     }
 

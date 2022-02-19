@@ -30,15 +30,15 @@ public abstract class AbstractFireball : Projectile
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
-        sw.WritePropertyName("power");
-        sw.WriteBeginArray();
-        sw.WriteDouble(Power[0]);
-        sw.WriteDouble(Power[1]);
-        sw.WriteDouble(Power[2]);
-        sw.WriteEndArray();
+        await sw.WritePropertyNameAsync("power");
+        await sw.WriteBeginArrayAsync();
+        await sw.WriteDoubleAsync(Power[0]);
+        await sw.WriteDoubleAsync(Power[1]);
+        await sw.WriteDoubleAsync(Power[2]);
+        await sw.WriteEndArrayAsync();
     }
 }

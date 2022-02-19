@@ -31,9 +31,9 @@ public sealed class WorldPlayer
     /// </summary>
     /// <param name="message">Message to be sent</param>
     /// <returns>This world player</returns>
-    public WorldPlayer SendMessage(IComponent message)
+    public async Task<WorldPlayer> SendMessage(Component message)
     {
-        Lock.Cache.Add($"tellraw {Name} {message.Serialize()}");
+        Lock.Cache.Add($"tellraw {Name} {await message.Serialize()}");
         return this;
     }
 
@@ -43,10 +43,10 @@ public sealed class WorldPlayer
     /// <param name="title">Title to be sent</param>
     /// <param name="subtitle">Optional subtitle to be sent</param>
     /// <returns>This world player</returns>
-    public WorldPlayer SendTitle(IComponent title, IComponent? subtitle = null)
+    public async Task<WorldPlayer> SendTitle(Component title, Component? subtitle = null)
     {
-        Lock.Cache.Add($"title {Name} title {title.Serialize()}");
-        if (subtitle != null) Lock.Cache.Add($"title {Name} subtitle {subtitle.Serialize()}");
+        Lock.Cache.Add($"title {Name} title {await title.Serialize()}");
+        if (subtitle != null) Lock.Cache.Add($"title {Name} subtitle {await subtitle.Serialize()}");
 
         return this;
     }
@@ -56,9 +56,9 @@ public sealed class WorldPlayer
     /// </summary>
     /// <param name="action">Action bar to be set</param>
     /// <returns>This world player</returns>
-    public WorldPlayer SendActionBar(IComponent action)
+    public async Task<WorldPlayer> SendActionBar(Component action)
     {
-        Lock.Cache.Add($"title {Name} actionbar {action.Serialize()}");
+        Lock.Cache.Add($"title {Name} actionbar {await action.Serialize()}");
         return this;
     }
 
@@ -237,7 +237,7 @@ public readonly struct ItemOptions : IParticleOptions
     /// <inheritdoc cref="IParticleOptions.ToString" />
     public override string ToString()
     {
-        return State.Serialize();
+        return State.Serialize().Result;
     }
 }
 

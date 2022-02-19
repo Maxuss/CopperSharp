@@ -21,9 +21,8 @@ public readonly struct Selector
     /// <summary>
     ///     Current command executor
     /// </summary>
-    public static Selector Executor = new("@s");
-
-
+    public static Selector CurrentEntity = new("@s");
+    
     /// <summary>
     ///     All players in the callers world
     /// </summary>

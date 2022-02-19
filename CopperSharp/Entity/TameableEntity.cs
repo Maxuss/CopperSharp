@@ -37,11 +37,11 @@ public abstract class TameableEntity : BreedableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Owner != null)
-            sw.WriteUuidArray("Owner", Owner ?? default);
+            await sw.WriteUuidArrayAsync("Owner", Owner ?? default);
     }
 }

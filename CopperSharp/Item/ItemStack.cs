@@ -1,3 +1,4 @@
+using CopperSharp.Data.SNbt;
 using CopperSharp.Item.Meta;
 
 namespace CopperSharp.Item;
@@ -87,8 +88,8 @@ public struct ItemStack : IStack
     ///     Serializes this item into minecraft-readable format
     /// </summary>
     /// <returns>Serialized item</returns>
-    public string Serialize()
+    public async Task<string> Serialize()
     {
-        return $"{Material.Id}{Meta.Serialize()} {Amount}";
+        return $"{Material.Id}{await Meta.Serialize()} {Amount}";
     }
 }

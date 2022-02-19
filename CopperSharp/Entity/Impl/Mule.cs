@@ -49,16 +49,17 @@ public class Mule : HorseEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Inventory.All(it => it == null)) return;
 
-        sw.WritePropertyName("Inventory");
-        sw.WriteBeginArray();
-        foreach (var item in Inventory.Where(it => it != null)) sw.WriteItem(item);
+        await sw.WritePropertyNameAsync("Inventory");
+        await sw.WriteBeginArrayAsync();
+        foreach (var item in Inventory.Where(it => it != null)) 
+            await sw.WriteItem(item);
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

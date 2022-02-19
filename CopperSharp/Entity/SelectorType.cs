@@ -21,6 +21,11 @@ public enum SelectorType
     ///     Calls for all entities
     /// </summary>
     [EnumData("@e")] AllEntities,
+    
+    /// <summary>
+    /// Calls for current executor
+    /// </summary>
+    [EnumData("@s")] CurrentEntity,
 
     /// <summary>
     ///     Calls for random entity

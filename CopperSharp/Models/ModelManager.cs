@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+
 namespace CopperSharp.Models;
 
 /// <summary>
@@ -9,7 +11,7 @@ public sealed class ModelManager
     private const int SECTION_END    =    0x7704C0;
     private const int JUMP_SIZE      =    0x000001;
 
-    private Dictionary<IModel, int> LookupTable { get; } = new();
+    private ConcurrentDictionary<IModel, int> LookupTable { get; } = new();
 
     private int PTR = SECTION_BEGIN - JUMP_SIZE;
 

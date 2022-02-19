@@ -34,20 +34,20 @@ public abstract class EntityBlockState<TEntity> : BlockState where TEntity : Abs
     }
 
     /// <inheritdoc />
-    internal override void SerializeExtra(StringNbtWriter sw)
+    internal override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (!Entities.Any()) return;
-        sw.WritePropertyName(EntityName);
-        sw.WriteBeginArray();
+        await sw.WritePropertyNameAsync(EntityName);
+        await sw.WriteBeginArrayAsync();
         foreach (var entity in Entities)
         {
-            sw.WriteBeginCompound();
-            sw.WriteRawValue("EntityData", entity.Serialize(false));
-            sw.WriteEndCompound();
+            await sw.WriteBeginCompoundAsync();
+            await sw.WriteRawValueAsync("EntityData", await entity.Serialize(false));
+            await sw.WriteEndCompoundAsync();
         }
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 }

@@ -37,13 +37,13 @@ public sealed class Fireball : AbstractFireball
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Item == null)
             return;
-        sw.WritePropertyName("Item");
-        sw.WriteItem(Item);
+        await sw.WritePropertyNameAsync("Item");
+        await sw.WriteItem(Item);
     }
 }

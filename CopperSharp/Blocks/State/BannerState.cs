@@ -28,8 +28,8 @@ public sealed class BannerState : BlockState
     }
 
     /// <inheritdoc />
-    internal override void SerializeExtra(StringNbtWriter sw)
+    internal override async Task SerializeExtra(INbtWriter sw)
     {
-        Meta?.WriteExternalMetaData(sw);
+        await (Meta?.WriteExternalMetaData(sw) ?? Task.CompletedTask);
     }
 }

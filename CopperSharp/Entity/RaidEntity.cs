@@ -82,11 +82,11 @@ public abstract class RaidEntity : LivingEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (PatrolTarget != null)
-            sw.WritePosition(PatrolTarget ?? new Location(0, 0, 0));
+            await sw.WritePositionAsync(PatrolTarget ?? new Location(0, 0, 0));
     }
 }

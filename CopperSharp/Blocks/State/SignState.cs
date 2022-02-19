@@ -20,9 +20,9 @@ public sealed class SignState : BlockState
     /// <param name="line">Line on which to change text. Must be in range of 1 to 4</param>
     /// <param name="text">Text to be set</param>
     /// <returns></returns>
-    public SignState SetText(int line, IComponent text)
+    public async Task<SignState> SetText(int line, Component text)
     {
-        Data[$"Text{Math.Clamp(line, 1, 4)}"] = text.Serialize();
+        Data[$"Text{Math.Clamp(line, 1, 4)}"] = await text.Serialize();
         return this;
     }
 

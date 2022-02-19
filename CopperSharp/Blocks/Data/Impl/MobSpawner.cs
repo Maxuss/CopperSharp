@@ -77,14 +77,14 @@ public sealed class MobSpawner : AbstractBlockData
     }
 
     /// <inheritdoc />
-    internal override void SerializeExtra(StringNbtWriter sw)
+    internal override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (Spawning == null)
             return;
 
-        sw.WritePropertyName("SpawnData");
-        sw.WriteRawValue(Spawning.Serialize(false));
+        await sw.WritePropertyNameAsync("SpawnData");
+        await sw.WriteRawValueAsync(await Spawning.Serialize(false));
     }
 }

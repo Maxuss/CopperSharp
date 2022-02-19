@@ -38,21 +38,21 @@ public sealed class NbtArray : INbtValue, IEnumerable<INbtValue>
     }
 
     /// <inheritdoc />
-    public void SerializeInto(StringNbtWriter sw)
+    public async Task SerializeInto(INbtWriter sw)
     {
-        sw.WriteBeginArray();
-        foreach (var item in Values) item.SerializeInto(sw);
+        await sw.WriteBeginArrayAsync();
+        foreach (var item in Values) await item.SerializeInto(sw);
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 
     /// <inheritdoc />
-    public void SerializeInto(JsonTextWriter sw)
+    public async Task SerializeInto(JsonTextWriter sw)
     {
-        sw.WriteStartArray();
-        foreach (var item in Values) item.SerializeInto(sw);
+        await sw.WriteStartArrayAsync();
+        foreach (var item in Values) await item.SerializeInto(sw);
 
-        sw.WriteEndArray();
+        await sw.WriteEndArrayAsync();
     }
 
     /// <summary>

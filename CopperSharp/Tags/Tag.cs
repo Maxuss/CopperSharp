@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace CopperSharp.Tags;
 
+/// <summary>
+/// Represents a tag
+/// </summary>
 public sealed class Tag
 {
     /// <summary>

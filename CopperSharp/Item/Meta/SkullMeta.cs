@@ -73,29 +73,29 @@ public sealed class SkullMeta : BlockItemMeta
     }
 
     /// <inheritdoc />
-    internal override void WriteExternalMetaData(StringNbtWriter w)
+    internal override async Task WriteExternalMetaData(INbtWriter w)
     {
         if (SkullOwner == null) return;
-        w.WritePropertyName("SkullOwner");
+        await w.WritePropertyNameAsync("SkullOwner");
         if (!_complexOwner)
         {
-            w.WriteString(SkullOwner);
+            await w.WriteStringAsync(SkullOwner);
             return;
         }
 
-        w.WriteBeginCompound();
-        w.WritePropertyName("Id");
-        w.WriteUuidArray(Guid.NewGuid());
-        w.WritePropertyName("Properties");
-        w.WriteBeginCompound();
-        w.WritePropertyName("textures");
-        w.WriteBeginArray();
-        w.WriteBeginCompound();
-        w.WritePropertyName("Value");
-        w.WriteString(SkullOwner);
-        w.WriteEndCompound();
-        w.WriteEndArray();
-        w.WriteEndCompound();
-        w.WriteEndCompound();
+        await w.WriteBeginCompoundAsync();
+        await w.WritePropertyNameAsync("Id");
+        await w.WriteUuidArrayAsync(Guid.NewGuid());
+        await w.WritePropertyNameAsync("Properties");
+        await w.WriteBeginCompoundAsync();
+        await w.WritePropertyNameAsync("textures");
+        await w.WriteBeginArrayAsync();
+        await w.WriteBeginCompoundAsync();
+        await w.WritePropertyNameAsync("Value");
+        await w.WriteStringAsync(SkullOwner);
+        await w.WriteEndCompoundAsync();
+        await w.WriteEndArrayAsync();
+        await w.WriteEndCompoundAsync();
+        await w.WriteEndCompoundAsync();
     }
 }

@@ -96,23 +96,23 @@ public abstract class HorseEntity : BreedableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (ArmorItem != null)
         {
-            sw.WritePropertyName("ArmorItem");
-            sw.WriteItem(ArmorItem);
+            await sw.WritePropertyNameAsync("ArmorItem");
+            await sw.WriteItem(ArmorItem);
         }
 
         if (SaddleItem != null)
         {
-            sw.WritePropertyName("SaddleItem");
-            sw.WriteItem(SaddleItem);
+            await sw.WritePropertyNameAsync("SaddleItem");
+            await sw.WriteItem(SaddleItem);
         }
 
         if (Owner != null)
-            sw.WriteUuidArray(Owner ?? Guid.Empty);
+            await sw.WriteUuidArrayAsync(Owner ?? Guid.Empty);
     }
 }

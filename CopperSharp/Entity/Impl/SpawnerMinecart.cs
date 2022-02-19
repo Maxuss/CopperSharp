@@ -26,9 +26,9 @@ public sealed class SpawnerMinecart : AbstractMinecart
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         Data?.SerializeExtra(sw);
     }

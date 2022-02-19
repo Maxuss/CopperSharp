@@ -166,25 +166,28 @@ public sealed class Llama : BreedableEntity
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
+        await base.SerializeExtra(sw);
 
         if (DecorItem != null)
-            sw.WriteRawValue("DecorItem", DecorItem?.Meta?.Serialize() ?? "{}");
+            await sw.WriteRawValueAsync("DecorItem", await DecorItem?.Meta.Serialize()!);
 
         if (Bools.ContainsKey("ChestedHorse") && Bools["ChestedHorse"] && Items.Any(it => it != null))
         {
-            sw.WritePropertyName("Items");
-            sw.WriteBeginArray();
+            await sw.WritePropertyNameAsync("Items");
+            await sw.WriteBeginArrayAsync();
             var slot = 0;
             foreach (var item in Items)
             {
-                sw.WriteRawValue(item?.Meta?.Serialize(slot) ?? "{}");
+                if (item?.Meta == null)
+                    await sw.WriteRawValueAsync("{}");
+                else 
+                    await sw.WriteRawValueAsync(await item?.Meta.Serialize(slot)!);
                 slot++;
             }
 
-            sw.WriteEndArray();
+            await sw.WriteEndArrayAsync();
         }
     }
 }

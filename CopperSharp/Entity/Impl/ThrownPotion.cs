@@ -42,9 +42,10 @@ public sealed class ThrownPotion : AbstractThrownItem
     }
 
     /// <inheritdoc />
-    protected override void SerializeExtra(StringNbtWriter sw)
+    protected override async Task SerializeExtra(INbtWriter sw)
     {
-        base.SerializeExtra(sw);
-        Meta?.WriteExternalMetaData(sw);
+        await base.SerializeExtra(sw);
+        if(Meta != null)
+            await Meta.WriteExternalMetaData(sw);
     }
 }
