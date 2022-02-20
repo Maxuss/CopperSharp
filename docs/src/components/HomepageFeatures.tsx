@@ -27,11 +27,10 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Distribute your executables',
+    title: 'Fast',
     description: (
       <>
-        Compiling your project allows other users to launch it, and generate
-        datapack by themselves!
+          CopperSharp is asynchronous, which makes it very fast.
       </>
     ),
   },

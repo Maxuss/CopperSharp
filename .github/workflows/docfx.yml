@@ -33,8 +33,6 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: docs
-      - name: Copy static files to documentation
-        run: cp -R static_docs/* docs/src/pages/guides
       - name: Build docusaurus
         run: cd docs && npm run build
       - name: Publish
