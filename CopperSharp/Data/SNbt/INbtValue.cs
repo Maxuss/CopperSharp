@@ -10,6 +10,14 @@ namespace CopperSharp.Data.SNbt;
 /// </summary>
 public interface INbtValue
 {
+    internal async Task<string> InternalSerialize()
+    {
+        await using var sw = new StringWriter();
+        await using var w = new StringNbtWriter(sw);
+        await SerializeInto(w);
+        return sw.ToString();
+    }
+    
     /// <summary>
     ///     Writes data to provided string writer
     /// </summary>

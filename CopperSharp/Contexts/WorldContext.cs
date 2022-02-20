@@ -1,9 +1,11 @@
+using System.Collections.Concurrent;
 using System.Reflection;
 using CopperSharp.Blocks;
 using CopperSharp.Data.Locations;
 using CopperSharp.Entity;
 using CopperSharp.Functions;
 using CopperSharp.Item;
+using CopperSharp.Modules;
 using CopperSharp.Registry;
 using CopperSharp.Text;
 using CopperSharp.Utils;
@@ -13,12 +15,31 @@ namespace CopperSharp.Contexts;
 /// <summary>
 ///     Represents a world-scoped context, in which the function will be invoked
 /// </summary>
-public sealed class WorldContext
+public sealed class WorldContext : IContext
 {
-    internal ConcurrentList<string> Cache { get; } = new();
-
+    private object _lock = new();
+    internal static int RetranslationIndex { get; private set; } = 0;
+    internal string? RetranslationTarget { get; set; }
+    internal ConcurrentList<string> Cache { get; set; } = new();
+    internal ConcurrentList<string>? Frozen { get; set; }
     private TextWriter? StdOut { get; set; }
     private TextWriter? StdErr { get; set; }
+    private ConcurrentDictionary<Identifier, DataStorage> Storages { get; set; } = new();
+
+    /// <summary>
+    /// Gets or creates a new storage by provided id
+    /// </summary>
+    /// <param name="name">ID of the storage</param>
+    /// <returns>Data storage</returns>
+    public DataStorage GetStorage(Identifier name)
+    {
+        if (Storages.ContainsKey(name))
+            return Storages[name];
+
+        var s = new DataStorage(this, name);
+        Storages[name] = s;
+        return s;
+    }
 
     /// <summary>
     ///     Releases lock on provided entity
@@ -181,11 +202,19 @@ public sealed class WorldContext
     /// <param name="w">TextWriter to which data should be written</param>
     public void Flush(TextWriter w)
     {
-        while (Cache.Any())
+        if (Frozen != null)
         {
-            var ele = Cache[0];
-            w.WriteLine(ele);
-            Cache.RemoveAt(0);
+            DisableMinecraftTranslating();
+            return;
+        }
+        lock (_lock)
+        {
+            while (Cache.Any())
+            {
+                var ele = Cache[0];
+                w.WriteLine(ele);
+                Cache.RemoveAt(0);
+            }
         }
     }
 
@@ -206,6 +235,28 @@ public sealed class WorldContext
     {
         using var writer = new StreamWriter(to);
         Flush(writer);
+    }
+
+    internal void StartRetranslation(string next)
+    {
+        lock (_lock)
+        {
+            Frozen = Cache;
+            Cache.Clear();
+            RetranslationTarget = next;
+            RetranslationIndex++;
+        }
+    }
+
+    internal void StopRetranslation()
+    {
+        lock (_lock)
+        {
+            var stream = ModuleLoader.CurrentModule!.InitStream("functions");
+            Flush(stream.Open($"{RetranslationTarget}.mcfunction"));
+            Cache = Frozen!;
+            Frozen = null;
+        }
     }
 
     internal void EnableMinecraftTranslating()

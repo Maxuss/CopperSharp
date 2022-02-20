@@ -3,6 +3,7 @@ using System.Globalization;
 using CopperSharp.Data.Locations;
 using CopperSharp.Item;
 using CopperSharp.Modules;
+using CopperSharp.Utils;
 
 namespace CopperSharp.Data.SNbt;
 
@@ -514,10 +515,11 @@ public sealed class StringNbtWriter : INbtWriter
             await WriteIntegerAsync("Slot", (int) slot);
         await WriteIntegerAsync("Count", item?.Amount ?? 0);
         await WriteStringAsync("id", item?.Material.Id.ToString() ?? "minecraft:null");
-        if (item?.Meta != null)
+        var meta = await (item?.Meta?.Serialize() ?? AsyncUtils.EmptyCompoundTask);
+        if (meta != "{}")
         {
             await WritePropertyNameAsync("tag");
-            await WriteRawValueAsync(await item?.Meta?.Serialize()!);
+            await WriteRawValueAsync(meta);
         }
 
         await WriteEndCompoundAsync();

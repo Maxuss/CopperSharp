@@ -41,6 +41,17 @@ public readonly struct Identifier
     }
 
     /// <summary>
+    /// Parses an identifier from provided string
+    /// </summary>
+    /// <param name="id">String of identifier to be parsed</param>
+    /// <returns>Parsed identifier</returns>
+    public static Identifier Parse(string id)
+    {
+        var p = id.Split(':', 2);
+        return new Identifier(p[0], p[1]);
+    }
+
+    /// <summary>
     ///     Converts this identifier to minecraft-readable string
     /// </summary>
     public override string ToString()

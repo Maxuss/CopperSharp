@@ -1,3 +1,5 @@
+using CopperSharp.Contexts.Hooks;
+using CopperSharp.Hooks;
 using CopperSharp.Item;
 using CopperSharp.Text;
 using Xunit;
@@ -5,9 +7,6 @@ using Xunit.Abstractions;
 
 namespace CopperSharp.Tests;
 
-/// <summary>
-///     Test classes
-/// </summary>
 public class Tests
 {
     private readonly ITestOutputHelper tout;
@@ -25,7 +24,6 @@ public class Tests
     [Fact]
     public async Task RawComponentSerialization()
     {
-        var beginTime = DateTime.Now;
         var component = new TextComponent("Hello, World!")
             .Colored(ITextColor.Hex(153, 0, 201))
             .Formatted(FormattingType.Bold)
@@ -41,7 +39,5 @@ public class Tests
                     .Colored(ITextColor.Hex(0xbf4f4a))
                     .OnHover(HoverEvent.Item(new ItemStack(Material.DiamondOre))));
         tout.WriteLine(await component.Serialize());
-        var endTime = DateTime.Now - beginTime;
-        tout.WriteLine($"Finished in {endTime.TotalMilliseconds}ms");
     }
 }

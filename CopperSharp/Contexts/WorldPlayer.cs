@@ -10,7 +10,7 @@ namespace CopperSharp.Contexts;
 /// <summary>
 ///     Represents a player in the world, which can have different operations done with them
 /// </summary>
-public sealed class WorldPlayer
+public sealed class WorldPlayer : IWorldReference
 {
     internal WorldPlayer(WorldContext ctx, string sel)
     {
@@ -18,6 +18,8 @@ public sealed class WorldPlayer
         Name = sel;
     }
 
+    /// <inheritdoc />
+    public WorldContext World => Lock;
     private WorldContext Lock { get; }
     private string Name { get; }
 
